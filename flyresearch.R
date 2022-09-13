@@ -690,14 +690,20 @@ geom_jitter(data = long_mated_females_d1,
               shape = 21)+
   ylim(0,6)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of eggs")+
+       y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
+
 
 
 
 long_mated_femalesd1_summary %>%
   kbl(caption=" ") %>% 
   kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+
+
+
+
+
 
 
 #-----------------------------
@@ -732,7 +738,7 @@ virgin_femalesd1_plot <- long_virgin_femalesd1_summary%>%
               shape = 21)+
   ylim(0,6)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of eggs")+
+       y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
 
 
