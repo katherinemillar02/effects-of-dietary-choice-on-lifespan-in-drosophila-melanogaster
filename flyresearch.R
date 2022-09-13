@@ -672,9 +672,36 @@ long_mated_femalesd1_summary <- long_mated_femalesd1 %>%
             n = n(),
             se = sd/sqrt(n))
 
+mated_femalesd1_plot <- long_mated_females_d1_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+geom_jitter(data = long_mated_females_d1,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of eggs")+
+  theme_minimal()
+
+
+
+long_mated_femalesd1_summary %>%
+  kbl(caption=" ") %>% 
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+
 
 #-----------------------------
-virgin_femalesd1 <- read_csv("~/Downloads/VirginFemalesD1.csv", col_select = 3:6)  %>% drop_na()
+virgin_femalesd1 <- read_csv("~/Downloads/VirginFemalesD1.csv", col_select = 3:6) %>% drop_na()
 
 long_virgin_femalesd1 <- virgin_femalesd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
@@ -687,5 +714,35 @@ long_virgin_femalesd1_summary <- long_virgin_femalesd1 %>%
             n = n(),
             se = sd/sqrt(n))
 
+virgin_femalesd1_plot <- long_virgin_femalesd1_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+  geom_jitter(data = long_virgin_femalesd1,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of eggs")+
+  theme_minimal()
 
+
+
+
+
+long_virgin_femalesd1_summary %>%
+  kbl(caption=" ") %>% 
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+
+
+mated_femalesd1_plot + virgin_femalesd1_plot
 
