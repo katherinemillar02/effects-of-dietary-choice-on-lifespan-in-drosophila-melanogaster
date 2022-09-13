@@ -654,3 +654,38 @@ anova(comapringeggsum)
 
 
 problems()
+
+#----------------------------- Feeding behaviour analysis, experiment 2----------------------------
+
+
+#-----------------------------
+mated_femalesd1 <- read_csv("~/Desktop/MatedFemalesD1.csv")  %>% drop_na()
+
+long_mated_femalesd1 <- mated_femalesd1 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+long_mated_femalesd1_summary <- long_mated_femalesd1 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers)
+            ,
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+
+#-----------------------------
+virgin_femalesd1 <- read_csv("~/Downloads/VirginFemalesD1.csv", col_select = 3:6)  %>% drop_na()
+
+long_virgin_femalesd1 <- virgin_femalesd1 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+long_virgin_femalesd1_summary <- long_virgin_femalesd1 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers)
+            ,
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+
+
