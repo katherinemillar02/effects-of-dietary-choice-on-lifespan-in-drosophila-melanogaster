@@ -179,7 +179,7 @@ fly2 + fly3
 #------------------------ day 1 male feeding 
 
 
-maleflyday1 <- read_csv("maleflyday1.csv" )  %>% drop_na()
+maleflyday1 <- read_csv("~/Downloads/project/maleflyday1.csv" )  %>% drop_na()
 
 maleflyday1long <- maleflyday1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "mfly1_numbers")
@@ -217,7 +217,7 @@ fly4
 
 #------------------------ day 2 male feeding 
 
-maleflyday2 <- read_csv("maleflyday2.csv", col_select = 1:5 )  %>% drop_na()
+maleflyday2 <- read_csv("~/Downloads/project/maleflyday2.csv", col_select = 1:5 )  %>% drop_na()
 
 maleflyday2long <- maleflyday2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "mfly2_numbers")
@@ -259,7 +259,7 @@ fly5
 fly4 + fly5
 
 
-eggtry <- read_csv("flytry.csv" )  %>% drop_na()
+eggtry <- read_csv("~/Downloads/project/flytry.csv" )  %>% drop_na()
 
 eggtrylong <- eggtry %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "flytry_numbers")
@@ -298,10 +298,10 @@ fly4
 
 
 
-femalenf2 <- read_csv("femalenf2.csv")  %>% drop_na()
+femalenf2 <- read_csv("~/Downloads/project/femalenf2.csv", col_select = 1:9)  %>% drop_na()
 
 femalenflong <- femalenf2 %>% 
-  pivot_longer(cols = ("1":"9"), names_to = "plate", values_to = "fnf")
+  pivot_longer(cols = ("1":"8"), names_to = "plate", values_to = "fnf")
 
 femalenflong
 
@@ -337,10 +337,10 @@ fly6
 
 
 
-malenf <- read_csv("malenf.csv")  %>% drop_na()
+malenf <- read_csv("~/Downloads/project/malenf.csv", col_select = 1:9)  %>% drop_na()
 
 malenflong <- malenf %>% 
-  pivot_longer(cols = ("1":"9"), names_to = "plate", values_to = "mnf")
+  pivot_longer(cols = ("1":"8"), names_to = "plate", values_to = "mnf")
 
 malenflong
 
@@ -506,11 +506,11 @@ femaleday1table <- femaleday1summary %>% broom::tidy(conf.int = T) %>%
 
 #---------------- Repeatability chart 
 
-repeatp <- read_csv("RepeatabilityPractise.csv" ) %>% drop_na()
+repeatp <- read_csv("~/Downloads/project/RepeatabilityPractise.csv" ) %>% drop_na()
 
 #-----------------------------------------------------
 
-repeaty <- read_csv("repeatdata.csv")  %>% drop_na()
+repeaty <- read_csv("~/Downloads/project/repeatdata.csv")  %>% drop_na()
 
 longrepeaty <- repeaty %>% 
   pivot_longer(cols = ("20":"180"), names_to = "one", values_to = "two")
@@ -524,7 +524,7 @@ ggplot(data = longrepeaty, aes(x = one , y = two))+
 
 #-----------------------------------------------------
 
-eggpractise<- read_csv("eggpractise.csv", col_select = 1:5) %>% drop_na()
+eggpractise<- read_csv("~/Downloads/project/eggpractise.csv", col_select = 1:5) %>% drop_na()
 
 eggpractiselong <- eggpractise %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "practiseegg")
@@ -567,12 +567,12 @@ realegg
 realegg + practiseegg 
 
 
-summary1
+
  
 #----------------------------------------------------- Egg practise 2
 
 
-eggpractise2<- read_csv("eggpractise2.csv", col_select = 1:5) %>% drop_na()
+eggpractise2<- read_csv("~/Downloads/project/eggpractise2.csv", col_select = 1:5) %>% drop_na()
 
 eggpractiselong2 <- eggpractise2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "practiseegg2")
@@ -612,7 +612,7 @@ practiseeggplot <- practisesummary2%>%
 
 
 
-comparingegg <- read_csv("comparingegg.csv", col_select = 1:5) %>% drop_na()
+comparingegg <- read_csv("~/Downloads/project/comparingegg.csv", col_select = 1:5) %>% drop_na()
 
 comparingegglong<- comparingegg %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "comparingeggn")
