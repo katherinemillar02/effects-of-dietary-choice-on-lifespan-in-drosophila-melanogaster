@@ -792,5 +792,19 @@ mated_femalesd2_plot <- long_mated_femalesd2_summary%>%
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
 
+
+
+
+ mated_femalesd2_ls <- glm(fly_numbers ~ diet, data = long_mated_femalesd2)
+
+ mated_femalesd2_ls
+ anova(mated_femalesd2_ls)
+ 
+ performance::check_model(mated_femalesd2_ls)
+ 
+ broom::tidy(mated_femalesd2_ls,  
+             exponentiate=T, 
+             conf.int=T)
+ 
 mated_femalesd1_plot + mated_femalesd2_plot
  
