@@ -754,6 +754,7 @@ long_virgin_femalesd1_summary %>%
 mated_femalesd1_plot + virgin_femalesd1_plot
 
 
+
 #-----------------------------
 
 
@@ -795,16 +796,17 @@ mated_femalesd2_plot <- long_mated_femalesd2_summary%>%
 
 
 
- mated_femalesd2_ls <- glm(fly_numbers ~ diet, data = long_mated_femalesd2)
+ mated_femalesd2_ls <- lm(fly_numbers ~ diet, data = long_mated_femalesd2)
 
  mated_femalesd2_ls
  anova(mated_femalesd2_ls)
  
  performance::check_model(mated_femalesd2_ls)
+ performance::check_model(mated_femalesd2_ls, check=c("homogeneity", "qq"))
  
  broom::tidy(mated_femalesd2_ls,  
              exponentiate=T, 
              conf.int=T)
  
 mated_femalesd1_plot + mated_femalesd2_plot
- 
+
