@@ -658,7 +658,10 @@ problems()
 #----------------------------- Feeding behaviour analysis, experiment 2----------------------------
 
 
-#-----------------------------
+
+
+#-----------------------------  Mated Females Day 1 
+
 mated_femalesd1 <- read_csv("~/Desktop/MatedFemalesD1.csv", col_select = 3:6)  %>% drop_na()
 
 long_mated_femalesd1 <- mated_femalesd1 %>% 
@@ -706,8 +709,8 @@ long_mated_femalesd1_summary %>%
 
 
 
-#-----------------------------
-virgin_femalesd1 <- read_excel("~/Downloads/VirginFemalesD1.xls") %>% drop_na()
+#----------------------------- Virgin Females Day 1 
+virgin_femalesd1 <- read_excel("~/Desktop/VirginFemalesD1.xls") %>% drop_na()
 
 
 long_virgin_femalesd1 <- virgin_femalesd1 %>% 
@@ -751,11 +754,11 @@ long_virgin_femalesd1_summary %>%
   kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
 
-mated_femalesd1_plot + virgin_femalesd1_plot
 
 
 
-#-----------------------------
+
+#----------------------------- Mated Females Day 2 
 
 
 mated_femalesd2 <- (read_excel(path = "~/Desktop/MatedFemalesD2.xls", na = "NA"))
@@ -808,5 +811,43 @@ mated_femalesd2_plot <- long_mated_femalesd2_summary%>%
              exponentiate=T, 
              conf.int=T)
  
-mated_femalesd1_plot + mated_femalesd2_plot
+ 
+ #----------------------------- Virgin Females Day 2 
+ 
+ virgin_femalesd2 <- (read_excel(path = "~/Desktop/VirginFemalesD2.xlsx", na = "NA"))
+
+long_virgin_femalesd2 <- virgin_femalesd2 %>% 
+   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+long_virgin_femalesd2_summary <- long_virgin_femalesd2 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers)
+            ,
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+virgin_femalesd2_plot <- long_virgin_femalesd2_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+  geom_jitter(data = long_virgin_femalesd2,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
+
+mated_femalesd2_plot + virgin_femalesd2_plot 
+
 
