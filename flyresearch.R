@@ -1,3 +1,5 @@
+
+#_________________________________ Installing appropriate packagaes 
 library(tidyverse)
 library(readxl)
 library(kableExtra)
@@ -10,59 +12,26 @@ library(here)
 
 
 
+#_________________________________ Experiment 1 _____________________________# 
 
-#Fly_data_ <- Fly_data_ %>% 
-  # mutate(RATIO = fct_relevel(RATIO, "1;8", "1;2", "2;1", "8;1" ), 
-#  DAY = fct_relevel(DAY))
-
- 
-#ggplot(data = Fly_data_, aes(x = DAY, y = FLIES, fill = RATIO)) +
-   #geom_col(position = "dodge")+
-#geom_point(colour = "black", 
-#            position = position_dodge(width = 0.9),
-#            shape = 21,
-#            alpha = 0.6)+
-# theme_minimal()+
-#labs(y = "Mean number of flies per patch", 
-#      x = "Day")
-
-
-#Malefliez <- Maleflies %>% 
-# mutate(Ratio = fct_relevel(Ratio, "1;8", "1;2", "2;1", "8;1" ))
-
-#ggplot(data = Malefliez, aes(x = Day, y = Flies, fill = Ratio))+
-#  geom_col(position = "dodge")+ 
-# geom_point(colour = "black", 
-#            position = position_dodge(width = 0.9),
-#            shape = 21,
-#    alpha = 0.6)+
-  # theme_minimal()+
-  #  labs(y = "Mean number of flies per plate", 
-  #    x = "Day")
-
-
-  #rlang::last_error()
-
-  #ggplot(data = eggdata, aes(x = ))
-
-#_________________________________ Egg counting 1 (Figure)
+#_________________________________ Egg counting
 
 
 
 egg_counting_data <- read_csv("~/Downloads/project/eggcountingdata.csv", col_select = 1:5) %>% drop_na()
 
-longdata <- egg_counting_data %>% 
+long_egg_counting1 <- egg_counting_data %>% 
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
 
 
-summary1 <- longdata %>% 
+egg_counting1_summary <- long_egg_counting1 %>% 
   group_by(diet) %>% 
   summarise(mean = mean(egg_numbers),
             sd = sd(egg_numbers),
             n = n(),
             se = sd/sqrt(n))
 
-realegg <- summary1%>% 
+egg_counting1_plot <- egg_counting1_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
@@ -86,26 +55,26 @@ realegg <- summary1%>%
   
 
 
-#---------------------------------------- Female feeding behaviour figure 
+ 
 
-# Day 1 feeding behaviour 
+#---------------- Female feeding behaviour (Day 1) 
 
-femaleflyday1 <- read_csv("~/Downloads/project/femaleflyday1.csv")  %>% drop_na()
-
-save(file = "femaleflyday1")
+female_feedingd1 <- read_csv("~/Downloads/project/femaleflyday1.csv")  %>% drop_na()
 
 
-femaleflyday1long <- femaleflyday1 %>% 
+
+
+long_female_feedingd1 <- female_feedingd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 
-summary2 <- femaleflyday1long %>% 
+female_feedingd1_summary <- long_female_feedingd1 %>% 
   group_by(diet) %>% 
   summarise(mean = mean(fly_numbers),
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
 
-fly2 <- summary2%>% 
+female_feedingd1_plot <- female_feedingd1_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
@@ -126,28 +95,23 @@ fly2 <- summary2%>%
        y = "Mean (+/- S.E.) number of flies on each patch")+
   theme_minimal()
 
-
-fly2
-
+#---------------- Female feeding behaviour (Day 2) 
 
 
 
+female_feedingd2 <- read_csv("~/Downloads/project/femaleflyday2.csv", col_select = 1:5 )  %>% drop_na()
 
-# Day 2 feeding behaviour 
-
-femaleflyday2 <- read_csv("~/Downloads/project/femaleflyday2.csv", col_select = 1:5 )  %>% drop_na()
-
-femaleflyday2long <- femaleflyday2 %>% 
+long_female_feedingd2 <- female_feedingd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly2_numbers")
 
-summary3 <- femaleflyday2long %>% 
+female_feedingd2_summary <- long_female_feedingd2 %>% 
   group_by(diet) %>% 
   summarise(mean = mean(fly2_numbers),
             sd = sd(fly2_numbers),
             n = n(),
             se = sd/sqrt(n))
 
-fly3 <- summary3 %>% 
+female_feedingd2_plot <- female_feedingd2_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
@@ -156,7 +120,7 @@ fly3 <- summary3 %>%
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
                 colour = "#FF6863",
                 width = 0.2)+
-  geom_jitter(data = femaleflyday2long,
+  geom_jitter(data = long_female_feedingd2,
               aes(x = diet,
                   y = fly2_numbers),
               fill = "skyblue",
@@ -170,29 +134,22 @@ fly3 <- summary3 %>%
 
 
 
-# Putting plots together 
-fly2 + fly3
+#------------------------ Male feeding behaviour (Day 1)
 
 
+male_feedingd1 <- read_csv("~/Downloads/project/maleflyday1.csv" )  %>% drop_na()
 
-#---------------------------------------- Male feeding behaviour figure 
-
-#------------------------ day 1 male feeding 
-
-
-maleflyday1 <- read_csv("~/Downloads/project/maleflyday1.csv" )  %>% drop_na()
-
-maleflyday1long <- maleflyday1 %>% 
+long_male_feedingd1 <- male_feedingd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "mfly1_numbers")
 
-summary4 <- maleflyday1long %>% 
+male_feedingd1_summary <- long_male_feedingd1 %>% 
   group_by(diet) %>% 
   summarise(mean = mean(mfly1_numbers),
             sd = sd(mfly1_numbers),
             n = n(),
             se = sd/sqrt(n))
 
-fly4 <- summary4 %>% 
+male_feedingd1_plot <- male_feedingd1_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
@@ -201,7 +158,7 @@ fly4 <- summary4 %>%
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
                 colour = "#A8DBAF",
                 width = 0.2)+
-  geom_jitter(data = maleflyday1long,
+  geom_jitter(data = long_female_feedingd1,
               aes(x = diet,
                   y = mfly1_numbers),
               fill = "skyblue",
@@ -213,10 +170,10 @@ fly4 <- summary4 %>%
        y = "Mean (+/- S.E.) number of flies on each patch" )+
   theme_minimal()
 
-fly4
 
 
-#------------------------ day 2 male feeding 
+
+#------------------------ Male feeding behaviour (Day 2)
 
 maleflyday2 <- read_csv("~/Downloads/project/maleflyday2.csv", col_select = 1:5 )  %>% drop_na()
 
@@ -711,7 +668,7 @@ long_mated_femalesd1_summary %>%
 
 
 #----------------------------- Virgin Females Day 1 
-virgin_femalesd1 <- read_excel("~/Desktop/VirginFemalesD1.xls") %>% drop_na()
+virgin_femalesd1 <- read_excel("~/Downloads/project/VirginFemalesD1.xls") %>% drop_na()
 
 
 long_virgin_femalesd1 <- virgin_femalesd1 %>% 
@@ -815,7 +772,7 @@ mated_femalesd2_plot <- long_mated_femalesd2_summary%>%
  
  #----------------------------- Virgin Females Day 2 
  
- virgin_femalesd2 <- (read_excel(path = "~/Desktop/VirginFemalesD2.xlsx", na = "NA"))
+ virgin_femalesd2 <- (read_excel(path = "~/Downloads/project/VirginFemalesD2.xlsx", na = "NA"))
 
 long_virgin_femalesd2 <- virgin_femalesd2 %>% 
    pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
