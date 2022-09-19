@@ -294,7 +294,7 @@ fly6
 
 
 
-
+library(readr)
 malenf <- read_csv("~/Downloads/project/malenf.csv", col_select = 1:9)  %>% drop_na()
 
 malenflong <- malenf %>% 
