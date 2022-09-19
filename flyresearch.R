@@ -92,6 +92,7 @@ realegg <- summary1%>%
 
 femaleflyday1 <- read_csv("~/Downloads/project/femaleflyday1.csv")  %>% drop_na()
 
+save(file = "femaleflyday1")
 
 
 femaleflyday1long <- femaleflyday1 %>% 
@@ -662,7 +663,7 @@ problems()
 
 #-----------------------------  Mated Females Day 1 
 
-mated_femalesd1 <- read_csv("~/Desktop/MatedFemalesD1.csv", col_select = 3:6)  %>% drop_na()
+mated_femalesd1 <- read_csv("~/Downloads/project/MatedFemalesD1.csv")  %>% drop_na()
 
 long_mated_femalesd1 <- mated_femalesd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
@@ -849,5 +850,9 @@ virgin_femalesd2_plot <- long_virgin_femalesd2_summary%>%
   theme_minimal()
 
 mated_femalesd2_plot + virgin_femalesd2_plot 
+
+
+
+
 
 
