@@ -132,6 +132,53 @@ female_feedingd1_plot <- female_feedingd1_summary %>%
        y = "Mean (+/- S.E.) number of flies on each patch")+
   theme_minimal()
 
+#------- Data Analysis 
+
+femaleday1summary <- femaleflyday1long %>%
+  group_by(diet) %>%
+  summarise(mean = mean(fly_numbers),
+            sd=sd(fly_numbers))
+
+
+femaleday1summary %>%
+  kbl(caption=" ") %>% 
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+
+femaleday1summary <- lm(fly_numbers ~ diet, data = femaleflyday1long)
+
+summary(femaleday1summary)
+
+femaleday1summary
+confint(femaleday1summary)
+anova(femaleday1summary)
+
+
+performance::check_model(femaleday1summary)
+
+broom::tidy(femaleday1summary,  
+            exponentiate=T, 
+            conf.int=T)
+
+femaleday1table <- femaleday1summary %>% broom::tidy(conf.int = T) %>% 
+  select(-`std.error`) %>% 
+  mutate_if(is.numeric, round, 2) %>% 
+  kbl(col.names = c("Predictors",
+                    "Estimates",
+                    "Z-value",
+                    "P",
+                    "Lower 95% CI",
+                    "Upper 95% CI"),
+      caption = "", 
+      booktabs = TRUE) %>% 
+  kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
+
+
+
+
+
+
+
+
 #---------------- Female feeding behaviour (Day 2) 
 
 female_feedingd2 <- read_csv("~/Downloads/project/femaleflyday2.csv", col_select = 1:5 )  %>% drop_na()
@@ -368,207 +415,11 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
 
 
 
-#------------- Male feeding behaviour day 1 
 
-
-#---------------- Female feeding behaviour day 1 
-
-femaleday1summary <- femaleflyday1long %>%
-  group_by(diet) %>%
-  summarise(mean = mean(fly_numbers),
-            sd=sd(fly_numbers))
-
-
-femaleday1summary %>%
-  kbl(caption=" ") %>% 
-  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
-
-femaleday1summary <- lm(fly_numbers ~ diet, data = femaleflyday1long)
-
-summary(femaleday1summary)
-
-femaleday1summary
-confint(femaleday1summary)
-anova(femaleday1summary)
-
-
-performance::check_model(femaleday1summary)
-
-broom::tidy(femaleday1summary,  
-            exponentiate=T, 
-            conf.int=T)
-
-femaleday1table <- femaleday1summary %>% broom::tidy(conf.int = T) %>% 
-  select(-`std.error`) %>% 
-  mutate_if(is.numeric, round, 2) %>% 
-  kbl(col.names = c("Predictors",
-                    "Estimates",
-                    "Z-value",
-                    "P",
-                    "Lower 95% CI",
-                    "Upper 95% CI"),
-      caption = "", 
-      booktabs = TRUE) %>% 
-  kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
-
-      
       
      
 
-#---------------- Repeatability chart 
-
-repeatp <- read_csv("~/Downloads/project/RepeatabilityPractise.csv" ) %>% drop_na()
-
-#-----------------------------------------------------
-
-repeaty <- read_csv("~/Downloads/project/repeatdata.csv")  %>% drop_na()
-
-longrepeaty <- repeaty %>% 
-  pivot_longer(cols = ("20":"180"), names_to = "one", values_to = "two")
-
-longrepeaty
-
-ggplot(data = longrepeaty, aes(x = one , y = two))+
-  geom_line()+
-  geom_point()+
-  ylim(0,200)
-
-#-----------------------------------------------------
-
-eggpractise<- read_csv("~/Downloads/project/eggpractise.csv", col_select = 1:5) %>% drop_na()
-
-eggpractiselong <- eggpractise %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "practiseegg")
-
-practisesummary <- eggpractiselong %>% 
-  group_by(diet) %>% 
-  summarise(mean = mean(practiseegg),
-            sd = sd(practiseegg),
-            n = n(),
-            se = sd/sqrt(n))
-
-
-
-practiseegg <- practisesummary%>% 
-  ggplot(aes(x = diet, y = mean))+
-  geom_bar(stat = "identity",
-           fill = "pink",
-           colour = "orange",
-           alpha = 0.6)+
-  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
-                width = 0.2)+
-  geom_jitter(data = eggpractiselong,
-              aes(x = diet,
-                  y = practiseegg),
-              fill = "skyblue",
-              colour = "black",
-              width = 0.2,
-              shape = 21)+
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of eggs")+
-  theme_minimal()+
-  ylim(0, 200)
-
-
-
-practiseegg
-realegg
-
-realegg + practiseegg 
-
-
-
- 
-#----------------------------------------------------- Egg practise 2
-
-
-eggpractise2<- read_csv("~/Downloads/project/eggpractise2.csv", col_select = 1:5) %>% drop_na()
-
-eggpractiselong2 <- eggpractise2 %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "practiseegg2")
-
-practisesummary2 <- eggpractiselong2 %>% 
-  group_by(diet) %>% 
-  summarise(mean = mean(practiseegg2),
-            sd = sd(practiseegg2),
-            n = n(),
-            se = sd/sqrt(n))
-
-
-
-practiseeggplot <- practisesummary2%>% 
-  ggplot(aes(x = diet, y = mean))+
-  geom_bar(stat = "identity",
-           fill = "pink",
-           colour = "orange",
-           alpha = 0.6)+
-  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
-                width = 0.2)+
-  geom_jitter(data = eggpractiselong2,
-              aes(x = diet,
-                  y = practiseegg2),
-              fill = "skyblue",
-              colour = "black",
-              width = 0.2,
-              shape = 21)+
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of eggs")+
-  theme_minimal()+
-  ylim(0, 200)
-
-
-
-
-
-
-comparingegg <- read_csv("~/Downloads/project/comparingegg.csv", col_select = 1:5) %>% drop_na()
-
-comparingegglong<- comparingegg %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "comparingeggn")
-
-comparingeggsummary <- comparingegglong %>% 
-  group_by(diet) %>% 
-  summarise(mean = mean(comparingeggn),
-            sd = sd(comparingeggn),
-            n = n(),
-            se = sd/sqrt(n))
-
-comparingeggs<- comparingeggsummary%>% 
-  ggplot(aes(x = diet, y = mean))+
-  geom_bar(stat = "identity",
-           fill = "pink",
-           colour = "orange",
-           alpha = 0.6)+
-  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
-                width = 0.2)+
-  geom_jitter(data = comparingegglong,
-              aes(x = diet,
-                  y = comparingeggn),
-              fill = "skyblue",
-              colour = "black",
-              width = 0.2,
-              shape = 21)+
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of eggs")+
-  theme_minimal()+
-  ylim(0, 200)
-
-
-
-comapringeggsum <- glm(TRY ~  comparingeggn, data = comparingegglong)
-
-summary(comapringeggsum)
-anova(comapringeggsum)
-
-
-problems()
-
-#----------------------------- Feeding behaviour analysis, experiment 2----------------------------
-
-
+#----------------------------- Experiment 2-------------------------------------
 
 
 #-----------------------------  Mated Females Day 1 
@@ -845,7 +696,11 @@ mated_femalesd3_plot + virgin_femalesd3_plot
 
 
 
+#----------- Experiment 3 
 
+#-----------------  Feeding behaviour 
+
+#--------------------- Mated females (Day 1)
 
 mated_femalese3d1 <- (read_excel(path = "~/Desktop/MatedFemalesE3D1.xlsx", na = "NA"))
 
@@ -859,7 +714,6 @@ long_mated_femalese3d1_summary <- long_mated_femalese3d1 %>%
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
-
 
 
 
