@@ -1,5 +1,5 @@
 
-#_________________________________ Installing appropriate packagaes 
+#_________________________________ Installing appropriate packages 
 library(tidyverse)
 library(readxl)
 library(kableExtra)
@@ -52,6 +52,46 @@ egg_counting1_plot <- egg_counting1_summary %>%
        y = "Mean (+/- S.E.) number of eggs")+
   theme_minimal()
 
+#-------------------------- Data Analysis 
+
+eggcountingsummary  <- longdata %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(egg_numbers),
+            sd = sd(egg_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+eggcountingsummary %>%
+  kbl(caption=" ") %>% 
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+
+eggcountingls1 <- lm(egg_numbers ~ diet, data = longdata)
+
+eggcountingls1
+summary(eggcountingls1)
+anova(eggcountingls1)
+confint(eggcountingls1)
+
+broom::tidy(eggcountingls1,  
+            exponentiate=T, 
+            conf.int=T)
+
+
+performance::check_model(eggcountingls1)
+
+
+eggcountingls1table <- eggcountingls1 %>% broom::tidy(conf.int = T) %>% 
+  select(-`std.error`) %>% 
+  mutate_if(is.numeric, round, 2) %>% 
+  kbl(col.names = c("Predictors",
+                    "Estimates",
+                    "Z-value",
+                    "P",
+                    "Lower 95% CI",
+                    "Upper 95% CI"),
+      caption = "", 
+      booktabs = TRUE) %>% 
+  kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
   
 
 
@@ -60,9 +100,6 @@ egg_counting1_plot <- egg_counting1_summary %>%
 #---------------- Female feeding behaviour (Day 1) 
 
 female_feedingd1 <- read_csv("~/Downloads/project/femaleflyday1.csv")  %>% drop_na()
-
-
-
 
 long_female_feedingd1 <- female_feedingd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
@@ -96,8 +133,6 @@ female_feedingd1_plot <- female_feedingd1_summary %>%
   theme_minimal()
 
 #---------------- Female feeding behaviour (Day 2) 
-
-
 
 female_feedingd2 <- read_csv("~/Downloads/project/femaleflyday2.csv", col_select = 1:5 )  %>% drop_na()
 
@@ -171,6 +206,42 @@ male_feedingd1_plot <- male_feedingd1_summary %>%
   theme_minimal()
 
 
+#------------------------ Data Analysis 
+
+
+maleday1summary <- maleflyday1long %>%
+  group_by(diet) %>%
+  summarise(mean = mean(mfly1_numbers),
+            sd=sd(mfly1_numbers))
+
+maleday1summary %>%
+  kbl(caption=" ") %>% 
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+
+maleflyday1summary <- lm(mfly1_numbers ~ diet, data = maleflyday1long)
+
+maleday1summary
+summary(maleday1summary)
+
+maleday1summary2 <- glm(formula = mfly1_numbers ~ diet,
+                        family = quasipoisson(), data = maleflyday1long)
+
+summary(maleday1summary2)
+performance::check_model(maleday1summary2, check=c("homogeneity", "qq"))
+
+
+performance::check_model(maleday1summary2)
+
+
+broom::tidy(maleday1summary2)
+anova(maleday1summary2)
+
+
+broom::tidy(eggcountingls1,  
+            exponentiate=T, 
+            conf.int=T)
+
+
 
 
 #------------------------ Male feeding behaviour (Day 2)
@@ -222,25 +293,24 @@ male_feedingd2_plot <- male_feedingd2_summary %>%
 
 
 
-#---------------------
+#--------------------- Flies not on a plate 
 
 
 
-femalenf2 <- read_csv("~/Downloads/project/femalenf2.csv", col_select = 1:9)  %>% drop_na()
 
-femalenflong <- femalenf2 %>% 
+female_notfeedinge1 <- read_csv("~/Downloads/project/femalenf2.csv", col_select = 1:9)  %>% drop_na()
+
+long_female_notfeedinge1 <- female_notfeedinge1 %>% 
   pivot_longer(cols = ("1":"8"), names_to = "plate", values_to = "fnf")
 
-femalenflong
-
-summary8 <- femalenflong %>% 
+female_notfeedinge1_summary <- long_female_notfeedinge1 %>% 
   group_by(plate) %>% 
   summarise(mean = mean(fnf),
             sd = sd(fnf),
             n = n(),
             se = sd/sqrt(n))
 
-fly6 <- summary8 %>% 
+female_notfeedinge1_plot <- female_notfeedinge1_summary %>% 
   ggplot(aes(x = plate, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
@@ -249,7 +319,7 @@ fly6 <- summary8 %>%
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
                 colour = "#FF6863",
                 width = 0.2)+
-  geom_jitter(data = femalenflong,
+  geom_jitter(data = long_female_notfeedinge1,
               aes(x = plate,
                   y = fnf),
               fill = "skyblue",
@@ -260,26 +330,23 @@ fly6 <- summary8 %>%
        y = "Mean (+/- S.E.) flies per plate not on a patch (females)")+
   theme_minimal()
 
-fly6
 
 
+male_notfeedinge1 <- read_csv("~/Downloads/project/malenf.csv", col_select = 1:9)  %>% drop_na()
 
-
-malenf <- read_csv("~/Downloads/project/malenf.csv", col_select = 1:9)  %>% drop_na()
-
-malenflong <- malenf %>% 
+long_male_notfeedinge1 <- male_notfeedinge1 %>% 
   pivot_longer(cols = ("1":"8"), names_to = "plate", values_to = "mnf")
 
-malenflong
 
-summary9 <- malenflong %>% 
+
+male_notfeedinge1_summary <- long_male_notfeedinge1 %>% 
   group_by(plate) %>% 
   summarise(mean = mean(mnf),
             sd = sd(mnf),
             n = n(),
             se = sd/sqrt(n))
 
-fly7 <- summary9 %>% 
+male_notfeedinge1_plot <- male_notfeedinge1_summary %>% 
   ggplot(aes(x = plate, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
@@ -288,7 +355,7 @@ fly7 <- summary9 %>%
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
                 colour = "#A8DBAF",
                 width = 0.2)+
-  geom_jitter(data = malenflong,
+  geom_jitter(data = long_male_notfeedinge1,
               aes(x = plate,
                   y = mnf),
               fill = "skyblue",
@@ -299,93 +366,9 @@ fly7 <- summary9 %>%
        y = "Mean (+/- S.E.) flies per plate not on a patch (males)")+
   theme_minimal()
 
-fly7
 
-fly6 + fly7
-
-
-
-#-------------------------- Data Analysis --------------------------------------
-
-
-
-#-------- Egg counting 
-
-eggcountingsummary  <- longdata %>% 
-  group_by(diet) %>% 
-  summarise(mean = mean(egg_numbers),
-            sd = sd(egg_numbers),
-            n = n(),
-            se = sd/sqrt(n))
-
-eggcountingsummary %>%
-  kbl(caption=" ") %>% 
-  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
-
-eggcountingls1 <- lm(egg_numbers ~ diet, data = longdata)
-
-eggcountingls1
-summary(eggcountingls1)
-anova(eggcountingls1)
-confint(eggcountingls1)
-
-broom::tidy(eggcountingls1,  
-            exponentiate=T, 
-            conf.int=T)
-
-
-performance::check_model(eggcountingls1)
-
-
-
-
-
-eggcountingls1table <- eggcountingls1 %>% broom::tidy(conf.int = T) %>% 
-  select(-`std.error`) %>% 
-  mutate_if(is.numeric, round, 2) %>% 
-  kbl(col.names = c("Predictors",
-                    "Estimates",
-                    "Z-value",
-                    "P",
-                    "Lower 95% CI",
-                    "Upper 95% CI"),
-      caption = "", 
-      booktabs = TRUE) %>% 
-  kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
 
 #------------- Male feeding behaviour day 1 
-
-maleday1summary <- maleflyday1long %>%
-  group_by(diet) %>%
-  summarise(mean = mean(mfly1_numbers),
-            sd=sd(mfly1_numbers))
-
-maleday1summary %>%
-  kbl(caption=" ") %>% 
-  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
-
-maleflyday1summary <- lm(mfly1_numbers ~ diet, data = maleflyday1long)
-
-maleday1summary
-summary(maleday1summary)
-
-maleday1summary2 <- glm(formula = mfly1_numbers ~ diet,
-                    family = quasipoisson(), data = maleflyday1long)
-
-summary(maleday1summary2)
-performance::check_model(maleday1summary2, check=c("homogeneity", "qq"))
-
-
-performance::check_model(maleday1summary2)
-
-
-broom::tidy(maleday1summary2)
-anova(maleday1summary2)
-
-
-broom::tidy(eggcountingls1,  
-            exponentiate=T, 
-            conf.int=T)
 
 
 #---------------- Female feeding behaviour day 1 
