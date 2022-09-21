@@ -175,19 +175,19 @@ male_feedingd1_plot <- male_feedingd1_summary %>%
 
 #------------------------ Male feeding behaviour (Day 2)
 
-maleflyday2 <- read_csv("~/Downloads/project/maleflyday2.csv", col_select = 1:5 )  %>% drop_na()
+male_feedingd2 <- read_csv("~/Downloads/project/maleflyday2.csv", col_select = 1:5 )  %>% drop_na()
 
-maleflyday2long <- maleflyday2 %>% 
+long_male_feedingd2 <- male_feedingd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "mfly2_numbers")
 
-summary6 <- maleflyday2long %>% 
+male_feedingd2_summary <- long_male_feedingd2 %>% 
   group_by(diet) %>% 
   summarise(mean = mean(mfly2_numbers),
             sd = sd(mfly2_numbers),
             n = n(),
             se = sd/sqrt(n))
 
-fly5 <- summary6 %>% 
+male_feedingd2_plot <- male_feedingd2_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
@@ -196,7 +196,7 @@ fly5 <- summary6 %>%
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
                 colour = "#A8DBAF",
                 width = 0.2)+
-  geom_jitter(data = maleflyday2long,
+  geom_jitter(data = long_male_feedingd2,
               aes(x = diet,
                   y = mfly2_numbers),
               fill = "skyblue",
@@ -208,48 +208,18 @@ fly5 <- summary6 %>%
        y = "")+
   theme_minimal()
 
-fly5
-
-# patchwork plots together 
 
 
 
-fly4 + fly5
 
 
-eggtry <- read_csv("~/Downloads/project/flytry.csv" )  %>% drop_na()
 
-eggtrylong <- eggtry %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "flytry_numbers")
 
-summary7 <- eggtrylong %>% 
-  group_by(diet) %>% 
-  summarise(mean = mean(flytry_numbers),
-            sd = sd(flytry_numbers),
-            n = n(),
-            se = sd/sqrt(n))
 
-fly5 <- summary6 %>% 
-  ggplot(aes(x = diet, y = mean))+
-  geom_bar(stat = "identity",
-           fill = "skyblue",
-           colour = "#A8DBAF",
-           alpha = 0.6)+
-  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "#A8DBAF",
-                width = 0.2)+
-  geom_jitter(data = maleflyday2long,
-              aes(x = diet,
-                  y = mfly2_numbers),
-              fill = "skyblue",
-              colour = "black",
-              width = 0.2,
-              shape = 21)+
-  labs(x = "Diet \n(Protein; Carbohydrate)\n*Day 2*", 
-       y = "")+
-  theme_minimal()
 
-fly4
+
+
+
 
 
 #---------------------
@@ -885,5 +855,53 @@ virgin_femalesd3_plot <- long_virgin_femalesd3_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
+
+
+
+mated_femalesd3_plot + virgin_femalesd3_plot
+
+
+
+
+
+mated_femalese3d1 <- (read_excel(path = "~/Desktop/MatedFemalesE3D1.xlsx", na = "NA"))
+
+
+long_mated_femalese3d1 <- mated_femalese3d1 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+long_mated_femalese3d1_summary <- long_mated_femalese3d1 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+
+
+
+mated_femalese3d1_plot <- long_mated_femalese3d1_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+  geom_jitter(data = long_mated_femalese3d1,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
+ 
+ 
+
 
 
