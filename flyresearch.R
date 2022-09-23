@@ -738,7 +738,38 @@ mated_femalese3d1_plot <- long_mated_femalese3d1_summary%>%
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
  
+#-------------------
  
-#--------------------
+mated_femalese4d1 <- (read_excel(path = "~/Desktop/MatedFemalesE4D1.xlsx", na = "NA"))
 
 
+long_mated_femalese4d1 <- mated_femalese4d1 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+long_mated_femalese4d1_summary <- long_mated_femalese4d1 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+mated_femalese4d1_plot <- long_mated_femalese4d1_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+  geom_jitter(data = long_mated_femalese4d1,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
