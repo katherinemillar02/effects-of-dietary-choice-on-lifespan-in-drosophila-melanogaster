@@ -756,11 +756,11 @@ long_mated_femalese4d1_summary <- long_mated_femalese4d1 %>%
 mated_femalese4d1_plot <- long_mated_femalese4d1_summary%>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
-           fill = "skyblue",
-           colour = "orange",
+           fill = "red",
+           colour = "blue",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "blue",
                 width = 0.2)+
   geom_jitter(data = long_mated_femalese4d1,
               aes(x = diet,
@@ -773,3 +773,4 @@ mated_femalese4d1_plot <- long_mated_femalese4d1_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
+
