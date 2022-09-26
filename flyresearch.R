@@ -16,8 +16,6 @@ library(here)
 
 #_________________________________ Egg counting
 
-
-
 egg_counting_data <- read_csv("~/Downloads/project/eggcountingdata.csv", col_select = 1:5) %>% drop_na()
 
 long_egg_counting1 <- egg_counting_data %>% 
@@ -30,6 +28,8 @@ egg_counting1_summary <- long_egg_counting1 %>%
             sd = sd(egg_numbers),
             n = n(),
             se = sd/sqrt(n))
+
+#---------- Visualise the data 
 
 egg_counting1_plot <- egg_counting1_summary %>% 
   ggplot(aes(x = diet, y = mean))+
@@ -52,7 +52,7 @@ egg_counting1_plot <- egg_counting1_summary %>%
        y = "Mean (+/- S.E.) number of eggs")+
   theme_minimal()
 
-#-------------------------- Data Analysis 
+#-------------------------- Data Analysis of egg counting (experiment 1)
 
 eggcountingsummary  <- longdata %>% 
   group_by(diet) %>% 
@@ -121,7 +121,7 @@ female_feedingd1_plot <- female_feedingd1_summary %>%
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
                 colour = "#FF6863",
                 width = 0.2)+
-  geom_jitter(data = femaleflyday1long,
+  geom_jitter(data = long_female_feedingd1,
               aes(x = diet,
                   y = fly_numbers),
               fill = "skyblue",
@@ -133,7 +133,7 @@ female_feedingd1_plot <- female_feedingd1_summary %>%
        y = "Mean (+/- S.E.) number of flies on each patch")+
   theme_minimal()
 
-#------- Data Analysis 
+#------- Data Analysis of female feeding behaviour (day 1)
 
 female_feedingd1_summary <- long_female_feedingd1 %>%
   group_by(diet) %>%
@@ -214,6 +214,30 @@ female_feedingd2_plot <- female_feedingd2_summary %>%
        y = "")+
   theme_minimal()
 
+#------------------------ Data analysis of female feeding behaviour (day 2)
+
+female_feedingd2_summary <- long_female_feedingd2 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly2_numbers),
+            sd = sd(fly2_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+
+female_feedingd2_ls1 <- lm(fly2_numbers ~ diet, data = long_female_feedingd2)
+
+summary(female_feedingd2_ls1)
+
+female_feedingd2_ls1
+confint(female_feedingd2_ls1)
+anova(female_feedingd2_ls1)
+
+
+performance::check_model(female_feedingd1_ls1)
+
+broom::tidy(female_feedingd2_ls1,  
+            exponentiate=T, 
+            conf.int=T)
 
 
 #------------------------ Male feeding behaviour (Day 1)
@@ -253,10 +277,10 @@ male_feedingd1_plot <- male_feedingd1_summary %>%
   theme_minimal()
 
 
-#------------------------ Data Analysis 
+#------------------------ Data Analysis of male feeding behaviour (day 2)
 
 
-male_feedingd1_summary <- maleflyday1long %>%
+male_feedingd1_summary <- long_male_feedingd1 %>%
   group_by(diet) %>%
   summarise(mean = mean(mfly1_numbers),
             sd=sd(mfly1_numbers))
@@ -265,13 +289,13 @@ male_feedingd1_summary %>%
   kbl(caption=" ") %>% 
   kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
-male_feedingd1_ls1 <- lm(mfly1_numbers ~ diet, data = maleflyday1long)
+male_feedingd1_ls1 <- lm(mfly1_numbers ~ diet, data = long_male_feedingd1)
 
 male_feedingd1_ls1
 summary(male_feedingd1_ls1)
 
 male_feedingd1_ls2 <- glm(formula = mfly1_numbers ~ diet,
-                        family = quasipoisson(), data = maleflyday1long)
+                        family = quasipoisson(), data = long_male_feedingd1)
 
 summary(male_feedingd1_ls2)
 performance::check_model(male_feedingd1_ls2, check=c("homogeneity", "qq"))
@@ -848,7 +872,7 @@ mated_femalese3d2_plot <- long_mated_femalese3d2_summary%>%
 
 
 
-#------------------------------Experiment 4
+#------------------------------Experiment 4---------------------------------
 #-----------------------  Mated Females 
  
 mated_femalese4d1 <- (read_excel(path = "~/Desktop/MatedFemalesE4D1.xlsx", na = "NA"))
@@ -885,3 +909,79 @@ mated_femalese4d1_plot <- long_mated_femalese4d1_summary%>%
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
 
+
+
+#---------- Males + Females 
+
+#----------------------------- Males 
+
+males_mf_e3_d1 <- (read_excel(path = "~/Desktop/MatedMalesE3D1(M+F).xlsx", na = "NA"))
+
+long_males_mf_e3_d1 <- males_mf_e3_d1 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+males_mf_e3_d1_summary <- long_males_mf_e3_d1 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+males_mf_e3_d1_plot <- males_mf_e3_d1_summary  %>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "red",
+           colour = "blue",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "blue",
+                width = 0.2)+
+  geom_jitter(data = long_males_mf_e3_d1,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,2)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
+
+males_mf_e3_d1_plot + females_mf_e3_d1_plot
+
+#------------------------- Females 
+
+females_mf_e3_d1 <- (read_excel(path = "~/Desktop/MatedFemalesE3D1(M+F).xlsx", na = "NA"))
+
+long_females_mf_e3_d1 <- females_mf_e3_d1 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+females_mf_e3_d1_summary <- long_females_mf_e3_d1 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+
+females_mf_e3_d1_plot <- females_mf_e3_d1_summary  %>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "red",
+           colour = "blue",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "blue",
+                width = 0.2)+
+  geom_jitter(data = long_females_mf_e3_d1,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,2)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
