@@ -1070,3 +1070,5 @@ mated_femalese4d1_plot <- long_mated_femalese4d1_summary%>%
 
 
 #----------------------- Virgin Females (Day 1)
+
+
