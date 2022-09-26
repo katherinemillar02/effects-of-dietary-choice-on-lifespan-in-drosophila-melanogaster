@@ -99,7 +99,8 @@ eggcountingls1table <- eggcountingls1 %>% broom::tidy(conf.int = T) %>%
 
 #---------------- Female feeding behaviour (Day 1) 
 
-female_feedingd1 <- read_csv("~/Downloads/project/femaleflyday1.csv")  %>% drop_na()
+female_feedingd1 <- read_excel("~/Desktop/MatedFemalesE1D1.xlsx")
+
 
 long_female_feedingd1 <- female_feedingd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
@@ -134,32 +135,32 @@ female_feedingd1_plot <- female_feedingd1_summary %>%
 
 #------- Data Analysis 
 
-femaleday1summary <- femaleflyday1long %>%
+female_feedingd1_summary <- long_female_feedingd1 %>%
   group_by(diet) %>%
   summarise(mean = mean(fly_numbers),
             sd=sd(fly_numbers))
 
 
-femaleday1summary %>%
+female_feedingd1_summary %>%
   kbl(caption=" ") %>% 
   kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
-femaleday1summary <- lm(fly_numbers ~ diet, data = femaleflyday1long)
+female_feedingd1_ls1 <- lm(fly_numbers ~ diet, data = long_female_feedingd1)
 
-summary(femaleday1summary)
+summary(female_feedingd1_ls1)
 
-femaleday1summary
-confint(femaleday1summary)
-anova(femaleday1summary)
+female_feedingd1_ls1
+confint(female_feedingd1_ls1)
+anova(female_feedingd1_ls1)
 
 
-performance::check_model(femaleday1summary)
+performance::check_model(female_feedingd1_ls1)
 
-broom::tidy(femaleday1summary,  
+broom::tidy(female_feedingd1_ls1,  
             exponentiate=T, 
             conf.int=T)
 
-femaleday1table <- femaleday1summary %>% broom::tidy(conf.int = T) %>% 
+female_feedingd1_table <- female_feedingd1_ls1 %>% broom::tidy(conf.int = T) %>% 
   select(-`std.error`) %>% 
   mutate_if(is.numeric, round, 2) %>% 
   kbl(col.names = c("Predictors",
@@ -180,8 +181,7 @@ femaleday1table <- femaleday1summary %>% broom::tidy(conf.int = T) %>%
 
 
 #---------------- Female feeding behaviour (Day 2) 
-
-female_feedingd2 <- read_csv("~/Downloads/project/femaleflyday2.csv", col_select = 1:5 )  %>% drop_na()
+female_feedingd2 <- read_excel("~/Desktop/MatedFemalesE1D2.xlsx")
 
 long_female_feedingd2 <- female_feedingd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly2_numbers")
@@ -218,8 +218,8 @@ female_feedingd2_plot <- female_feedingd2_summary %>%
 
 #------------------------ Male feeding behaviour (Day 1)
 
+male_feedingd1 <- read_excel("~/Desktop/MatedMalesE1D1.xlsx")
 
-male_feedingd1 <- read_csv("~/Downloads/project/maleflyday1.csv" )  %>% drop_na()
 
 long_male_feedingd1 <- male_feedingd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "mfly1_numbers")
@@ -256,44 +256,42 @@ male_feedingd1_plot <- male_feedingd1_summary %>%
 #------------------------ Data Analysis 
 
 
-maleday1summary <- maleflyday1long %>%
+male_feedingd1_summary <- maleflyday1long %>%
   group_by(diet) %>%
   summarise(mean = mean(mfly1_numbers),
             sd=sd(mfly1_numbers))
 
-maleday1summary %>%
+male_feedingd1_summary %>%
   kbl(caption=" ") %>% 
   kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
-maleflyday1summary <- lm(mfly1_numbers ~ diet, data = maleflyday1long)
+male_feedingd1_ls1 <- lm(mfly1_numbers ~ diet, data = maleflyday1long)
 
-maleday1summary
-summary(maleday1summary)
+male_feedingd1_ls1
+summary(male_feedingd1_ls1)
 
-maleday1summary2 <- glm(formula = mfly1_numbers ~ diet,
+male_feedingd1_ls2 <- glm(formula = mfly1_numbers ~ diet,
                         family = quasipoisson(), data = maleflyday1long)
 
-summary(maleday1summary2)
-performance::check_model(maleday1summary2, check=c("homogeneity", "qq"))
+summary(male_feedingd1_ls2)
+performance::check_model(male_feedingd1_ls2, check=c("homogeneity", "qq"))
 
 
-performance::check_model(maleday1summary2)
+performance::check_model(male_feedingd1_ls2)
 
 
-broom::tidy(maleday1summary2)
-anova(maleday1summary2)
+broom::tidy(male_feedingd1_ls2)
+anova(male_feedingd1_ls2)
 
-
-broom::tidy(eggcountingls1,  
-            exponentiate=T, 
-            conf.int=T)
 
 
 
 
 #------------------------ Male feeding behaviour (Day 2)
 
-male_feedingd2 <- read_csv("~/Downloads/project/maleflyday2.csv", col_select = 1:5 )  %>% drop_na()
+male_feedingd2 <- read_excel("~/Desktop/MatedMalesE1D1.xlsx")
+
+
 
 long_male_feedingd2 <- male_feedingd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "mfly2_numbers")
@@ -695,8 +693,49 @@ virgin_femalesd3_plot <- long_virgin_femalesd3_summary%>%
 mated_femalesd3_plot + virgin_femalesd3_plot
 
 
+#----------- Egg counts
 
-#----------- Experiment 3 
+
+mated_females_e2_eggcount <- (read_excel(path = "~/Desktop/MatedFemalesE2EggCount.xlsx", na = "NA"))
+
+long_mated_females_e2_eggcount <- mated_females_e2_eggcount %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
+
+long_mated_femalese2_eggcount_summary <- long_mated_females_e2_eggcount %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(egg_numbers),
+            sd = sd(egg_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+mated_females_e2_eggcount_plot <- long_mated_femalese2_eggcount_summary %>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+  geom_jitter(data = long_mated_females_e2_eggcount,
+              aes(x = diet,
+                  y = egg_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,200)+
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
+
+
+mated_females_e2_eggcount <- (read_excel(path = "~/Desktop/MatedFemalesE2EggCount.xlsx", na = "NA"))
+                               
+                               
+                               
+
+#----------------------------------- Experiment 3----------------------------
 
 #-----------------  Feeding behaviour 
 
