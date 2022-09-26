@@ -693,7 +693,7 @@ virgin_femalesd3_plot <- long_virgin_femalesd3_summary%>%
 mated_femalesd3_plot + virgin_femalesd3_plot
 
 
-#----------- Egg counts
+#----------------------------- Egg counts
 
 
 mated_females_e2_eggcount <- (read_excel(path = "~/Desktop/MatedFemalesE2EggCount.xlsx", na = "NA"))
@@ -730,12 +730,43 @@ mated_females_e2_eggcount_plot <- long_mated_femalese2_eggcount_summary %>%
   theme_minimal()
 
 
-mated_females_e2_eggcount <- (read_excel(path = "~/Desktop/MatedFemalesE2EggCount.xlsx", na = "NA"))
-                               
+virgin_females_e2_eggcount <- (read_excel(path = "~/Desktop/VirginFemalesE2EggCount.xlsx", na = "NA"))
+
+long_virgin_females_e2_eggcount <- virgin_females_e2_eggcount %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
+
+long_virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(egg_numbers),
+            sd = sd(egg_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+mated_virgin_e2_eggcount_plot <- long_virgin_femalese2_eggcount_summary %>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+  geom_jitter(data = long_virgin_females_e2_eggcount,
+              aes(x = diet,
+                  y = egg_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,200)+
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
+
                                
                                
 
-#----------------------------------- Experiment 3----------------------------
+#----------------------------------- Experiment 3 ----------------------------
 
 #-----------------  Feeding behaviour 
 
@@ -777,7 +808,48 @@ mated_femalese3d1_plot <- long_mated_femalese3d1_summary%>%
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
  
-#-------------------
+
+mated_femalese3d2 <- (read_excel(path = "~/Desktop/MatedFemalesE3D2.xlsx", na = "NA"))
+
+long_mated_femalese3d2 <- mated_femalese3d2 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+long_mated_femalese3d2_summary <- long_mated_femalese3d2 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+#-------------- Mated Females (Day 2)
+
+mated_femalese3d2_plot <- long_mated_femalese3d2_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+  geom_jitter(data = long_mated_femalese3d2,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
+
+
+
+
+
+#------------------------------Experiment 4
+#-----------------------  Mated Females 
  
 mated_femalese4d1 <- (read_excel(path = "~/Desktop/MatedFemalesE4D1.xlsx", na = "NA"))
 
