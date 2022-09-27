@@ -1,7 +1,5 @@
 
-#------------------------------Data from four experiments-------------------#
-
-
+ #------------------------------Data from four experiments-------------------#
 
 #-------- Experiment 1 (Males and Females)
 #---- Male day 1 
@@ -16,14 +14,14 @@
 #---- Virgin Female day 2 
 
 
-#Experiment 3 (Mated Females and (Males + Females))
+#--------Experiment 3 (Mated Females and (Males + Females))
 #---- Males and Females day 1 
 #---- Males and Females day 2 
 #---- Mated Female day 1 
 #---- Mated Female day 2 
 
 
-#Experiment 4: repeat of experiment 2 (Mated Females and Virgin Females)
+#--------Experiment 4: repeat of experiment 2 (Mated Females and Virgin Females)
 #---- Mated Female day 1 
 #---- Mated Female day 2
 #---- Virgin Female day 1
@@ -31,6 +29,7 @@
 
 
 #_________________________________ Installing appropriate packages---------
+
 library(tidyverse)
 library(readxl)
 library(kableExtra)
@@ -40,8 +39,6 @@ library(patchwork)
 library(usethis)
 library(devtools)
 library(here)
-
-
 
 #_________________________________ Experiment 1 _____________________________# 
 
@@ -389,7 +386,7 @@ male_feedingd2_plot <- male_feedingd2_summary %>%
        y = "")+
   theme_minimal()
 
-#---------------------  Analysis of flies not on a plate (experiment 1)
+#-------------------------  Analysis of flies not on a plate (experiment 1)
 
 #----------------- Data for female flies not feeding (exp 1)
 
@@ -470,10 +467,6 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
 
 
 
-
-      
-     
-
 #----------------------------- Experiment 2-------------------------------------
 
 
@@ -519,7 +512,7 @@ long_mated_femalesd1_summary %>%
   kbl(caption=" ") %>% 
   kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
-#----------------------------- Mated Females Day 2 
+#----------------------------- Mated Females Day 2 (exp 2)
 
 
 mated_femalesd2 <- (read_excel(path = "~/Desktop/MatedFemalesD2.xls", na = "NA"))
@@ -800,7 +793,7 @@ mated_females_e2_eggcount <- (read_excel(path = "~/Desktop/MatedFemalesE2EggCoun
 long_mated_females_e2_eggcount <- mated_females_e2_eggcount %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
 
-long_mated_femalese2_eggcount_summary <- long_mated_females_e2_eggcount %>% 
+mated_femalese2_eggcount_summary <- long_mated_females_e2_eggcount %>% 
   group_by(diet) %>% 
   summarise(mean = mean(egg_numbers),
             sd = sd(egg_numbers),
@@ -829,6 +822,30 @@ mated_females_e2_eggcount_plot <- long_mated_femalese2_eggcount_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
+
+#----------- Data analysis for mated female egg count (exp 2)
+
+mated_femalese2_eggcount_summary %>%
+  kbl(caption=" ") %>% 
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+
+
+mated_femalese2_eggcount_ls <- lm(egg_numbers ~ diet, data = long_mated_females_e2_eggcount)
+summary(mated_femalese2_eggcount_ls)
+
+anova()
+performance::check_model(mated_femalese2_eggcount_ls)
+performance::check_model(mated_femalese2_eggcount_ls, check=c("homogeneity", "qq"))
+#-- Choose a different linear model !!!
+
+broom::tidy(mated_femalese2_eggcount_ls,  
+            exponentiate=T, 
+            conf.int=T)
+
+
+
+
+
 
 #-------------- Virgin female egg count 
 
@@ -866,6 +883,23 @@ virgin_female_e2_eggcount_plot <- long_virgin_femalese2_eggcount_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
+
+
+
+#------------------------- Data analysis for virgin egg count 
+
+virgin_females_e2_eggcount <- (read_excel(path = "~/Desktop/VirginFemalesE2EggCount.xlsx", na = "NA"))
+
+long_virgin_females_e2_eggcount <- virgin_females_e2_eggcount %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
+
+long_virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(egg_numbers),
+            sd = sd(egg_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
                                
 
 #----------------------------------- Experiment 3 ----------------------------
@@ -911,6 +945,9 @@ mated_femalese3d1_plot <- long_mated_femalese3d1_summary%>%
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
  
+#--------- Data analysis for mated females (exp 3, day 1)
+
+
 
 #--------------------- Mated females (exp 3, day 2)
 
@@ -926,7 +963,7 @@ long_mated_femalese3d2_summary <- long_mated_femalese3d2 %>%
             n = n(),
             se = sd/sqrt(n))
 
-#--------------  Visualising the data mated Females (exp 3, day 2)
+#--------------  Visualising the data for mated females (exp 3, day 2)
 
 mated_femalese3d2_plot <- long_mated_femalese3d2_summary%>% 
   ggplot(aes(x = diet, y = mean))+
@@ -948,6 +985,9 @@ mated_femalese3d2_plot <- long_mated_femalese3d2_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
+
+
+#-------- Data analysis for mated females (exp 3, day 2)
 
 
 
