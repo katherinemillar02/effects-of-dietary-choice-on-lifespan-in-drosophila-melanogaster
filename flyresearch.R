@@ -475,15 +475,29 @@ expls1 <- lm(long_female_feedingd1$fly_numbers ~ long_male_feedingd1$fly_numbers
 
 exp1.df <- merge(long_female_feedingd1, long_male_feedingd1, by=c("diet","diet"))
 
-exp1.model <- lm(fly_numbers.x ~ fly_numbers.y , data= exp1.df)
+exp1.model <- lm(fly_numbers.x ~ diet + fly_numbers.y, data= exp1.df)
 
 anova(exp1.model)
 summary(exp1.model)
 
-#----------------------------- Experiment 2-------------------------------------
+experiment1_table <- exp1.model %>% broom::tidy(conf.int = T) %>% 
+  select(-`std.error`) %>% 
+  mutate_if(is.numeric, round, 2) %>% 
+  kbl(col.names = c("Predictors",
+                    "Estimates",
+                    "Z-value",
+                    "P",
+                    "Lower 95% CI",
+                    "Upper 95% CI"),
+      caption = "", 
+      booktabs = TRUE) %>% 
+  kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
 
 
-#--------------------- Mated Females (Day 1, exp 2) 
+#----------------------------- Experiment 2 ------------------------------------
+
+
+#--------------------- Mated Females (day 1, exp 2) 
 
 mated_femalesd1 <- read_csv("~/Downloads/project/MatedFemalesD1.csv")  %>% drop_na()
 
