@@ -479,10 +479,12 @@ exp1.df <- merge(long_female_feedingd1, long_male_feedingd1, by=c("diet","diet")
 
 long_male_feedingd1 %>% mutate(sex = "male")
 long_female_feedingd1 %>% mutate(sex = "female")
-rbind(long_female_feedingd1,long_male_feedingd1)
+
+ exp1 <- rbind(long_female_feedingd1,long_male_feedingd1)
+
 test <- lm(fly_numbers ~ diet * sex, data = long_female_feedingd1)
 
-test <- lm(fly_numbers ~ diet + sex, data = long_female_feedingd1)
+test <- lm(fly_numbers ~ diet + sex, data = exp1)
 
 exp1.model <- lm(fly_numbers.x ~ fly_numbers.y, data= exp1.df)
 # can compare overall fly numbers but not compare fly numbers of each 
