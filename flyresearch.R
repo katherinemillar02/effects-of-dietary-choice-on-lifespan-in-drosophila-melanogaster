@@ -29,7 +29,7 @@ egg_counting1_summary <- long_egg_counting1 %>%
             n = n(),
             se = sd/sqrt(n))
 
-#---------- Visualise the data 
+#---------- Visualise the data of egg counting (experiment 1)
 
 egg_counting1_plot <- egg_counting1_summary %>% 
   ggplot(aes(x = diet, y = mean))+
@@ -52,20 +52,20 @@ egg_counting1_plot <- egg_counting1_summary %>%
        y = "Mean (+/- S.E.) number of eggs")+
   theme_minimal()
 
-#-------------------------- Data Analysis of egg counting (experiment 1)
+#----------- Data Analysis of egg counting (experiment 1)
 
-eggcountingsummary  <- longdata %>% 
+egg_counting1_summary  <- long_egg_counting1 %>% 
   group_by(diet) %>% 
   summarise(mean = mean(egg_numbers),
             sd = sd(egg_numbers),
             n = n(),
             se = sd/sqrt(n))
 
-eggcountingsummary %>%
+egg_counting1_summary %>%
   kbl(caption=" ") %>% 
   kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
-eggcountingls1 <- lm(egg_numbers ~ diet, data = longdata)
+eggcountingls1 <- lm(egg_numbers ~ diet, data = long_egg_counting1)
 
 eggcountingls1
 summary(eggcountingls1)
@@ -80,7 +80,7 @@ broom::tidy(eggcountingls1,
 performance::check_model(eggcountingls1)
 
 
-eggcountingls1table <- eggcountingls1 %>% broom::tidy(conf.int = T) %>% 
+eggcountingls1_table <- eggcountingls1 %>% broom::tidy(conf.int = T) %>% 
   select(-`std.error`) %>% 
   mutate_if(is.numeric, round, 2) %>% 
   kbl(col.names = c("Predictors",
@@ -112,6 +112,9 @@ female_feedingd1_summary <- long_female_feedingd1 %>%
             n = n(),
             se = sd/sqrt(n))
 
+
+#---------- Visualise the data of female feeding behaviour (experiment 1, day 1)
+
 female_feedingd1_plot <- female_feedingd1_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
@@ -133,7 +136,7 @@ female_feedingd1_plot <- female_feedingd1_summary %>%
        y = "Mean (+/- S.E.) number of flies on each patch")+
   theme_minimal()
 
-#------- Data Analysis of female feeding behaviour (day 1)
+#------- Data Analysis of female feeding behaviour (experiment 1, day 1)
 
 female_feedingd1_summary <- long_female_feedingd1 %>%
   group_by(diet) %>%
@@ -181,6 +184,8 @@ female_feedingd1_table <- female_feedingd1_ls1 %>% broom::tidy(conf.int = T) %>%
 
 
 #---------------- Female feeding behaviour (Day 2) 
+
+
 female_feedingd2 <- read_excel("~/Desktop/MatedFemalesE1D2.xlsx")
 
 long_female_feedingd2 <- female_feedingd2 %>% 
@@ -192,6 +197,9 @@ female_feedingd2_summary <- long_female_feedingd2 %>%
             sd = sd(fly2_numbers),
             n = n(),
             se = sd/sqrt(n))
+
+
+#---------------- Visualise the data of female feeding (experiment 1, day 2)
 
 female_feedingd2_plot <- female_feedingd2_summary %>% 
   ggplot(aes(x = diet, y = mean))+
@@ -214,7 +222,7 @@ female_feedingd2_plot <- female_feedingd2_summary %>%
        y = "")+
   theme_minimal()
 
-#------------------------ Data analysis of female feeding behaviour (day 2)
+#---------------Data analysis of female feeding behaviour (experiment 1, day 2)
 
 female_feedingd2_summary <- long_female_feedingd2 %>% 
   group_by(diet) %>% 
@@ -240,7 +248,7 @@ broom::tidy(female_feedingd2_ls1,
             conf.int=T)
 
 
-#------------------------ Male feeding behaviour (Day 1)
+#--------------------------- Male feeding behaviour (Day 1)
 
 male_feedingd1 <- read_excel("~/Desktop/MatedMalesE1D1.xlsx")
 
@@ -254,6 +262,9 @@ male_feedingd1_summary <- long_male_feedingd1 %>%
             sd = sd(mfly1_numbers),
             n = n(),
             se = sd/sqrt(n))
+
+
+#----------- Visualise the data of male feeding behaviour (experiment 1, day 1)
 
 male_feedingd1_plot <- male_feedingd1_summary %>% 
   ggplot(aes(x = diet, y = mean))+
@@ -277,7 +288,7 @@ male_feedingd1_plot <- male_feedingd1_summary %>%
   theme_minimal()
 
 
-#------------------------ Data Analysis of male feeding behaviour (day 2)
+#-------------- Data Analysis of male feeding behaviour (experiment 1, day 1)
 
 
 male_feedingd1_summary <- long_male_feedingd1 %>%
@@ -308,9 +319,6 @@ broom::tidy(male_feedingd1_ls2)
 anova(male_feedingd1_ls2)
 
 
-
-
-
 #------------------------ Male feeding behaviour (Day 2)
 
 male_feedingd2 <- read_excel("~/Desktop/MatedMalesE1D1.xlsx")
@@ -326,6 +334,8 @@ male_feedingd2_summary <- long_male_feedingd2 %>%
             sd = sd(mfly2_numbers),
             n = n(),
             se = sd/sqrt(n))
+
+#------------Visualise the data of male feeding behaviour (experiment 1, day 2)
 
 male_feedingd2_plot <- male_feedingd2_summary %>% 
   ggplot(aes(x = diet, y = mean))+
@@ -348,24 +358,9 @@ male_feedingd2_plot <- male_feedingd2_summary %>%
        y = "")+
   theme_minimal()
 
+#---------------------  Analysis of flies not on a plate (experiment 1)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-#--------------------- Flies not on a plate 
-
-
-
+#----------------- Data for female flies not feeding (exp 1)
 
 female_notfeedinge1 <- read_csv("~/Downloads/project/femalenf2.csv", col_select = 1:9)  %>% drop_na()
 
@@ -378,6 +373,8 @@ female_notfeedinge1_summary <- long_female_notfeedinge1 %>%
             sd = sd(fnf),
             n = n(),
             se = sd/sqrt(n))
+
+#--------------------- Visualising data for female flies not feeding (exp 1)
 
 female_notfeedinge1_plot <- female_notfeedinge1_summary %>% 
   ggplot(aes(x = plate, y = mean))+
@@ -401,12 +398,13 @@ female_notfeedinge1_plot <- female_notfeedinge1_summary %>%
 
 
 
+#----------------- Data for male flies not feeding (exp 1)
+
+
 male_notfeedinge1 <- read_csv("~/Downloads/project/malenf.csv", col_select = 1:9)  %>% drop_na()
 
 long_male_notfeedinge1 <- male_notfeedinge1 %>% 
   pivot_longer(cols = ("1":"8"), names_to = "plate", values_to = "mnf")
-
-
 
 male_notfeedinge1_summary <- long_male_notfeedinge1 %>% 
   group_by(plate) %>% 
@@ -414,6 +412,10 @@ male_notfeedinge1_summary <- long_male_notfeedinge1 %>%
             sd = sd(mnf),
             n = n(),
             se = sd/sqrt(n))
+
+
+#--------------- Visualising data for male flies not feeding (exp 1)
+
 
 male_notfeedinge1_plot <- male_notfeedinge1_summary %>% 
   ggplot(aes(x = plate, y = mean))+
@@ -444,7 +446,7 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
 #----------------------------- Experiment 2-------------------------------------
 
 
-#-----------------------------  Mated Females Day 1 
+#--------------------- Mated Females (Day 1, exp 2) 
 
 mated_femalesd1 <- read_csv("~/Downloads/project/MatedFemalesD1.csv")  %>% drop_na()
 
@@ -458,6 +460,8 @@ long_mated_femalesd1_summary <- long_mated_femalesd1 %>%
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
+
+#------------- Visualising data for mated females (exp 2, day 1) 
 
 mated_femalesd1_plot <- long_mated_femalesd1_summary%>% 
   ggplot(aes(x = diet, y = mean))+
@@ -480,67 +484,9 @@ geom_jitter(data = long_mated_femalesd1,
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
 
-
-
-
 long_mated_femalesd1_summary %>%
   kbl(caption=" ") %>% 
   kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
-
-
-
-
-
-
-
-#----------------------------- Virgin Females Day 1 
-virgin_femalesd1 <- read_excel("~/Downloads/project/VirginFemalesD1.xls") %>% drop_na()
-
-
-long_virgin_femalesd1 <- virgin_femalesd1 %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-
-long_virgin_femalesd1_summary <- long_virgin_femalesd1 %>% 
-  group_by(diet) %>% 
-  summarise(mean = mean(fly_numbers)
-            ,
-            sd = sd(fly_numbers),
-            n = n(),
-            se = sd/sqrt(n))
-
-virgin_femalesd1_plot <- long_virgin_femalesd1_summary%>% 
-  ggplot(aes(x = diet, y = mean))+
-  geom_bar(stat = "identity",
-           fill = "skyblue",
-           colour = "orange",
-           alpha = 0.6)+
-  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
-                width = 0.2)+
-  geom_jitter(data = long_virgin_femalesd1,
-              aes(x = diet,
-                  y = fly_numbers),
-              fill = "skyblue",
-              colour = "black",
-              width = 0.2,
-              shape = 21)+
-  ylim(0,6)+
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
-  theme_minimal()
-
-
-
-
-
-long_virgin_femalesd1_summary %>%
-  kbl(caption=" ") %>% 
-  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
-
-
-
-
-
 
 #----------------------------- Mated Females Day 2 
 
@@ -558,6 +504,7 @@ long_mated_femalesd2_summary <- long_mated_femalesd2 %>%
             n = n(),
             se = sd/sqrt(n))
 
+#------------------ Visualising the data for mated females (exp 2, day 2) 
 
 mated_femalesd2_plot <- long_mated_femalesd2_summary%>% 
   ggplot(aes(x = diet, y = mean))+
@@ -581,20 +528,83 @@ mated_femalesd2_plot <- long_mated_femalesd2_summary%>%
   theme_minimal()
 
 
+#------------------ Data analysis for mated females (exp 2, day 2)
+
+mated_femalesd2_ls <- lm(fly_numbers ~ diet, data = long_mated_femalesd2)
+
+mated_femalesd2_ls
+anova(mated_femalesd2_ls)
+
+performance::check_model(mated_femalesd2_ls)
+performance::check_model(mated_femalesd2_ls, check=c("homogeneity", "qq"))
+
+broom::tidy(mated_femalesd2_ls,  
+            exponentiate=T, 
+            conf.int=T)
 
 
- mated_femalesd2_ls <- lm(fly_numbers ~ diet, data = long_mated_femalesd2)
 
- mated_femalesd2_ls
- anova(mated_femalesd2_ls)
- 
- performance::check_model(mated_femalesd2_ls)
- performance::check_model(mated_femalesd2_ls, check=c("homogeneity", "qq"))
- 
- broom::tidy(mated_femalesd2_ls,  
-             exponentiate=T, 
-             conf.int=T)
- 
+#----------------------------- Virgin Females Day 1 
+
+
+virgin_femalesd1 <- read_excel("~/Downloads/project/VirginFemalesD1.xls") %>% drop_na()
+
+
+long_virgin_femalesd1 <- virgin_femalesd1 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+long_virgin_femalesd1_summary <- long_virgin_femalesd1 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers)
+            ,
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+#-------------- Visualising data for virgin females (exp 2, day 1)
+
+
+virgin_femalesd1_plot <- long_virgin_femalesd1_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+  geom_jitter(data = long_virgin_femalesd1,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
+
+
+long_virgin_femalesd1_summary %>%
+  kbl(caption=" ") %>% 
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
  #----------------------------- Virgin Females Day 2 
  
