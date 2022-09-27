@@ -471,20 +471,26 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
 
 #--------------------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ------
 
-expls1 <- lm(long_female_feedingd1$fly_numbers ~ long_male_feedingd1$fly_numbers)
+#expls1 <- lm(long_female_feedingd1$fly_numbers ~ long_male_feedingd1$fly_numbers)
 # Error in variable lengths 
 # so merged instead 
+#exp1.df <- merge(long_female_feedingd1, long_male_feedingd1, by=c("diet","diet"))
 
-exp1.df <- merge(long_female_feedingd1, long_male_feedingd1, by=c("diet","diet"))
+# Mutating a sex variable 
+exp1male <- long_male_feedingd1 %>% mutate(sex = "male")
+exp1female <- long_female_feedingd1 %>% mutate(sex = "female")
 
-long_male_feedingd1 %>% mutate(sex = "male")
-long_female_feedingd1 %>% mutate(sex = "female")
+# Using rbind to bind the two new datasets 
+exp1 <- rbind(exp1male, exp1female)
 
- exp1 <- rbind(long_female_feedingd1,long_male_feedingd1)
 
-test <- lm(fly_numbers ~ diet * sex, data = long_female_feedingd1)
+exp1ls1 <- lm(fly_numbers ~ diet + sex, data = exp1)
 
-test <- lm(fly_numbers ~ diet + sex, data = exp1)
+# Used to 
+exp1ls2 <- lm(fly_numbers ~ diet * sex, data = exp1)
+
+summary(exp1ls1)
+summary(exp1ls2)
 
 exp1.model <- lm(fly_numbers.x ~ fly_numbers.y, data= exp1.df)
 # can compare overall fly numbers but not compare fly numbers of each 
