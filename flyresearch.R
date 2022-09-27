@@ -1,6 +1,14 @@
 
  #------------------------------Data from four experiments-------------------#
 
+#-- Data analysis 
+#includes only data analysis of diets within the separate parts of the 
+#experiments 
+
+#---Need to include:
+#Data analysis comparing separate parts of the individual experiments 
+#Comparing different experiments? 
+
 #-------- Experiment 1 (Males and Females)
 #---- Male day 1 
 #---- Male day 2 
@@ -13,13 +21,11 @@
 #---- Virgin Female day 1
 #---- Virgin Female day 2 
 
-
 #--------Experiment 3 (Mated Females and (Males + Females))
 #---- Males and Females day 1 
 #---- Males and Females day 2 
 #---- Mated Female day 1 
 #---- Mated Female day 2 
-
 
 #--------Experiment 4: repeat of experiment 2 (Mated Females and Virgin Females)
 #---- Mated Female day 1 
@@ -27,8 +33,7 @@
 #---- Virgin Female day 1
 #---- Virgin Female day 2 
 
-
-#_________________________________ Installing appropriate packages---------
+#_________________________________ Installing appropriate packages__________
 
 library(tidyverse)
 library(readxl)
