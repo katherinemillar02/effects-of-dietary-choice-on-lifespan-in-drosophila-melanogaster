@@ -47,7 +47,7 @@ library(here)
 
 #_________________________________ Experiment 1 _____________________________# 
 
-#_________________________________ Egg counting
+#____________________________ Egg counting
 
 egg_counting_data <- read_csv("~/Downloads/project/eggcountingdata.csv", col_select = 1:5) %>% drop_na()
 
@@ -255,7 +255,7 @@ female_feedingd2_plot <- female_feedingd2_summary %>%
        y = "")+
   theme_minimal()
 
-#---------------Data analysis of female feeding behaviour (experiment 1, day 2)
+#---------------Data analysis of female feeding behaviour (exp 1, day 2)
 
 female_feedingd2_summary <- long_female_feedingd2 %>% 
   group_by(diet) %>% 
