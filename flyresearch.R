@@ -1069,6 +1069,118 @@ mated_femalese4d1_plot <- long_mated_femalese4d1_summary%>%
   theme_minimal()
 
 
+#-----------------------  Mated Females (Day 2)
+
+mated_femalese4d2 <- (read_excel(path = "~/Desktop/MatedFemalesE4D2.xlsx", na = "NA"))
+
+
+long_mated_femalese4d2 <- mated_femalese4d2 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+long_mated_femalese4d2_summary <- long_mated_femalese4d2 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+mated_femalese4d2_plot <- long_mated_femalese4d2_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "red",
+           colour = "blue",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "blue",
+                width = 0.2)+
+  geom_jitter(data = long_mated_femalese4d2,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
+
+
 #----------------------- Virgin Females (Day 1)
+
+virgin_femalese4d1 <- (read_excel(path = "~/Desktop/VirginFemalesE4D1.xlsx", na = "NA"))
+
+
+long_virgin_femalese4d1 <- virgin_femalese4d1 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+long_virgin_femalese4d1_summary <- long_virgin_femalese4d1 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+virgin_femalese4d1_plot <- long_virgin_femalese4d1_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "red",
+           colour = "blue",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "blue",
+                width = 0.2)+
+  geom_jitter(data = long_virgin_femalese4d1,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
+
+
+
+#----------------------- Virgin Females (Day 2)
+
+virgin_femalese4d2 <- (read_excel(path = "~/Desktop/VirginFemalesE4D2.xlsx", na = "NA"))
+
+
+long_virgin_femalese4d2 <- virgin_femalese4d2 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
+long_virgin_femalese4d2_summary <- long_virgin_femalese4d2 %>% 
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+
+virgin_femalese4d2_plot <- long_virgin_femalese4d2_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "red",
+           colour = "blue",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "blue",
+                width = 0.2)+
+  geom_jitter(data = long_virgin_femalese4d2,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
+
+
+
 
 
