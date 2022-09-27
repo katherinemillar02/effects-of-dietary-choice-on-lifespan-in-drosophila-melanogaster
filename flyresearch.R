@@ -1,5 +1,36 @@
 
-#_________________________________ Installing appropriate packages 
+#------------------------------Data from four experiments-------------------#
+
+
+
+#-------- Experiment 1 (Males and Females)
+#---- Male day 1 
+#---- Male day 2 
+#---- Female day 1 
+#---- Female day 2 
+
+#-------- Experiment 2 (Mated Females and Virgin Females)
+#---- Mated Female day 1 
+#---- Mated Female day 2
+#---- Virgin Female day 1
+#---- Virgin Female day 2 
+
+
+#Experiment 3 (Mated Females and (Males + Females))
+#---- Males and Females day 1 
+#---- Males and Females day 2 
+#---- Mated Female day 1 
+#---- Mated Female day 2 
+
+
+#Experiment 4: repeat of experiment 2 (Mated Females and Virgin Females)
+#---- Mated Female day 1 
+#---- Mated Female day 2
+#---- Virgin Female day 1
+#---- Virgin Female day 2 
+
+
+#_________________________________ Installing appropriate packages---------
 library(tidyverse)
 library(readxl)
 library(kableExtra)
@@ -1100,7 +1131,7 @@ long_mated_femalese4d1_summary <- long_mated_femalese4d1 %>%
             n = n(),
             se = sd/sqrt(n))
 
-#---------------- Visualising the data for mated Females (exp 4, day 1)
+#---------------- Visualising the data for mated females (exp 4, day 1)
 
 mated_femalese4d1_plot <- long_mated_femalese4d1_summary%>% 
   ggplot(aes(x = diet, y = mean))+
@@ -1139,7 +1170,7 @@ long_mated_femalese4d2_summary <- long_mated_femalese4d2 %>%
             n = n(),
             se = sd/sqrt(n))
 
-#----------------- Visualising the data for females (exp 4, day 2)
+#----------------- Visualising the data for mated females (exp 4, day 2)
 
 mated_femalese4d2_plot <- long_mated_femalese4d2_summary%>% 
   ggplot(aes(x = diet, y = mean))+
@@ -1163,7 +1194,7 @@ mated_femalese4d2_plot <- long_mated_femalese4d2_summary%>%
   theme_minimal()
 
 
-#----------------------- Virgin Females (Day 1)
+#----------------------- Virgin Females (exp 4, day 1)
 
 virgin_femalese4d1 <- (read_excel(path = "~/Desktop/VirginFemalesE4D1.xlsx", na = "NA"))
 
@@ -1178,8 +1209,7 @@ long_virgin_femalese4d1_summary <- long_virgin_femalese4d1 %>%
             n = n(),
             se = sd/sqrt(n))
 
-#----------------------- Visualising the data for virgin females (Day 1)
-
+#--------------- Visualising the data for virgin females (exp 4, day 1)
 
 virgin_femalese4d1_plot <- long_virgin_femalese4d1_summary%>% 
   ggplot(aes(x = diet, y = mean))+
@@ -1203,8 +1233,7 @@ virgin_femalese4d1_plot <- long_virgin_femalese4d1_summary%>%
   theme_minimal()
 
 
-
-#----------------------- Virgin Females (Day 2)
+#----------------------- Virgin Females (exp 4, day 2)
 
 virgin_femalese4d2 <- (read_excel(path = "~/Desktop/VirginFemalesE4D2.xlsx", na = "NA"))
 
@@ -1218,6 +1247,8 @@ long_virgin_femalese4d2_summary <- long_virgin_femalese4d2 %>%
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
+
+#------------- Visualising the data for virgin females (exp 4, day 2)
 
 virgin_femalese4d2_plot <- long_virgin_femalese4d2_summary%>% 
   ggplot(aes(x = diet, y = mean))+
@@ -1239,6 +1270,9 @@ virgin_femalese4d2_plot <- long_virgin_femalese4d2_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
+
+
+
 
 
 
