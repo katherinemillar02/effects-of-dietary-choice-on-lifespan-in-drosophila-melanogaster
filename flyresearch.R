@@ -54,7 +54,6 @@ egg_counting_data <- read_csv("~/Downloads/project/eggcountingdata.csv", col_sel
 long_egg_counting1 <- egg_counting_data %>% 
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
 
-
 egg_counting1_summary <- long_egg_counting1 %>% 
   group_by(diet) %>% 
   summarise(mean = mean(egg_numbers),
@@ -287,12 +286,12 @@ male_feedingd1 <- read_excel("~/Desktop/MatedMalesE1D1.xlsx")
 
 
 long_male_feedingd1 <- male_feedingd1 %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "mfly1_numbers")
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 
 male_feedingd1_summary <- long_male_feedingd1 %>% 
   group_by(diet) %>% 
-  summarise(mean = mean(mfly1_numbers),
-            sd = sd(mfly1_numbers),
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
 
@@ -310,7 +309,7 @@ male_feedingd1_plot <- male_feedingd1_summary %>%
                 width = 0.2)+
   geom_jitter(data = long_female_feedingd1,
               aes(x = diet,
-                  y = mfly1_numbers),
+                  y = fly_numbers),
               fill = "skyblue",
               colour = "black",
               width = 0.2,
@@ -326,14 +325,14 @@ male_feedingd1_plot <- male_feedingd1_summary %>%
 
 male_feedingd1_summary <- long_male_feedingd1 %>%
   group_by(diet) %>%
-  summarise(mean = mean(mfly1_numbers),
-            sd=sd(mfly1_numbers))
+  summarise(mean = mean(fly_numbers),
+            sd=sd(fly_numbers))
 
 male_feedingd1_summary %>%
   kbl(caption=" ") %>% 
   kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
-male_feedingd1_ls1 <- lm(mfly1_numbers ~ diet, data = long_male_feedingd1)
+male_feedingd1_ls1 <- lm(fly_numbers ~ diet, data = long_male_feedingd1)
 
 male_feedingd1_ls1
 summary(male_feedingd1_ls1)
@@ -470,7 +469,16 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
        y = "Mean (+/- S.E.) flies per plate not on a patch (males)")+
   theme_minimal()
 
+#--------------------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ------
 
+expls1 <- lm(long_female_feedingd1$fly_numbers ~ long_male_feedingd1$fly_numbers)
+
+exp1.df <- merge(long_female_feedingd1, long_male_feedingd1, by=c("diet","diet"))
+
+exp1.model <- lm(fly_numbers.x ~ fly_numbers.y , data= exp1.df)
+
+anova(exp1.model)
+summary(exp1.model)
 
 #----------------------------- Experiment 2-------------------------------------
 
@@ -1284,8 +1292,8 @@ virgin_femalese4d1_plot <- long_virgin_femalese4d1_summary%>%
 
 #---------------- Data analysis for virgin females (exp 4, day 1)
 
-
-
+virgin_femalese4d1ls1 <- lm(fly_numbers ~ diet, data = long_virgin_femalese4d1)
+performance::check_model(virgin_femalese4d1ls1)
 
 #----------------------- Virgin Females (exp 4, day 2)
 
@@ -1295,7 +1303,7 @@ virgin_femalese4d2 <- (read_excel(path = "~/Desktop/VirginFemalesE4D2.xlsx", na 
 long_virgin_femalese4d2 <- virgin_femalese4d2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 
-long_virgin_femalese4d2_summary <- long_virgin_femalese4d2 %>% 
+virgin_femalese4d2_summary <- long_virgin_femalese4d2 %>% 
   group_by(diet) %>% 
   summarise(mean = mean(fly_numbers),
             sd = sd(fly_numbers),
@@ -1327,6 +1335,35 @@ virgin_femalese4d2_plot <- long_virgin_femalese4d2_summary%>%
 
 
 #---------------- Data analysis for virgin females (exp 4, day 2)
+
+virgin_femalese4d2_summary %>%
+  kbl(caption=" ") %>% 
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+
+virgin_femalese4d2ls1 <- lm(fly_numbers ~ diet, data = long_virgin_femalese4d2)
+
+virgin_femalese4d2ls1
+summary(virgin_femalese4d2ls1)
+anova(virgin_femalese4d2ls1)
+confint(virgin_femalese4d2ls1)
+broom::tidy(virgin_femalese4d2ls1,  
+            exponentiate=T, 
+            conf.int=T)
+performance::check_model(virgin_femalese4d2ls1)
+
+virgin_femalese4d2ls1_table <- eggcountingls1 %>% broom::tidy(conf.int = T) %>% 
+  select(-`std.error`) %>% 
+  mutate_if(is.numeric, round, 2) %>% 
+  kbl(col.names = c("Predictors",
+                    "Estimates",
+                    "Z-value",
+                    "P",
+                    "Lower 95% CI",
+                    "Upper 95% CI"),
+      caption = "", 
+      booktabs = TRUE) %>% 
+  kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
+
 
 
 
