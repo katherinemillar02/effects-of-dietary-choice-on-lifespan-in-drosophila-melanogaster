@@ -1001,7 +1001,7 @@ females_mf_e3_d1_plot <- females_mf_e3_d1_summary  %>%
 
 males_mf_e3_d1_plot + females_mf_e3_d1_plot
 
-#-------- Males (Day 2)
+#-------- Males (m+f) (exp 3,Day 2)
 
 males_mf_e3_d2 <- (read_excel(path = "~/Desktop/MatedMalesE3D2(M+F).xlsx", na = "NA"))
 
@@ -1014,6 +1014,8 @@ males_mf_e3_d2_summary <- long_males_mf_e3_d2 %>%
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
+
+#--------  Visualising the data for males (m+f) (exp 3, day 2)
 
 males_mf_e3_d2_plot <- males_mf_e3_d2_summary  %>% 
   ggplot(aes(x = diet, y = mean))+
@@ -1083,7 +1085,7 @@ females_mf_e3_d2_plot <- females_mf_e3_d2_summary  %>%
 #------------------------------Experiment 4---------------------------------
 
 
-#-----------------------  Mated Females (Day 1)
+#-----------------------  Mated Females (exp 4, day 1)
  
 mated_femalese4d1 <- (read_excel(path = "~/Desktop/MatedFemalesE4D1.xlsx", na = "NA"))
 
@@ -1097,6 +1099,8 @@ long_mated_femalese4d1_summary <- long_mated_femalese4d1 %>%
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
+
+#---------------- Visualising the data for mated Females (exp 4, day 1)
 
 mated_femalese4d1_plot <- long_mated_femalese4d1_summary%>% 
   ggplot(aes(x = diet, y = mean))+
@@ -1120,7 +1124,7 @@ mated_femalese4d1_plot <- long_mated_femalese4d1_summary%>%
   theme_minimal()
 
 
-#-----------------------  Mated Females (Day 2)
+#-----------------------  Mated Females (exp 4, day 2)
 
 mated_femalese4d2 <- (read_excel(path = "~/Desktop/MatedFemalesE4D2.xlsx", na = "NA"))
 
@@ -1134,6 +1138,8 @@ long_mated_femalese4d2_summary <- long_mated_femalese4d2 %>%
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
+
+#----------------- Visualising the data for females (exp 4, day 2)
 
 mated_femalese4d2_plot <- long_mated_femalese4d2_summary%>% 
   ggplot(aes(x = diet, y = mean))+
@@ -1171,6 +1177,9 @@ long_virgin_femalese4d1_summary <- long_virgin_femalese4d1 %>%
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
+
+#----------------------- Visualising the data for virgin females (Day 1)
+
 
 virgin_femalese4d1_plot <- long_virgin_femalese4d1_summary%>% 
   ggplot(aes(x = diet, y = mean))+
