@@ -472,27 +472,19 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
 #--------------------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ------
 
 expls1 <- lm(long_female_feedingd1$fly_numbers ~ long_male_feedingd1$fly_numbers)
+# Error in variable lengths 
+# so merged instead 
 
 exp1.df <- merge(long_female_feedingd1, long_male_feedingd1, by=c("diet","diet"))
 
-exp1.model <- lm(fly_numbers.x ~ diet + fly_numbers.y, data= exp1.df)
+long_male_feedingd1 %>% mutate(sex = "male")
+long_female_feedingd1 %>% mutate(sex = "female")
+rbind(long_female_feedingd1,long_male_feedingd1)
+test <- lm(fly_numbers ~ diet * sex, data = long_female_feedingd1)
 
-anova(exp1.model)
-summary(exp1.model)
-
-experiment1_table <- exp1.model %>% broom::tidy(conf.int = T) %>% 
-  select(-`std.error`) %>% 
-  mutate_if(is.numeric, round, 2) %>% 
-  kbl(col.names = c("Predictors",
-                    "Estimates",
-                    "Z-value",
-                    "P",
-                    "Lower 95% CI",
-                    "Upper 95% CI"),
-      caption = "", 
-      booktabs = TRUE) %>% 
-  kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
-
+exp1.model <- lm(fly_numbers.x ~ fly_numbers.y, data= exp1.df)
+# can compare overall fly numbers but not compare fly numbers of each 
+# diet over two data-sets
 
 #----------------------------- Experiment 2 ------------------------------------
 
@@ -860,10 +852,10 @@ mated_femalese2_eggcount_summary %>%
 mated_femalese2_eggcount_ls <- lm(egg_numbers ~ diet, data = long_mated_females_e2_eggcount)
 summary(mated_femalese2_eggcount_ls)
 
-anova()
+
 performance::check_model(mated_femalese2_eggcount_ls)
 performance::check_model(mated_femalese2_eggcount_ls, check=c("homogeneity", "qq"))
-#-- Choose a different linear model !!!
+#-- Choose a different linear model !!!!
 
 broom::tidy(mated_femalese2_eggcount_ls,  
             exponentiate=T, 
