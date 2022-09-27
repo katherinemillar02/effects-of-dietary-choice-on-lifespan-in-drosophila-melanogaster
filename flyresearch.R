@@ -1153,7 +1153,7 @@ females_mf_e3_d2_plot <- females_mf_e3_d2_summary  %>%
 
 
 
-#------------------------------Experiment 4---------------------------------
+#------------------------------Experiment 4---------------------------------#
 
 
 #-----------------------  Mated Females (exp 4, day 1)
@@ -1194,6 +1194,8 @@ mated_femalese4d1_plot <- long_mated_femalese4d1_summary%>%
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
 
+#------------------ Data analysis for mated females (exp 4, day 1)
+
 
 #-----------------------  Mated Females (exp 4, day 2)
 
@@ -1232,6 +1234,8 @@ mated_femalese4d2_plot <- long_mated_femalese4d2_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
+
+#------------------ Data analysis for mated females (exp 4, day 2)
 
 
 #----------------------- Virgin Females (exp 4, day 1)
@@ -1273,6 +1277,11 @@ virgin_femalese4d1_plot <- long_virgin_femalese4d1_summary%>%
   theme_minimal()
 
 
+#---------------- Data analysis for virgin females (exp 4, day 1)
+
+
+
+
 #----------------------- Virgin Females (exp 4, day 2)
 
 virgin_femalese4d2 <- (read_excel(path = "~/Desktop/VirginFemalesE4D2.xlsx", na = "NA"))
@@ -1312,7 +1321,7 @@ virgin_femalese4d2_plot <- long_virgin_femalese4d2_summary%>%
   theme_minimal()
 
 
-
+#---------------- Data analysis for virgin females (exp 4, day 2)
 
 
 
