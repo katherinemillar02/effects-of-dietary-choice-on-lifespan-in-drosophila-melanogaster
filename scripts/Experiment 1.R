@@ -41,7 +41,7 @@ library(here)
 
 #____________________________ Egg counting
 
-egg_counting_data <- read_csv("~/Documents/drosophilaresearchproject/data/EggCountingE1.csv", col_select = 1:5) %>% drop_na()
+egg_counting_data <- read_csv("data/EggCountingE1.csv", col_select = 1:5) %>% drop_na()
 
 long_egg_counting1 <- egg_counting_data %>% 
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
