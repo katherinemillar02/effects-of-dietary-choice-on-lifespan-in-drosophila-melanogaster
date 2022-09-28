@@ -353,7 +353,7 @@ anova(male_feedingd1_ls2)
 
 #------------------------ Male feeding behaviour (Day 2)
 
-male_feedingd2 <- read_excel("~/Desktop/MatedMalesE1D1.xlsx")
+male_feedingd2 <- read_excel("~/Desktop/MatedMalesE1D2.xlsx")
 
 
 
@@ -469,7 +469,7 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
        y = "Mean (+/- S.E.) flies per plate not on a patch (males)")+
   theme_minimal()
 
-#--------------------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ------
+#----------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ------------------
 
 #expls1 <- lm(long_female_feedingd1$fly_numbers ~ long_male_feedingd1$fly_numbers)
 # Error in variable lengths 
@@ -492,7 +492,21 @@ exp1ls2 <- lm(fly_numbers ~ diet * sex, data = exp1)
 summary(exp1ls1)
 summary(exp1ls2)
 
-exp1.model <- lm(fly_numbers.x ~ fly_numbers.y, data= exp1.df)
+
+exp1ls2_table <- exp1ls2 %>% broom::tidy(conf.int = T) %>% 
+  select(-`std.error`) %>% 
+  mutate_if(is.numeric, round, 2) %>% 
+  kbl(col.names = c("Predictors",
+                    "Estimates",
+                    "Z-value",
+                    "P",
+                    "Lower 95% CI",
+                    "Upper 95% CI"),
+      caption = "", 
+      booktabs = TRUE) %>% 
+  kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
+
+# exp1.model <- lm(fly_numbers.x ~ fly_numbers.y, data= exp1.df)
 # can compare overall fly numbers but not compare fly numbers of each 
 # diet over two data-sets
 
@@ -544,10 +558,10 @@ long_mated_femalesd1_summary %>%
 #----------------------------- Mated Females Day 2 (exp 2)
 
 
-mated_femalesd2 <- (read_excel(path = "~/Desktop/MatedFemalesD2.xls", na = "NA"))
+mated_femalesd2 <- read.csv("~/Desktop/MatedFemalesD2.csv")
 
 long_mated_femalesd2 <- mated_femalesd2 %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+  pivot_longer(cols = ("X8.1":"X1.8"), names_to = "diet", values_to = "fly_numbers")
 
 long_mated_femalesd2_summary <- long_mated_femalesd2 %>% 
   group_by(diet) %>% 
