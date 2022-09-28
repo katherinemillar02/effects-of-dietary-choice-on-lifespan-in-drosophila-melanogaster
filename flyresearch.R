@@ -1,13 +1,8 @@
 
  #------------------------------Data from four experiments-------------------#
 
-#-- Data analysis 
-#includes only data analysis of diets within the separate parts of the 
-#experiments 
 
-#---Need to include:
-#Data analysis comparing separate parts of the individual experiments 
-#Comparing different experiments? 
+
 
 #-------- Experiment 1 (Males and Females)
 #---- Male day 1 
@@ -33,7 +28,7 @@
 #---- Virgin Female day 1
 #---- Virgin Female day 2 
 
-#_________________________________ Installing appropriate packages__________
+#________________________ Installing appropriate packages__________________
 
 library(tidyverse)
 library(readxl)
@@ -469,7 +464,9 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
        y = "Mean (+/- S.E.) flies per plate not on a patch (males)")+
   theme_minimal()
 
-#----------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ------------------
+
+
+#----------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ----------------#
 
 #expls1 <- lm(long_female_feedingd1$fly_numbers ~ long_male_feedingd1$fly_numbers)
 # Error in variable lengths 
@@ -483,28 +480,17 @@ exp1female <- long_female_feedingd1 %>% mutate(sex = "female")
 # Using rbind to bind the two new datasets 
 exp1 <- rbind(exp1male, exp1female)
 
-
 exp1ls1 <- lm(fly_numbers ~ diet + sex, data = exp1)
 
-# Used to 
+
 exp1ls2 <- lm(fly_numbers ~ diet * sex, data = exp1)
 
 summary(exp1ls1)
 summary(exp1ls2)
 
-
-exp1ls2_table <- exp1ls2 %>% broom::tidy(conf.int = T) %>% 
-  select(-`std.error`) %>% 
-  mutate_if(is.numeric, round, 2) %>% 
-  kbl(col.names = c("Predictors",
-                    "Estimates",
-                    "Z-value",
-                    "P",
-                    "Lower 95% CI",
-                    "Upper 95% CI"),
-      caption = "", 
-      booktabs = TRUE) %>% 
-  kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
+broom::tidy(exp1ls2,  
+            exponentiate=T, 
+            conf.int=T)
 
 # exp1.model <- lm(fly_numbers.x ~ fly_numbers.y, data= exp1.df)
 # can compare overall fly numbers but not compare fly numbers of each 
@@ -635,7 +621,7 @@ mated_femalesd3_plot <- long_mated_femalesd3_summary%>%
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
                 colour = "orange",
                 width = 0.2)+
-  geom_jitter(data = long_mated_femalesd2,
+  geom_jitter(data = long_mated_femalesd3,
               aes(x = diet,
                   y = fly_numbers),
               fill = "skyblue",
@@ -943,7 +929,22 @@ long_virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>%
             n = n(),
             se = sd/sqrt(n))
 
-                               
+
+#------------------------ OVERALL DATA ANALYSIS FOR EXPERIMENT 2 --------------
+
+exp2mated <- long_virgin_femalesd1 %>% mutate(variable = "virgin")
+exp2virgin <- long_mated_femalesd1 %>% mutate(variable = "mated")
+
+exp2 <- rbind(exp2mated, exp2virgin)
+
+exp2ls1 <- lm(fly_numbers ~ diet + variable, data = exp2)
+
+
+exp2ls2 <- lm(fly_numbers ~ diet * variable, data = exp2)
+
+broom::tidy(exp2ls2,  
+            exponentiate=T, 
+            conf.int=T)
 
 #----------------------------------- Experiment 3 ----------------------------
 
