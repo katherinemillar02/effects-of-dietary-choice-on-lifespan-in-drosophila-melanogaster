@@ -1194,7 +1194,22 @@ females_mf_e3_d2_plot <- females_mf_e3_d2_summary  %>%
 
 
 
+#--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 ----------------#
 
+
+exp3f <- long_females_mf_e3_d1 %>% mutate(variable = "virgin")
+exp3female <- long_m %>% mutate(variable = "mated")
+
+exp2 <- rbind(exp2mated, exp2virgin)
+
+exp2ls1 <- lm(fly_numbers ~ diet + variable, data = exp2)
+
+
+exp2ls2 <- lm(fly_numbers ~ diet * variable, data = exp2)
+
+broom::tidy(exp2ls2,  
+            exponentiate=T, 
+            conf.int=T)
 
 
 #------------------------------Experiment 4---------------------------------#
