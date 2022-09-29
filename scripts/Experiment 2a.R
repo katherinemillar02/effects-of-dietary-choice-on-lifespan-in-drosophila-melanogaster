@@ -85,15 +85,15 @@ mated_femalesd2_plot <- long_mated_femalesd2_summary%>%
 
 #------------------ Data analysis for mated females (exp 2, day 2)
 
-mated_femalesd2_ls <- lm(fly_numbers ~ diet, data = long_mated_femalesd2)
+#mated_femalesd2_ls <- lm(fly_numbers ~ diet, data = long_mated_femalesd2)
 
-mated_femalesd2_ls
-anova(mated_femalesd2_ls)
+#mated_femalesd2_ls
+#anova(mated_femalesd2_ls)
 
-performance::check_model(mated_femalesd2_ls)
-performance::check_model(mated_femalesd2_ls, check=c("homogeneity", "qq"))
+#performance::check_model(mated_femalesd2_ls)
+#performance::check_model(mated_femalesd2_ls, check=c("homogeneity", "qq"))
 
-broom::tidy(mated_femalesd2_ls,  
+#broom::tidy(mated_femalesd2_ls,  
             exponentiate=T, 
             conf.int=T)
 
@@ -137,9 +137,9 @@ mated_femalesd3_plot <- long_mated_femalesd3_summary%>%
 
 #-------------- Data analysis for mated females (exp 2, day 3)
 
-mated_femalesd3_ls <- lm(fly_numbers ~ diet, data = long_mated_femalesd3)
+#mated_femalesd3_ls <- lm(fly_numbers ~ diet, data = long_mated_femalesd3)
 
-summary(mated_femalesd3_ls)
+#summary(mated_femalesd3_ls)
 
 
 
@@ -191,15 +191,15 @@ long_virgin_femalesd1_summary %>%
   kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
 
-virgin_femalesd1_ls <- lm(fly_numbers ~ diet, data = long_virgin_femalesd1)
-summary(virgin_femalesd1_ls)
-anova(virgin_femalesd1_ls)
-performance::check_model(virgin_femalesd1_ls)
-performance::check_model(virgin_femalesd1_ls, check=c("homogeneity", "qq"))
+#virgin_femalesd1_ls <- lm(fly_numbers ~ diet, data = long_virgin_femalesd1)
+#summary(virgin_femalesd1_ls)
+#anova(virgin_femalesd1_ls)
+#performance::check_model(virgin_femalesd1_ls)
+#performance::check_model(virgin_femalesd1_ls, check=c("homogeneity", "qq"))
 #-- Choose a different linear model !!!
-broom::tidy(mated_femalesd2_ls,  
-            exponentiate=T, 
-            conf.int=T)
+#broom::tidy(mated_femalesd2_ls,  
+#exponentiate=T, 
+#conf.int=T)
 
 #---------------------- Virgin Females Day 2 
 
@@ -241,20 +241,20 @@ virgin_femalesd2_plot <- long_virgin_femalesd2_summary%>%
 
 
 #------------------ Data analysis for virgin females (exp 2, day 2)
+#
+#long_virgin_femalesd2_summary %>%
+#kbl(caption=" ") %>% 
+#kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
-long_virgin_femalesd2_summary %>%
-  kbl(caption=" ") %>% 
-  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
-
-virgin_femalesd2_ls <- lm(fly_numbers ~ diet, data = long_virgin_femalesd1)
-summary(virgin_femalesd2_ls)
-anova(virgin_femalesd2_ls)
-performance::check_model(virgin_femalesd2_ls)
-performance::check_model(virgin_femalesd2_ls, check=c("homogeneity", "qq"))
+#virgin_femalesd2_ls <- lm(fly_numbers ~ diet, data = long_virgin_femalesd1)
+#summary(virgin_femalesd2_ls)
+#anova(virgin_femalesd2_ls)
+#performance::check_model(virgin_femalesd2_ls)
+#performance::check_model(virgin_femalesd2_ls, check=c("homogeneity", "qq"))
 #-- Choose a different linear model !!!
 
-broom::tidy(virgin_femalesd2_ls,  
+#broom::tidy(virgin_femalesd2_ls,  
             exponentiate=T, 
             conf.int=T)
 
@@ -297,23 +297,7 @@ virgin_femalesd3_plot <- long_virgin_femalesd3_summary%>%
   theme_minimal()
 
 
-#----------------- Data analysis for virgin females (exp 3, day 3) 
 
-long_virgin_femalesd3_summary %>%
-  kbl(caption=" ") %>% 
-  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
-
-
-virgin_femalesd3_ls <- lm(fly_numbers ~ diet, data = long_virgin_femalesd3)
-summary(virgin_femalesd3_ls)
-anova(virgin_femalesd3_ls)
-performance::check_model(virgin_femalesd3_ls)
-performance::check_model(virgin_femalesd3_ls, check=c("homogeneity", "qq"))
-#-- Choose a different linear model !!!
-
-broom::tidy(virgin_femalesd3_ls,  
-            exponentiate=T, 
-            conf.int=T)
 
 #---------------------- Egg counts for experiment 2
 
@@ -356,22 +340,7 @@ mated_females_e2_eggcount_plot <- long_mated_femalese2_eggcount_summary %>%
 
 #----------- Data analysis for mated female egg count (exp 2)
 
-mated_femalese2_eggcount_summary %>%
-  kbl(caption=" ") %>% 
-  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
-
-mated_femalese2_eggcount_ls <- lm(egg_numbers ~ diet, data = long_mated_females_e2_eggcount)
-summary(mated_femalese2_eggcount_ls)
-
-
-performance::check_model(mated_femalese2_eggcount_ls)
-performance::check_model(mated_femalese2_eggcount_ls, check=c("homogeneity", "qq"))
-#-- Choose a different linear model !!!!
-
-broom::tidy(mated_femalese2_eggcount_ls,  
-            exponentiate=T, 
-            conf.int=T)
 
 
 
@@ -443,6 +412,10 @@ exp2ls1 <- lm(fly_numbers ~ diet + variable, data = exp2)
 
 
 exp2ls2 <- lm(fly_numbers ~ diet * variable, data = exp2)
+
+performance::check_model(exp2ls2)
+
+
 
 broom::tidy(exp2ls2,  
             exponentiate=T, 
