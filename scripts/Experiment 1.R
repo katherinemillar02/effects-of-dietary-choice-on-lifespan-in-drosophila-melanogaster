@@ -479,8 +479,7 @@ malebind <- rbind(long_male_feedingd1, long_male_feedingd2)
 exp1female <- long_female_feedingd1 %>% mutate(sex = "female")
 
 # Using rbind to bind the two new datasets 
-
-
+## Need to bind days beforehnand?? 
 
 
 exp1 <- rbind(exp1male, exp1female)
