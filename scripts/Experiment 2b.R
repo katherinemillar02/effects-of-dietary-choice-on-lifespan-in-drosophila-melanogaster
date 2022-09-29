@@ -168,33 +168,33 @@ virgin_femalese4d2_plot <- long_virgin_femalese4d2_summary%>%
 
 #---------------- Data analysis for virgin females (exp 4, day 2)
 
-virgin_femalese4d2_summary %>%
+#virgin_femalese4d2_summary %>%
   kbl(caption=" ") %>% 
   kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
-virgin_femalese4d2ls1 <- lm(fly_numbers ~ diet, data = long_virgin_femalese4d2)
+  #virgin_femalese4d2ls1 <- lm(fly_numbers ~ diet, data = long_virgin_femalese4d2)
 
-virgin_femalese4d2ls1
-summary(virgin_femalese4d2ls1)
-anova(virgin_femalese4d2ls1)
-confint(virgin_femalese4d2ls1)
-broom::tidy(virgin_femalese4d2ls1,  
-            exponentiate=T, 
-            conf.int=T)
-performance::check_model(virgin_femalese4d2ls1)
+  #virgin_femalese4d2ls1
+  #summary(virgin_femalese4d2ls1)
+  #anova(virgin_femalese4d2ls1)
+  #confint(virgin_femalese4d2ls1)
+  #broom::tidy(virgin_femalese4d2ls1,  
+  #     exponentiate=T, 
+  #         conf.int=T)
+#performance::check_model(virgin_femalese4d2ls1)
 
-virgin_femalese4d2ls1_table <- eggcountingls1 %>% broom::tidy(conf.int = T) %>% 
-  select(-`std.error`) %>% 
-  mutate_if(is.numeric, round, 2) %>% 
-  kbl(col.names = c("Predictors",
-                    "Estimates",
-                    "Z-value",
-                    "P",
-                    "Lower 95% CI",
-                    "Upper 95% CI"),
-      caption = "", 
-      booktabs = TRUE) %>% 
-  kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
+#virgin_femalese4d2ls1_table <- eggcountingls1 %>% broom::tidy(conf.int = T) %>% 
+# select(-`std.error`) %>% 
+# mutate_if(is.numeric, round, 2) %>% 
+# kbl(col.names = c("Predictors",
+#                   "Estimates",
+#                   "Z-value",
+#                   "P",
+#                   "Lower 95% CI",
+#                   "Upper 95% CI"),
+#     #  caption = "", 
+#     booktabs = TRUE) %>% 
+# kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
 
 
 

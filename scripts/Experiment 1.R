@@ -486,7 +486,7 @@ exp1 <- rbind(exp1male, exp1female)
 
 exp1ls1 <- lm(fly_numbers ~ diet + sex, data = exp1)
 
-performance::check_model(exp1ls1)
+performance::check_model(exp1ls2)
 
 exp1ls2 <- lm(fly_numbers ~ diet * sex, data = exp1)
 
