@@ -249,15 +249,21 @@ females_mf_e3_d2_plot <- females_mf_e3_d2_summary  %>%
 #--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 ----------------#
 
 
-exp3f <- long_females_mf_e3_d1 %>% mutate(variable = "virgin")
-exp3female <- long_m %>% mutate(variable = "mated")
+exp3alone <- long_females_mf_e3_d1 %>% mutate(variable = "together")
+exp3together <- long_mated_femalese3d1 %>% mutate(variable = "alone")
 
-exp2 <- rbind(exp2mated, exp2virgin)
+exp3 <- rbind(exp3alone, exp3together)
 
-exp2ls1 <- lm(fly_numbers ~ diet + variable, data = exp2)
+exp3ls1 <- lm(fly_numbers ~ diet + variable, data = exp3)
+
+performance::check_model(exp3ls1)
 
 
-exp2ls2 <- lm(fly_numbers ~ diet * variable, data = exp2)
+exp3ls2 <- lm(fly_numbers ~ diet * variable, data = exp3)
+
+performance::check_model(exp3ls2)
+
+
 
 broom::tidy(exp2ls2,  
             exponentiate=T, 

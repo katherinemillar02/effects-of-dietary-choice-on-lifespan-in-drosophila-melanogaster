@@ -146,7 +146,7 @@ mated_femalesd3_plot <- long_mated_femalesd3_summary%>%
 #----------------------------- Virgin Females Day 1 
 
 
-virgin_femalesd1 <- read_csv("~/Documents/drosophilaresearchproject/data/VirginFemalesE2aD1.csv") %>% drop_na()
+virgin_femalesd1 <- read_csv("data/VirginFemalesE2aD1.csv", col_select = 1:6) %>% drop_na()
 
 
 long_virgin_femalesd1 <- virgin_femalesd1 %>% 
@@ -403,17 +403,29 @@ long_virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>%
 
 #------------------------ OVERALL DATA ANALYSIS FOR EXPERIMENT 2 --------------
 
-exp2mated <- long_virgin_femalesd1 %>% mutate(variable = "virgin")
-exp2virgin <- long_mated_femalesd1 %>% mutate(variable = "mated")
+exp2avirgin <- long_virgin_femalesd1 %>% mutate(variable = "virgin")
+exp2amated <- long_mated_femalesd1 %>% mutate(variable = "mated")
 
-exp2 <- rbind(exp2mated, exp2virgin)
+# mated v virgin have different n numbers ? but males and females
+# had different n numbers and that worked 
 
-exp2ls1 <- lm(fly_numbers ~ diet + variable, data = exp2)
 
 
-exp2ls2 <- lm(fly_numbers ~ diet * variable, data = exp2)
+# Error in rbind(deparse.level, ...) : 
+# numbers of columns of arguments do not match - confused because they don't match 
 
-performance::check_model(exp2ls2)
+exp2a <- rbind(exp2amated, exp2avirgin)
+
+exp2als1 <- lm(fly_numbers ~ diet + variable, data = exp2a)
+
+performance::check_model(exp2als1)
+# hmmm 
+
+
+exp2als2 <- lm(fly_numbers ~ diet * variable, data = exp2a)
+# hmmm 
+
+performance::check_model(exp2als2)
 
 
 
