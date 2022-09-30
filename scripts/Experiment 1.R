@@ -478,27 +478,52 @@ malebind <- rbind(long_male_feedingd1, long_male_feedingd2)
 
 exp1female <- long_female_feedingd1 %>% mutate(sex = "female")
 
-# Using rbind to bind the two new datasets 
-## Need to bind days beforehnand?? 
+
+#using r bind to make two data sets one data set 
 
 
 exp1 <- rbind(exp1male, exp1female)
 
+# Making a linear model
 exp1ls1 <- lm(fly_numbers ~ diet + sex, data = exp1)
 
-performance::check_model(exp1ls2)
+performance::check_model(exp1ls1)
+
+broom::tidy(exp1ls1,  
+            exponentiate=T, 
+            conf.int=T)
+
+# Same linear model but with sqrt 
+exp1ls1a <- lm(sqrt(fly_numbers) ~ diet + sex , data = exp1)
+
+performance::check_model(exp1ls1a)
+
+broom::tidy(exp1ls1a,  
+            exponentiate=T, 
+            conf.int=T)
+
+
+# Making a second linear model (with an interaction effect)
 
 exp1ls2 <- lm(fly_numbers ~ diet * sex, data = exp1)
 
-summary(exp1ls1)
-summary(exp1ls2)
+performance::check_model(exp1ls2)
 
 broom::tidy(exp1ls2,  
             exponentiate=T, 
             conf.int=T)
 
-# exp1.model <- lm(fly_numbers.x ~ fly_numbers.y, data= exp1.df)
-# can compare overall fly numbers but not compare fly numbers of each 
-# diet over two data-sets
+# Same linear model but with sqrt 
+
+exp1ls2a <- lm(sqrt(fly_numbers) ~ diet * sex , data = exp1)
+
+performance::check_model(exp1ls2a)
+
+broom::tidy(exp1ls2a,  
+            exponentiate=T, 
+            conf.int=T)
+
+# From performance::check, exp 2a looks better but probaly use (2) 
+
 
 

@@ -249,22 +249,35 @@ females_mf_e3_d2_plot <- females_mf_e3_d2_summary  %>%
 #--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 ----------------#
 
 
+# Using mutate to add a variable 
 exp3alone <- long_females_mf_e3_d1 %>% mutate(variable = "together")
 exp3together <- long_mated_femalese3d1 %>% mutate(variable = "alone")
 
+# Using rbind to bind the two data sets from the experiment 
 exp3 <- rbind(exp3alone, exp3together)
 
+# Making a linear model of fly numbers and diet  
 exp3ls1 <- lm(fly_numbers ~ diet + variable, data = exp3)
 
+# Using performance 
 performance::check_model(exp3ls1)
 
+exp3ls1a <- lm(sqrt(fly_numbers) ~ diet + variable, data = exp3)
+
+performance::check_model(exp3ls1a)
 
 exp3ls2 <- lm(fly_numbers ~ diet * variable, data = exp3)
 
 performance::check_model(exp3ls2)
 
+exp3ls2a <- lm(sqrt(fly_numbers) ~ diet * variable, data = exp3)
+
+performance::check_model(exp3ls2a)
 
 
-broom::tidy(exp2ls2,  
+
+#without sqrt - works better
+
+broom::tidy(exp3ls2,  
             exponentiate=T, 
             conf.int=T)

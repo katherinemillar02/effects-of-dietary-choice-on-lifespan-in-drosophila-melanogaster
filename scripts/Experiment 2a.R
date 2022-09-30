@@ -416,10 +416,17 @@ exp2amated <- long_mated_femalesd1 %>% mutate(variable = "mated")
 
 exp2a <- rbind(exp2amated, exp2avirgin)
 
+
 exp2als1 <- lm(fly_numbers ~ diet + variable, data = exp2a)
 
 performance::check_model(exp2als1)
 # hmmm 
+
+exp2als1a <- lm(sqrt(fly_numbers) ~ diet + variable, data = exp2a)
+
+performance::check_model(exp2als1a)
+# without sqrt looks a lot better 
+
 
 
 exp2als2 <- lm(fly_numbers ~ diet * variable, data = exp2a)
@@ -427,8 +434,17 @@ exp2als2 <- lm(fly_numbers ~ diet * variable, data = exp2a)
 
 performance::check_model(exp2als2)
 
+broom::tidy(exp2als2,  
+            exponentiate=T, 
+            conf.int=T)
 
 
-broom::tidy(exp2ls2,  
+exp2als2a <- lm(sqrt(fly_numbers) ~ diet * variable, data = exp2a)
+
+performance::check_model(exp2als2a)
+
+# without sqrt looks better 
+
+broom::tidy(exp2als2a,  
             exponentiate=T, 
             conf.int=T)
