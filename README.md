@@ -6,6 +6,13 @@ This was a Genetics Society funded internship hosted by the Professor Tracey Cha
 
 The aim of this project was to investigate the effect of altered protein:carbohydrate ratios in adult diets on lifespan in male and female *Drosophila melanogaster*. 
 
+
+
+knitr::include_graphics("images/flypic.jpg")
+
+
+
+
 ## Descriptions of data files
 
 EggCountingE1.csv
