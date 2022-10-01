@@ -203,10 +203,10 @@ virgin_femalese2bd2_plot <- long_virgin_females_e2bd2_summary%>%
   #----------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 2b ----------------#
   
   # Mutating a sex variable 
-  exp2bvirgin <- long_virgin_females_e %>% mutate(sex = "virgin")
+  exp2bvirgin <- long_virgin_females_e2bd1 %>% mutate(status = "virgin")
   
   
-  exp2bmated <- long_female_feedingd1 %>% mutate(sex = "mated")
+  exp2bmated <- long_mated_females_e2bd1 %>% mutate(status = "mated")
   
   
   #using r bind to make two data sets one data set 
@@ -215,18 +215,25 @@ virgin_femalese2bd2_plot <- long_virgin_females_e2bd2_summary%>%
   exp2b <- rbind(exp2bvirgin, exp2bmated)
   
   # Making a linear model
-  exp2bls1 <- lm(fly_numbers ~ diet + sex, data = exp2b)
+  exp2bls1 <- lm(fly_numbers ~ diet + status, data = exp2b)
   
-  performance::check_model(exp1ls1)
+  performance::check_model(exp2bls1)
+  
+  
   
   broom::tidy(exp1ls1,  
               exponentiate=T, 
               conf.int=T)
   
   # Same linear model but with sqrt 
-  exp1ls1a <- lm(sqrt(fly_numbers) ~ diet + sex , data = exp1)
+  exp2bls1a <- lm(sqrt(fly_numbers) ~ diet + status , data = exp2b)
   
-  performance::check_model(exp1ls1a)
+  # Looks a lot better with sqrt 
+  
+  
+  performance::check_model(exp2bls1a)
+  
+
   
   broom::tidy(exp1ls1a,  
               exponentiate=T, 
@@ -235,9 +242,11 @@ virgin_femalese2bd2_plot <- long_virgin_females_e2bd2_summary%>%
   
   # Making a second linear model (with an interaction effect)
   
-  exp1ls2 <- lm(fly_numbers ~ diet * sex, data = exp1)
+  exp2bls2 <- lm(fly_numbers ~ diet * status, data = exp2b)
   
-  performance::check_model(exp1ls2)
+  performance::check_model(exp2bls2)
+  
+  #almost perfect
   
   broom::tidy(exp1ls2,  
               exponentiate=T, 
@@ -245,9 +254,11 @@ virgin_femalese2bd2_plot <- long_virgin_females_e2bd2_summary%>%
   
   # Same linear model but with sqrt 
   
-  exp1ls2a <- lm(sqrt(fly_numbers) ~ diet * sex , data = exp1)
+  exp2bls2a <- lm(sqrt(fly_numbers) ~ diet * status , data = exp2b)
   
-  performance::check_model(exp1ls2a)
+  performance::check_model(exp2bls2a)
+  
+  # maybe better with sqrt? 
   
   broom::tidy(exp1ls2a,  
               exponentiate=T, 
