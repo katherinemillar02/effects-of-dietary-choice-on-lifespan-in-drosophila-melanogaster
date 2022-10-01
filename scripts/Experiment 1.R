@@ -35,6 +35,7 @@ library(see)
 library(patchwork)
 library(usethis)
 library(devtools)
+library(knitr)
 library(here)
 
 #_________________________________ Experiment 1 _____________________________# 
