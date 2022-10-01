@@ -18,7 +18,7 @@ knitr::include_graphics(here("images", "flypic.jpg"))
 ## Descriptions of data files
 
 EggCountingE1.csv
-An excel document containing the egg counts for the 4 different protein:carbohydrate ratios taken from experiment 1
+An excel document containing the egg counts for the 4 different protein:carbohydrate ratios taken from experiment 1. 
 
 
 ## Descriptions of analysis files
