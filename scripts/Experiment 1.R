@@ -42,7 +42,7 @@ library(here)
 
 #____________________________ Egg counting
 
-egg_counting_data <- read_csv("data/EggCountingE1.csv", col_select = 1:5) %>% drop_na()
+egg_counting_data <- read_csv("data/EggCountingE1.csv", col_select = 2:5 ) %>% drop_na()
 
 long_egg_counting1 <- egg_counting_data %>% 
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
@@ -53,6 +53,7 @@ egg_counting1_summary <- long_egg_counting1 %>%
             sd = sd(egg_numbers),
             n = n(),
             se = sd/sqrt(n))
+
 
 #---------- Visualise the data of egg counting (experiment 1)
 
@@ -65,7 +66,7 @@ egg_counting1_plot <- egg_counting1_summary %>%
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
                 colour = "orange",
                 width = 0.2)+
-  geom_jitter(data = longdata,
+  geom_jitter(data = long_egg_counting1,
               aes(x = diet,
                   y = egg_numbers),
               fill = "skyblue",
@@ -123,6 +124,7 @@ eggcountingls1_table <- eggcountingls1 %>% broom::tidy(conf.int = T) %>%
 
  
 
+
 #---------------- Female feeding behaviour (Day 1) 
 
 female_feedingd1 <- read_excel("data/MatedFemalesE1D1.xlsx")
@@ -165,14 +167,14 @@ female_feedingd1_plot <- female_feedingd1_summary %>%
 #------- Data Analysis of female feeding behaviour (experiment 1, day 1)
 
 #female_feedingd1_summary <- long_female_feedingd1 %>%
-  group_by(diet) %>%
-  summarise(mean = mean(fly_numbers),
-            sd=sd(fly_numbers))
+# group_by(diet) %>%
+# summarise(mean = mean(fly_numbers),
+#           sd=sd(fly_numbers))
 
 
   #female_feedingd1_summary %>%
-  kbl(caption=" ") %>% 
-  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
+# kbl(caption=" ") %>% 
+# kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
 
   #female_feedingd1_ls1 <- lm(fly_numbers ~ diet, data = long_female_feedingd1)
 
@@ -186,8 +188,8 @@ female_feedingd1_plot <- female_feedingd1_summary %>%
   #performance::check_model(female_feedingd1_ls1)
 
   #broom::tidy(female_feedingd1_ls1,  
-            exponentiate=T, 
-            conf.int=T)
+  # exponentiate=T, 
+  #         conf.int=T)
 
 #female_feedingd1_table <- female_feedingd1_ls1 %>% broom::tidy(conf.int = T) %>% 
 #select(-`std.error`) %>% 
@@ -245,17 +247,19 @@ female_feedingd2_plot <- female_feedingd2_summary %>%
               shape = 21)+
   ylim(0.0, 4.0)+
   labs(x = "Diet \n(Protein; Carbohydrate)\n*Day 2*", 
-       y = "")+
+       y = "Mean +/- SE number of flies on each patch")+ 
   theme_minimal()
+
+female_feedingd2_plot + male_feedingd2_plot
 
 #---------------Data analysis of female feeding behaviour (exp 1, day 2)
 
 #female_feedingd2_summary <- long_female_feedingd2 %>% 
-  group_by(diet) %>% 
-  summarise(mean = mean(fly2_numbers),
-            sd = sd(fly2_numbers),
-            n = n(),
-            se = sd/sqrt(n))
+#  group_by(diet) %>% 
+# summarise(mean = mean(fly2_numbers),
+#           sd = sd(fly2_numbers),
+#           n = n(),
+#        se = sd/sqrt(n))
 
 
   #female_feedingd2_ls1 <- lm(fly2_numbers ~ diet, data = long_female_feedingd2)
@@ -310,17 +314,19 @@ male_feedingd1_plot <- male_feedingd1_summary %>%
               shape = 21)+
   ylim(0.0, 2.0)+
   labs(x = "Diet \n(Protein; Carbohydrate)\n*Day 1*", 
-       y = "Mean (+/- S.E.) number of flies on each patch" )+
+       y = "" )+
   theme_minimal()
+
+female_feedingd1_plot + male_feedingd1_plot
 
 
 #-------------- Data Analysis of male feeding behaviour (experiment 1, day 1)
 
 
 #male_feedingd1_summary <- long_male_feedingd1 %>%
-  group_by(diet) %>%
-  summarise(mean = mean(fly_numbers),
-            sd=sd(fly_numbers))
+#  group_by(diet) %>%
+# summarise(mean = mean(fly_numbers),
+#           sd=sd(fly_numbers))
 
   #male_feedingd1_summary %>%
   #kbl(caption=" ") %>% 
@@ -332,7 +338,7 @@ male_feedingd1_plot <- male_feedingd1_summary %>%
   #summary(male_feedingd1_ls1)
 
   #male_feedingd1_ls2 <- glm(formula = fly_numbers ~ diet,
-                        family = quasipoisson(), data = long_male_feedingd1)
+  #    family = quasipoisson(), data = long_male_feedingd1)
 
 #summary(male_feedingd1_ls2)
 #performance::check_model(male_feedingd1_ls2, check=c("homogeneity", "qq"))
@@ -419,8 +425,9 @@ female_notfeedinge1_plot <- female_notfeedinge1_summary %>%
               width = 0.2,
               shape = 21)+
   labs(x = "Plate", 
-       y = "Mean (+/- S.E.) flies per plate not on a patch (females)")+
+       y = "Mean (+/- S.E.) flies per plate not on a plate")+
   theme_minimal()
+
 
 
 
@@ -428,6 +435,7 @@ female_notfeedinge1_plot <- female_notfeedinge1_summary %>%
 
 
 male_notfeedinge1 <- read_csv("~/Documents/drosophilaresearchproject/data/MaleNotFeedingE1.csv", col_select = 1:9)  %>% drop_na()
+
 
 long_male_notfeedinge1 <- male_notfeedinge1 %>% 
   pivot_longer(cols = ("1":"8"), names_to = "plate", values_to = "mnf")
@@ -460,9 +468,10 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
               width = 0.2,
               shape = 21)+
   labs(x = "Plate", 
-       y = "Mean (+/- S.E.) flies per plate not on a patch (males)")+
+       y = "")+
   theme_minimal()
 
+female_notfeedinge1_plot + male_notfeedinge1_plot
 
 
 #----------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ----------------#

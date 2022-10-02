@@ -22,10 +22,10 @@ mated_femalesd1_plot <- long_mated_femalesd1_summary%>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "#03fc7f",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "#03fc7f",
                 width = 0.2)+
   geom_jitter(data = long_mated_femalesd1,
               aes(x = diet,
@@ -35,8 +35,8 @@ mated_femalesd1_plot <- long_mated_femalesd1_summary%>%
               width = 0.2,
               shape = 21)+
   ylim(0,6)+
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+  labs(x = "Diet \n(Protein; Carbohydrate)\n Mated",
+       y = "Mean (+/- S.E.) number of flies on a feeding patch")+
   theme_minimal()
 
 long_mated_femalesd1_summary %>%
@@ -65,10 +65,10 @@ mated_femalesd2_plot <- long_mated_femalesd2_summary%>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "#03fc7f",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "#03fc7f",
                 width = 0.2)+
   geom_jitter(data = long_mated_femalesd2,
               aes(x = diet,
@@ -78,8 +78,8 @@ mated_femalesd2_plot <- long_mated_femalesd2_summary%>%
               width = 0.2,
               shape = 21)+
   ylim(0,6)+
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+  labs(x = "Diet \n(Protein; Carbohydrate) \n Mated",
+       y = "Mean (+/- S.E.) number of flies on a feeding patch")+
   theme_minimal()
 
 
@@ -94,8 +94,8 @@ mated_femalesd2_plot <- long_mated_femalesd2_summary%>%
 #performance::check_model(mated_femalesd2_ls, check=c("homogeneity", "qq"))
 
 #broom::tidy(mated_femalesd2_ls,  
-            exponentiate=T, 
-            conf.int=T)
+#      exponentiate=T, 
+#     conf.int=T)
 
 
 #----------------------------- Mated Females Day 3
@@ -118,10 +118,10 @@ mated_femalesd3_plot <- long_mated_femalesd3_summary%>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "#03fc7f",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "#03fc7f",
                 width = 0.2)+
   geom_jitter(data = long_mated_femalesd3,
               aes(x = diet,
@@ -131,8 +131,8 @@ mated_femalesd3_plot <- long_mated_femalesd3_summary%>%
               width = 0.2,
               shape = 21)+
   ylim(0,6)+
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+  labs(x = "Diet \n(Protein; Carbohydrate)\ n Mated",
+       y = "Mean (+/- S.E.) number of flies on a patch")+
   theme_minimal()
 
 #-------------- Data analysis for mated females (exp 2, day 3)
@@ -167,10 +167,10 @@ virgin_femalesd1_plot <- long_virgin_femalesd1_summary%>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "#c203fc",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "#c203fc",
                 width = 0.2)+
   geom_jitter(data = long_virgin_femalesd1,
               aes(x = diet,
@@ -180,9 +180,11 @@ virgin_femalesd1_plot <- long_virgin_femalesd1_summary%>%
               width = 0.2,
               shape = 21)+
   ylim(0,6)+
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+  labs(x = "Diet \n(Protein; Carbohydrate) \nVirgin",
+       y = "")+
   theme_minimal()
+
+mated_femalesd1_plot + virgin_femalesd1_plot
 
 #-------------- Data analysis for virgin females (exp 2, day 1)
 
@@ -222,10 +224,10 @@ virgin_femalesd2_plot <- long_virgin_femalesd2_summary%>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "#c203fc",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "#c203fc",
                 width = 0.2)+
   geom_jitter(data = long_virgin_femalesd2,
               aes(x = diet,
@@ -235,10 +237,11 @@ virgin_femalesd2_plot <- long_virgin_femalesd2_summary%>%
               width = 0.2,
               shape = 21)+
   ylim(0,6)+ 
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+  labs(x = "Diet \n(Protein; Carbohydrate)\n Virgin",
+       y = "")+
   theme_minimal()
 
+mated_femalesd2_plot + virgin_femalesd2_plot
 
 #------------------ Data analysis for virgin females (exp 2, day 2)
 #
@@ -255,8 +258,8 @@ virgin_femalesd2_plot <- long_virgin_femalesd2_summary%>%
 #-- Choose a different linear model !!!
 
 #broom::tidy(virgin_femalesd2_ls,  
-            exponentiate=T, 
-            conf.int=T)
+#     exponentiate=T, 
+#           conf.int=T)
 
 
 #----------------------------- Virgin Females Day 3
