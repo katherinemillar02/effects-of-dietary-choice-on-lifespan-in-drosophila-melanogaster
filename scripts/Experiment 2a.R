@@ -3,7 +3,7 @@
 
 #--------------------- Mated Females (day 1, exp 2) 
 
-mated_femalesd1 <- read_csv("~/Documents/drosophilaresearchproject/data/MatedFemalesE2aD1.csv")  %>% drop_na()
+mated_femalesd1 <- read_csv("data/MatedFemalesE2aD1.csv")  %>% drop_na()
 
 long_mated_femalesd1 <- mated_femalesd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
@@ -46,10 +46,11 @@ long_mated_femalesd1_summary %>%
 #----------------------------- Mated Females Day 2 (exp 2)
 
 
-mated_femalesd2 <- read.csv("~/Documents/drosophilaresearchproject/data/MatedFemalesE2aD2.csv")
+mated_femalesd2 <- (read_excel(path = "data/MatedFemalesE2aD2.xlsx", na = "NA" ))
+
 
 long_mated_femalesd2 <- mated_femalesd2 %>% 
-  pivot_longer(cols = ("X8.1":"X1.8"), names_to = "diet", values_to = "fly_numbers")
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 
 long_mated_femalesd2_summary <- long_mated_femalesd2 %>% 
   group_by(diet) %>% 
@@ -310,6 +311,7 @@ mated_femalesd3_plot + virgin_femalesd3_plot
 
 mated_females_e2_eggcount <- (read_excel(path = "data/MatedEggCountE2a.xlsx", na = "NA"))
 
+
 long_mated_females_e2_eggcount <- mated_females_e2_eggcount %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
 
@@ -453,5 +455,48 @@ performance::check_model(exp2als2a)
 # without sqrt looks better 
 
 broom::tidy(exp2als2a,  
+            exponentiate=T, 
+            conf.int=T)
+
+
+# Combining the days ------------------------------------------------------------
+
+# Mated 
+exp2amated1 <- long_mated_femalesd1 %>% mutate(variable = "mated") %>% mutate(day = "1")
+exp2amated2 <- long_mated_femalesd2 %>% mutate(variable = "mated") %>% mutate(day = "2")
+exp2amated3 <- long_mated_femalesd3 %>% mutate(variable = "mated") %>% mutate(day = "3")
+
+# Binding mated days 1 - 3 
+exp2matedall <- rbind(exp2amated1, exp2amated2, exp2amated3)
+
+# Virgin 
+exp2avirgin1 <- long_virgin_femalesd1 %>% mutate(variable = "virgin") %>% mutate(day = "1")
+exp2avirgin2 <- long_virgin_femalesd2 %>% mutate(variable = "virgin") %>% mutate(day = "2")
+exp2avirgin3 <- long_virgin_femalesd3 %>% mutate(variable = "virgin") %>% mutate(day = "3")
+
+# Binding virgin days 1 - 3 
+exp2virginall <- rbind(exp2avirgin1, exp2avirgin2, exp2avirgin3)
+
+# Binding mated and virgin days 1 - 3 
+exp2all <- rbind(exp2matedall, exp2virginall)
+
+# linear model 
+exp2allls <- lm(fly_numbers ~ diet + variable + day, data = exp2all)
+
+# linear model with interaction effect
+exp2allls1 <- lm(fly_numbers ~ diet * variable + day, data = exp2all)
+
+# Checking the model 
+performance::check_model(exp2allls1)
+performance::check_model(exp2allls)
+
+summary(exp2allls1)
+
+
+broom::tidy(exp2allls,  
+            exponentiate=T, 
+            conf.int=T)
+
+broom::tidy(exp2allls1,  
             exponentiate=T, 
             conf.int=T)
