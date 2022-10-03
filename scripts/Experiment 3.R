@@ -281,3 +281,36 @@ performance::check_model(exp3ls2a)
 broom::tidy(exp3ls2,  
             exponentiate=T, 
             conf.int=T)
+# Day 2 
+# Using mutate to add a variable 
+exp3alone2 <- long_females_mf_e3_d2 %>% mutate(variable = "together")
+exp3together2 <- long_mated_femalese3d2 %>% mutate(variable = "alone")
+
+# Using rbind to bind the two data sets from the experiment 
+exp3d2 <- rbind(exp3alone2, exp3together2)
+
+# Making a linear model of fly numbers and diet  
+exp3d2ls1 <- lm(fly_numbers ~ diet + variable, data = exp3d2)
+
+performance::check_model(exp3d2ls1)
+
+# Same model but with sqrt 
+exp3d2ls1a <- lm(sqrt(fly_numbers) ~ diet + variable, data = exp3d2)
+
+performance::check_model(exp3d2ls1a)
+# better without sqrt 
+
+# Testing with an interaction effect 
+
+exp3d2ls2 <- lm(fly_numbers ~ diet * variable, data = exp3d2)
+
+performance::check_model(exp3d2ls2)
+
+exp3d2ls2a <- lm(sqrt(fly_numbers) ~ diet * variable, data = exp3d2)
+
+performance::check_model(exp3d2ls2a)
+
+# better without sqrt 
+
+
+

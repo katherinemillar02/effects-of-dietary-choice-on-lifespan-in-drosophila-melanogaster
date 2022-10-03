@@ -144,7 +144,7 @@ virgin_females_e2bd2_summary <- long_virgin_females_e2bd2 %>%
 
 #------------- Visualising the data for virgin females (exp 4, day 2)
 
-virgin_femalese2bd2_plot <- long_virgin_females_e2bd2_summary%>% 
+virgin_femalese2bd2_plot <- long_virgin_females_e2bd2 %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "red",
@@ -263,4 +263,36 @@ virgin_femalese2bd2_plot <- long_virgin_females_e2bd2_summary%>%
   broom::tidy(exp1ls2a,  
               exponentiate=T, 
               conf.int=T)
+  
+  
+  
+# Day 2 
+# Mutating a sex variable 
+exp2bvirgin2 <- long_virgin_females_e2bd2 %>% mutate(status = "virgin")
+exp2bmated2 <- long_mated_females_e2bd2 %>% mutate(status = "mated")
+
+#using r bind to make two data sets one data set 
+exp2bd2 <- rbind(exp2bvirgin2, exp2bmated2)
+
+
+  
+exp2bd2ls1 <- lm(fly_numbers ~ diet + status, data = exp2bd2)
+
+performance::check_model(exp2bd2ls1)
+
+exp2bd2ls1a <- lm(sqrt(fly_numbers) ~ diet + status, data = exp2bd2)
+
+performance::check_model(exp2bd2ls1a)
+
+# Better with sqrt 
+
+exp2bd2ls2 <- lm(fly_numbers ~ diet * status, data = exp2bd2)
+
+performance::check_model(exp2bd2ls2)
+
+exp2bd2ls2a <- lm(sqrt(fly_numbers) ~ diet * status, data = exp2bd2)
+
+performance::check_model(exp2bd2ls2a)
+
+# Better with sqrt 
 

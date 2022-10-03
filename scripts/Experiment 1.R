@@ -484,8 +484,6 @@ female_notfeedinge1_plot + male_notfeedinge1_plot
 # Mutating a sex variable 
 exp1male <- long_male_feedingd1 %>% mutate(sex = "male")
 
-malebind <- rbind(long_male_feedingd1, long_male_feedingd2)
-
 exp1female <- long_female_feedingd1 %>% mutate(sex = "female")
 
 
@@ -535,5 +533,11 @@ broom::tidy(exp1ls2a,
 
 # From performance::check, exp 2a looks better but probaly use (2) 
 
+# Day 2 
+exp1male2 <- long_male_feedingd2 %>% mutate(sex = "male")
+
+exp1female2 <- long_female_feedingd2 %>% mutate(sex = "female")
+
+exp1d2 <- rbind(exp1male2, exp1female2)
 
 

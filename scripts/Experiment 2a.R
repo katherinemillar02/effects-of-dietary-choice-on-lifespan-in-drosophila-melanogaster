@@ -320,7 +320,7 @@ mated_femalese2_eggcount_summary <- long_mated_females_e2_eggcount %>%
 
 #-------------- Visualising the data for mated female egg count (exp 2)
 
-mated_females_e2_eggcount_plot <- long_mated_femalese2_eggcount_summary %>% 
+mated_females_e2_eggcount_plot <- long_mated_females_e2_eggcount %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
