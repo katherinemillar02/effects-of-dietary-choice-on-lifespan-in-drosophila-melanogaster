@@ -36,6 +36,7 @@ library(patchwork)
 library(usethis)
 library(devtools)
 library(knitr)
+library(emmeans)
 library(here)
 
 #_________________________________ Experiment 1 _____________________________# 
@@ -271,11 +272,10 @@ female_feedingd2_plot + male_feedingd2_plot
   #anova(female_feedingd2_ls1)
 
 
-  #performance::check_model(female_feedingd1_ls1)
-
-  #broom::tidy(female_feedingd2_ls1,  
-  #   exponentiate=T, 
-  #   conf.int=T)
+#performance::check_model(female_feedingd1_ls1)
+#broom::tidy(female_feedingd2_ls1,  
+#   exponentiate=T, 
+#   conf.int=T)
 
 
 #--------------------------- Male feeding behaviour (Day 1)
@@ -521,6 +521,8 @@ broom::tidy(exp1ls2,
             exponentiate=T, 
             conf.int=T)
 
+emmeans::emmeans
+
 # Same linear model but with sqrt 
 
 exp1ls2a <- lm(sqrt(fly_numbers) ~ diet * sex , data = exp1)
@@ -531,7 +533,7 @@ broom::tidy(exp1ls2a,
             exponentiate=T, 
             conf.int=T)
 
-# From performance::check, exp 2a looks better but probaly use (2) 
+# From performance::check, exp 2a looks better but probably use (2) 
 
 # Day 2 
 exp1male2 <- long_male_feedingd2 %>% mutate(sex = "male")
@@ -539,5 +541,7 @@ exp1male2 <- long_male_feedingd2 %>% mutate(sex = "male")
 exp1female2 <- long_female_feedingd2 %>% mutate(sex = "female")
 
 exp1d2 <- rbind(exp1male2, exp1female2)
+
+
 
 

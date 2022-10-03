@@ -209,58 +209,56 @@ virgin_femalese2bd2_plot <- long_virgin_females_e2bd2 %>%
   exp2bmated <- long_mated_females_e2bd1 %>% mutate(status = "mated")
   
   
-  #using r bind to make two data sets one data set 
+#using r bind to make two data sets one data set 
   
   
-  exp2b <- rbind(exp2bvirgin, exp2bmated)
+exp2b <- rbind(exp2bvirgin, exp2bmated)
   
-  # Making a linear model
-  exp2bls1 <- lm(fly_numbers ~ diet + status, data = exp2b)
+# Making a linear model
+exp2bls1 <- lm(fly_numbers ~ diet + status, data = exp2b)
   
-  performance::check_model(exp2bls1)
+performance::check_model(exp2bls1)
   
   
   
-  broom::tidy(exp1ls1,  
+broom::tidy(exp1ls1,  
               exponentiate=T, 
               conf.int=T)
   
-  # Same linear model but with sqrt 
-  exp2bls1a <- lm(sqrt(fly_numbers) ~ diet + status , data = exp2b)
+# Same linear model but with sqrt 
+exp2bls1a <- lm(sqrt(fly_numbers) ~ diet + status , data = exp2b)
   
-  # Looks a lot better with sqrt 
+# Looks a lot better with sqrt 
   
-  
-  performance::check_model(exp2bls1a)
+performance::check_model(exp2bls1a)
   
 
-  
-  broom::tidy(exp1ls1a,  
+broom::tidy(exp1ls1a,  
               exponentiate=T, 
               conf.int=T)
   
   
-  # Making a second linear model (with an interaction effect)
+# Making a second linear model (with an interaction effect)
   
-  exp2bls2 <- lm(fly_numbers ~ diet * status, data = exp2b)
+exp2bls2 <- lm(fly_numbers ~ diet * status, data = exp2b)
   
-  performance::check_model(exp2bls2)
+performance::check_model(exp2bls2)
   
-  #almost perfect
+#almost perfect
   
-  broom::tidy(exp1ls2,  
+broom::tidy(exp1ls2,  
               exponentiate=T, 
               conf.int=T)
   
-  # Same linear model but with sqrt 
+# Same linear model but with sqrt 
   
-  exp2bls2a <- lm(sqrt(fly_numbers) ~ diet * status , data = exp2b)
+exp2bls2a <- lm(sqrt(fly_numbers) ~ diet * status , data = exp2b)
   
-  performance::check_model(exp2bls2a)
+performance::check_model(exp2bls2a)
   
-  # maybe better with sqrt? 
+# maybe better with sqrt? 
   
-  broom::tidy(exp1ls2a,  
+broom::tidy(exp1ls2a,  
               exponentiate=T, 
               conf.int=T)
   
