@@ -264,7 +264,6 @@ performance::check_model(exp2bd2ls2)
 exp2bd2ls2a <- lm(sqrt(fly_numbers) ~ diet * status, data = exp2bd2)
 # Checking the model 
 performance::check_model(exp2bd2ls2a) # Better with sqrt 
-
 #---------
 #exp2bd1ls3 <- glm(formula = fly_numbers ~ diet * status,
 #family = quasipoisson(), data = exp2b)

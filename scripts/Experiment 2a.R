@@ -100,7 +100,7 @@ mated_femalesd2_plot <- long_mated_femalesd2_summary%>%
 
 #----------------------------- Mated Females Day 3
 
-mated_femalesd3 <- (read_excel(path = "~/Documents/drosophilaresearchproject/data/MatedFemalesE2aD3.xlsx", na = "NA"))
+mated_femalesd3 <- (read_excel(path = "data/MatedFemalesE2aD3.xlsx", na = "NA"))
 
 long_mated_femalesd3 <- mated_femalesd3 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
@@ -131,8 +131,8 @@ mated_femalesd3_plot <- long_mated_femalesd3_summary%>%
               width = 0.2,
               shape = 21)+
   ylim(0,6)+
-  labs(x = "Diet \n(Protein; Carbohydrate)\ n Mated",
-       y = "Mean (+/- S.E.) number of flies on a patch")+
+  labs(x = "Diet \n(Protein; Carbohydrate) \n Mated",
+       y = "Mean (+/- S.E.) number of flies on a feeding patch")+
   theme_minimal()
 
 #-------------- Data analysis for mated females (exp 2, day 3)
@@ -264,12 +264,12 @@ mated_femalesd2_plot + virgin_femalesd2_plot
 
 #----------------------------- Virgin Females Day 3
 
-virgin_femalesd3 <- (read_excel(path = "~/Documents/drosophilaresearchproject/data/VirginFemalesE2aD3.xlsx", na = "NA"))
+virgin_femalesd3 <- (read_excel(path = "data/VirginFemalesE2aD3.xlsx", na = "NA"))
 
 long_virgin_femalesd3 <- virgin_femalesd3 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 
-long_virgin_femalesd3_summary <- long_virgin_femalesd3 %>% 
+virgin_femalesd3_summary <- long_virgin_femalesd3 %>% 
   group_by(diet) %>% 
   summarise(mean = mean(fly_numbers),
             sd = sd(fly_numbers),
@@ -278,14 +278,14 @@ long_virgin_femalesd3_summary <- long_virgin_femalesd3 %>%
 
 #----------------- Visualising the data for virgin females (exp 3, day 3) 
 
-virgin_femalesd3_plot <- long_virgin_femalesd3_summary%>% 
+virgin_femalesd3_plot <- virgin_femalesd3_summary%>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "#c203fc",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "#c203fc",
                 width = 0.2)+
   geom_jitter(data = long_virgin_femalesd3,
               aes(x = diet,
@@ -295,9 +295,11 @@ virgin_femalesd3_plot <- long_virgin_femalesd3_summary%>%
               width = 0.2,
               shape = 21)+
   ylim(0,6)+ 
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+  labs(x = "Diet \n(Protein; Carbohydrate) \n Virgin",
+       y = "")+
   theme_minimal()
+
+mated_femalesd3_plot + virgin_femalesd3_plot
 
 
 
@@ -306,7 +308,7 @@ virgin_femalesd3_plot <- long_virgin_femalesd3_summary%>%
 
 #---------------- Mated female egg count (exp 2)
 
-mated_females_e2_eggcount <- (read_excel(path = "~/Documents/drosophilaresearchproject/data/MatedEggCountE2a.xlsx", na = "NA"))
+mated_females_e2_eggcount <- (read_excel(path = "data/MatedEggCountE2a.xlsx", na = "NA"))
 
 long_mated_females_e2_eggcount <- mated_females_e2_eggcount %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
@@ -320,7 +322,7 @@ mated_femalese2_eggcount_summary <- long_mated_females_e2_eggcount %>%
 
 #-------------- Visualising the data for mated female egg count (exp 2)
 
-mated_females_e2_eggcount_plot <- long_mated_females_e2_eggcount %>% 
+mated_females_e2_eggcount_plot <- mated_femalese2_eggcount_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
@@ -340,6 +342,8 @@ mated_females_e2_eggcount_plot <- long_mated_females_e2_eggcount %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
+
+
 
 #----------- Data analysis for mated female egg count (exp 2)
 
