@@ -523,6 +523,8 @@ broom::tidy(exp1ls2,
 
 emmeans::emmeans
 
+
+
 # Same linear model but with sqrt 
 
 exp1ls2a <- lm(sqrt(fly_numbers) ~ diet * sex , data = exp1)

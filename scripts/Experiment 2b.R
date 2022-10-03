@@ -200,97 +200,75 @@ virgin_femalese2bd2_plot <- long_virgin_females_e2bd2 %>%
 
 
   
-  #----------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 2b ----------------#
+#----------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 2b ----------------#
   
-  # Mutating a sex variable 
-  exp2bvirgin <- long_virgin_females_e2bd1 %>% mutate(status = "virgin")
-  
-  
-  exp2bmated <- long_mated_females_e2bd1 %>% mutate(status = "mated")
-  
-  
+# Day 1 
+
+# Mutating a sex variable 
+exp2bvirgin <- long_virgin_females_e2bd1 %>% mutate(status = "virgin")
+exp2bmated <- long_mated_females_e2bd1 %>% mutate(status = "mated")
 #using r bind to make two data sets one data set 
-  
-  
 exp2b <- rbind(exp2bvirgin, exp2bmated)
-  
 # Making a linear model
 exp2bls1 <- lm(fly_numbers ~ diet + status, data = exp2b)
-  
+# Checking the model 
 performance::check_model(exp2bls1)
-  
-  
-  
+# 
 broom::tidy(exp1ls1,  
               exponentiate=T, 
               conf.int=T)
-  
 # Same linear model but with sqrt 
 exp2bls1a <- lm(sqrt(fly_numbers) ~ diet + status , data = exp2b)
-  
 # Looks a lot better with sqrt 
-  
 performance::check_model(exp2bls1a)
-  
-
+#
 broom::tidy(exp1ls1a,  
               exponentiate=T, 
               conf.int=T)
-  
-  
 # Making a second linear model (with an interaction effect)
-  
 exp2bls2 <- lm(fly_numbers ~ diet * status, data = exp2b)
-  
-performance::check_model(exp2bls2)
-  
-#almost perfect
-  
+# Checking the model 
+performance::check_model(exp2bls2) #almost perfect
+# 
 broom::tidy(exp1ls2,  
               exponentiate=T, 
               conf.int=T)
-  
 # Same linear model but with sqrt 
-  
 exp2bls2a <- lm(sqrt(fly_numbers) ~ diet * status , data = exp2b)
-  
-performance::check_model(exp2bls2a)
-  
-# maybe better with sqrt? 
-  
+# Checking the model 
+performance::check_model(exp2bls2a) # maybe better with sqrt? 
+#
 broom::tidy(exp1ls2a,  
               exponentiate=T, 
               conf.int=T)
-  
-  
-  
+# ------------  
 # Day 2 
 # Mutating a sex variable 
 exp2bvirgin2 <- long_virgin_females_e2bd2 %>% mutate(status = "virgin")
 exp2bmated2 <- long_mated_females_e2bd2 %>% mutate(status = "mated")
-
-#using r bind to make two data sets one data set 
+# Using r bind to make two data sets one data set 
 exp2bd2 <- rbind(exp2bvirgin2, exp2bmated2)
-
-
-  
+# Model 
 exp2bd2ls1 <- lm(fly_numbers ~ diet + status, data = exp2bd2)
-
+# Checking the model 
 performance::check_model(exp2bd2ls1)
-
+# Using sqrt 
 exp2bd2ls1a <- lm(sqrt(fly_numbers) ~ diet + status, data = exp2bd2)
-
-performance::check_model(exp2bd2ls1a)
-
-# Better with sqrt 
-
+# Checking the model 
+performance::check_model(exp2bd2ls1a) # Better with sqrt 
+# Same model but with interaction effect 
 exp2bd2ls2 <- lm(fly_numbers ~ diet * status, data = exp2bd2)
-
+# Checking the model 
 performance::check_model(exp2bd2ls2)
-
+# Model with sqrt 
 exp2bd2ls2a <- lm(sqrt(fly_numbers) ~ diet * status, data = exp2bd2)
+# Checking the model 
+performance::check_model(exp2bd2ls2a) # Better with sqrt 
 
-performance::check_model(exp2bd2ls2a)
+#---------
+#exp2bd1ls3 <- glm(formula = fly_numbers ~ diet * status,
+#family = quasipoisson(), data = exp2b)
 
-# Better with sqrt 
+#performance::check_model(exp2bd1ls3)
+
 
