@@ -3,16 +3,18 @@
 #-----------------  Feeding behaviour analysis 
 
 #----------------- FEMALE FEEDING BEHAVIOUR (Days 1 & 2)
+#----------- Females alone on a plate 
+#----------------- Making data "long"
 long_exp3femalesall <- exp3femalesall %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-
-exp3femalesall_summary <- exp3femalesall %>% 
+#----------------- Summarising the data 
+exp3femalesall_summary <- exp3femalesall %>%  
   group_by(diet) %>% 
   summarise(mean = mean(fly_numbers),
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
-
+#----------------- Visualising the data 
 exp3femalesall_plot <- exp3femalesall_summary%>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
@@ -34,21 +36,18 @@ exp3femalesall_plot <- exp3femalesall_summary%>%
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
 
-
-
-
-
-
+#--------------- Females on a plate with males 
+#----------------- Making data "long"
 long_exp3bothall <- exp3bothall %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-
+#----- Summarising the data 
 exp3bothall_summary <- exp3bothall %>% 
   group_by(diet) %>% 
   summarise(mean = mean(fly_numbers),
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
-
+#----- Visualising the data 
 exp3both_plot <- exp3bothall_summary%>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
@@ -69,74 +68,10 @@ exp3both_plot <- exp3bothall_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
-
-
-
+#------------------- 
 #--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 ----------------#
 
 
-# Using mutate to add a variable 
-exp3alone <- long_females_mf_e3_d1 %>% mutate(variable = "together")
-exp3together <- long_mated_femalese3d1 %>% mutate(variable = "alone")
-
-# Using rbind to bind the two data sets from the experiment 
-exp3 <- rbind(exp3alone, exp3together)
-
-# Making a linear model of fly numbers and diet  
-exp3ls1 <- lm(fly_numbers ~ diet + variable, data = exp3)
-
-# Using performance 
-performance::check_model(exp3ls1)
-
-exp3ls1a <- lm(sqrt(fly_numbers) ~ diet + variable, data = exp3)
-
-performance::check_model(exp3ls1a)
-
-exp3ls2 <- lm(fly_numbers ~ diet * variable, data = exp3)
-
-performance::check_model(exp3ls2)
-
-exp3ls2a <- lm(sqrt(fly_numbers) ~ diet * variable, data = exp3)
-
-performance::check_model(exp3ls2a)
-
-
-
-#without sqrt - works better
-
-broom::tidy(exp3ls2,  
-            exponentiate=T, 
-            conf.int=T)
-# Day 2 
-# Using mutate to add a variable 
-exp3alone2 <- long_females_mf_e3_d2 %>% mutate(variable = "together")
-exp3together2 <- long_mated_femalese3d2 %>% mutate(variable = "alone")
-
-# Using rbind to bind the two data sets from the experiment 
-exp3d2 <- rbind(exp3alone2, exp3together2)
-
-# Making a linear model of fly numbers and diet  
-exp3d2ls1 <- lm(fly_numbers ~ diet + variable, data = exp3d2)
-
-performance::check_model(exp3d2ls1)
-
-# Same model but with sqrt 
-exp3d2ls1a <- lm(sqrt(fly_numbers) ~ diet + variable, data = exp3d2)
-
-performance::check_model(exp3d2ls1a)
-# better without sqrt 
-
-# Testing with an interaction effect 
-
-exp3d2ls2 <- lm(fly_numbers ~ diet * variable, data = exp3d2)
-
-performance::check_model(exp3d2ls2)
-
-exp3d2ls2a <- lm(sqrt(fly_numbers) ~ diet * variable, data = exp3d2)
-
-performance::check_model(exp3d2ls2a)
-
-# better without sqrt 
 
 
 # -------------------- Collating days 
@@ -367,6 +302,45 @@ performance::check_model(exp3allls)
 # labs(x = "Diet \n(Protein; Carbohydrate)",
 #      y = "Mean (+/- S.E.) number of flies")+
 # theme_minimal()
+# ------- Overall data analysis 
+# Using mutate to add a variable 
+#exp3alone <- long_females_mf_e3_d1 %>% mutate(variable = "together")
+#exp3together <- long_mated_femalese3d1 %>% mutate(variable = "alone")
+# Using rbind to bind the two data sets from the experiment 
+#exp3 <- rbind(exp3alone, exp3together)
+# Making a linear model of fly numbers and diet  
+#exp3ls1 <- lm(fly_numbers ~ diet + variable, data = exp3)
+# Using performance 
+#performance::check_model(exp3ls1)
+#exp3ls1a <- lm(sqrt(fly_numbers) ~ diet + variable, data = exp3)
+#performance::check_model(exp3ls1a)
+#exp3ls2 <- lm(fly_numbers ~ diet * variable, data = exp3)
+#performance::check_model(exp3ls2)
+#exp3ls2a <- lm(sqrt(fly_numbers) ~ diet * variable, data = exp3)
+#performance::check_model(exp3ls2a)
+#without sqrt - works better
+#broom::tidy(exp3ls2,  
+#       exponentiate=T, 
+#            conf.int=T)
+# Day 2 
+# Using mutate to add a variable 
+#exp3alone2 <- long_females_mf_e3_d2 %>% mutate(variable = "together")
+#exp3together2 <- long_mated_femalese3d2 %>% mutate(variable = "alone")
+# Using rbind to bind the two data sets from the experiment 
+#exp3d2 <- rbind(exp3alone2, exp3together2)
+# Making a linear model of fly numbers and diet  
+#exp3d2ls1 <- lm(fly_numbers ~ diet + variable, data = exp3d2)
+#performance::check_model(exp3d2ls1)
+# Same model but with sqrt 
+#exp3d2ls1a <- lm(sqrt(fly_numbers) ~ diet + variable, data = exp3d2)
+#performance::check_model(exp3d2ls1a)
+# better without sqrt 
+# Testing with an interaction effect 
+#exp3d2ls2 <- lm(fly_numbers ~ diet * variable, data = exp3d2)
+#performance::check_model(exp3d2ls2)
+#exp3d2ls2a <- lm(sqrt(fly_numbers) ~ diet * variable, data = exp3d2)
+#performance::check_model(exp3d2ls2a)
+# better without sqrt 
 
 
 
