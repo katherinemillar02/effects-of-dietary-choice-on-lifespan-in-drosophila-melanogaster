@@ -4,7 +4,7 @@
 
 #--------------------- Mated females (exp 3, day 1)
 
-mated_femalese3d1 <- (read_excel(path = "~/Documents/drosophilaresearchproject/data/MatedFemalesE3D1.xlsx", na = "NA"))
+mated_femalese3d1 <- (read_excel(path = "data/MatedFemalesE3D1.xlsx", na = "NA"))
 
 
 long_mated_femalese3d1 <- mated_femalese3d1 %>% 
@@ -332,9 +332,13 @@ exp3bothall <- rbind(exp3both1, exp3both2)
 # Binding mated and virgin days 1 - 3 
 exp3all <- rbind(exp3femalesall, exp3bothall)
 
+exp3all <- exp3all %>% mutate(fly_prop = if_else(variable =="females", 
+                                     fly_numbers/10,
+                                     fly_numbers/5))
+
 
 # linear model with interaction effect
-exp3allls <- lm(fly_numbers ~ diet * variable + day, data = exp3all)
-
-performance::check_model(exp2allls)
+exp3allls <- glm(fly_numbers ~ diet * variable + day, data = exp3all, family = poisson())
+# use quasi likelihood as null/df >1 quasipoisson()
+performance::check_model(exp3allls)
 

@@ -219,12 +219,12 @@ female_feedingd1_plot <- female_feedingd1_summary %>%
 female_feedingd2 <- read_excel("data/MatedFemalesE1D2.xlsx")
 
 long_female_feedingd2 <- female_feedingd2 %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly2_numbers")
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 
 female_feedingd2_summary <- long_female_feedingd2 %>% 
   group_by(diet) %>% 
-  summarise(mean = mean(fly2_numbers),
-            sd = sd(fly2_numbers),
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
 
@@ -242,7 +242,7 @@ female_feedingd2_plot <- female_feedingd2_summary %>%
                 width = 0.2)+
   geom_jitter(data = long_female_feedingd2,
               aes(x = diet,
-                  y = fly2_numbers),
+                  y = fly_numbers),
               fill = "skyblue",
               colour = "black",
               width = 0.2,
@@ -549,7 +549,7 @@ exp1d2 <- rbind(exp1male2, exp1female2)
 # Combining the days 
 # Females 
 exp1females1 <- long_female_feedingd1 %>% mutate(sex = "female") %>% mutate(day = "1")
-exp1females2 <- long_female_feedingd2 %>% mutate(sex = "male") %>% mutate(day = "2")
+exp1females2 <- long_female_feedingd2 %>% mutate(sex = "female") %>% mutate(day = "2")
 
 # Combining 
 exp1femaleall <- rbind(exp1females1, exp1females2)
