@@ -15,7 +15,6 @@ long_mated_femalesd1_summary <- long_mated_femalesd1 %>%
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
-
 #------------- Visualising data for mated females (exp 2, day 1) 
 
 mated_femalesd1_plot <- long_mated_femalesd1_summary%>% 
