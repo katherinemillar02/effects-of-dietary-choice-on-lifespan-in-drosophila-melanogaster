@@ -313,4 +313,28 @@ performance::check_model(exp3d2ls2a)
 # better without sqrt 
 
 
+# -------------------- Collating days 
+
+# Just females 
+exp3females1 <- long_mated_femalese3d1 %>% mutate(variable = "females") %>% mutate(day = "1")
+exp3females2 <- long_mated_femalese3d2 %>% mutate(variable = "females") %>% mutate(day = "2")
+
+# Binding days 1 and 2 
+exp3femalesall <- rbind(exp3females1, exp3females2)
+
+# Females in a plate with males 
+exp3both1 <- long_females_mf_e3_d1 %>% mutate(variable = "both") %>% mutate(day = "1")
+exp3both2 <- long_females_mf_e3_d2 %>% mutate(variable = "both") %>% mutate(day = "2")
+
+# Binding days 1 and 2 
+exp3bothall <- rbind(exp3both1, exp3both2)
+
+# Binding mated and virgin days 1 - 3 
+exp3all <- rbind(exp3femalesall, exp3bothall)
+
+
+# linear model with interaction effect
+exp3allls <- lm(fly_numbers ~ diet * variable + day, data = exp3all)
+
+performance::check_model(exp2allls)
 

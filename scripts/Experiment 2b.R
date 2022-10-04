@@ -271,3 +271,43 @@ performance::check_model(exp2bd2ls2a) # Better with sqrt
 #performance::check_model(exp2bd1ls3)
 
 
+
+# ------------  
+# Mated 
+exp2bmated1 <- long_mated_females_e2bd1 %>% mutate(variable = "mated") %>% mutate(day = "1")
+exp2bmated2 <- long_mated_females_e2bd2 %>% mutate(variable = "mated") %>% mutate(day = "2")
+
+# Binding mated days 1 - 2 
+exp2bmatedall <- rbind(exp2bmated1, exp2bmated2)
+
+# Virgin 
+exp2bvirgin1 <- long_virgin_females_e2bd1 %>% mutate(variable = "virgin") %>% mutate(day = "1")
+exp2bvirgin2 <- long_virgin_females_e2bd2 %>% mutate(variable = "virgin") %>% mutate(day = "2")
+
+
+# Binding virgin days 1 - 2 
+exp2bvirginall <- rbind(exp2bvirgin1, exp2bvirgin2)
+
+# Binding mated and virgin days 1 - 2 
+exp2ball <- rbind(exp2bmatedall, exp2bvirginall)
+
+# linear model 
+exp2bbothls1 <- lm(fly_numbers ~ diet + variable + day, data = exp2ball)
+
+# linear model with interaction effect
+exp2bboths1a <- lm(fly_numbers ~ diet * variable + day, data = exp2ball)
+
+# Checking the model 
+performance::check_model(exp2bbothls1)
+performance::check_model(exp2bboths1a)
+
+# Both look a bit hmmmm 
+
+summary(exp2bboths1a)
+
+
+broom::tidy(exp2bboths1a,  
+            exponentiate=T, 
+            conf.int=T)
+
+

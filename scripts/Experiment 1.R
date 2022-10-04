@@ -128,7 +128,8 @@ eggcountingls1_table <- eggcountingls1 %>% broom::tidy(conf.int = T) %>%
 
 #---------------- Female feeding behaviour (Day 1) 
 
-female_feedingd1 <- read_excel("data/MatedFemalesE1D1.xlsx", filter("1":"5"))
+female_feedingd1 <- read_excel("data/MatedFemalesE1D1.xlsx", 
+                               filter("1":"5"))
 
 
 long_female_feedingd1 <- female_feedingd1 %>% 
@@ -546,6 +547,14 @@ exp1d2 <- rbind(exp1male2, exp1female2)
 
 
 # Combining the days 
+# Females 
+exp1females1 <- long_female_feedingd1 %>% mutate(sex = "female") %>% mutate(day = "1")
+exp1females2 <- long_female_feedingd2 %>% mutate(sex = "male") %>% mutate(day = "2")
+
+# Combining 
+exp1femaleall <- rbind(exp1females1, exp1females2)
+
+
 
 
 
