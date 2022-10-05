@@ -244,14 +244,25 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
 female_notfeedinge1_plot + male_notfeedinge1_plot
 
 #----------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ----------------#
+# Binding the combined days data of males and females 
+exp1all <- rbind(exp1femaleall, exp1maleall)
+# linear model with interaction effect
+exp1allls <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = poisson())
+# use quasi likelihood as null/df >1 quasipoisson()
+performance::check_model(exp1allls)
+
+
+exp1ls0 <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
+performance::check_model(exp1ls0)
+
+summary(exp1allls)
 
 
 
 
 
 
-
-#--------------------- IGNORE THE HASHTAGGED OUT CODE--------------------
+#--------------------- IGNORE THE HASHTAGGED OUT CODE--------------------------------
 #expls1 <- lm(long_female_feedingd1$fly_numbers ~ long_male_feedingd1$fly_numbers)
 # Error in variable lengths 
 # so merged instead 
