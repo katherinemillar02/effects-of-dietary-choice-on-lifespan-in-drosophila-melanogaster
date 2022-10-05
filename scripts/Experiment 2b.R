@@ -1,140 +1,103 @@
 #------------------------------Experiment 2b---------------------------------#
-
-
-#-----------------------  Mated Females (exp 4, day 1)
-
+#-----------------------  Mated Females
+#--------- Day 1 
+#---------- Reading the data in 
 mated_females_e2bd1 <- (read_excel(path = "data/MatedFemalesE2bD1.xlsx", na = "NA"))
-
-
+#----- Making the data long 
 long_mated_females_e2bd1 <- mated_females_e2bd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-
-#long_mated_females_e2bd1_summary <- long_mated_females_e2bd1 %>% 
-#  group_by(diet) %>% 
-#  summarise(mean = mean(fly_numbers),
-#            sd = sd(fly_numbers),
-#            n = n(),
-#            se = sd/sqrt(n))
-#---------------- Visualising the data for mated females (exp 4, day 1)
-#mated_females_e2bd1_plot <- long_mated_females_e2bd1_summary%>% 
-# ggplot(aes(x = diet, y = mean))+
-# geom_bar(stat = "identity",
-#          fill = "red",
-#          colour = "blue",
-#          alpha = 0.6)+
-# geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-#               colour = "blue",
-#               width = 0.2)+
-# geom_jitter(data = long_mated_females_e2bd1,
-#             aes(x = diet,
-#                 y = fly_numbers),
-#             fill = "skyblue",
-#             colour = "black",
-#             width = 0.2,
-#              shape = 21)+
-#  ylim(0,6)+ 
-#  labs(x = "Diet \n(Protein; Carbohydrate)",
-#       y = "Mean (+/- S.E.) number of flies")+
-#  theme_minimal()
-#------------------ Data analysis for mated females (exp 4, day 1)
-#-----------------------  Mated Females (exp 4, day 2)
-
+#--------- Day 2 
+#---------- Reading the data in 
 mated_females_e2bd2 <- (read_excel(path = "data/MatedFemalesE2bD2.xlsx", na = "NA"))
-
-
+#----- Making the data long 
 long_mated_females_e2bd2 <- mated_females_e2bd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-
-#long_mated_females_e2bd2_summary <- long_mated_females_e2bd2 %>% 
-# group_by(diet) %>% 
-# summarise(mean = mean(fly_numbers),
-#           sd = sd(fly_numbers),
-#           n = n(),
-#           se = sd/sqrt(n))
-#----------------- Visualising the data for mated females (exp 4, day 2)
-#mated_females_e2bd2_plot <- long_mated_females_e2bd2_summary%>% 
-#  ggplot(aes(x = diet, y = mean))+
-#  geom_bar(stat = "identity",
-#          fill = "red",
-#          colour = "blue",
-#           alpha = 0.6)+
-#  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-#                colour = "blue",
-#                width = 0.2)+
-#  geom_jitter(data = long_mated_females_e2bd2,
-#             aes(x = diet,
-#                  y = fly_numbers),
-#              fill = "skyblue",
-#              colour = "black",
-#             width = 0.2,
-#             shape = 21)+
-#  ylim(0,6)+ 
-#  labs(x = "Diet \n(Protein; Carbohydrate)",
-#       y = "Mean (+/- S.E.) number of flies")+
-# theme_minimal()
-#------------------ Data analysis for mated females (exp 4, day 2)
-#----------------------- Virgin Females (exp 4, day 1)
-
-virgin_females_e2bd1 <- (read_excel(path = "data/VirginFemalesE2bD1.xlsx", na = "NA"))
-
-
-long_virgin_females_e2bd1 <- virgin_females_e2bd1 %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-
-#long_virgin_females_e2bd1_summary <- long_virgin_females_e2bd1 %>% 
-# group_by(diet) %>% 
-# summarise(mean = mean(fly_numbers),
-#           sd = sd(fly_numbers),
-#            n = n(),
-#            se = sd/sqrt(n))
-#--------------- Visualising the data for virgin females (exp 4, day 1)
-#virgin_females_e2bd1_plot <- long_virgin_females_e2bd1_summary%>% 
-#  ggplot(aes(x = diet, y = mean))+
-# geom_bar(stat = "identity",
-#          fill = "red",
-#          colour = "blue",
-#          alpha = 0.6)+
-# geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-#                colour = "blue",
-                #               width = 0.2)+
-# geom_jitter(data = long_virgin_females_e2bd1,
-#             aes(x = diet,
-#                 y = fly_numbers),
-#             fill = "skyblue",
-#  colour = "black",
-#          width = 0.2,
-#           shape = 21)+
-#ylim(0,6)+ 
-#labs(x = "Diet \n(Protein; Carbohydrate)",
-#     y = "Mean (+/- S.E.) number of flies")+
-# theme_minimal()
-#---------------- Data analysis for virgin females (exp 4, day 1)
-#virgin_females_e4_d1ls1 <- lm(fly_numbers ~ diet, data = long_virgin_females_e4d1)
-#performance::check_model(virgin_females_e4d1_ls1)
-#----------------------- Virgin Females (exp 4, day 2)
-
-virgin_females_e2bd2 <- (read_excel(path = "~/Documents/drosophilaresearchproject/data/VirginFemalesE2bD2.xlsx", na = "NA"))
-
-
-long_virgin_females_e2bd2 <- virgin_females_e2bd2 %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-
-# Mated 
+#--------- Mutating a variable 
 exp2bmated1 <- long_mated_females_e2bd1 %>% mutate(variable = "mated") %>% mutate(day = "1")
 exp2bmated2 <- long_mated_females_e2bd2 %>% mutate(variable = "mated") %>% mutate(day = "2")
-
-# Binding mated days 1 - 2 
+#----- Binding mated days 1 - 2 
 exp2bmatedall <- rbind(exp2bmated1, exp2bmated2)
-
-# Virgin 
+#----- Summarising the data 
+exp2bmatedall_summary <- exp2bmatedall %>%  
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+#---- Visualising the data 
+exp2bmatedall_plot <- exp2bmatedall_summary %>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+  geom_jitter(data = exp2bmatedall,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
+#-----------------------  Virgin Females
+#--------- Day 1 
+#---------- Reading the data in 
+virgin_females_e2bd1 <- (read_excel(path = "data/VirginFemalesE2bD1.xlsx", na = "NA"))
+#----- Making the data long 
+long_virgin_females_e2bd1 <- virgin_females_e2bd1 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+#--------- Day 2 
+#---------- Reading the data in 
+virgin_females_e2bd2 <- (read_excel(path = "data/VirginFemalesE2bD2.xlsx", na = "NA"))
+#----- Making the data long 
+long_virgin_females_e2bd2 <- virgin_females_e2bd2 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+#------ Mutating a variable 
 exp2bvirgin1 <- long_virgin_females_e2bd1 %>% mutate(variable = "virgin") %>% mutate(day = "1")
 exp2bvirgin2 <- long_virgin_females_e2bd2 %>% mutate(variable = "virgin") %>% mutate(day = "2")
-
-
-# Binding virgin days 1 - 2 
+#------- Binding virgin days 1 - 2 
 exp2bvirginall <- rbind(exp2bvirgin1, exp2bvirgin2)
+#----- Summarising the data 
+exp2bvirginall_summary <- exp2bvirginall %>%  
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+#---- Visualising the data
+exp2bvirginall_plot <- exp2bvirginall_summary %>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+  geom_jitter(data = exp2bvirginall,
+              aes(x = diet,
+                  y = fly_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of flies")+
+  theme_minimal()
 
-# Binding mated and virgin days 1 - 2 
+
+
+
+
+
+#------- Binding mated and virgin days 1 - 2 
 exp2ball <- rbind(exp2bmatedall, exp2bvirginall)
 
 # linear model 
@@ -157,7 +120,7 @@ broom::tidy(exp2bboths1a,
             conf.int=T)
 
 
-
+#-------------------- IGNORE THIS HASHTAGGED OUT CODE --------------------
 #virgin_females_e2bd2_summary <- long_virgin_females_e2bd2 %>% 
 #  group_by(diet) %>% 
 #  summarise(mean = mean(fly_numbers),
@@ -278,4 +241,93 @@ broom::tidy(exp2bboths1a,
 #exp2bd1ls3 <- glm(formula = fly_numbers ~ diet * status,
 #family = quasipoisson(), data = exp2b)
 #performance::check_model(exp2bd1ls3)
+#long_mated_females_e2bd1_summary <- long_mated_females_e2bd1 %>% 
+#  group_by(diet) %>% 
+#  summarise(mean = mean(fly_numbers),
+#            sd = sd(fly_numbers),
+#            n = n(),
+#            se = sd/sqrt(n))
+#---------------- Visualising the data for mated females (exp 4, day 1)
+#mated_females_e2bd1_plot <- long_mated_females_e2bd1_summary%>% 
+# ggplot(aes(x = diet, y = mean))+
+# geom_bar(stat = "identity",
+#          fill = "red",
+#          colour = "blue",
+#          alpha = 0.6)+
+# geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+#               colour = "blue",
+#               width = 0.2)+
+# geom_jitter(data = long_mated_females_e2bd1,
+#             aes(x = diet,
+#                 y = fly_numbers),
+#             fill = "skyblue",
+#             colour = "black",
+#             width = 0.2,
+#              shape = 21)+
+#  ylim(0,6)+ 
+#  labs(x = "Diet \n(Protein; Carbohydrate)",
+#       y = "Mean (+/- S.E.) number of flies")+
+#  theme_minimal()
+#------------------ Data analysis for mated females (exp 4, day 1)
+#-----------------------  Mated Females (exp 4, day 2)
+#long_mated_females_e2bd2_summary <- long_mated_females_e2bd2 %>% 
+# group_by(diet) %>% 
+# summarise(mean = mean(fly_numbers),
+#           sd = sd(fly_numbers),
+#           n = n(),
+#           se = sd/sqrt(n))
+#----------------- Visualising the data for mated females (exp 4, day 2)
+#mated_females_e2bd2_plot <- long_mated_females_e2bd2_summary%>% 
+#  ggplot(aes(x = diet, y = mean))+
+#  geom_bar(stat = "identity",
+#          fill = "red",
+#          colour = "blue",
+#           alpha = 0.6)+
+#  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+#                colour = "blue",
+#                width = 0.2)+
+#  geom_jitter(data = long_mated_females_e2bd2,
+#             aes(x = diet,
+#                  y = fly_numbers),
+#              fill = "skyblue",
+#              colour = "black",
+#             width = 0.2,
+#             shape = 21)+
+#  ylim(0,6)+ 
+#  labs(x = "Diet \n(Protein; Carbohydrate)",
+#       y = "Mean (+/- S.E.) number of flies")+
+# theme_minimal()
+#------------------ Data analysis for mated females (exp 4, day 2)
+#----------------------- Virgin Females (exp 4, day 1)
 # ------------  
+#long_virgin_females_e2bd1_summary <- long_virgin_females_e2bd1 %>% 
+# group_by(diet) %>% 
+# summarise(mean = mean(fly_numbers),
+#           sd = sd(fly_numbers),
+#            n = n(),
+#            se = sd/sqrt(n))
+#--------------- Visualising the data for virgin females (exp 4, day 1)
+#virgin_females_e2bd1_plot <- long_virgin_females_e2bd1_summary%>% 
+#  ggplot(aes(x = diet, y = mean))+
+# geom_bar(stat = "identity",
+#          fill = "red",
+#          colour = "blue",
+#          alpha = 0.6)+
+# geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+#                colour = "blue",
+#               width = 0.2)+
+# geom_jitter(data = long_virgin_females_e2bd1,
+#             aes(x = diet,
+#                 y = fly_numbers),
+#             fill = "skyblue",
+#  colour = "black",
+#          width = 0.2,
+#           shape = 21)+
+#ylim(0,6)+ 
+#labs(x = "Diet \n(Protein; Carbohydrate)",
+#     y = "Mean (+/- S.E.) number of flies")+
+# theme_minimal()
+#---------------- Data analysis for virgin females (exp 4, day 1)
+#virgin_females_e4_d1ls1 <- lm(fly_numbers ~ diet, data = long_virgin_females_e4d1)
+#performance::check_model(virgin_females_e4d1_ls1)
+#----------------------- Virgin Females (exp 4, day 2)
