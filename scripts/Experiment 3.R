@@ -94,7 +94,7 @@ exp3both_plot <- exp3bothall_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
-#-------------------------------------------
+#---------------------------
 #--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 ----------------#
 # Binding the combined days data of alone on a plate and with males on a plate
 exp3all <- rbind(exp3femalesall, exp3bothall)
@@ -107,6 +107,16 @@ exp3allls <- glm(fly_numbers ~ diet * variable + day, data = exp3all, family = p
 # use quasi likelihood as null/df >1 quasipoisson()
 performance::check_model(exp3allls)
 #--------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
 
 
 
