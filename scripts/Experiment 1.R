@@ -14,18 +14,19 @@ library(emmeans)
 library(here)
 #_________________________________ Experiment 1 _____________________________# 
 #__________ Egg counting
+#____ Reading the data in 
 egg_counting_data <- read_csv("data/EggCountingE1.csv", col_select = 2:5 ) %>% drop_na()
-
+#____ Making the data long 
 long_egg_counting1 <- egg_counting_data %>% 
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
-
+#_____ Making a summary of the data 
 egg_counting1_summary <- long_egg_counting1 %>% 
   group_by(diet) %>% 
   summarise(mean = mean(egg_numbers),
             sd = sd(egg_numbers),
             n = n(),
             se = sd/sqrt(n))
-#---------- Visualise the data of egg counting (experiment 1)
+#---------- Visualise the data of egg counting
 egg_counting1_plot <- egg_counting1_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
@@ -47,44 +48,18 @@ egg_counting1_plot <- egg_counting1_summary %>%
        y = "Mean (+/- S.E.) number of eggs")+
   theme_minimal()
 #----------- Data Analysis of egg counting (experiment 1)
-egg_counting1_summary  <- long_egg_counting1 %>% 
-  group_by(diet) %>% 
-  summarise(mean = mean(egg_numbers),
-            sd = sd(egg_numbers),
-            n = n(),
-            se = sd/sqrt(n))
-
-egg_counting1_summary %>%
-  kbl(caption=" ") %>% 
-  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")
-
+#-- Making a linear model 
 eggcountingls1 <- lm(egg_numbers ~ diet, data = long_egg_counting1)
+#---- Checking the model 
+performance::check_model(eggcountingls1)
 
-eggcountingls1
+#----
 summary(eggcountingls1)
 anova(eggcountingls1)
 confint(eggcountingls1)
-
 broom::tidy(eggcountingls1,  
             exponentiate=T, 
             conf.int=T)
-
-
-performance::check_model(eggcountingls1)
-
-
-eggcountingls1_table <- eggcountingls1 %>% broom::tidy(conf.int = T) %>% 
-  select(-`std.error`) %>% 
-  mutate_if(is.numeric, round, 2) %>% 
-  kbl(col.names = c("Predictors",
-                    "Estimates",
-                    "Z-value",
-                    "P",
-                    "Lower 95% CI",
-                    "Upper 95% CI"),
-      caption = "", 
-      booktabs = TRUE) %>% 
-  kable_styling(full_width = FALSE, font_size=16, latex_options = c("striped", "hold_position"))
   
 #---------------- Female feeding behaviour 
 #----- Day 1 
@@ -129,7 +104,7 @@ exp1_femaleall_plot <- exp1femaleall_summary %>%
               width = 0.2,
               shape = 21)+
   ylim(0.0, 4.0)+
-  labs(x = "Diet \n(Protein; Carbohydrate)\n*Day 1*",
+  labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies on each patch")+
   theme_minimal()
 #--------------------------- Male feeding behaviour
@@ -178,6 +153,10 @@ exp1_maleall_plot <- exp1maleall_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies on each patch")+
   theme_minimal()
+
+#------- Using patchwork to combine the two parts of data 
+
+exp1_femaleall_plot + exp1_maleall_plot
 
 #-------------------------  Analysis of flies not on a plate (experiment 1)
 #----------------- Data for female flies not feeding (exp 1)
@@ -246,16 +225,18 @@ female_notfeedinge1_plot + male_notfeedinge1_plot
 #----------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ----------------#
 # Binding the combined days data of males and females 
 exp1all <- rbind(exp1femaleall, exp1maleall)
-# linear model with interaction effect
+# linear model with interaction effect of experiment 1 
 exp1allls <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = poisson())
 # use quasi likelihood as null/df >1 quasipoisson()
 performance::check_model(exp1allls)
-
-
+# Doing a normal linear model 
 exp1ls0 <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
+# Checking the data 
 performance::check_model(exp1ls0)
-
+# Using the summary function 
 summary(exp1allls)
+
+
 
 
 

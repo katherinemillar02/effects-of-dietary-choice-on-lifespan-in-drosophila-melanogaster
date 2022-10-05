@@ -99,11 +99,11 @@ exp3both_plot <- exp3bothall_summary%>%
 # Binding the combined days data of alone on a plate and with males on a plate
 exp3all <- rbind(exp3femalesall, exp3bothall)
 # Adding a fly proportion variable 
-exp3all <- exp3all %>% mutate(fly_prop = if_else(variable =="females", 
+exp3allz <- exp3all %>% mutate(fly_prop = if_else(variable =="females", 
                                                  fly_numbers/10,
                                                  fly_numbers/5))
 # linear model with interaction effect
-exp3allls <- glm(fly_numbers ~ diet * variable + day, data = exp3all, family = poisson())
+exp3allls <- glm(fly_numbers ~ diet * variable + day, data = exp3allz, family = poisson())
 # use quasi likelihood as null/df >1 quasipoisson()
 performance::check_model(exp3allls)
 #--------------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ performance::check_model(exp3allls)
 
 
 
-#- PROBALY IGNORE ALL THIS HASHTAGGED CODE #-----------------------------------------------------
+#------------------- PROBALY IGNORE ALL THIS HASHTAGGED CODE #-----------------
 #--------------------- Mated females (exp 3, day 1)
 #long_mated_femalese3d1_summary <- long_mated_femalese3d1 %>% 
 #group_by(diet) %>% 

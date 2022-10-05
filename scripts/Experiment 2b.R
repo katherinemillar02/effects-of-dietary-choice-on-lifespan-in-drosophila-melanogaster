@@ -91,23 +91,29 @@ exp2bvirginall_plot <- exp2bvirginall_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
-#--------------------- Binding mated and virgin days 1 - 2 
+
+#--------------------------- Overall data analysis for experiment 2b-------
+#-- Binding mated and virgin days 1 - 2 
 exp2ball <- rbind(exp2bmatedall, exp2bvirginall)
 # linear model 
 exp2bbothls1 <- lm(fly_numbers ~ diet + variable + day, data = exp2ball)
+# Checking the model 
+performance::check_model(exp2bbothls1)
 # linear model with interaction effect
 exp2bboths1a <- lm(fly_numbers ~ diet * variable + day, data = exp2ball)
 # Checking the model 
-performance::check_model(exp2bbothls1)
 performance::check_model(exp2bboths1a)
-# Both look a bit hmmmm 
+# trying glm with quasi poisson
+exp2bglm <- glm(fly_numbers ~ diet * variable + day, 
+                data = exp2ball, family = quasipoisson(link = "log"))
+# trying glm with poisson
+exp2bglm <- glm(fly_numbers ~ diet * variable + day, 
+                data = exp2ball, family = poisson(link = "log"))
+# Checking the model
+performance::check_model(exp2bglm)
 
-summary(exp2bboths1a)
 
 
-broom::tidy(exp2bboths1a,  
-            exponentiate=T, 
-            conf.int=T)
 
 
 

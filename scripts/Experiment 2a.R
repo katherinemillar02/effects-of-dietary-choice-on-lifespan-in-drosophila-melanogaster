@@ -188,24 +188,22 @@ long_virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>%
 #------------------------ OVERALL DATA ANALYSIS FOR EXPERIMENT 2 FEEDING BEHAVIOUR --------------
 # Binding mated and virgin days 1 - 3 
 exp2all <- rbind(exp2matedall, exp2virginall)
-# linear model 
+# making a linear model 
 exp2allls <- lm(fly_numbers ~ diet + variable + day, data = exp2all)
+# Checking the data 
+performance::check_model(exp2allls)
 # linear model with interaction effect
 exp2allls1 <- lm(fly_numbers ~ diet * variable + day, data = exp2all)
 # Checking the model 
 performance::check_model(exp2allls1)
-performance::check_model(exp2allls)
-
+# Using the summary function
 summary(exp2allls1)
-
-broom::tidy(exp2allls,  
-            exponentiate=T, 
-            conf.int=T)
+# Using broom::tidy 
 broom::tidy(exp2allls1,  
             exponentiate=T, 
             conf.int=T)
 
-
+#-------------------------------------------------------------------------------
 #long_mated_femalesd1_summary <- long_mated_femalesd1 %>% 
 #  group_by(diet) %>% 
 #  summarise(mean = mean(fly_numbers)
