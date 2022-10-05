@@ -20,6 +20,33 @@ knitr::include_graphics(here("images", "flypic.jpg"))
 EggCountingE1.csv
 An excel document containing the egg counts for the 4 different protein:carbohydrate ratios taken from experiment 1. 
 
+FemaleNotFeedingE1.csv 
+An excel document containing the amount of female flies that weren't on any of the 4 different protein:carbohydrate ratios, and instead were around the plate, from experiment 1.  
+
+MaleNotFeedingE1.csv 
+An excel document containing the amount of male flies that weren't on any of the 4 different protein:carbohydrate ratios, and instead were around the plate, from experiment 1. 
+
+MatedFemalesE1D1.xlsx 
+An excel document containing the amount of female flies that were on any of the 4 different protein:carbohydrate ratios from day 1 observations from experiment 1.
+
+MatedFemalesE1D2.xlsx 
+An excel document containing the amount of female flies that were on any of the 4 different protein:carbohydrate ratios from day 2 observations from experiment 1.
+
+MatedMalesE1D1.xlsx 
+An excel document containing the amount of male flies that were on any of the 4 different protein:carbohydrate ratios from day 1 observations from experiment 1.
+
+MatedMalesE1D2.xlsx 
+An excel document containing the amount of male flies that were on any of the 4 different protein:carbohydrate ratios from day 2 observations from experiment 1.
+
+MatedEggCountE2a.xlsx 
+An excel document containing the egg counts for the 4 different protein:carbohydrate ratios taken from experiment 2a from the mated females plates. 
+
+VirginEggCountE2a.xlsx 
+An excel document containing the egg counts for the 4 different protein:carbohydrate ratios taken from experiment 2a from the virgin females plates. 
+
+
+
+
 
 ## Descriptions of analysis files
  

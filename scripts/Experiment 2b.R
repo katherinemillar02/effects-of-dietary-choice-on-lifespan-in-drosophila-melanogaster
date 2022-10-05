@@ -1,4 +1,4 @@
-#------------------------------Experiment 2b---------------------------------#
+#------------------------------Experiment 2b----------------------------------------#
 #-----------------------  Mated Females
 #--------- Day 1 
 #---------- Reading the data in 
@@ -91,25 +91,15 @@ exp2bvirginall_plot <- exp2bvirginall_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
-
-
-
-
-
-
-#------- Binding mated and virgin days 1 - 2 
+#--------------------- Binding mated and virgin days 1 - 2 
 exp2ball <- rbind(exp2bmatedall, exp2bvirginall)
-
 # linear model 
 exp2bbothls1 <- lm(fly_numbers ~ diet + variable + day, data = exp2ball)
-
 # linear model with interaction effect
 exp2bboths1a <- lm(fly_numbers ~ diet * variable + day, data = exp2ball)
-
 # Checking the model 
 performance::check_model(exp2bbothls1)
 performance::check_model(exp2bboths1a)
-
 # Both look a bit hmmmm 
 
 summary(exp2bboths1a)
@@ -120,7 +110,15 @@ broom::tidy(exp2bboths1a,
             conf.int=T)
 
 
-#-------------------- IGNORE THIS HASHTAGGED OUT CODE --------------------
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------- 
+#-------------------- IGNORE THIS HASHTAGGED OUT CODE -------------------------
 #virgin_females_e2bd2_summary <- long_virgin_females_e2bd2 %>% 
 #  group_by(diet) %>% 
 #  summarise(mean = mean(fly_numbers),
