@@ -4,9 +4,25 @@
 
 #----------------- FEMALE FEEDING BEHAVIOUR (Days 1 & 2)
 #----------- Females alone on a plate 
-#----------------- Making data "long"
-long_exp3femalesall <- exp3femalesall %>% 
+#---------Reading the data in 
+#-------Day 1
+mated_femalese3d1 <- (read_excel(path = "data/MatedFemalesE3D1.xlsx", na = "NA"))
+#-- Making data "long"
+long_mated_femalese3d1 <- mated_femalese3d1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+#-------Day 2 
+mated_femalese3d2 <- (read_excel(path = "data/MatedFemalesE3D2.xlsx", na = "NA"))
+long_mated_femalese3d2 <- mated_femalese3d2 %>% 
+pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+# -------------------- Collating days 
+#------- Just females 
+exp3females1 <- long_mated_femalese3d1 %>% mutate(variable = "females") %>% mutate(day = "1")
+exp3females2 <- long_mated_femalese3d2 %>% mutate(variable = "females") %>% mutate(day = "2")
+#-------Binding days 1 and 2 
+exp3femalesall <- rbind(exp3females1, exp3females2)
+#----------------- Making data "long"
+#long_exp3femalesall <- exp3femalesall %>% 
+#pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 #----------------- Summarising the data 
 exp3femalesall_summary <- exp3femalesall %>%  
   group_by(diet) %>% 
@@ -35,11 +51,21 @@ exp3femalesall_plot <- exp3femalesall_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
-
 #--------------- Females on a plate with males 
+#-------- Reading the data in 
+mated_femalese3d2 <- (read_excel(path = "data/MatedFemalesE3D2.xlsx", na = "NA"))
+#---- Making the data long
+long_mated_femalese3d2 <- mated_femalese3d2 %>% 
+pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+#------ Combining the days 
+#-- Mutating a status variable and a day variable 
+exp3both1 <- long_females_mf_e3_d1 %>% mutate(variable = "both") %>% mutate(day = "1")
+exp3both2 <- long_females_mf_e3_d2 %>% mutate(variable = "both") %>% mutate(day = "2")
+#----- Binding days 1 and 2 
+exp3bothall <- rbind(exp3both1, exp3both2)
 #----------------- Making data "long"
-long_exp3bothall <- exp3bothall %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+#long_exp3bothall <- exp3bothall %>% 
+#pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 #----- Summarising the data 
 exp3bothall_summary <- exp3bothall %>% 
   group_by(diet) %>% 
@@ -69,48 +95,30 @@ exp3both_plot <- exp3bothall_summary%>%
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
 #------------------- 
+
+
+
+
 #--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 ----------------#
-
-
-
-
-# -------------------- Collating days 
-
-# Just females 
-exp3females1 <- long_mated_femalese3d1 %>% mutate(variable = "females") %>% mutate(day = "1")
-exp3females2 <- long_mated_femalese3d2 %>% mutate(variable = "females") %>% mutate(day = "2")
-
-# Binding days 1 and 2 
-exp3femalesall <- rbind(exp3females1, exp3females2)
-
-# Females in a plate with males 
-exp3both1 <- long_females_mf_e3_d1 %>% mutate(variable = "both") %>% mutate(day = "1")
-exp3both2 <- long_females_mf_e3_d2 %>% mutate(variable = "both") %>% mutate(day = "2")
-
-# Binding days 1 and 2 
-exp3bothall <- rbind(exp3both1, exp3both2)
-
-# Binding mated and virgin days 1 - 3 
+# Binding the combined days data of alone on a plate and with males on a plate
 exp3all <- rbind(exp3femalesall, exp3bothall)
-
+# Adding a fly proportion variable 
 exp3all <- exp3all %>% mutate(fly_prop = if_else(variable =="females", 
                                                  fly_numbers/10,
                                                  fly_numbers/5))
-
-
 # linear model with interaction effect
 exp3allls <- glm(fly_numbers ~ diet * variable + day, data = exp3all, family = poisson())
 # use quasi likelihood as null/df >1 quasipoisson()
 performance::check_model(exp3allls)
+#--------------------------------------------------------------------------------------
+
+
 
 
 
 
 #- PROBALY IGNORE ALL THIS HASHTAGGED CODE #---------------------------------------
 #--------------------- Mated females (exp 3, day 1)
-#mated_femalese3d1 <- (read_excel(path = "data/MatedFemalesE3D1.xlsx", na = "NA"))
-#long_mated_femalese3d1 <- mated_femalese3d1 %>% 
-#pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 #long_mated_femalese3d1_summary <- long_mated_femalese3d1 %>% 
 #group_by(diet) %>% 
 #summarise(mean = mean(fly_numbers),
@@ -140,10 +148,7 @@ performance::check_model(exp3allls)
 # theme_minimal()
 #--------- Data analysis for mated females (exp 3, day 1)
 #--------------------- Mated females (exp 3, day 2)
-#mated_femalese3d2 <- (read_excel(path = "~/Documents/drosophilaresearchproject/data/MatedFemalesE3D2.xlsx", na = "NA"))
-#
-#long_mated_femalese3d2 <- mated_femalese3d2 %>% 
-#pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+
 #long_mated_femalese3d2_summary <- long_mated_femalese3d2 %>% 
 # group_by(diet) %>% 
 # summarise(mean = mean(fly_numbers),
