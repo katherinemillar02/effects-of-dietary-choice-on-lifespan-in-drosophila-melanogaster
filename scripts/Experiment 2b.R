@@ -92,6 +92,9 @@ exp2bvirginall_plot <- exp2bvirginall_summary %>%
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
 
+exp2bmatedall_plot + exp2bvirginall_plot
+
+
 #--------------------------- Overall data analysis for experiment 2b---------- 
 
 #-- Binding mated and virgin days 1 - 2 
@@ -117,7 +120,10 @@ exp2bglm <- glm(fly_numbers ~ diet * variable + day,
 performance::check_model(exp2bglm)
 # 
 summary(exp2bbothls1a)
+
+
 broom::tidy(exp2bbothls1)
+broom::tidy(exp2bbothls1a)
 
 emmeans::emmeans(exp2bbothls1a, specs = pairwise ~ diet + variable + day)
 
