@@ -237,6 +237,16 @@ performance::check_model(exp1ls0)
 summary(exp1allls)
 
 
+summary(exp1ls0)
+
+plot(exp1allls, which=c(1,3))
+
+# do not use for interaction modeln
+means <- emmeans::emmeans(exp1allls, specs = ~ diet)
+
+GGally::ggpairs(exp1all)
+
+
 
 
 

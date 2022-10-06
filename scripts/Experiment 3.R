@@ -121,8 +121,6 @@ performance::check_model(exp3allls)
 
 
 
-
-
 #------------------- PROBALY IGNORE ALL THIS HASHTAGGED CODE #-----------------
 #--------------------- Mated females (exp 3, day 1)
 #long_mated_femalese3d1_summary <- long_mated_femalese3d1 %>% 
