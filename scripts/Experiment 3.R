@@ -94,6 +94,9 @@ exp3both_plot <- exp3bothall_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
+
+exp3femalesall_plot + exp3both_plot
+
 #---------------------------
 #--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 ----------------#
 # Binding the combined days data of alone on a plate and with males on a plate

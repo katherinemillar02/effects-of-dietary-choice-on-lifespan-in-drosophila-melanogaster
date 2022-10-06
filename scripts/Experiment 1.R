@@ -236,6 +236,9 @@ performance::check_model(exp1ls0)
 # Using the summary function 
 summary(exp1allls)
 
+library(sjPlot)
+tab_model(exp1ls0)
+
 exp(0.16667)
 
 
