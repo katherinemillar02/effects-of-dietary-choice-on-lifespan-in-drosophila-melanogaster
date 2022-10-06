@@ -12,7 +12,15 @@ library(here)
 library(tidyverse)
 library(kableExtra)
 source(here("scripts", "Experiment 1.R"))
-```
+
+
+
+
+
+
+
+
+
 
 ## R Markdown
 
@@ -25,6 +33,19 @@ summary(cars)
 ```
 
 ## Including Plots
+
+
+
+There was a strong significant difference when looking at the interaction effect between diet choice and male and female sex (F = 30.5, P = <0.001 ), so this was kept in the model. 
+
+There was a significant difference (P = 0.02) found between the diets that females chose to feed on and the diets that males chose to feed on. With the 2:1 diet being the most popular diets for females to feed on with having a mean average of 2.72 flies on a feeding patch at one observation taken over 2 days of observations. While the most popular feeding diet for males was 1:8 with there being a mean average of 1.06 flies on a patch at an observation. 
+
+There was a large significant difference (P=<0.001) found between females choosing a 1:2 diet (a diet higher in carbohydrate), than males choosing a 2:1 diet (a diet high in protein). 
+
+
+
+
+
 
 You can also embed plots, for example:
 

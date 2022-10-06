@@ -236,13 +236,25 @@ performance::check_model(exp1ls0)
 # Using the summary function 
 summary(exp1allls)
 
+exp(0.16667)
+
 
 summary(exp1ls0)
 
+broom::tidy(exp1ls0)
+
 plot(exp1allls, which=c(1,3))
 
-# do not use for interaction modeln
-means <- emmeans::emmeans(exp1allls, specs = ~ diet)
+
+# testing for significance of interaction effect
+drop1(exp1ls0, test = "F")
+
+exp1femaleall
+
+
+# do not use for interaction model
+meansf <- emmeans::emmeans(exp1femaleall, specs = ~ diet)
+meansm <- emmeans::emmeans(exp1maleall, specs = ~ diet)
 
 GGally::ggpairs(exp1all)
 

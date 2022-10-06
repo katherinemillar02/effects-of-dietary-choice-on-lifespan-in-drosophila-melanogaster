@@ -106,6 +106,14 @@ exp3allz <- exp3all %>% mutate(fly_prop = if_else(variable =="females",
 exp3allls <- glm(fly_numbers ~ diet * variable + day, data = exp3allz, family = poisson())
 # use quasi likelihood as null/df >1 quasipoisson()
 performance::check_model(exp3allls)
+
+# information summary
+broom::tidy(exp3allls)
+# information about the model but irrelevant 
+broom::glance(exp3allls)
+# inividual observations 
+broom::augment(exp3allls)
+
 #--------------------------------------------------------------------------------------
 
 
