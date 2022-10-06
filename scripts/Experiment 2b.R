@@ -18,7 +18,7 @@ exp2bmated2 <- long_mated_females_e2bd2 %>% mutate(variable = "mated") %>% mutat
 #----- Binding mated days 1 - 2 
 exp2bmatedall <- rbind(exp2bmated1, exp2bmated2)
 #----- Summarising the data 
-exp2bmatedall_summary <- exp2bmatedall %>%  
+exp2bmatedall_summary <- exp2bmatedall %>%
   group_by(diet) %>% 
   summarise(mean = mean(fly_numbers),
             sd = sd(fly_numbers),
@@ -124,6 +124,12 @@ emmeans::emmeans(exp2bbothls1a, specs = pairwise ~ diet + variable + day)
 
 library(sjPlot)
 tab_model(exp2bbothls1a)
+
+
+tab_model(exp2bglm)
+
+anova(exp2bbothls1a)
+
 library(gtsummary)
 tbl_regression(exp2bbothls1a)
 
