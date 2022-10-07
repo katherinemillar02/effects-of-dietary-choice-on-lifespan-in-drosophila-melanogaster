@@ -226,22 +226,28 @@ female_notfeedinge1_plot + male_notfeedinge1_plot
 # Binding the combined days data of males and females 
 exp1all <- rbind(exp1femaleall, exp1maleall)
 # linear model with interaction effect of experiment 1 
-exp1allls <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = poisson())
-# use quasi likelihood as null/df >1 quasipoisson()
+exp1allls <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = quasipoisson())
+
 performance::check_model(exp1allls)
 
 
 
+exp1allls <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
+# lm looks better? 
+
+summary(exp1allls)
 
 
 # Doing a normal linear model 
 exp1ls0 <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
+
 # Checking the data 
 performance::check_model(exp1ls0)
+
+
 # Using the summary function 
 summary(exp1allls)
-
-
+# there is almost significance in day, keep it anyway 
 
 
 
