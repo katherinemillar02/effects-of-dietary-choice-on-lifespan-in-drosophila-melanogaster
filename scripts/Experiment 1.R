@@ -229,12 +229,22 @@ exp1all <- rbind(exp1femaleall, exp1maleall)
 exp1allls <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = poisson())
 # use quasi likelihood as null/df >1 quasipoisson()
 performance::check_model(exp1allls)
+
+
+
+
+
 # Doing a normal linear model 
 exp1ls0 <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
 # Checking the data 
 performance::check_model(exp1ls0)
 # Using the summary function 
 summary(exp1allls)
+
+
+
+
+
 
 library(sjPlot)
 tab_model(exp1ls0)

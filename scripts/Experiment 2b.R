@@ -107,12 +107,12 @@ performance::check_model(exp2bbothls1)
 exp2bbothls1a <- lm(fly_numbers ~ diet * variable + day, data = exp2ball)
 # Checking the model 
 performance::check_model(exp2bbothls1a)
-# trying glm with quasi poisson
-exp2bglm <- glm(fly_numbers ~ diet * variable + day, 
-                data = exp2ball, family = quasipoisson(link = "log"))
 # trying glm with poisson
 exp2bglm <- glm(fly_numbers ~ diet * variable + day, 
                 data = exp2ball, family = poisson(link = "log"))
+# trying glm with quasi poisson as is overdispersion 
+exp2bglm <- glm(fly_numbers ~ diet * variable + day,
+                data = exp2ball, family = quasipoisson(link = "log"))
 
 # Not much changes?? between the two 
 
@@ -120,6 +120,13 @@ exp2bglm <- glm(fly_numbers ~ diet * variable + day,
 performance::check_model(exp2bglm)
 # 
 summary(exp2bbothls1a)
+summary(exp2bglm)
+
+# can drop day as is not significant
+
+exp2bglm <- glm(fly_numbers ~ diet * variable,
+                data = exp2ball, family = quasipoisson(link = "log"))
+
 
 
 broom::tidy(exp2bbothls1)
@@ -131,6 +138,7 @@ emmeans::emmeans(exp2bglm, specs = pairwise ~ diet + variable + day)
 
 library(sjPlot)
 tab_model(exp2bbothls1a)
+
 
 
 tab_model(exp2bglm)
