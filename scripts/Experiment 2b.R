@@ -125,7 +125,8 @@ summary(exp2bbothls1a)
 broom::tidy(exp2bbothls1)
 broom::tidy(exp2bbothls1a)
 
-emmeans::emmeans(exp2bbothls1a, specs = pairwise ~ diet + variable + day)
+
+emmeans::emmeans(exp2bglm, specs = pairwise ~ diet + variable + day)
 
 
 library(sjPlot)
