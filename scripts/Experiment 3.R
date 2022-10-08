@@ -16,8 +16,8 @@ long_mated_femalese3d2 <- mated_femalese3d2 %>%
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 # -------------------- Collating days 
 #------- Just females 
-exp3females1 <- long_mated_femalese3d1 %>% mutate(variable = "females") %>% mutate(day = "1")
-exp3females2 <- long_mated_femalese3d2 %>% mutate(variable = "females") %>% mutate(day = "2")
+exp3females1 <- long_mated_femalese3d1 %>% mutate(status = "females") %>% mutate(day = "1")
+exp3females2 <- long_mated_femalese3d2 %>% mutate(status = "females") %>% mutate(day = "2")
 #-------Binding days 1 and 2 
 exp3femalesall <- rbind(exp3females1, exp3females2)
 #----------------- Making data "long"
@@ -59,8 +59,8 @@ long_mated_femalese3d2 <- mated_femalese3d2 %>%
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 #------ Combining the days 
 #-- Mutating a status variable and a day variable 
-exp3both1 <- long_females_mf_e3_d1 %>% mutate(variable = "both") %>% mutate(day = "1")
-exp3both2 <- long_females_mf_e3_d2 %>% mutate(variable = "both") %>% mutate(day = "2")
+exp3both1 <- long_females_mf_e3_d1 %>% mutate(status = "both") %>% mutate(day = "1")
+exp3both2 <- long_females_mf_e3_d2 %>% mutate(status = "both") %>% mutate(day = "2")
 #----- Binding days 1 and 2 
 exp3bothall <- rbind(exp3both1, exp3both2)
 #----------------- Making data "long"
@@ -102,13 +102,21 @@ exp3femalesall_plot + exp3both_plot
 # Binding the combined days data of alone on a plate and with males on a plate
 exp3all <- rbind(exp3femalesall, exp3bothall)
 # Adding a fly proportion variable 
-exp3allz <- exp3all %>% mutate(fly_prop = if_else(variable =="females", 
+exp3allz <- exp3all %>% mutate(fly_prop = if_else(status =="females", 
                                                  fly_numbers/10,
                                                  fly_numbers/5))
 # linear model with interaction effect
-exp3allls <- glm(fly_numbers ~ diet * variable + day, data = exp3allz, family = poisson())
+exp3allglm <- glm(fly_numbers ~ diet * variable + day, data = exp3allz, family = poisson())
 # use quasi likelihood as null/df >1 quasipoisson()
-performance::check_model(exp3allls)
+
+exp3allglm2 <- glm(fly_prop ~ diet * status + day, data = exp3allz, family = quasipoisson())
+exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3allz, family = quasipoisson())
+
+
+performance::check_model(exp3allglm)
+
+summary(exp3allglm2)
+
 
 # information summary
 broom::tidy(exp3allls)
