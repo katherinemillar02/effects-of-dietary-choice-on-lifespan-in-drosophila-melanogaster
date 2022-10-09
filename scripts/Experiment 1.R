@@ -240,6 +240,10 @@ exp1allglm <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = quasi
 performance::check_model(exp1allglm)
 # using summary function to look at values 
 summary(exp1allglm)
+
+
+
+
 # trying normal linear model 
 exp1alllm <- lm(fly_numbers ~ diet * sex + day, data = exp1all) # lm looks better
 # Checking the model 

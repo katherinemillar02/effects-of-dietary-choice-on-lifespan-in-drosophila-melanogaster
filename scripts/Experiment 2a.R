@@ -110,6 +110,7 @@ exp2virginall_plot <- exp2virginall_summary %>%
 exp2matedall_plot + exp2virginall_plot
 
 #------ Egg counting data -----------------------------------------------------#
+# Mated egg count 
 # Reading the data in 
 mated_females_e2_eggcount <- (read_excel(path = "data/MatedEggCountE2a.xlsx", na = "NA"))
 # Making the data long 
@@ -122,7 +123,7 @@ mated_femalese2_eggcount_summary <- long_mated_females_e2_eggcount %>%
             sd = sd(egg_numbers),
             n = n(),
             se = sd/sqrt(n))
-#-------------- Visualising the data for mated female egg count (exp 2)
+#-------------- Visualising the data for mated female egg count 
 mated_females_e2_eggcount_plot <- mated_femalese2_eggcount_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
@@ -146,10 +147,13 @@ mated_females_e2_eggcount_plot <- mated_femalese2_eggcount_summary %>%
 
 #----------- Data analysis for mated female egg count (exp 2)
 #-------------- Virgin female egg count
-virgin_females_e2_eggcount <- (read_excel(path = "~/Documents/drosophilaresearchproject/data/VirginEggCountE2a.xlsx", na = "NA"))
+# Reading the data in
+virgin_females_e2_eggcount <- (read_excel(path = "data/VirginEggCountE2a.xlsx", na = "NA"))
+# Making the data long 
 long_virgin_females_e2_eggcount <- virgin_females_e2_eggcount %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
-long_virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>% 
+# Summarising the data 
+virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>% 
   group_by(diet) %>% 
   summarise(mean = mean(egg_numbers),
             sd = sd(egg_numbers),
@@ -181,6 +185,18 @@ virgin_female_e2_eggcount_plot <- long_virgin_femalese2_eggcount_summary %>%
 mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
 
 #------------------------- Data analysis for virgin egg count 
+
+exp2avirginegg <- long_virgin_females_e2_eggcount %>% mutate(status = "virgin") 
+exp2amatedegg <- long_mated_females_e2_eggcount %>% mutate(status = "mated") 
+
+exp2a_all_egg <- rbind(exp2avirginegg, exp2amatedegg)
+
+exp2a_egg_lm <- lm(egg_numbers ~ diet * status, data = exp2a_all_egg)
+
+performance::check_model(exp2a_egg_lm)
+
+summary(exp2a_egg_lm)
+
 virgin_females_e2_eggcount <- (read_excel(path = "~/Documents/drosophilaresearchproject/data/VirginEggCountE2a.xlsx", na = "NA"))
 long_virgin_females_e2_eggcount <- virgin_females_e2_eggcount %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
@@ -195,19 +211,23 @@ long_virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>%
 # Binding mated and virgin days 1 - 3 
 exp2all <- rbind(exp2matedall, exp2virginall)
 # making a linear model 
-exp2allls <- lm(fly_numbers ~ diet + variable + day, data = exp2all)
+exp2a_all_lm <- lm(fly_numbers ~ diet + variable + day, data = exp2all)
 # Checking the data 
-performance::check_model(exp2allls)
+performance::check_model(exp2a_all_lm)
 # linear model with interaction effect
-exp2allls1 <- lm(fly_numbers ~ diet * variable + day, data = exp2all)
+exp2a_all_lm_2 <- lm(fly_numbers ~ diet * variable + day, data = exp2all)
 # Checking the model 
-performance::check_model(exp2allls1)
+performance::check_model(exp2a_all_lm_2)
 # Using the summary function
-summary(exp2allls1)
+summary(exp2a_all_lm)
+# Only day 3 is significant but this has changed data 
+
 # Using broom::tidy 
-broom::tidy(exp2allls1,  
+broom::tidy(exp2a_all_lm,  
             exponentiate=T, 
             conf.int=T)
+
+# trying glm 
 
 #-------------------------------------------------------------------------------
 #long_mated_femalesd1_summary <- long_mated_femalesd1 %>% 
