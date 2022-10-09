@@ -106,7 +106,7 @@ exp3allz <- exp3all %>% mutate(fly_prop = if_else(status =="females",
                                                  fly_numbers/10,
                                                  fly_numbers/5))
 # linear model with interaction effect
-exp3allglm <- glm(fly_numbers ~ diet * variable + day, data = exp3allz, family = poisson())
+exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3allz, family = poisson())
 # use quasi likelihood as null/df >1 quasipoisson()
 
 exp3allglm2 <- glm(fly_prop ~ diet * status + day, data = exp3allz, family = quasipoisson())

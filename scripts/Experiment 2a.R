@@ -1,6 +1,4 @@
 #----------------------------- Experiment 2a ------------------------------------
-
-
 #--------------------- Mated Females  
 #------  Day 1 
 #--- Reading the data in 
@@ -38,10 +36,10 @@ exp2matedall_plot <- exp2matedall_summary %>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "red",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "red",
                 width = 0.2)+
   geom_jitter(data = exp2matedall,
               aes(x = diet,
@@ -52,10 +50,8 @@ exp2matedall_plot <- exp2matedall_summary %>%
               shape = 21)+
   ylim(0,6)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+       y = "Mean (+/- S.E.) number of mated female flies")+
   theme_minimal()
-
-
 #------------------------------------------------------- Virgin Females  
 #------  Day 1 
 #--- Reading the data in 
@@ -93,10 +89,10 @@ exp2virginall_plot <- exp2virginall_summary %>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "#eb34c3",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "#eb34c3",
                 width = 0.2)+
   geom_jitter(data = exp2virginall,
               aes(x = diet,
@@ -107,14 +103,19 @@ exp2virginall_plot <- exp2virginall_summary %>%
               shape = 21)+
   ylim(0,6)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+       y = "Mean (+/- S.E.) number of virgin female flies")+
   theme_minimal()
+#------- Using patchwork to combine the two parts of data --------
 
+exp2matedall_plot + exp2virginall_plot
 
-#------ Egg counting 
+#------ Egg counting data -----------------------------------------------------#
+# Reading the data in 
 mated_females_e2_eggcount <- (read_excel(path = "data/MatedEggCountE2a.xlsx", na = "NA"))
+# Making the data long 
 long_mated_females_e2_eggcount <- mated_females_e2_eggcount %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
+# Summarising the data 
 mated_femalese2_eggcount_summary <- long_mated_females_e2_eggcount %>% 
   group_by(diet) %>% 
   summarise(mean = mean(egg_numbers),
@@ -126,10 +127,10 @@ mated_females_e2_eggcount_plot <- mated_femalese2_eggcount_summary %>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "red",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "red",
                 width = 0.2)+
   geom_jitter(data = long_mated_females_e2_eggcount,
               aes(x = diet,
@@ -138,15 +139,10 @@ mated_females_e2_eggcount_plot <- mated_femalese2_eggcount_summary %>%
               colour = "black",
               width = 0.2,
               shape = 21)+
-  ylim(0,200)+
+  ylim(0,150)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+       y = "Mean (+/- S.E.) number eggs layed by mated flies")+
   theme_minimal()
-
-
-#------- Using patchwork to combine the two parts of data 
-
-exp2virginall_plot + exp2matedall_plot
 
 #----------- Data analysis for mated female egg count (exp 2)
 #-------------- Virgin female egg count
@@ -164,10 +160,10 @@ virgin_female_e2_eggcount_plot <- long_virgin_femalese2_eggcount_summary %>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "#eb34c3",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "#eb34c3",
                 width = 0.2)+
   geom_jitter(data = long_virgin_females_e2_eggcount,
               aes(x = diet,
@@ -176,10 +172,14 @@ virgin_female_e2_eggcount_plot <- long_virgin_femalese2_eggcount_summary %>%
               colour = "black",
               width = 0.2,
               shape = 21)+
-  ylim(0,200)+
+  ylim(0,150)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+       y = "Mean (+/- S.E.) number of eggs layed by virgin flies")+
   theme_minimal()
+
+#---------- Using patchwork to combine the mated and virgin egg counting plots 
+mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
+
 #------------------------- Data analysis for virgin egg count 
 virgin_females_e2_eggcount <- (read_excel(path = "~/Documents/drosophilaresearchproject/data/VirginEggCountE2a.xlsx", na = "NA"))
 long_virgin_females_e2_eggcount <- virgin_females_e2_eggcount %>% 

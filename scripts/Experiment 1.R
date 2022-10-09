@@ -12,6 +12,7 @@ library(devtools)
 library(knitr)
 library(emmeans)
 library(here)
+library(sjPlot)
 #_________________________________ Experiment 1 _____________________________# 
 #__________ Egg counting
 #____ Reading the data in 
@@ -47,12 +48,11 @@ egg_counting1_plot <- egg_counting1_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of eggs")+
   theme_minimal()
-#----------- Data Analysis of egg counting (experiment 1)
+#----------- Data Analysis of egg counting (experiment 1)---------------------- 
 #-- Making a linear model 
 eggcountingls1 <- lm(egg_numbers ~ diet, data = long_egg_counting1)
 #---- Checking the model 
 performance::check_model(eggcountingls1)
-
 #----
 summary(eggcountingls1)
 anova(eggcountingls1)
@@ -60,8 +60,7 @@ confint(eggcountingls1)
 broom::tidy(eggcountingls1,  
             exponentiate=T, 
             conf.int=T)
-  
-#---------------- Female feeding behaviour 
+#---------------- Female feeding behaviour -----------------------------
 #----- Day 1 
 #-------- Reading the data in
 female_feedingd1 <- read_excel("data/MatedFemalesE1D1.xlsx")
@@ -86,7 +85,7 @@ exp1femaleall_summary <- exp1femaleall %>%
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
-#------- Visualising the data for female feeding experiment 1 
+#------- Visualising the data for female feeding experiment 1-----------------#
 exp1_femaleall_plot <- exp1femaleall_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
@@ -137,10 +136,10 @@ exp1_maleall_plot <- exp1maleall_summary %>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "#00FFFF",
+           colour = "#00FF00",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "#00FFFF",
+                colour = "#00FF00",
                 width = 0.2)+
   geom_jitter(data = exp1maleall,
               aes(x = diet,
@@ -151,7 +150,7 @@ exp1_maleall_plot <- exp1maleall_summary %>%
               shape = 21)+
   ylim(0.0, 4.0)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies on each patch")+
+       y = "")+
   theme_minimal()
 
 #------- Using patchwork to combine the two parts of data 
@@ -160,16 +159,19 @@ exp1_femaleall_plot + exp1_maleall_plot
 
 #-------------------------  Analysis of flies not on a plate (experiment 1)
 #----------------- Data for female flies not feeding (exp 1)
+#------ Reading the data in 
 female_notfeedinge1 <- read_csv("data/FemaleNotFeedingE1.csv", col_select = 1:9)  %>% drop_na()
+#------ Making the data long 
 long_female_notfeedinge1 <- female_notfeedinge1 %>% 
   pivot_longer(cols = ("1":"8"), names_to = "plate", values_to = "fnf")
+#------ Summarising the data 
 female_notfeedinge1_summary <- long_female_notfeedinge1 %>% 
   group_by(plate) %>% 
   summarise(mean = mean(fnf),
             sd = sd(fnf),
             n = n(),
             se = sd/sqrt(n))
-#--------------------- Visualising data for female flies not feeding (exp 1)
+#---------- Visualising data for female flies not feeding (exp 1)
 female_notfeedinge1_plot <- female_notfeedinge1_summary %>% 
   ggplot(aes(x = plate, y = mean))+
   geom_bar(stat = "identity",
@@ -190,9 +192,12 @@ female_notfeedinge1_plot <- female_notfeedinge1_summary %>%
        y = "Mean (+/- S.E.) flies per plate not on a plate")+
   theme_minimal()
 #----------------- Data for male flies not feeding (exp 1)
+#------ Reading the data in 
 male_notfeedinge1 <- read_csv("data/MaleNotFeedingE1.csv", col_select = 1:9)  %>% drop_na()
+#------ Making the data long 
 long_male_notfeedinge1 <- male_notfeedinge1 %>% 
   pivot_longer(cols = ("1":"8"), names_to = "plate", values_to = "mnf")
+#------ Summarising the data 
 male_notfeedinge1_summary <- long_male_notfeedinge1 %>% 
   group_by(plate) %>% 
   summarise(mean = mean(mnf),
@@ -220,62 +225,39 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
        y = "")+
   theme_minimal()
 
+#------ Using patchwork to combine the male and female plots ------------# 
+
 female_notfeedinge1_plot + male_notfeedinge1_plot
 
 #----------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ----------------#
 # Binding the combined days data of males and females 
-exp1all <- rbind(exp1femaleall, exp1maleall)
+exp1all <- rbind(exp1femaleall, exp1maleall) 
+# viewing the whole data set 
+GGally::ggpairs(exp1all)
 # linear model with interaction effect of experiment 1 
-exp1allls <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = quasipoisson())
-
-performance::check_model(exp1allls)
-
-
-
-exp1allls <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
-# lm looks better? 
-
-summary(exp1allls)
-
-
-# Doing a normal linear model 
-exp1ls0 <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
-
-# Checking the data 
-performance::check_model(exp1ls0)
-
-
-# Using the summary function 
-summary(exp1allls)
-# there is almost significance in day, keep it anyway 
-
-
-
-
-library(sjPlot)
-tab_model(exp1ls0)
-
-exp(0.16667)
-
-
-summary(exp1ls0)
-
-broom::tidy(exp1ls0)
-
-plot(exp1allls, which=c(1,3))
-
-
+exp1allglm <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = quasipoisson())
+# Checking the model 
+performance::check_model(exp1allglm)
+# using summary function to look at values 
+summary(exp1allglm)
+# trying normal linear model 
+exp1alllm <- lm(fly_numbers ~ diet * sex + day, data = exp1all) # lm looks better
+# Checking the model 
+performance::check_model(exp1alllm)
+# using summary function to look at values 
+summary(exp1alllm)
+# using broom::tidy
+broom::tidy(exp1alllm)
+# Only just significance with day for both lm and glm tests 
+# forming a table 
+tab_model(exp1alllm)
+# variance against predicted residuals, residuals are almost at 0? 
+plot(exp1alllm, which=c(1,3))
 # testing for significance of interaction effect
-drop1(exp1ls0, test = "F")
-
-exp1femaleall
-
-
-# do not use for interaction model
+drop1(exp1alllm, test = "F")
+# do not use for interaction model?? - doesnt run 
 meansf <- emmeans::emmeans(exp1femaleall, specs = ~ diet)
 meansm <- emmeans::emmeans(exp1maleall, specs = ~ diet)
-
-GGally::ggpairs(exp1all)
 
 
 
