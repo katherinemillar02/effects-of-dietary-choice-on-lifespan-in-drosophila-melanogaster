@@ -14,6 +14,9 @@ library(emmeans)
 library(here)
 library(sjPlot)
 library(gtsummary)
+
+tinytex::install_tinytex()
+
 #_________________________________ Experiment 1 _____________________________# 
 #__________ Egg counting
 #____ Reading the data in 
@@ -107,7 +110,7 @@ exp1_femaleall_plot <- exp1femaleall_summary %>%
               shape = 21)+
   ylim(0.0, 4.0)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies on each patch")+
+       y = "Mean (+/- S.E.) number of female flies on each patch")+
   theme_minimal()
 #--------------------------- Male feeding behaviour
 #----------------- Day 1 
@@ -139,10 +142,10 @@ exp1_maleall_plot <- exp1maleall_summary %>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "#00FF00",
+           colour = "#A8DBAF",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "#00FF00",
+                colour = "#A8DBAF",
                 width = 0.2)+
   geom_jitter(data = exp1maleall,
               aes(x = diet,
@@ -153,7 +156,7 @@ exp1_maleall_plot <- exp1maleall_summary %>%
               shape = 21)+
   ylim(0.0, 4.0)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "")+
+       y = "Mean (+/- S.E.) number of male flies on each patch")+
   theme_minimal()
 
 #------- Using patchwork to combine the two parts of data 
@@ -192,7 +195,7 @@ female_notfeedinge1_plot <- female_notfeedinge1_summary %>%
               width = 0.2,
               shape = 21)+
   labs(x = "Plate", 
-       y = "Mean (+/- S.E.) flies per plate not on a plate")+
+       y = "Mean (+/- S.E.) number of female flies per plate not on a patch")+
   theme_minimal()
 #----------------- Data for male flies not feeding (exp 1)
 #------ Reading the data in 
@@ -225,7 +228,7 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
               width = 0.2,
               shape = 21)+
   labs(x = "Plate", 
-       y = "")+
+       y = "Mean (+/- S.E.) number of female flies per plate not on a patch")+
   theme_minimal()
 
 #------ Using patchwork to combine the male and female plots ------------# 
