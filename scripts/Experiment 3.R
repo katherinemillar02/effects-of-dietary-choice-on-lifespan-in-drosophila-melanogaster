@@ -2,32 +2,42 @@
 
 #-----------------  Feeding behaviour analysis 
 
-#----------------- FEMALE FEEDING BEHAVIOUR (Days 1 & 2)
+#----------------- FEMALE FEEDING BEHAVIOUR (Days 1 & 2)------------------------
 #----------- Females alone on a plate 
-#---------Reading the data in 
 #-------Day 1
+#---------Reading the data in 
 mated_femalese3d1 <- (read_excel(path = "data/MatedFemalesE3D1.xlsx", na = "NA"))
 #-- Making data "long"
 long_mated_femalese3d1 <- mated_femalese3d1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 #-------Day 2 
+#---------Reading the data in 
 mated_femalese3d2 <- (read_excel(path = "data/MatedFemalesE3D2.xlsx", na = "NA"))
+#-- Making data "long"
 long_mated_femalese3d2 <- mated_femalese3d2 %>% 
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-# -------------------- Collating days 
-#------- Just females 
-exp3females1 <- long_mated_femalese3d1 %>% mutate(status = "females") %>% mutate(day = "1")
-exp3females2 <- long_mated_femalese3d2 %>% mutate(status = "females") %>% mutate(day = "2")
+# data without fly proportion variable
+exp3females01 <- long_mated_femalese3d1 %>% mutate(status = "females") %>% mutate(day = "1")
+exp3females02 <- long_mated_femalese3d2 %>% mutate(status = "females") %>% mutate(day = "2")
+exp3females0all <- rbind(exp3females01, exp3females02)
+# mutating variables 
+exp3females1 <- long_mated_femalese3d1 %>% mutate(status = "females") %>% mutate(day = "1") %>% mutate(fly_prop = if_else(status =="females", 
+                                                                                                                      fly_numbers/10,
+                                                                                                                      fly_numbers/5))
+exp3females2 <- long_mated_femalese3d2 %>% mutate(status = "females") %>% mutate(day = "2")  %>% mutate(fly_prop = if_else(status =="females", 
+                                                                                                                           fly_numbers/10,
+                                                                                                                           fly_numbers/5))
 #-------Binding days 1 and 2 
 exp3femalesall <- rbind(exp3females1, exp3females2)
+
 #----------------- Making data "long"
 #long_exp3femalesall <- exp3femalesall %>% 
 #pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 #----------------- Summarising the data 
 exp3femalesall_summary <- exp3femalesall %>%  
   group_by(diet) %>% 
-  summarise(mean = mean(fly_numbers),
-            sd = sd(fly_numbers),
+  summarise(mean = mean(fly_prop),
+            sd = sd(fly_prop),
             n = n(),
             se = sd/sqrt(n))
 #----------------- Visualising the data 
@@ -35,42 +45,63 @@ exp3femalesall_plot <- exp3femalesall_summary%>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "red",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "red",
                 width = 0.2)+
   geom_jitter(data = exp3femalesall,
               aes(x = diet,
-                  y = fly_numbers),
+                  y = fly_prop),
               fill = "skyblue",
               colour = "black",
               width = 0.2,
               shape = 21)+
-  ylim(0,6)+ 
+  ylim(0,1)+ 
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
+#--------------- ---------------------------------------------------------------
+
+
+
 #--------------- Females on a plate with males 
+#----- Day 1 
 #-------- Reading the data in 
-mated_femalese3d2 <- (read_excel(path = "data/MatedFemalesE3D2.xlsx", na = "NA"))
+bothplate_e3d1 <- (read_excel(path = "data/MatedFemalesE3D1(M+F).xlsx", na = "NA"))
 #---- Making the data long
-long_mated_femalese3d2 <- mated_femalese3d2 %>% 
+long_bothplate_e3d1 <- bothplate_e3d1 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+#----- Day 2 
+#-------- Reading the data in
+bothplate_e3d2 <- (read_excel(path = "data/MatedFemalesE3D2(M+F).xlsx", na = "NA"))
+#---- Making the data long
+long_bothplate_e3d2 <- bothplate_e3d2 %>% 
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 #------ Combining the days 
+#------  Data without fly proportion variable 
+exp3both01 <- long_bothplate_e3d1 %>% mutate(status = "both") %>% mutate(day = "1")
+exp3both02 <- long_bothplate_e3d2 %>% mutate(status = "both") %>% mutate(day = "2")
+exp3both0all <- rbind(exp3both01, exp3both02)
+
 #-- Mutating a status variable and a day variable 
-exp3both1 <- long_females_mf_e3_d1 %>% mutate(status = "both") %>% mutate(day = "1")
-exp3both2 <- long_females_mf_e3_d2 %>% mutate(status = "both") %>% mutate(day = "2")
+exp3both1 <- long_bothplate_e3d1 %>% mutate(status = "both") %>% mutate(day = "1")%>% mutate(fly_prop = if_else(status =="females", 
+                                                                                                                  fly_numbers/10,
+                                                                                                                  fly_numbers/5))
+exp3both2 <- long_bothplate_e3d2 %>% mutate(status = "both") %>% mutate(day = "2") %>% mutate(fly_prop = if_else(status =="females", 
+                                                                                                                   fly_numbers/10,
+                                                                                                                   fly_numbers/5))
 #----- Binding days 1 and 2 
 exp3bothall <- rbind(exp3both1, exp3both2)
+
 #----------------- Making data "long"
 #long_exp3bothall <- exp3bothall %>% 
 #pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 #----- Summarising the data 
 exp3bothall_summary <- exp3bothall %>% 
   group_by(diet) %>% 
-  summarise(mean = mean(fly_numbers),
-            sd = sd(fly_numbers),
+  summarise(mean = mean(fly_prop),
+            sd = sd(fly_prop),
             n = n(),
             se = sd/sqrt(n))
 #----- Visualising the data 
@@ -78,52 +109,60 @@ exp3both_plot <- exp3bothall_summary%>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "purple",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "purple",
                 width = 0.2)+
   geom_jitter(data = exp3bothall,
               aes(x = diet,
-                  y = fly_numbers),
+                  y = fly_prop),
               fill = "skyblue",
               colour = "black",
               width = 0.2,
               shape = 21)+
-  ylim(0,6)+ 
+  ylim(0,1)+ 
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of flies")+
   theme_minimal()
 
+#-------------------------------------------------------------------------------
 exp3femalesall_plot + exp3both_plot
-
 #---------------------------
 #--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 ----------------#
+
+exp3all01 <- rbind(exp3both01, exp3females01)
+
 # Binding the combined days data of alone on a plate and with males on a plate
 exp3all <- rbind(exp3femalesall, exp3bothall)
 # Adding a fly proportion variable 
-exp3allz <- exp3all %>% mutate(fly_prop = if_else(status =="females", 
-                                                 fly_numbers/10,
-                                                 fly_numbers/5))
+#  exp3allz <- exp3all %>% mutate(fly_prop = if_else(status =="females", 
+#   fly_numbers/10,
+#   fly_numbers/5))
 # linear model with interaction effect
 exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3allz, family = poisson())
 # use quasi likelihood as null/df >1 quasipoisson()
+# model with fly proportions
+exp3allglm2 <- glm(fly_prop ~ diet * status + day, data = exp3all, family = quasipoisson())
+# model with original data 
+exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3all01, family = quasipoisson())
+# day is not significant
 
-exp3allglm2 <- glm(fly_prop ~ diet * status + day, data = exp3allz, family = quasipoisson())
-exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3allz, family = quasipoisson())
+exp3allglm3 <- glm(fly_prop ~ diet * status, data = exp3all, family = quasipoisson())
 
-
+# Checking the data 
 performance::check_model(exp3allglm)
-
+performance::check_model(exp3allglm2)
+# Using the summary functionn
+summary(exp3allglm)
 summary(exp3allglm2)
-
-
+summary(exp3allglm3)
 # information summary
-broom::tidy(exp3allls)
+broom::tidy(exp3allglm3)
 # information about the model but irrelevant 
-broom::glance(exp3allls)
+broom::glance(exp3allglm3)
 # inividual observations 
-broom::augment(exp3allls)
+broom::augment(exp3allglm3)
 
 #--------------------------------------------------------------------------------------
 

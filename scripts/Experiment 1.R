@@ -13,6 +13,7 @@ library(knitr)
 library(emmeans)
 library(here)
 library(sjPlot)
+library(gtsummary)
 #_________________________________ Experiment 1 _____________________________# 
 #__________ Egg counting
 #____ Reading the data in 

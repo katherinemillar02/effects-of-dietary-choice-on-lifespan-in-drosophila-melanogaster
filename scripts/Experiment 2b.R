@@ -6,13 +6,13 @@ mated_females_e2bd1 <- (read_excel(path = "data/MatedFemalesE2bD1.xlsx", na = "N
 #----- Making the data long 
 long_mated_females_e2bd1 <- mated_females_e2bd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-#--------- Day 2 
+#---------Day 2 
 #---------- Reading the data in 
 mated_females_e2bd2 <- (read_excel(path = "data/MatedFemalesE2bD2.xlsx", na = "NA"))
 #----- Making the data long 
 long_mated_females_e2bd2 <- mated_females_e2bd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-#--------- Mutating a variable 
+#--------- Mutating variables
 exp2bmated1 <- long_mated_females_e2bd1 %>% mutate(variable = "mated") %>% mutate(day = "1")
 exp2bmated2 <- long_mated_females_e2bd2 %>% mutate(variable = "mated") %>% mutate(day = "2")
 #----- Binding mated days 1 - 2 
@@ -29,10 +29,10 @@ exp2bmatedall_plot <- exp2bmatedall_summary %>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "red",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "red",
                 width = 0.2)+
   geom_jitter(data = exp2bmatedall,
               aes(x = diet,
@@ -43,9 +43,9 @@ exp2bmatedall_plot <- exp2bmatedall_summary %>%
               shape = 21)+
   ylim(0,6)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+       y = "Mean (+/- S.E.) number of mated female flies")+
   theme_minimal()
-#-----------------------  Virgin Females
+#----------------------------- Virgin Females
 #--------- Day 1 
 #---------- Reading the data in 
 virgin_females_e2bd1 <- (read_excel(path = "data/VirginFemalesE2bD1.xlsx", na = "NA"))
@@ -58,7 +58,7 @@ virgin_females_e2bd2 <- (read_excel(path = "data/VirginFemalesE2bD2.xlsx", na = 
 #----- Making the data long 
 long_virgin_females_e2bd2 <- virgin_females_e2bd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-#------ Mutating a variable 
+#------ Mutating variables 
 exp2bvirgin1 <- long_virgin_females_e2bd1 %>% mutate(variable = "virgin") %>% mutate(day = "1")
 exp2bvirgin2 <- long_virgin_females_e2bd2 %>% mutate(variable = "virgin") %>% mutate(day = "2")
 #------- Binding virgin days 1 - 2 
@@ -75,10 +75,10 @@ exp2bvirginall_plot <- exp2bvirginall_summary %>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "orange",
+           colour = "#eb34c3",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
+                colour = "#eb34c3",
                 width = 0.2)+
   geom_jitter(data = exp2bvirginall,
               aes(x = diet,
@@ -89,24 +89,28 @@ exp2bvirginall_plot <- exp2bvirginall_summary %>%
               shape = 21)+
   ylim(0,6)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+       y = "Mean (+/- S.E.) number of virgin female flies")+
   theme_minimal()
-
+#------------------ Using patchwork to combine the plots -----------------------
 exp2bmatedall_plot + exp2bvirginall_plot
+#-------------------------------------------------------------------------------
+
+#------------------------------ Offspring counts -------------------------------
 
 
-#--------------------------- Overall data analysis for experiment 2b---------- 
+
+#------------------ Overall data analysis for experiment 2b--------------------#
 
 #-- Binding mated and virgin days 1 - 2 
 exp2ball <- rbind(exp2bmatedall, exp2bvirginall)
-# linear model 
-exp2bbothls1 <- lm(fly_numbers ~ diet + variable + day, data = exp2ball)
+# linear model without interaction effect 
+exp2blm0 <- lm(fly_numbers ~ diet + variable + day, data = exp2ball)
 # Checking the model 
-performance::check_model(exp2bbothls1)
+performance::check_model(exp2blm0)
 # linear model with interaction effect
-exp2bbothls1a <- lm(fly_numbers ~ diet * variable + day, data = exp2ball)
+exp2blm <- lm(fly_numbers ~ diet * variable + day, data = exp2ball)
 # Checking the model 
-performance::check_model(exp2bbothls1a)
+performance::check_model(exp2blm)
 # trying glm with poisson
 exp2bglm <- glm(fly_numbers ~ diet * variable + day, 
                 data = exp2ball, family = poisson(link = "log"))
@@ -114,38 +118,28 @@ exp2bglm <- glm(fly_numbers ~ diet * variable + day,
 exp2bglm <- glm(fly_numbers ~ diet * variable + day,
                 data = exp2ball, family = quasipoisson(link = "log"))
 
-# Not much changes?? between the two 
-
 # Checking the model
 performance::check_model(exp2bglm)
 # 
-summary(exp2bbothls1a)
 summary(exp2bglm)
-
 # can drop day as is not significant
-
-exp2bglm <- glm(fly_numbers ~ diet * variable,
+exp2bglm2 <- glm(fly_numbers ~ diet * variable,
                 data = exp2ball, family = quasipoisson(link = "log"))
-
-
-
-broom::tidy(exp2bbothls1)
-broom::tidy(exp2bbothls1a)
-
-
+#
+performance::check_model(exp2bglm2)
+#
+summary(exp2bglm2)
+#
+broom::tidy(exp2bglm2)
+#
 emmeans::emmeans(exp2bglm, specs = pairwise ~ diet + variable + day)
-
-
-library(sjPlot)
+#
 tab_model(exp2bbothls1a)
-
-
-
+#
 tab_model(exp2bglm)
-
+#
 anova(exp2bbothls1a)
-
-library(gtsummary)
+#
 tbl_regression(exp2bbothls1a)
 
 
