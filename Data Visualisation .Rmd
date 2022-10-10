@@ -1,0 +1,103 @@
+---
+title: "Data Visualisation"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(here)
+library(tidyverse)
+library(kableExtra)
+source(here("scripts", "Experiment 1.R"))
+source(here("scripts", "Experiment 2a.R"))
+source(here("scripts", "Experiment 2b.R"))
+source(here("scripts", "Experiment 3.R"))
+```
+
+
+
+## Experiment 1
+
+### Egg counting 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+egg_counting1_plot 
+
+```
+
+#### The number of eggs laid by female flies across 4 diets
+
+### Feeding behaviour 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+exp1_femaleall_plot + exp1_maleall_plot
+
+```
+
+#### The mean average number of flies feeding on diets across 2 days, females (shown in red) and males (shown in blue)
+
+### Not feeding 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+female_notfeedinge1_plot + male_notfeedinge1_plot
+
+```
+
+#### The mean average number of flies NOT feeding on diets across 2 days, females (shown in red) and males (shown in blue)
+
+
+## Experiment 2a
+
+### Egg counting 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
+
+```
+
+#### The mean average of eggs across four diet ratios with mated females (shown in red) and virgin females (shown in purple)
+
+
+### Feeding behaviour 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+exp2matedall_plot + exp2avirginall_plot
+
+```
+
+#### The mean average number of flies feeding on diets across 3 days, mated females (shown in red) and virgin females (shown in pink)
+
+
+## Experiment 2b
+
+### Feeding behaviour 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+exp2bmatedall_plot + exp2bvirginall_plot
+
+```
+
+#### The mean average number of flies feeding on diets across 2 days, mated females (shown in red) and virgin females (shown in pink)
+
+## Experiment 3
+
+### Feeding behaviour 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+exp3femalesall_plot + exp3both_plot
+
+```
+
+#### The calculated proportional value of the mean average number of flies feeding on diets across 2 days, just mated females alone on a plate (shown in red) and mated females along with males on a plate (shown in purple)
