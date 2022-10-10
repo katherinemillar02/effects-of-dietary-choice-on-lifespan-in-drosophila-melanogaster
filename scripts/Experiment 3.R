@@ -20,7 +20,7 @@ pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 exp3females01 <- long_mated_femalese3d1 %>% mutate(status = "females") %>% mutate(day = "1")
 exp3females02 <- long_mated_femalese3d2 %>% mutate(status = "females") %>% mutate(day = "2")
 exp3females0all <- rbind(exp3females01, exp3females02)
-# mutating variables 
+# mutating status, day and proporiton variables 
 exp3females1 <- long_mated_femalese3d1 %>% mutate(status = "females") %>% mutate(day = "1") %>% mutate(fly_prop = if_else(status =="females", 
                                                                                                                       fly_numbers/10,
                                                                                                                       fly_numbers/5))
@@ -84,20 +84,20 @@ exp3both01 <- long_bothplate_e3d1 %>% mutate(status = "both") %>% mutate(day = "
 exp3both02 <- long_bothplate_e3d2 %>% mutate(status = "both") %>% mutate(day = "2")
 exp3both0all <- rbind(exp3both01, exp3both02)
 
-#-- Mutating a status variable and a day variable 
+#------------------------------- Mutating a status variable and a day variable 
 exp3both1 <- long_bothplate_e3d1 %>% mutate(status = "both") %>% mutate(day = "1")%>% mutate(fly_prop = if_else(status =="females", 
                                                                                                                   fly_numbers/10,
                                                                                                                   fly_numbers/5))
 exp3both2 <- long_bothplate_e3d2 %>% mutate(status = "both") %>% mutate(day = "2") %>% mutate(fly_prop = if_else(status =="females", 
                                                                                                                    fly_numbers/10,
                                                                                                                    fly_numbers/5))
-#----- Binding days 1 and 2 
+#----- Binding days 1 and 2 --------------------
 exp3bothall <- rbind(exp3both1, exp3both2)
 
 #----------------- Making data "long"
 #long_exp3bothall <- exp3bothall %>% 
 #pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-#----- Summarising the data 
+#----- Summarising the data ------------------------------------- 
 exp3bothall_summary <- exp3bothall %>% 
   group_by(diet) %>% 
   summarise(mean = mean(fly_prop),
@@ -131,7 +131,7 @@ exp3femalesall_plot + exp3both_plot
 #---------------------------
 #--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 ----------------#
 
-exp3all01 <- rbind(exp3both01, exp3females01)
+exp3all01 <- rbind(exp3both0all, exp3females01)
 
 # Binding the combined days data of alone on a plate and with males on a plate
 exp3all <- rbind(exp3femalesall, exp3bothall)
@@ -153,7 +153,7 @@ exp3allglm3 <- glm(fly_prop ~ diet * status, data = exp3all, family = quasipoiss
 # Checking the data 
 performance::check_model(exp3allglm)
 performance::check_model(exp3allglm2)
-# Using the summary functionn
+# Using the summary function
 summary(exp3allglm)
 summary(exp3allglm2)
 summary(exp3allglm3)
