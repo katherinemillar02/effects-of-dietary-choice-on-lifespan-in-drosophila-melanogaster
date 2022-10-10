@@ -127,12 +127,12 @@ exp3both_plot <- exp3bothall_summary%>%
   theme_minimal()
 
 #-------------------------------------------------------------------------------
+#--------------------------- Using patchwork to combine the two data plots 
 exp3femalesall_plot + exp3both_plot
 #---------------------------
-#--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 ----------------#
-
+#--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 -------------------#
+#----- binding the original data 
 exp3all01 <- rbind(exp3both0all, exp3females01)
-
 # Binding the combined days data of alone on a plate and with males on a plate
 exp3all <- rbind(exp3femalesall, exp3bothall)
 # Adding a fly proportion variable 
@@ -149,7 +149,6 @@ exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3all01, family = 
 # day is not significant
 
 exp3allglm3 <- glm(fly_prop ~ diet * status, data = exp3all, family = quasipoisson())
-
 # Checking the data 
 performance::check_model(exp3allglm)
 performance::check_model(exp3allglm2)
@@ -164,7 +163,7 @@ broom::glance(exp3allglm3)
 # inividual observations 
 broom::augment(exp3allglm3)
 
-#--------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 
 

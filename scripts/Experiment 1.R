@@ -17,7 +17,7 @@ library(gtsummary)
 #_________________________________ Experiment 1 _____________________________# 
 #__________ Egg counting
 #____ Reading the data in 
-egg_counting_data <- read_csv("data/EggCountingE1.csv", col_select = 2:5 ) %>% drop_na()
+egg_counting_data <- read_excel("data/EggCountingDataExp1.xlsx") %>% drop_na()
 #____ Making the data long 
 long_egg_counting1 <- egg_counting_data %>% 
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
@@ -161,7 +161,7 @@ exp1_femaleall_plot + exp1_maleall_plot
 #-------------------------  Analysis of flies not on a plate (experiment 1)
 #----------------- Data for female flies not feeding (exp 1)
 #------ Reading the data in 
-female_notfeedinge1 <- read_csv("data/FemaleNotFeedingE1.csv", col_select = 1:9)  %>% drop_na()
+female_notfeedinge1 <- read_excel("data/FemaleNotFeedingExp1.xlsx")  %>% drop_na()
 #------ Making the data long 
 long_female_notfeedinge1 <- female_notfeedinge1 %>% 
   pivot_longer(cols = ("1":"8"), names_to = "plate", values_to = "fnf")
@@ -194,7 +194,7 @@ female_notfeedinge1_plot <- female_notfeedinge1_summary %>%
   theme_minimal()
 #----------------- Data for male flies not feeding (exp 1)
 #------ Reading the data in 
-male_notfeedinge1 <- read_csv("data/MaleNotFeedingE1.csv", col_select = 1:9)  %>% drop_na()
+male_notfeedinge1 <- read_excel("data/MalesNotFeedingExp1.xlsx")%>% drop_na()
 #------ Making the data long 
 long_male_notfeedinge1 <- male_notfeedinge1 %>% 
   pivot_longer(cols = ("1":"8"), names_to = "plate", values_to = "mnf")

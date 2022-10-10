@@ -197,7 +197,7 @@ performance::check_model(exp2a_egg_lm)
 
 summary(exp2a_egg_lm)
 
-virgin_females_e2_eggcount <- (read_excel(path = "~/Documents/drosophilaresearchproject/data/VirginEggCountE2a.xlsx", na = "NA"))
+virgin_females_e2_eggcount <- (read_excel(path = "data/VirginEggCountE2a.xlsx", na = "NA"))
 long_virgin_females_e2_eggcount <- virgin_females_e2_eggcount %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
 
@@ -207,7 +207,7 @@ long_virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>%
             sd = sd(egg_numbers),
             n = n(),
             se = sd/sqrt(n))
-#------------------------ OVERALL DATA ANALYSIS FOR EXPERIMENT 2 FEEDING BEHAVIOUR --------------
+#--------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 2 FEEDING BEHAVIOUR --------------
 # Binding mated and virgin days 1 - 3 
 exp2all <- rbind(exp2matedall, exp2virginall)
 # making a linear model 
