@@ -17,7 +17,9 @@ library(gtsummary)
 #_________________________________ Experiment 1 _____________________________# 
 #__________ Egg counting
 #____ Reading the data in 
-egg_counting_data <- read_excel("data/EggCountingDataExp1.xlsx") %>% drop_na()
+
+egg_counting_data <- (read_excel(path = "data/EggCountingDataExp1.xlsx", na = "NA"))
+
 #____ Making the data long 
 long_egg_counting1 <- egg_counting_data %>% 
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
@@ -257,12 +259,12 @@ broom::tidy(exp1alllm)
 # forming a table 
 tab_model(exp1alllm)
 # variance against predicted residuals, residuals are almost at 0? 
-plot(exp1alllm, which=c(1,3))
+#plot(exp1alllm, which=c(1,3))
 # testing for significance of interaction effect
 drop1(exp1alllm, test = "F")
 # do not use for interaction model?? - doesnt run 
-meansf <- emmeans::emmeans(exp1femaleall, specs = ~ diet)
-meansm <- emmeans::emmeans(exp1maleall, specs = ~ diet)
+#meansf <- emmeans::emmeans(exp1femaleall, specs = ~ diet)
+#meansm <- emmeans::emmeans(exp1maleall, specs = ~ diet)
 
 
 

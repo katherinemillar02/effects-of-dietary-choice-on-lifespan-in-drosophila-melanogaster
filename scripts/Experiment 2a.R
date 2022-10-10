@@ -2,7 +2,7 @@
 #--------------------- Mated Females  
 #------  Day 1 
 #--- Reading the data in 
-mated_femalesd1 <- read_csv("data/MatedFemalesE2aD1.csv")  %>% drop_na()
+mated_femalesd1 <- read_excel("data/MatedFemalesE2aD1.xlsx")  %>% drop_na()
 #------------- Making the data long 
 long_mated_femalesd1 <- mated_femalesd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
@@ -55,7 +55,7 @@ exp2matedall_plot <- exp2matedall_summary %>%
 #------------------------------------------------------- Virgin Females  
 #------  Day 1 
 #--- Reading the data in 
-virgin_femalesd1 <- read_csv("data/VirginFemalesE2aD1.csv", col_select = 1:6) %>% drop_na()
+virgin_femalesd1 <- read_excel("data/VirginFemalesE2aD1.xlsx") %>% drop_na()
 #---------- Making the data long 
 long_virgin_femalesd1 <- virgin_femalesd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
@@ -78,14 +78,14 @@ exp2avirgin3 <- long_virgin_femalesd3 %>% mutate(variable = "virgin") %>% mutate
 #------ Binding virgin days 1 - 3 
 exp2avirginall <- rbind(exp2avirgin1, exp2avirgin2, exp2avirgin3)
 #------ Summarising the data 
-exp2virginall_summary <- exp2virginall %>%  
+exp2avirginall_summary <- exp2avirginall %>%  
   group_by(diet) %>% 
   summarise(mean = mean(fly_numbers),
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
 #------ Visualising the data 
-exp2virginall_plot <- exp2virginall_summary %>% 
+exp2avirginall_plot <- exp2avirginall_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
@@ -94,7 +94,7 @@ exp2virginall_plot <- exp2virginall_summary %>%
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
                 colour = "#eb34c3",
                 width = 0.2)+
-  geom_jitter(data = exp2virginall,
+  geom_jitter(data = exp2avirginall,
               aes(x = diet,
                   y = fly_numbers),
               fill = "skyblue",
@@ -107,7 +107,7 @@ exp2virginall_plot <- exp2virginall_summary %>%
   theme_minimal()
 #------- Using patchwork to combine the two parts of data --------
 
-exp2matedall_plot + exp2virginall_plot
+exp2matedall_plot + exp2avirginall_plot
 
 #------ Egg counting data -----------------------------------------------------#
 # Mated egg count 
@@ -153,14 +153,14 @@ virgin_females_e2_eggcount <- (read_excel(path = "data/VirginEggCountE2a.xlsx", 
 long_virgin_females_e2_eggcount <- virgin_females_e2_eggcount %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
 # Summarising the data 
-virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>% 
+virgin_females_e2_eggcount_summary <- long_virgin_females_e2_eggcount %>% 
   group_by(diet) %>% 
   summarise(mean = mean(egg_numbers),
             sd = sd(egg_numbers),
             n = n(),
             se = sd/sqrt(n))
 #-------------- Visualising the data for virgin female egg count 
-virgin_female_e2_eggcount_plot <- long_virgin_femalese2_eggcount_summary %>% 
+virgin_female_e2_eggcount_plot <- virgin_females_e2_eggcount_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
@@ -201,7 +201,7 @@ virgin_females_e2_eggcount <- (read_excel(path = "data/VirginEggCountE2a.xlsx", 
 long_virgin_females_e2_eggcount <- virgin_females_e2_eggcount %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
 
-long_virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>% 
+long_virgin_females_e2_eggcount_summary <- long_virgin_females_e2_eggcount %>% 
   group_by(diet) %>% 
   summarise(mean = mean(egg_numbers),
             sd = sd(egg_numbers),
@@ -209,7 +209,7 @@ long_virgin_femalese2_eggcount_summary <- long_virgin_females_e2_eggcount %>%
             se = sd/sqrt(n))
 #--------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 2 FEEDING BEHAVIOUR --------------
 # Binding mated and virgin days 1 - 3 
-exp2all <- rbind(exp2matedall, exp2virginall)
+exp2all <- rbind(exp2matedall, exp2avirginall)
 # making a linear model 
 exp2a_all_lm <- lm(fly_numbers ~ diet + variable + day, data = exp2all)
 # Checking the data 

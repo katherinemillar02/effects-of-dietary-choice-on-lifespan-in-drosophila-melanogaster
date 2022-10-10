@@ -140,7 +140,7 @@ exp3all <- rbind(exp3femalesall, exp3bothall)
 #   fly_numbers/10,
 #   fly_numbers/5))
 # linear model with interaction effect
-exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3allz, family = poisson())
+exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3all, family = poisson())
 # use quasi likelihood as null/df >1 quasipoisson()
 # model with fly proportions
 exp3allglm2 <- glm(fly_prop ~ diet * status + day, data = exp3all, family = quasipoisson())

@@ -134,13 +134,13 @@ broom::tidy(exp2bglm2)
 #
 emmeans::emmeans(exp2bglm, specs = pairwise ~ diet + variable + day)
 #
-tab_model(exp2bbothls1a)
+tab_model(exp2bglm2)
 #
 tab_model(exp2bglm)
 #
-anova(exp2bbothls1a)
+anova(exp2bglm2)
 #
-tbl_regression(exp2bbothls1a)
+tbl_regression(exp2bglm2)
 
 
 
