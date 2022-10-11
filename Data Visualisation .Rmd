@@ -41,7 +41,7 @@ exp1_femaleall_plot + exp1_maleall_plot
 
 ```
 
-#### The mean average number of flies feeding on diets across 2 days, females (shown in red) and males (shown in blue)
+#### The mean average number of flies feeding on diets across 2 days, females (shown in red) and males (shown in green)
 
 ### Not feeding 
 
@@ -51,7 +51,7 @@ female_notfeedinge1_plot + male_notfeedinge1_plot
 
 ```
 
-#### The mean average number of flies NOT feeding on diets across 2 days, females (shown in red) and males (shown in blue)
+#### The mean average number of flies NOT feeding on diets across 2 days, females (shown in red) and males (shown in green)
 
 
 ## Experiment 2a
