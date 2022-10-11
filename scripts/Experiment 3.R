@@ -59,7 +59,7 @@ exp3femalesall_plot <- exp3femalesall_summary%>%
               shape = 21)+
   ylim(0,1)+ 
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+       y = "Mean (+/- S.E.) female flies/patch on a plate alone")+
   theme_minimal()
 #--------------- ---------------------------------------------------------------
 
@@ -123,7 +123,7 @@ exp3both_plot <- exp3bothall_summary%>%
               shape = 21)+
   ylim(0,1)+ 
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies")+
+       y = "Mean (+/- S.E.) female flies/patch on a plate with males")+
   theme_minimal()
 
 #-------------------------------------------------------------------------------

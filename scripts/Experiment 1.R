@@ -195,7 +195,7 @@ female_notfeedinge1_plot <- female_notfeedinge1_summary %>%
               width = 0.2,
               shape = 21)+
   labs(x = "Plate", 
-       y = "Mean (+/- S.E.) number of female flies per plate not on a patch")+
+       y = "Mean (+/- S.E.) number of female flies/plate not on a patch")+
   theme_minimal()
 #----------------- Data for male flies not feeding (exp 1)
 #------ Reading the data in 
@@ -228,7 +228,7 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
               width = 0.2,
               shape = 21)+
   labs(x = "Plate", 
-       y = "Mean (+/- S.E.) number of female flies per plate not on a patch")+
+       y = "Mean (+/- S.E.) number of male flies/plate not on a patch")+
   theme_minimal()
 
 #------ Using patchwork to combine the male and female plots ------------# 
@@ -247,8 +247,11 @@ performance::check_model(exp1allglm)
 # using summary function to look at values 
 summary(exp1allglm)
 
+#  day is only just significant 
 
+tab_model(exp1allglm)
 
+# what is incidence rate ratios vs. estimates? 
 
 # trying normal linear model 
 exp1alllm <- lm(fly_numbers ~ diet * sex + day, data = exp1all) # lm looks better
