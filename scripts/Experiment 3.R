@@ -131,6 +131,9 @@ exp3both_plot <- exp3bothall_summary%>%
 exp3femalesall_plot + exp3both_plot
 #---------------------------
 #--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 -------------------#
+# fly_numbers: number of flies on a flies on a food patch
+# status: whether or not there were just females on a plate or females with males
+# diet: one of the four P:C ratios 
 
 
 #----- binding the original data (WITHOUT proportions)

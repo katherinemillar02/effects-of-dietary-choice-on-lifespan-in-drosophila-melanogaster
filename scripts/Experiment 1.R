@@ -245,6 +245,11 @@ female_notfeedinge1_plot + male_notfeedinge1_plot
 
 
 #---------------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ----------------------#
+# fly_numbers: number of flies on a flies on a food patch
+# sex: whether the fly is male or female 
+# diet: one of the four P:C ratios 
+
+
 # Binding the combined days data of males and females 
 exp1all <- rbind(exp1femaleall, exp1maleall) 
 # viewing the whole data set 
