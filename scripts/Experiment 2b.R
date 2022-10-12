@@ -1,50 +1,28 @@
 #------------------------------Experiment 2b----------------------------------------#
-#---------- Offspring counting 
+#---------- Offspring counting -------------------------
+#------- Data not ready yet 
+#offspringcount_e2b <- (read_excel(path = "data/OffspringCountExp2b.xlsx", na = "NA"))
 
-offspringcount_e2b <- (read_excel(path = "data/OffspringCountExp2b.xlsx", na = "NA"))
+#long_offspringcount_e2b <- offspringcount_e2b %>% 
+# pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
 
-long_offspringcount_e2b <- offspringcount_e2b %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
+#offspringcount_e2b_summary <- long_offspringcount_e2b %>%
+#group_by(diet) %>% 
+#summarise(mean = mean(egg_numbers),
+#          sd = sd(egg_numbers),
+#          n = n(),
+#          se = sd/sqrt(n))
+#-------------------------------------------------------------------------------
 
-offspringcount_e2b_summary <- long_offspringcount_e2b %>%
-  group_by(diet) %>% 
-  summarise(mean = mean(egg_numbers),
-            sd = sd(egg_numbers),
-            n = n(),
-            se = sd/sqrt(n))
-#---------- 
-
-offspringcount_e2b_plot <- offspringcount_e2b_summary %>% 
-  ggplot(aes(x = diet, y = mean))+
-  geom_bar(stat = "identity",
-           fill = "skyblue",
-           colour = "orange",
-           alpha = 0.6)+
-  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "orange",
-                width = 0.2)+
-  geom_jitter(data = long_offspringcount_e2b,
-              aes(x = diet,
-                  y = egg_numbers),
-              fill = "skyblue",
-              colour = "black",
-              width = 0.2,
-              shape = 21)+
-  ylim(0,6)+
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of mated female flies")+
-  theme_minimal()
-
-
-
-
+# FEEDING BEHAVIOUR ------------------------------------------------------------
 #-----------------------  Mated Females
 #--------- Day 1 
 #---------- Reading the data in 
 mated_females_e2bd1 <- (read_excel(path = "data/MatedFemalesE2bD1.xlsx", na = "NA"))
 #----- Making the data long 
 long_mated_females_e2bd1 <- mated_females_e2bd1 %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")#---------Day 2 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+#---------Day 2 
 #---------- Reading the data in 
 mated_females_e2bd2 <- (read_excel(path = "data/MatedFemalesE2bD2.xlsx", na = "NA"))
 #----- Making the data long 
@@ -83,7 +61,8 @@ exp2bmatedall_plot <- exp2bmatedall_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of mated female flies")+
   theme_minimal()
-#----------------------------- Virgin Females
+#--------------------------------------------------------------------------------
+#----------------------- Virgin Females
 #--------- Day 1 
 #---------- Reading the data in 
 virgin_females_e2bd1 <- (read_excel(path = "data/VirginFemalesE2bD1.xlsx", na = "NA"))
@@ -134,6 +113,10 @@ exp2bmatedall_plot + exp2bvirginall_plot
 #-------------------------------------------------------------------------------
 
 #------------------------------ Offspring counts -------------------------------
+#--- Data not ready yet 
+#-------------------------------------------------------------------------------
+
+
 
 
 
@@ -157,7 +140,7 @@ performance::check_model(exp2blm)
 exp2bglm <- glm(fly_numbers ~ diet * variable + day, 
                 data = exp2ball, family = poisson(link = "log"))
 
-# trying glm with quasi poisson as is overdispersion 
+# trying glm with quasi poisson as there is overdispersion 
 exp2bglm <- glm(fly_numbers ~ diet * variable + day,
                 data = exp2ball, family = quasipoisson(link = "log"))
 # Checking the model

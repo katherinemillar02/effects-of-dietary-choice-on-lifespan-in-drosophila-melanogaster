@@ -20,9 +20,7 @@ tinytex::install_tinytex()
 #_________________________________ Experiment 1 _____________________________# 
 #__________ Egg counting
 #____ Reading the data in 
-
 egg_counting_data <- (read_excel(path = "data/EggCountingDataExp1.xlsx", na = "NA"))
-
 #____ Making the data long 
 long_egg_counting1 <- egg_counting_data %>% 
 pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
@@ -59,14 +57,18 @@ egg_counting1_plot <- egg_counting1_summary %>%
 eggcountingls1 <- lm(egg_numbers ~ diet, data = long_egg_counting1)
 #---- Checking the model 
 performance::check_model(eggcountingls1)
-#----
+#---- summarising the data 
 summary(eggcountingls1)
+#----  doing tests 
 anova(eggcountingls1) 
 confint(eggcountingls1)
 broom::tidy(eggcountingls1,  
             exponentiate=T, 
             conf.int=T)
-#---------------- Female feeding behaviour -----------------------------
+
+
+#- ------ FEEDING BEHAHAVIOUR ------------------------------
+#---------------- Female feeding behaviour -----------------------------------
 #----- Day 1 
 #-------- Reading the data in
 female_feedingd1 <- read_excel("data/MatedFemalesE1D1.xlsx")
@@ -112,6 +114,7 @@ exp1_femaleall_plot <- exp1femaleall_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of female flies on each patch")+
   theme_minimal()
+#-------------------------------------------------------------------------------
 #--------------------------- Male feeding behaviour
 #----------------- Day 1 
 #------ Reading the data in 
@@ -158,12 +161,11 @@ exp1_maleall_plot <- exp1maleall_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of male flies on each patch")+
   theme_minimal()
-
 #------- Using patchwork to combine the two parts of data 
 
 exp1_femaleall_plot + exp1_maleall_plot
 
-#-------------------------  Analysis of flies not on a plate (experiment 1)
+#------------------------------- Analysis of flies not on a plate (experiment 1)
 #----------------- Data for female flies not feeding (exp 1)
 #------ Reading the data in 
 female_notfeedinge1 <- read_excel("data/FemaleNotFeedingExp1.xlsx")  %>% drop_na()
@@ -231,22 +233,29 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
        y = "Mean (+/- S.E.) number of male flies/plate not on a patch")+
   theme_minimal()
 
-#------ Using patchwork to combine the male and female plots ------------------# 
+#------------ Using patchwork to combine the male and female plots ------------# 
 
 female_notfeedinge1_plot + male_notfeedinge1_plot
+
+#-------------------------------------------------------------------------------
+
+
+
+
+
 
 #---------------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ----------------------#
 # Binding the combined days data of males and females 
 exp1all <- rbind(exp1femaleall, exp1maleall) 
 # viewing the whole data set 
 GGally::ggpairs(exp1all)
+
 #  glm with interaction effect of experiment 1 
 exp1allglm <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = quasipoisson())
 # Checking the model 
 performance::check_model(exp1allglm)
 # using summary function to look at values 
 summary(exp1allglm)
-
 # testing for significance of day
 drop1(exp1alllm, test = "F")
 #  day is only just significant  but keep anyway?? 
@@ -257,9 +266,8 @@ tab_model(exp1allglm)
 
 # trying normal linear model 
 exp1alllm <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
-
 # Checking the model 
-# lm looks better from patchwork 
+# lm looks better from patchwork but do glm anyway 
 performance::check_model(exp1alllm)
 # using summary function to look at values 
 summary(exp1alllm)
