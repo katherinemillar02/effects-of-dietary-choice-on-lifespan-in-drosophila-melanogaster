@@ -80,6 +80,9 @@ exp2matedall_plot + exp2avirginall_plot
 
 ## Experiment 2b
 
+## Offspring count 
+# -- 
+
 ### Feeding behaviour 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -91,6 +94,9 @@ exp2bmatedall_plot + exp2bvirginall_plot
 #### The mean average number of flies feeding on diets across 2 days, mated females (shown in red) and virgin females (shown in pink)
 
 ## Experiment 3
+
+## Offspring count 
+# -- 
 
 ### Feeding behaviour 
 
