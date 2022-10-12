@@ -121,7 +121,7 @@ exp2bmatedall_plot + exp2bvirginall_plot
 
 
 #------------------ Overall data analysis for experiment 2b--------------------#
-# fly_numbers: number of flies on a flies on a food patch
+# fly_numbers: number of flies on a flies on a food patch 
 # variable: whether or not the female fly is mated or a virgin 
 # diet: one of the four P:C ratios 
 
