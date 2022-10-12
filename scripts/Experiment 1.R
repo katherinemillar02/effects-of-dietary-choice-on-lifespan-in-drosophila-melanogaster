@@ -61,7 +61,7 @@ eggcountingls1 <- lm(egg_numbers ~ diet, data = long_egg_counting1)
 performance::check_model(eggcountingls1)
 #----
 summary(eggcountingls1)
-anova(eggcountingls1)
+anova(eggcountingls1) 
 confint(eggcountingls1)
 broom::tidy(eggcountingls1,  
             exponentiate=T, 
@@ -254,7 +254,9 @@ tab_model(exp1allglm)
 # what is incidence rate ratios vs. estimates? 
 
 # trying normal linear model 
-exp1alllm <- lm(fly_numbers ~ diet * sex + day, data = exp1all) # lm looks better
+exp1alllm <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
+
+# lm looks better
 # Checking the model 
 performance::check_model(exp1alllm)
 # using summary function to look at values 
@@ -268,9 +270,17 @@ tab_model(exp1alllm)
 #plot(exp1alllm, which=c(1,3))
 # testing for significance of interaction effect
 drop1(exp1alllm, test = "F")
+
+
+
+
+
 # do not use for interaction model?? - doesnt run 
 #meansf <- emmeans::emmeans(exp1femaleall, specs = ~ diet)
 #meansm <- emmeans::emmeans(exp1maleall, specs = ~ diet)
+
+
+
 
 
 

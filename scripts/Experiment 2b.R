@@ -1,4 +1,43 @@
 #------------------------------Experiment 2b----------------------------------------#
+#---------- Offspring counting 
+
+offspringcount_e2b <- (read_excel(path = "data/OffspringCountExp2b.xlsx", na = "NA"))
+
+long_offspringcount_e2b <- offspringcount_e2b %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
+
+offspringcount_e2b_summary <- long_offspringcount_e2b %>%
+  group_by(diet) %>% 
+  summarise(mean = mean(egg_numbers),
+            sd = sd(egg_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+#---------- 
+
+offspringcount_e2b_plot <- offspringcount_e2b_summary %>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "orange",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "orange",
+                width = 0.2)+
+  geom_jitter(data = long_offspringcount_e2b,
+              aes(x = diet,
+                  y = egg_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,6)+
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) number of mated female flies")+
+  theme_minimal()
+
+
+
+
 #-----------------------  Mated Females
 #--------- Day 1 
 #---------- Reading the data in 
