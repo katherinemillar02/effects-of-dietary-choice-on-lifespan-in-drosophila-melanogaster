@@ -131,8 +131,17 @@ exp3both_plot <- exp3bothall_summary%>%
 exp3femalesall_plot + exp3both_plot
 #---------------------------
 #--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 -------------------#
-#----- binding the original data 
+
+
+#----- binding the original data (WITHOUT proportions)
 exp3all01 <- rbind(exp3both0all, exp3females01)
+# model with original data 
+exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3all01, family = quasipoisson())
+
+
+
+
+#-----  FLY PROPORTION MODEL --------- 
 # Binding the combined days data of alone on a plate and with males on a plate
 exp3all <- rbind(exp3femalesall, exp3bothall)
 # Adding a fly proportion variable 
@@ -141,27 +150,23 @@ exp3all <- rbind(exp3femalesall, exp3bothall)
 #   fly_numbers/5))
 # linear model with interaction effect
 exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3all, family = poisson())
+# summary of glm 
+summary(exp3allglm)
+# testing for significance of day 
+drop1(exp3allglm, test = "F")
+# day is dropped as not significant 
 # use quasi likelihood as null/df >1 quasipoisson()
-# model with fly proportions
-exp3allglm2 <- glm(fly_prop ~ diet * status + day, data = exp3all, family = quasipoisson())
-# model with original data 
-exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3all01, family = quasipoisson())
-# day is not significant
-
-exp3allglm3 <- glm(fly_prop ~ diet * status, data = exp3all, family = quasipoisson())
+exp3allglm2 <- glm(fly_prop ~ diet * status, data = exp3all, family = quasipoisson())
 # Checking the data 
-performance::check_model(exp3allglm)
 performance::check_model(exp3allglm2)
 # Using the summary function
-summary(exp3allglm)
 summary(exp3allglm2)
-summary(exp3allglm3)
 # information summary
-broom::tidy(exp3allglm3)
+broom::tidy(exp3allglm2)
 # information about the model but irrelevant 
-broom::glance(exp3allglm3)
+broom::glance(exp3allglm2)
 # inividual observations 
-broom::augment(exp3allglm3)
+broom::augment(exp3allglm2)
 
 #-------------------------------------------------------------------------------
 

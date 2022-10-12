@@ -231,45 +231,46 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
        y = "Mean (+/- S.E.) number of male flies/plate not on a patch")+
   theme_minimal()
 
-#------ Using patchwork to combine the male and female plots ------------# 
+#------ Using patchwork to combine the male and female plots ------------------# 
 
 female_notfeedinge1_plot + male_notfeedinge1_plot
 
-#----------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ----------------#
+#---------------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ----------------------#
 # Binding the combined days data of males and females 
 exp1all <- rbind(exp1femaleall, exp1maleall) 
 # viewing the whole data set 
 GGally::ggpairs(exp1all)
-# linear model with interaction effect of experiment 1 
+#  glm with interaction effect of experiment 1 
 exp1allglm <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = quasipoisson())
 # Checking the model 
 performance::check_model(exp1allglm)
 # using summary function to look at values 
 summary(exp1allglm)
 
-#  day is only just significant 
+# testing for significance of day
+drop1(exp1alllm, test = "F")
+#  day is only just significant  but keep anyway?? 
 
+# making a table 
 tab_model(exp1allglm)
-
 # what is incidence rate ratios vs. estimates? 
 
 # trying normal linear model 
 exp1alllm <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
 
-# lm looks better
 # Checking the model 
+# lm looks better from patchwork 
 performance::check_model(exp1alllm)
 # using summary function to look at values 
 summary(exp1alllm)
 # using broom::tidy
 broom::tidy(exp1alllm)
-# Only just significance with day for both lm and glm tests 
 # forming a table 
 tab_model(exp1alllm)
-# variance against predicted residuals, residuals are almost at 0? 
-#plot(exp1alllm, which=c(1,3))
-# testing for significance of interaction effect
-drop1(exp1alllm, test = "F")
+
+
+
+
 
 
 

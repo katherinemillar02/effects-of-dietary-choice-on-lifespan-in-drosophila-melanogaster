@@ -44,8 +44,7 @@ offspringcount_e2b_plot <- offspringcount_e2b_summary %>%
 mated_females_e2bd1 <- (read_excel(path = "data/MatedFemalesE2bD1.xlsx", na = "NA"))
 #----- Making the data long 
 long_mated_females_e2bd1 <- mated_females_e2bd1 %>% 
-  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-#---------Day 2 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")#---------Day 2 
 #---------- Reading the data in 
 mated_females_e2bd2 <- (read_excel(path = "data/MatedFemalesE2bD2.xlsx", na = "NA"))
 #----- Making the data long 
@@ -142,50 +141,62 @@ exp2bmatedall_plot + exp2bvirginall_plot
 
 #-- Binding mated and virgin days 1 - 2 
 exp2ball <- rbind(exp2bmatedall, exp2bvirginall)
+
 # linear model without interaction effect 
 exp2blm0 <- lm(fly_numbers ~ diet + variable + day, data = exp2ball)
 # Checking the model 
 performance::check_model(exp2blm0)
-# linear model with interaction effect
+
+
+# linear model WITH  interaction effect
 exp2blm <- lm(fly_numbers ~ diet * variable + day, data = exp2ball)
 # Checking the model 
 performance::check_model(exp2blm)
+
 # trying glm with poisson
 exp2bglm <- glm(fly_numbers ~ diet * variable + day, 
                 data = exp2ball, family = poisson(link = "log"))
+
 # trying glm with quasi poisson as is overdispersion 
 exp2bglm <- glm(fly_numbers ~ diet * variable + day,
                 data = exp2ball, family = quasipoisson(link = "log"))
-
 # Checking the model
 performance::check_model(exp2bglm)
-# 
+# using the summary function
 summary(exp2bglm)
+
 # can drop day as is not significant
 exp2bglm2 <- glm(fly_numbers ~ diet * variable,
                 data = exp2ball, family = quasipoisson(link = "log"))
-#
+# checking the new model 
 performance::check_model(exp2bglm2)
-#
+# using the summary function
 summary(exp2bglm2)
-#
+# using broom::tidy for another summary
 broom::tidy(exp2bglm2)
-#
-emmeans::emmeans(exp2bglm, specs = pairwise ~ diet + variable + day)
-#
+# Creating a whole comparison summary 
+emmeans::emmeans(exp2bglm2, specs = pairwise ~ diet + variable)
+# creating a table 
 tab_model(exp2bglm2)
-#
-tab_model(exp2bglm)
-#
+
+# doing an anova test 
 anova(exp2bglm2)
-#
-tbl_regression(exp2bglm2)
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+#-------------------------------------------------------------------------------
+#tbl_regression(exp2bglm2)
 #------------------------------------------------------------------------------- 
 #-------------------- IGNORE THIS HASHTAGGED OUT CODE -------------------------
 #virgin_females_e2bd2_summary <- long_virgin_females_e2bd2 %>% 
