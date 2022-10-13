@@ -1,0 +1,12 @@
+---
+title: "Experimental write-up"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+A generalised linear model was used with quasipoisson to count for overdispersion. Day was dropped from the model as there was found to be no significant effect of including day in the model (P = 0.32). 
+It was found that there was a strong significant effect in diet choice when comparing mated *drosophila melanogaster* with virgin. 
