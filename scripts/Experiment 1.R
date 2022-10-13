@@ -255,7 +255,21 @@ exp1all <- rbind(exp1femaleall, exp1maleall)
 # viewing the whole data set 
 GGally::ggpairs(exp1all)
 
-#  glm with interaction effect of experiment 1 
+# trying normal linear model 
+exp1alllm <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
+# Checking the model 
+# lm looks better from patchwork but do glm anyway 
+performance::check_model(exp1alllm)
+# using summary function to look at values 
+summary(exp1alllm)
+# using broom::tidy
+broom::tidy(exp1alllm)
+# forming a table 
+tab_model(exp1alllm)
+
+# -----------------
+
+# ---glm with interaction effect
 exp1allglm <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = quasipoisson())
 # Checking the model 
 performance::check_model(exp1allglm)
@@ -269,17 +283,6 @@ drop1(exp1alllm, test = "F")
 tab_model(exp1allglm)
 # what is incidence rate ratios vs. estimates? 
 
-# trying normal linear model 
-exp1alllm <- lm(fly_numbers ~ diet * sex + day, data = exp1all)
-# Checking the model 
-# lm looks better from patchwork but do glm anyway 
-performance::check_model(exp1alllm)
-# using summary function to look at values 
-summary(exp1alllm)
-# using broom::tidy
-broom::tidy(exp1alllm)
-# forming a table 
-tab_model(exp1alllm)
 
 
 
