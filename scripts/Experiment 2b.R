@@ -29,8 +29,8 @@ mated_females_e2bd2 <- (read_excel(path = "data/MatedFemalesE2bD2.xlsx", na = "N
 long_mated_females_e2bd2 <- mated_females_e2bd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 #--------- Mutating variables
-exp2bmated1 <- long_mated_females_e2bd1 %>% mutate(variable = "mated") %>% mutate(day = "1")
-exp2bmated2 <- long_mated_females_e2bd2 %>% mutate(variable = "mated") %>% mutate(day = "2")
+exp2bmated1 <- long_mated_females_e2bd1 %>% mutate(type = "mated") %>% mutate(day = "1")
+exp2bmated2 <- long_mated_females_e2bd2 %>% mutate(type = "mated") %>% mutate(day = "2")
 #----- Binding mated days 1 - 2 
 exp2bmatedall <- rbind(exp2bmated1, exp2bmated2)
 #----- Summarising the data 
@@ -76,8 +76,8 @@ virgin_females_e2bd2 <- (read_excel(path = "data/VirginFemalesE2bD2.xlsx", na = 
 long_virgin_females_e2bd2 <- virgin_females_e2bd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 #------ Mutating variables 
-exp2bvirgin1 <- long_virgin_females_e2bd1 %>% mutate(variable = "virgin") %>% mutate(day = "1")
-exp2bvirgin2 <- long_virgin_females_e2bd2 %>% mutate(variable = "virgin") %>% mutate(day = "2")
+exp2bvirgin1 <- long_virgin_females_e2bd1 %>% mutate(type = "virgin") %>% mutate(day = "1")
+exp2bvirgin2 <- long_virgin_females_e2bd2 %>% mutate(type = "virgin") %>% mutate(day = "2")
 #------- Binding virgin days 1 - 2 
 exp2bvirginall <- rbind(exp2bvirgin1, exp2bvirgin2)
 #----- Summarising the data 
@@ -120,31 +120,33 @@ exp2bmatedall_plot + exp2bvirginall_plot
 
 
 
+
 #------------------ Overall data analysis for experiment 2b--------------------#
 # fly_numbers: number of flies on a flies on a food patch 
-# variable: whether or not the female fly is mated or a virgin 
+# type: whether or not the female fly is mated or a virgin 
 # diet: one of the four P:C ratios 
 
 #-- Binding mated and virgin days 1 - 2 
 exp2ball <- rbind(exp2bmatedall, exp2bvirginall)
 
 # linear model without interaction effect 
-exp2blm0 <- lm(fly_numbers ~ diet + variable + day, data = exp2ball)
+exp2blm0 <- lm(fly_numbers ~ diet + type + day, data = exp2ball)
 # Checking the model 
 performance::check_model(exp2blm0)
 
+#-----------------------------------------
 
 # linear model WITH  interaction effect
-exp2blm <- lm(fly_numbers ~ diet * variable + day, data = exp2ball)
+exp2blm <- lm(fly_numbers ~ diet * type + day, data = exp2ball)
 # Checking the model 
 performance::check_model(exp2blm)
 
 # trying glm with poisson
-exp2bglm <- glm(fly_numbers ~ diet * variable + day, 
+exp2bglm <- glm(fly_numbers ~ diet * type + day, 
                 data = exp2ball, family = poisson(link = "log"))
 
 # trying glm with quasi poisson as there is overdispersion 
-exp2bglm <- glm(fly_numbers ~ diet * variable + day,
+exp2bglm <- glm(fly_numbers ~ diet * type + day,
                 data = exp2ball, family = quasipoisson(link = "log"))
 # Checking the model
 performance::check_model(exp2bglm)
@@ -153,8 +155,9 @@ summary(exp2bglm)
 broom::tidy(exp2bglm)
 
 # can drop day as is not significant
-exp2bglm2 <- glm(fly_numbers ~ diet * variable,
+exp2bglm2 <- glm(fly_numbers ~ diet * type,
                 data = exp2ball, family = quasipoisson(link = "log"))
+
 # checking the new model 
 performance::check_model(exp2bglm2)
 # using the summary function
@@ -162,7 +165,7 @@ summary(exp2bglm2)
 # using broom::tidy for another summary
 broom::tidy(exp2bglm2)
 # Creating a whole comparison summary 
-emmeans::emmeans(exp2bglm2, specs = pairwise ~ diet + variable)
+emmeans::emmeans(exp2bglm2, specs = pairwise ~ diet + type)
 # creating a table 
 tab_model(exp2bglm2)
 
