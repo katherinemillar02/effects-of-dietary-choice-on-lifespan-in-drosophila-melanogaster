@@ -209,17 +209,20 @@ long_virgin_females_e2_eggcount_summary <- long_virgin_females_e2_eggcount %>%
             se = sd/sqrt(n))
 #--------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 2 FEEDING BEHAVIOUR --------------
 # Binding mated and virgin days 1 - 3 
-exp2all <- rbind(exp2matedall, exp2avirginall)
+exp2a_all <- rbind(exp2matedall, exp2avirginall)
 # making a linear model 
-exp2a_all_lm <- lm(fly_numbers ~ diet + variable + day, data = exp2all)
+exp2a_all_lm <- lm(fly_numbers ~ diet + variable + day, data = exp2a_all)
 # Checking the data 
 performance::check_model(exp2a_all_lm)
+
+#----------
+
 # linear model with interaction effect
-exp2a_all_lm_2 <- lm(fly_numbers ~ diet * variable + day, data = exp2all)
+exp2a_all_lm_2 <- lm(fly_numbers ~ diet * variable + day, data = exp2a_all)
 # Checking the model 
 performance::check_model(exp2a_all_lm_2)
 # Using the summary function
-summary(exp2a_all_lm)
+summary(exp2a_all_lm_2)
 # Only day 3 is significant but this has changed data 
 
 # Using broom::tidy 
@@ -227,7 +230,13 @@ broom::tidy(exp2a_all_lm,
             exponentiate=T, 
             conf.int=T)
 
+#----------
+
 # trying glm 
+exp2aglm <- glm(fly_numbers ~ diet * variable + day,
+                  data = exp2a_all, family = poisson(link = "log"))
+
+summary(exp2aglm)
 
 #-------------------------------------------------------------------------------
 #long_mated_femalesd1_summary <- long_mated_femalesd1 %>% 
