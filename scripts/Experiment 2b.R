@@ -150,6 +150,7 @@ exp2bglm <- glm(fly_numbers ~ diet * variable + day,
 performance::check_model(exp2bglm)
 # using the summary function
 summary(exp2bglm)
+broom::tidy(exp2bglm)
 
 # can drop day as is not significant
 exp2bglm2 <- glm(fly_numbers ~ diet * variable,

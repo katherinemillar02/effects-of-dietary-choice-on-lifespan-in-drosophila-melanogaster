@@ -152,9 +152,9 @@ exp3all <- rbind(exp3femalesall, exp3bothall)
 #   fly_numbers/10,
 #   fly_numbers/5))
 # linear model with interaction effect
-exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3all, family = poisson())
-# summary of glm 
-summary(exp3allglm)
+exp3alllm <- lm(fly_numbers ~ diet * status + day, data = exp3all)
+# summary of lm 
+summary(exp3alllm)
 # testing for significance of day 
 drop1(exp3allglm, test = "F")
 # day is dropped as not significant 
