@@ -1,5 +1,82 @@
 #----------------------------------- Experiment 3 ----------------------------
 
+
+
+#------------------ Offspring counts 
+
+#------- Just females on a plate 
+offspring_alone_exp3 <- read_excel("data/Exp3OffspringAlone.xlsx")
+#------- Making the data long 
+long_offspring_alone_exp3 <- offspring_alone_exp3 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "offspring_numbers")
+#--- Summarising the data 
+offspring_alone_exp3_summary <- long_offspring_alone_exp3 %>%  
+  group_by(diet) %>% 
+  summarise(mean = mean(offspring_numbers),
+            sd = sd(offspring_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+#----- Visualising the data 
+offspring_alone_exp3_plot <- offspring_alone_exp3_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "red",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "red",
+                width = 0.2)+
+  geom_jitter(data = long_offspring_alone_exp3,
+              aes(x = diet,
+                  y = offspring_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,200)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) offspring from alone plates")+
+  theme_minimal()
+
+#------- Female count ( with males on a plate) 
+offspring_both_exp3 <- read_excel("data/Exp3OffspringBoth.xlsx")
+#------- Making the data long 
+long_offspring_both_exp3 <- offspring_both_exp3 %>% 
+  pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "offspring_numbers")
+#--- Summarising the data 
+offspring_both_exp3_summary <- long_offspring_both_exp3 %>%  
+  group_by(diet) %>% 
+  summarise(mean = mean(offspring_numbers),
+            sd = sd(offspring_numbers),
+            n = n(),
+            se = sd/sqrt(n))
+#----- Visualising the data 
+offspring_both_exp3_plot <- offspring_both_exp3_summary%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "red",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "red",
+                width = 0.2)+
+  geom_jitter(data = long_offspring_both_exp3,
+              aes(x = diet,
+                  y = offspring_numbers),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,200)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) offspring from both plates")+
+  theme_minimal()
+#----- patchworking the data 
+
+offspring_alone_exp3_plot + offspring_both_exp3_plot
+
+
+
 #-----------------  Feeding behaviour analysis 
 
 #----------------- FEMALE FEEDING BEHAVIOUR (Days 1 & 2)------------------------
