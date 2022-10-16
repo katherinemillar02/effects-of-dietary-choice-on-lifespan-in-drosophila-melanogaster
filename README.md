@@ -104,14 +104,21 @@ An excel document containing the amount of mated female flies on a plate with ma
 
 ## Descriptions of analysis files
  
-Data: including plots, statistical tests.. for 
+Data analysis, including data visualisation and statistical tests for the different experiments. 
 
-Experiment 1: 
-An experiment looking at Mated females feeding behaviour vs Mated males feeding behaviour 
+#### Experiment 1 
+An experiment looking at the feeding behaviour of mated males compared with the feeding behaviour of mated females over the course of 2 days when given the choice of 4x altered P:C ratios. 
+This experiment also looks into diet choice of where females chose to lay the eggs. 
 
-Experiment 2a
+#### Experiment 2a
+An experiment looking at the feeding behaviour of mated females compared with the feeding behaviour of virgin females over the course of 3 days, when given the choice of 4x altered P:C ratios. 
+This experiment also looks into diet choice of where the different types of females chose to lay the eggs. 
 
-Experiment 2b
+#### Experiment 2b
+A repear of the experiment looking at the feeding behaviour of mated females compared with the feeding behaviour of virgin females, completed over the course of 2 days, when given the choice of 4x altered P:C ratios. 
+This experiment also looks into diet choice of where the different types of females chose to lay the eggs.
 
-Experiment 3 
+#### Experiment 3
+An experiment looking at the feeding behaviour of n=10 females on a replicate of plates compared with n=5 females mixed with n=5 males on a plate. Feeding behaviour is monitored from 4x different P:C ratios. 
+This experiment also includes analysis of the offspring produced from egg laying on the 4x different P:C ratios. 
 
