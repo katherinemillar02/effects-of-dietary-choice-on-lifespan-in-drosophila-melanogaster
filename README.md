@@ -8,23 +8,17 @@ The aim of this project was to investigate the effect of altered protein:carbohy
 
 This projected investigated the divergent diet choices of *drosophila melanogaster*, and looked more specifically at how males chose compared to females, how mated females chose compared to virgin females, and also if choice differed if females were placed in plates with males versus if they were in plates alone. 
 
-knitr::include_graphics("images/flypic.jpg")
-
-knitr::include_graphics(here("images", "darwin.png")
-
-
-images/flypic.jpg
 
 
 ## Descriptions of data files
 
-EggCountingE1.csv
+EggCountingE1.csv:
 An excel document containing the egg counts for the 4 different protein:carbohydrate ratios taken from experiment 1. 
 
-FemaleNotFeedingE1.csv 
+FemaleNotFeedingE1.csv: 
 An excel document containing the amount of female flies that weren't on any of the 4 different protein:carbohydrate ratios, and instead were around the plate, from experiment 1.  
 
-MaleNotFeedingE1.csv 
+MaleNotFeedingE1.:
 An excel document containing the amount of male flies that weren't on any of the 4 different protein:carbohydrate ratios, and instead were around the plate, from experiment 1. 
 
 MatedFemalesE1D1.xlsx 
