@@ -75,6 +75,24 @@ offspring_both_exp3_plot <- offspring_both_exp3_summary%>%
 
 offspring_alone_exp3_plot + offspring_both_exp3_plot
 
+#----- Data analysis for offspring counts 
+
+#- adding varibles 
+exp3offspringboth <- long_offspring_alone_exp3 %>% mutate(variable = "alone") %>% mutate(egg_prop = if_else(variable =="both", 
+                                                                                                            offspring_numbers/5,
+                                                                                                            offspring_numbers/10))
+exp3offspringalone <- long_offspring_both_exp3 %>% mutate(variable = "both") %>% mutate(egg_prop = if_else(variable =="both", 
+                                                                                                          offspring_numbers/5,
+                                                                                                           offspring_numbers/10))
+#- Binding the two data sets 
+exp3offspring <- rbind(exp3offspringboth, exp3offspringalone)
+
+exp3offspring_lm <- lm(egg_prop ~ diet * variable, data = exp3offspring)
+
+summary(exp3offspring_lm)
+
+
+
 
 
 #-----------------  Feeding behaviour analysis 
