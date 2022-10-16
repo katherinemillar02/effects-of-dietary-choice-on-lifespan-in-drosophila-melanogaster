@@ -6,15 +6,14 @@ This was a Genetics Society funded internship hosted by the Professor Tracey Cha
 
 The aim of this project was to investigate the effect of altered protein:carbohydrate ratios in adult diets on lifespan in male and female *Drosophila melanogaster*. 
 
-
-
-
+This projected investigated the divergent diet choices of *drosophila melanogaster*, and looked more specifically at how males chose compared to females, how mated females chose compared to virgin females, and also if choice differed if females were placed in plates with males versus if they were in plates alone. 
 
 knitr::include_graphics("images/flypic.jpg")
 
-knitr::include_graphics(here("images", "flypic.jpg"))
+knitr::include_graphics(here("images", "darwin.png")
 
 
+images/flypic.jpg
 
 
 ## Descriptions of data files
