@@ -14,6 +14,7 @@ library(emmeans)
 library(here)
 library(sjPlot)
 library(gtsummary)
+library(knitr)
 
 tinytex::install_tinytex()
 
