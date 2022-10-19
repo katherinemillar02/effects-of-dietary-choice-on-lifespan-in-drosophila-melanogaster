@@ -8,6 +8,9 @@ The aim of this project was to investigate the effect of altered protein:carbohy
 
 This projected investigated the divergent diet choices of *drosophila melanogaster*, and looked more specifically at how males chose compared to females, how mated females chose compared to virgin females, and also if choice differed if females were placed in plates with males versus if they were in plates alone. 
 
+source("images","flypic.jpg")
+
+<img title="a title" alt="Alt text" src="/images/flypic.jpg">
 
 
 ## Descriptions of data files
