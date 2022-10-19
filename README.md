@@ -1,8 +1,4 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
+
 # Effects of Diet on Lifespan in *Drosophila melanogaster*
 
 ## Project Aims
