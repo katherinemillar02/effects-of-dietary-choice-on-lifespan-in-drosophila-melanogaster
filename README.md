@@ -9,8 +9,8 @@ The aim of this project was to investigate the effect of altered protein:carbohy
 
 This projected investigated the divergent diet choices of *drosophila melanogaster*, and looked more specifically at how males chose compared to females, how mated females chose compared to virgin females, and also if choice differed if females were placed in plates with males versus if they were in plates alone. 
 
-
-
+The four diets contain a variety of P:C ratios based on what has been found that is best for lifespan and reproductive success through previous research. The P:C diets chosen in these experiments were:  
+8:1, 2:1, 1:2, 1:8. 
 
 
 <img title="drosophila are cool" alt="drosopAlt text" src="/images/flypic.jpg">
