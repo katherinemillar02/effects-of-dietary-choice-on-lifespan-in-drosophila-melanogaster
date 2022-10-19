@@ -13,7 +13,7 @@ The four diets contain a variety of P:C ratios based on what has been found that
 8:1, 2:1, 1:2, 1:8. 
 
 
-<img title="drosophila are cool" alt="drosopAlt text" src="/images/flypic.jpg">
+<img title="drosophila are cool" alt="drosopAlt text" src="/images/fruitfly.png">
 
 
 ## Descriptions of data files
