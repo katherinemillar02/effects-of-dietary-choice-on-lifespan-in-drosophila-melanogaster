@@ -17,7 +17,7 @@ This projected investigated the divergent diet choices of *drosophila melanogast
 
 
 
-<img title="a title" alt="Alt text" src="/images/flypic.jpg">
+<img title="drosophila are cool" alt="drosopAlt text" src="/images/flypic.jpg">
 
 
 ## Descriptions of data files
