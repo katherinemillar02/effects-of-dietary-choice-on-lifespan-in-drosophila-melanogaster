@@ -15,6 +15,7 @@ library(here)
 library(sjPlot)
 library(gtsummary)
 library(knitr)
+library(rphylopic)
 
 tinytex::install_tinytex()
 
@@ -95,6 +96,8 @@ exp1femaleall_summary <- exp1femaleall %>%
             n = n(),
             se = sd/sqrt(n))
 #------- Visualising the data for female feeding experiment 1-----------------#
+
+
 exp1_femaleall_plot <- exp1femaleall_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
@@ -114,7 +117,7 @@ exp1_femaleall_plot <- exp1femaleall_summary %>%
   ylim(0.0, 4.0)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of female flies on each patch")+
-  theme_minimal()
+  theme_minimal() 
 #-------------------------------------------------------------------------------
 #--------------------------- Male feeding behaviour
 #----------------- Day 1 
