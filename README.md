@@ -14,7 +14,7 @@ The four diets contain a variety of P:C ratios based on what has been found that
 
 
 <img title="drosophila are cool" alt="drosopAlt text" src="/images/flypic.jpg">
-
+make image smaller... 
 
 ## Descriptions of data files
 
