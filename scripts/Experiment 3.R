@@ -38,6 +38,18 @@ offspring_alone_exp3_plot <- offspring_alone_exp3_summary%>%
        y = "Mean (+/- S.E.) offspring from alone plates")+
   theme_minimal()
 
+
+
+
+
+#------------------------------------- Data analysis 
+
+exp3offspring_alone_lm <- lm(offspring_numbers ~ diet, data = long_offspring_alone_exp3)
+
+summary(exp3offspring_alone_lm)
+
+
+
 #------- Female count ( with males on a plate) 
 offspring_both_exp3 <- read_excel("data/Exp3OffspringBoth.xlsx")
 #------- Making the data long 
@@ -71,6 +83,13 @@ offspring_both_exp3_plot <- offspring_both_exp3_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) offspring from both plates")+
   theme_minimal()
+
+#----- Data analysis 
+
+exp3offspring_both_lm <- lm(offspring_numbers ~ diet, data = long_offspring_both_exp3)
+
+summary(exp3offspring_both_lm)
+
 #----- patchworking the data 
 
 offspring_alone_exp3_plot + offspring_both_exp3_plot
