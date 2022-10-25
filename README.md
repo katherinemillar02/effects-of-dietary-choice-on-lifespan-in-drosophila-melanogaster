@@ -14,7 +14,7 @@ The four diets contain a variety of P:C ratios based on what has been found that
 
 <img title="drosophilplot" alt="drosopAlt text" src="/images/malesvfemalesplot.png" width=500 height=400>
 
-*Figure: box plot showing (a) the mean average of where female females feed or spend time on 4 different protein: carbohydrate (P:C) ratios with (b) the mean average of where males feed or spend time on the 4 different P:C ratios.*
+*Figure: The divergent effects of diet on females and males.*
 
 <img title="droso pic" alt="drosopAlt text" src="/images/flypic.jpg" width=200 height=100>
 
