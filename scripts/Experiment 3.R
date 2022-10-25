@@ -136,7 +136,7 @@ offspring_both_exp3_plot2 <- offspring_both_exp3_summary2 %>%
               colour = "black",
               width = 0.2,
               shape = 21)+
-  ylim(0,200)+ 
+  ylim(0,150)+ 
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) offspring from both plates")+
   theme_minimal()

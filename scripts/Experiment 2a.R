@@ -238,6 +238,7 @@ exp2aglm <- glm(fly_numbers ~ diet * variable + day,
 
 summary(exp2aglm)
 
+
 #-------------------------------------------------------------------------------
 #long_mated_femalesd1_summary <- long_mated_femalesd1 %>% 
 #  group_by(diet) %>% 
