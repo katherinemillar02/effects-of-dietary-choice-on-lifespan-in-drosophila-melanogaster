@@ -12,8 +12,9 @@ This projected investigated the divergent diet choices of *drosophila melanogast
 The four diets contain a variety of P:C ratios based on what has been found that is best for lifespan and reproductive success through previous research. The P:C diets chosen in these experiments were:  
 8:1, 2:1, 1:2, 1:8. 
 
-<img title="droso plot" alt="drosopAlt plot text" src="/images/flypic.jpg" width=300 height=200>
-<img title="drosophila are cool" alt="drosopAlt text" src="/images/malesvfemalesplot.png" width=400 height=300>
+<img title="drosophilplot" alt="drosopAlt text" src="/images/malesvfemalesplot.png" width=500 height=400>
+
+<img title="droso pic" alt="drosopAlt text" src="/images/flypic.jpg" width=200 height=100>
 
 
 make image smaller... 
