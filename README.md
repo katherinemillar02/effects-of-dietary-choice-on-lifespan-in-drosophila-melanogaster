@@ -19,7 +19,6 @@ The four diets contain a variety of P:C ratios based on what has been found that
 <img title="droso pic" alt="drosopAlt text" src="/images/flypic.jpg" width=200 height=100>
 
 
-make image smaller... 
 
 ## Descriptions of data files
 
