@@ -111,7 +111,7 @@ exp1_femaleall_plot <- exp1femaleall_summary %>%
               aes(x = diet,
                   y = fly_numbers),
               fill = "skyblue",
-              colour = "black",
+              colour = "#3a3c3d",
               width = 0.2,
               shape = 21)+
   ylim(0.0, 4.0)+
@@ -149,16 +149,16 @@ exp1_maleall_plot <- exp1maleall_summary %>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "#A8DBAF",
+           colour = "#077535",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "#A8DBAF",
+                colour = "#077535",
                 width = 0.2)+
   geom_jitter(data = exp1maleall,
               aes(x = diet,
                   y = fly_numbers),
               fill = "skyblue",
-              colour = "black",
+              colour = "#3a3c3d",
               width = 0.2,
               shape = 21)+
   ylim(0.0, 4.0)+
@@ -168,6 +168,7 @@ exp1_maleall_plot <- exp1maleall_summary %>%
 #------- Using patchwork to combine the two parts of data 
 
 exp1_femaleall_plot + exp1_maleall_plot
+
 
 #------------------------------- Analysis of flies not on a plate (experiment 1)
 #----------------- Data for female flies not feeding (exp 1)

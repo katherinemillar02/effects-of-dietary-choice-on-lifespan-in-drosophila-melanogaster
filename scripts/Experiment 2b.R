@@ -53,8 +53,8 @@ exp2bmatedall_plot <- exp2bmatedall_summary %>%
   geom_jitter(data = exp2bmatedall,
               aes(x = diet,
                   y = fly_numbers),
-              fill = "skyblue",
-              colour = "black",
+              fill = "#ad97a2",
+              colour = "#ded7da",
               width = 0.2,
               shape = 21)+
   ylim(0,6)+
@@ -100,8 +100,8 @@ exp2bvirginall_plot <- exp2bvirginall_summary %>%
   geom_jitter(data = exp2bvirginall,
               aes(x = diet,
                   y = fly_numbers),
-              fill = "skyblue",
-              colour = "black",
+              fill = "#ad97a2",
+              colour = "#ded7da",
               width = 0.2,
               shape = 21)+
   ylim(0,6)+
