@@ -19,6 +19,8 @@ The four diets contain a variety of P:C ratios based on what has been found that
 <img title="droso pic" alt="drosopAlt text" src="/images/flypic.jpg" width=200 height=100>
 <img title="droso pic" alt="drosopAlt text" src="/images/drospic.png" width=200 height=200>
 
+*Figure: Mated female feeding behaviour shown in an experimental petri dish. The top of the petri dish shows diet ratios from (left to right) 8:1 and 2:1, and the bottom of the dish shows P:C ratios 1:2 and 1:8. Mated females are shown to mainly feed on the 8:1 diet.*
+
 
 ## Descriptions of data files
 
