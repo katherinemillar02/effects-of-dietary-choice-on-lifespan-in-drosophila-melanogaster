@@ -52,7 +52,7 @@ egg_counting1_plot <- egg_counting1_summary %>%
               shape = 21)+
   ylim(0,200)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of eggs")+
+       y = "Mean (+/- S.E.) number of eggs laid on each patch")+
   theme_minimal()
 #----------- Data Analysis of egg counting (experiment 1)---------------------- 
 #-- Making a linear model 
@@ -64,6 +64,7 @@ summary(eggcountingls1)
 #----  doing tests 
 anova(eggcountingls1) 
 confint(eggcountingls1)
+#tidy verse summary
 broom::tidy(eggcountingls1,  
             exponentiate=T, 
             conf.int=T)
@@ -83,7 +84,7 @@ female_feedingd2 <- read_excel("data/MatedFemalesE1D2.xlsx")
 #---- Making the data long
 long_female_feedingd2 <- female_feedingd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-#------- Mutating a variable for female and day 
+#------- Mutating a variable for sex (female) and day 
 exp1females1 <- long_female_feedingd1 %>% mutate(sex = "female") %>% mutate(day = "1")
 exp1females2 <- long_female_feedingd2 %>% mutate(sex = "female") %>% mutate(day = "2")
 #------- Combining the days 
@@ -95,9 +96,7 @@ exp1femaleall_summary <- exp1femaleall %>%
             sd = sd(fly_numbers),
             n = n(),
             se = sd/sqrt(n))
-#------- Visualising the data for female feeding experiment 1-----------------#
-
-
+#------- Visualising the data for female feeding----------------#
 exp1_femaleall_plot <- exp1femaleall_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
@@ -132,7 +131,7 @@ male_feedingd2 <- read_excel("data/MatedMalesE1D2.xlsx")
 #---Making the data long 
 long_male_feedingd2 <- male_feedingd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-#------- Mutating a variable for male and day 
+#------- Mutating a variable for sex (male) and day 
 exp1males1 <- long_male_feedingd1 %>% mutate(sex = "male") %>% mutate(day = "1")
 exp1males2 <- long_male_feedingd2 %>% mutate(sex = "male") %>% mutate(day = "2")
 #------- Combining the days 
@@ -275,11 +274,15 @@ tab_model(exp1alllm)
 # -----------------
 
 # ---glm with interaction effect
-exp1allglm <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = quasipoisson())
-# Checking the model 
-performance::check_model(exp1allglm)
-# using summary function to look at values 
+exp1allglm <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = poisson())
+# --- summarising the data 
 summary(exp1allglm)
+# - overdispersion so use quasi <1 
+exp1allglm2 <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = quasipoisson())
+# Checking the new model 
+performance::check_model(exp1allglm2)
+# using summary function to look at values 
+summary(exp1allglm2)
 # testing for significance of day
 drop1(exp1alllm, test = "F")
 #  day is only just significant  but keep anyway?? 
@@ -287,7 +290,7 @@ drop1(exp1alllm, test = "F")
 # making a table 
 tab_model(exp1allglm)
 # what is incidence rate ratios vs. estimates? 
-
+# happens in the table when glm over lm is used 
 
 
 
