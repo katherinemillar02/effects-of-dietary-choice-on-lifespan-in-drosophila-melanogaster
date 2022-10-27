@@ -14,7 +14,7 @@ The four diets contain a variety of P:C ratios based on what has been found that
 
 <img title="drosophilplot" alt="drosopAlt text" src="/images/malesvfemalesplot.png" width=500 height=400>
 
-*Figure: The divergent effects of diet on females and males.*
+*Figure: The divergent choice of different protein: carbohydrate diets on females and males.*
 
 <img title="droso pic" alt="drosopAlt text" src="/images/flypic.jpg" width=200 height=100>
 
