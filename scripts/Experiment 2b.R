@@ -1,9 +1,9 @@
-#------------------------------Experiment 2b----------------------------------------#
-#---------- Offspring counting -------------------------
-#------- Data not ready yet 
-#offspringcount_e2b <- (read_excel(path = "data/OffspringCountExp2b.xlsx", na = "NA"))
+#------------------------------ 🪰 Experiment 2b 🪰 ----------------------------
+#----- 👶 Offspring counting ----
+#----- Data not ready yet 
+# offspringcount_e2b <- (read_excel(path = "data/OffspringCountExp2b.xlsx", na = "NA"))
 
-#long_offspringcount_e2b <- offspringcount_e2b %>% 
+# long_offspringcount_e2b <- offspringcount_e2b %>% 
 # pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "egg_numbers")
 
 #offspringcount_e2b_summary <- long_offspringcount_e2b %>%
@@ -12,10 +12,10 @@
 #          sd = sd(egg_numbers),
 #          n = n(),
 #          se = sd/sqrt(n))
-#-------------------------------------------------------------------------------
 
-# FEEDING BEHAVIOUR ------------------------------------------------------------
-#-----------------------  Mated Females
+
+#---- Feeding Behaviour 
+#----------------------- ♀️ Mated Females----
 #--------- Day 1 
 #---------- Reading the data in 
 mated_females_e2bd1 <- (read_excel(path = "data/MatedFemalesE2bD1.xlsx", na = "NA"))
@@ -61,8 +61,9 @@ exp2bmatedall_plot <- exp2bmatedall_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of mated female flies")+
   theme_minimal()
-#--------------------------------------------------------------------------------
-#----------------------- Virgin Females
+
+
+#----------------------- 👰 Virgin Females Feeding Behaviour ----
 #--------- Day 1 
 #---------- Reading the data in 
 virgin_females_e2bd1 <- (read_excel(path = "data/VirginFemalesE2bD1.xlsx", na = "NA"))
@@ -108,9 +109,8 @@ exp2bvirginall_plot <- exp2bvirginall_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of virgin female flies")+
   theme_minimal()
-#------------------ Using patchwork to combine the plots -----------------------
+#------------------ Using patchwork to combine the plots
 exp2bmatedall_plot + exp2bvirginall_plot
-#-------------------------------------------------------------------------------
 
 
 
@@ -118,9 +118,9 @@ exp2bmatedall_plot + exp2bvirginall_plot
 
 
 
-#------------------------------ Offspring counts -------------------------------
 
-#-------------------------------------------------------------------------------
+#------------------- 👶 Offspring counts ----
+
 
 
 offspring_ex2b <- (read_excel(path = "data/OffspringCountExp2b.xlsx", na = "NA"))
@@ -173,7 +173,6 @@ exp2blm0 <- lm(fly_numbers ~ diet + type + day, data = exp2ball)
 # Checking the model 
 performance::check_model(exp2blm0)
 
-#-----------------------------------------
 
 # linear model WITH  interaction effect
 exp2blm <- lm(fly_numbers ~ diet * type + day, data = exp2ball)
@@ -224,10 +223,10 @@ anova(exp2bglm2)
 
 
 
-#-------------------------------------------------------------------------------
+
 #tbl_regression(exp2bglm2)
-#------------------------------------------------------------------------------- 
-#-------------------- IGNORE THIS HASHTAGGED OUT CODE -------------------------
+
+#-------------------- IGNORE THIS HASHTAGGED OUT CODE 
 #virgin_females_e2bd2_summary <- long_virgin_females_e2bd2 %>% 
 #  group_by(diet) %>% 
 #  summarise(mean = mean(fly_numbers),
@@ -321,7 +320,7 @@ anova(exp2bglm2)
 #broom::tidy(exp1ls2a,  
 #             exponentiate=T, 
 #             conf.int=T)
-# ------------  
+
 # Day 2 
 # Mutating a sex variable 
 #exp2bvirgin2 <- long_virgin_females_e2bd2 %>% mutate(status = "virgin")
@@ -344,7 +343,7 @@ anova(exp2bglm2)
 #exp2bd2ls2a <- lm(sqrt(fly_numbers) ~ diet * status, data = exp2bd2)
 # Checking the model 
 #performance::check_model(exp2bd2ls2a) # Better with sqrt 
-#---------
+
 #exp2bd1ls3 <- glm(formula = fly_numbers ~ diet * status,
 #family = quasipoisson(), data = exp2b)
 #performance::check_model(exp2bd1ls3)
@@ -406,7 +405,7 @@ anova(exp2bglm2)
 # theme_minimal()
 #------------------ Data analysis for mated females (exp 4, day 2)
 #----------------------- Virgin Females (exp 4, day 1)
-# ------------  
+ 
 #long_virgin_females_e2bd1_summary <- long_virgin_females_e2bd1 %>% 
 # group_by(diet) %>% 
 # summarise(mean = mean(fly_numbers),
