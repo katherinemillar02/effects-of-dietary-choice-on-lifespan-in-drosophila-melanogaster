@@ -1,8 +1,8 @@
-#----------------------------------- Experiment 3 ----------------------------
+#----------------------------------- 🪰 Experiment 3 🪰 ----------------------------
 
 
 
-#------------------ Offspring counts 
+#----- 👶Offspring counts  -----
 
 #------- Just females on a plate 
 offspring_alone_exp3 <- read_excel("data/Exp3OffspringAlone.xlsx")
@@ -72,7 +72,7 @@ offspring_alone_exp3_plot2 + offspring_both_exp3_plot2
 
 
 
-#------------------------------------- Data analysis 
+#---- 📊 Offspring Data analysis  ---- 
 
 exp3offspring_alone_lm <- lm(offspring_numbers ~ diet, data = long_offspring_alone_exp3)
 
@@ -175,7 +175,7 @@ summary(exp3offspring_lm)
 
 #-----------------  Feeding behaviour analysis 
 
-#----------------- FEMALE FEEDING BEHAVIOUR (Days 1 & 2)------------------------
+#----------------- ♀️ Female feeding behaviour ----
 #----------- Females alone on a plate 
 #-------Day 1
 #---------Reading the data in 
@@ -234,11 +234,12 @@ exp3femalesall_plot <- exp3femalesall_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) female flies/patch on a plate alone")+
   theme_minimal()
-#--------------- ---------------------------------------------------------------
 
 
 
-#--------------- Females on a plate with males 
+
+
+#---- ⚤ Females on a plate with males  ---- 
 #----- Day 1 
 #-------- Reading the data in 
 bothplate_e3d1 <- (read_excel(path = "data/MatedFemalesE3D1(M+F).xlsx", na = "NA"))
@@ -264,13 +265,13 @@ exp3both1 <- long_bothplate_e3d1 %>% mutate(status = "both") %>% mutate(day = "1
 exp3both2 <- long_bothplate_e3d2 %>% mutate(status = "both") %>% mutate(day = "2") %>% mutate(fly_prop = if_else(status =="females", 
                                                                                                                    fly_numbers/10,
                                                                                                                    fly_numbers/5))
-#----- Binding days 1 and 2 --------------------
+#----- Binding days 1 and 2 
 exp3bothall <- rbind(exp3both1, exp3both2)
 
 #----------------- Making data "long"
 #long_exp3bothall <- exp3bothall %>% 
 #pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
-#----- Summarising the data ------------------------------------- 
+#----- Summarising the data 
 exp3bothall_summary <- exp3bothall %>% 
   group_by(diet) %>% 
   summarise(mean = mean(fly_prop),
@@ -299,11 +300,10 @@ exp3both_plot <- exp3bothall_summary%>%
        y = "Mean (+/- S.E.) female flies/patch on a plate with males")+
   theme_minimal()
 
-#-------------------------------------------------------------------------------
 #--------------------------- Using patchwork to combine the two data plots 
 exp3femalesall_plot + exp3both_plot
-#---------------------------
-#--------------------OVERALL DATA ANALYSIS FOR EXPERIMENT 3 -------------------#
+
+#-------------------- 📊 Feeding behaviour data analysis  -------------------
 # fly_numbers: number of flies on a flies on a food patch
 # status: whether or not there were just females on a plate or females with males
 # diet: one of the four P:C ratios 
@@ -317,7 +317,7 @@ exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3all01, family = 
 
 
 
-#-----  FLY PROPORTION MODEL --------- 
+#-----  Fly proportion model  
 # Binding the combined days data of alone on a plate and with males on a plate
 exp3all <- rbind(exp3femalesall, exp3bothall)
 # Adding a fly proportion variable 
@@ -344,7 +344,6 @@ broom::glance(exp3allglm2)
 # inividual observations 
 broom::augment(exp3allglm2)
 
-#-------------------------------------------------------------------------------
 
 
 
@@ -359,7 +358,8 @@ broom::augment(exp3allglm2)
 
 
 
-#------------------- PROBALY IGNORE ALL THIS HASHTAGGED CODE #-----------------
+
+#------------------- PROBALY IGNORE ALL THIS HASHTAGGED CODE
 #--------------------- Mated females (exp 3, day 1)
 #long_mated_femalese3d1_summary <- long_mated_femalese3d1 %>% 
 #group_by(diet) %>% 
@@ -421,7 +421,7 @@ broom::augment(exp3allglm2)
 #      y = "Mean (+/- S.E.) number of flies")+
 # theme_minimal()
 #-------- Data analysis for mated females (exp 3, day 2)
-#---------------- Males + Females ----- -----------
+#---------------- Males + Females
 #----------------------------- Males (m+f) (exp 3, day 1)
 #males_mf_e3_d1 <- (read_excel(path = "~/Documents/drosophilaresearchproject/data/MatedMalesE3D1(M+F).xlsx", na = "NA"))
 #long_males_mf_e3_d1 <- males_mf_e3_d1 %>% 
