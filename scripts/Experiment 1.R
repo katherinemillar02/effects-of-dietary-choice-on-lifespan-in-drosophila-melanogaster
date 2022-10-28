@@ -1,6 +1,6 @@
 
 
-#________________________ Installing appropriate packages__________________
+#----------------------📦  Installing appropriate packages 📦----------
 library(tidyverse)
 library(readxl)
 library(kableExtra)
@@ -19,8 +19,8 @@ library(rphylopic)
 
 tinytex::install_tinytex()
 
-#_________________________________ Experiment 1 _____________________________# 
-#__________ Egg counting
+#--------------------------------- ♀️ Experiment 1 ♂️----------------------------------
+#---- 🥚 Egg counting ----
 #____ Reading the data in 
 egg_counting_data <- (read_excel(path = "data/EggCountingDataExp1.xlsx", na = "NA"))
 #____ Making the data long 
@@ -54,7 +54,7 @@ egg_counting1_plot <- egg_counting1_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of eggs laid on each patch")+
   theme_minimal()
-#----------- Data Analysis of egg counting (experiment 1)---------------------- 
+#----------- 📊🥚 Data analysis of Egg Counting ---------------------- 
 #-- Making a linear model 
 eggcountingls1 <- lm(egg_numbers ~ diet, data = long_egg_counting1)
 #---- Checking the model 
@@ -70,8 +70,8 @@ broom::tidy(eggcountingls1,
             conf.int=T)
 
 
-#- ------ FEEDING BEHAHAVIOUR ------------------------------
-#---------------- Female feeding behaviour -----------------------------------
+#- ------ FEEDING BEHAHAVIOUR 
+#---------------- ♀️ Female feeding behaviour -----------------------------------
 #----- Day 1 
 #-------- Reading the data in
 female_feedingd1 <- read_excel("data/MatedFemalesE1D1.xlsx")
@@ -117,8 +117,11 @@ exp1_femaleall_plot <- exp1femaleall_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of female flies on each patch")+
   theme_minimal() 
-#-------------------------------------------------------------------------------
-#--------------------------- Male feeding behaviour
+
+
+
+
+#--------------------------- ♂️ Male feeding behaviour ---- 
 #----------------- Day 1 
 #------ Reading the data in 
 male_feedingd1 <- read_excel("data/MatedMalesE1D1.xlsx")
@@ -241,14 +244,14 @@ male_notfeedinge1_plot <- male_notfeedinge1_summary %>%
 
 female_notfeedinge1_plot + male_notfeedinge1_plot
 
-#-------------------------------------------------------------------------------
 
 
 
 
 
 
-#---------------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 1 ----------------------#
+
+#----------------- 📊 Data Analysis of feeding behaviours  ---- 
 # fly_numbers: number of flies on a flies on a food patch
 # sex: whether the fly is male or female 
 # diet: one of the four P:C ratios 
@@ -271,7 +274,6 @@ broom::tidy(exp1alllm)
 # forming a table 
 tab_model(exp1alllm)
 
-# -----------------
 
 # ---glm with interaction effect
 exp1allglm <- glm(fly_numbers ~ diet * sex + day, data = exp1all, family = poisson())
@@ -314,7 +316,7 @@ tab_model(exp1allglm)
 
 
 
-#--------------------- IGNORE THE HASHTAGGED OUT CODE--------------------------------
+#--------------------- IGNORE THE HASHTAGGED OUT CODE
 #expls1 <- lm(long_female_feedingd1$fly_numbers ~ long_male_feedingd1$fly_numbers)
 # Error in variable lengths 
 # so merged instead 

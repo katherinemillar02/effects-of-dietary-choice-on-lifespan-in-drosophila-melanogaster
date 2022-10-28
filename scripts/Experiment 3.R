@@ -2,7 +2,7 @@
 
 
 
-#----- 👶Offspring counts  -----
+#----- 👶Offspring counts -----
 
 #------- Just females on a plate 
 offspring_alone_exp3 <- read_excel("data/Exp3OffspringAlone.xlsx")
