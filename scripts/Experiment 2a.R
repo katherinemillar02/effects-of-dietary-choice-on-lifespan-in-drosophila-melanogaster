@@ -1,5 +1,5 @@
-#----------------------------- Experiment 2a ------------------------------------
-#--------------------- Mated Females  
+#----------------------------- 🪰 Experiment 2a ------------------------------------
+#--------------------- ♀️ Mated Females -----
 #------  Day 1 
 #--- Reading the data in 
 mated_femalesd1 <- read_excel("data/MatedFemalesE2aD1.xlsx")  %>% drop_na()
@@ -52,7 +52,7 @@ exp2matedall_plot <- exp2matedall_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of mated female flies")+
   theme_minimal()
-#------------------------------------------------------- Virgin Females  
+#-------- 👰 Virgin Females ----  
 #------  Day 1 
 #--- Reading the data in 
 virgin_femalesd1 <- read_excel("data/VirginFemalesE2aD1.xlsx") %>% drop_na()
@@ -105,12 +105,11 @@ exp2avirginall_plot <- exp2avirginall_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of virgin female flies")+
   theme_minimal()
-#------- Using patchwork to combine the two parts of data --------
-
+#------- Using patchwork to combine the two parts of data 
 exp2matedall_plot + exp2avirginall_plot
 
 #------ Egg counting data -----------------------------------------------------#
-# Mated egg count 
+# ---- ♀️🥚 Mated Egg count ----
 # Reading the data in 
 mated_females_e2_eggcount <- (read_excel(path = "data/MatedEggCountE2a.xlsx", na = "NA"))
 # Making the data long 
@@ -145,8 +144,9 @@ mated_females_e2_eggcount_plot <- mated_femalese2_eggcount_summary %>%
        y = "Mean (+/- S.E.) number eggs layed by mated flies")+
   theme_minimal()
 
-#----------- Data analysis for mated female egg count (exp 2)
-#-------------- Virgin female egg count
+
+
+#-------------- 👰🥚Virgin Egg ----
 # Reading the data in
 virgin_females_e2_eggcount <- (read_excel(path = "data/VirginEggCountE2a.xlsx", na = "NA"))
 # Making the data long 
@@ -207,7 +207,7 @@ long_virgin_females_e2_eggcount_summary <- long_virgin_females_e2_eggcount %>%
             sd = sd(egg_numbers),
             n = n(),
             se = sd/sqrt(n))
-#--------------- OVERALL DATA ANALYSIS FOR EXPERIMENT 2 FEEDING BEHAVIOUR --------------
+#--------------- 📊Data Analysis of Feeding Behaviour   --------------
 # Binding mated and virgin days 1 - 3 
 exp2a_all <- rbind(exp2matedall, exp2avirginall)
 # making a linear model 
@@ -215,7 +215,7 @@ exp2a_all_lm <- lm(fly_numbers ~ diet + variable + day, data = exp2a_all)
 # Checking the data 
 performance::check_model(exp2a_all_lm)
 
-#----------
+
 
 # linear model with interaction effect
 exp2a_all_lm_2 <- lm(fly_numbers ~ diet * variable + day, data = exp2a_all)
@@ -230,7 +230,6 @@ broom::tidy(exp2a_all_lm,
             exponentiate=T, 
             conf.int=T)
 
-#----------
 
 # trying glm 
 exp2aglm <- glm(fly_numbers ~ diet * variable + day,
@@ -239,7 +238,7 @@ exp2aglm <- glm(fly_numbers ~ diet * variable + day,
 summary(exp2aglm)
 
 
-#-------------------------------------------------------------------------------
+
 #long_mated_femalesd1_summary <- long_mated_femalesd1 %>% 
 #  group_by(diet) %>% 
 #  summarise(mean = mean(fly_numbers)
