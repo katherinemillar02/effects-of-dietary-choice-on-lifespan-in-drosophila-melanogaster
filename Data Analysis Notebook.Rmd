@@ -1,11 +1,24 @@
 ---
-title: "R Notebook"
+title: "Drosophila notebook"
 output: html_notebook
 ---
 
 
-- Experiment 3 - 
+
  notes - think of this as a lab notebook for your analysis, write notes, thoughts and process here, run code in chunks
+
+
+### Experiment 1 
+
+
+
+### Experiment 2 
+
+
+
+
+### Experiment 3 
+
 
 Testing the summary function to look at a poisson glm test 
 ```{r}
@@ -13,13 +26,13 @@ summary(exp3allglm1)
 ```
 
 
-QUESTION 1: 
+QUESTION!!: 
 
 If I have a model which is poisson
 Do I 
 still use drop1 and let it be quasi-poisson 
 or 
-just use summary to see if a variable is significant. 
+just use summary to see if a variable is significant? 
 
 
 
@@ -51,6 +64,14 @@ The normality of residuals for the generalized linear model doesn't differ much 
 
 The performance shows none of the models are great, but the generalized linear model is slighlty better, and also complex? 
 I could go into using more complex models but it is best to stop here as there is very little difference between the ones that have been tried. 
+
+Final choice: generalised linear model with quasipoisson (and with day dropped from the model).
+Now have chosen generalised linear model. 
+
+Experiment 3 
+Write up 
+QUESTION!! 
+What is the small number on the F value?? 
 
 
 
