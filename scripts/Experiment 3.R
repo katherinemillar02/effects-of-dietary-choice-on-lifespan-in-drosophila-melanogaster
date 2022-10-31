@@ -308,12 +308,41 @@ exp3femalesall_plot + exp3both_plot
 # status: whether or not there were just females on a plate or females with males
 # diet: one of the four P:C ratios 
 
-
+# original data (WITHOUT proportions) 
 #----- binding the original data (WITHOUT proportions)
 exp3all01 <- rbind(exp3both0all, exp3females01)
-# model with original data 
-exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3all01, family = quasipoisson())
+# LM model with original data 
+exp3alllm <- lm(fly_numbers ~ diet * status + day, data = exp3all01)
+# Looking for the significance of day 
+drop1(exp3alllm, test = "F")
+# Drop day from the model as not significant 
+# Model without day variable 
+exp3alllm2 <- lm(fly_numbers ~ diet * status, data = exp3all01)
+# Performance check of the model 
+performance::check_model(exp3alllm2)
+# ---
+# GLM model with original data 
+exp3allglm <- glm(fly_numbers ~ diet * status + day, data = exp3all01, family = poisson())
+# looking for significance in day
+drop1(exp3allglm, test = "F")
+# drop day as not significant 
+# glm with poisson 
+exp3allglm1 <- glm(fly_numbers ~ diet * status, data = exp3all01, family = poisson())
+# summarising the data 
+summary(exp3allglm1)
+# 1147/ 912 = 1.25
+# make model quasi possion as is over-dispersed = >1 
+exp3allglm2 <- glm(fly_numbers ~ diet * status, data = exp3all01, family = quasipoisson())
+# checking the model 
+performance::check_model(exp3allglm2)
+# summarising the data 
+summary(exp3allglm2)
+broom::tidy(exp3allglm2)
 
+
+
+
+#-------------------------------------------------------------------------------------@
 
 
 
@@ -326,6 +355,7 @@ exp3all <- rbind(exp3femalesall, exp3bothall)
 #   fly_numbers/5))
 # linear model with interaction effect
 exp3alllm <- lm(fly_numbers ~ diet * status + day, data = exp3all)
+
 # summary of lm 
 summary(exp3alllm)
 # testing for significance of day 
