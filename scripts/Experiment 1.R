@@ -115,7 +115,8 @@ exp1_femaleall_plot <- exp1femaleall_summary %>%
               shape = 21)+
   ylim(0.0, 4.0)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of female flies on each patch")+
+       y = "Mean (+/- S.E.) number of flies on a patch",
+       title = "Female")+
   theme_minimal() 
 
 
@@ -165,7 +166,8 @@ exp1_maleall_plot <- exp1maleall_summary %>%
               shape = 21)+
   ylim(0.0, 4.0)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of male flies on each patch")+
+       y = "Mean (+/- S.E.) number of flies on a patch", 
+       title = "Male")+
   theme_minimal()
 #------- Using patchwork to combine the two parts of data 
 

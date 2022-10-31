@@ -53,13 +53,14 @@ exp2bmatedall_plot <- exp2bmatedall_summary %>%
   geom_jitter(data = exp2bmatedall,
               aes(x = diet,
                   y = fly_numbers),
-              fill = "#ad97a2",
-              colour = "#ded7da",
+              fill = "skyblue",
+              colour = "black",
               width = 0.2,
               shape = 21)+
   ylim(0,6)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of mated female flies")+
+       y = "Mean (+/- S.E.) number of flies on a patch", 
+       title = "Mated Female")+
   theme_minimal()
 
 
@@ -101,13 +102,14 @@ exp2bvirginall_plot <- exp2bvirginall_summary %>%
   geom_jitter(data = exp2bvirginall,
               aes(x = diet,
                   y = fly_numbers),
-              fill = "#ad97a2",
-              colour = "#ded7da",
+              fill = "skyblue",
+              colour = "black",
               width = 0.2,
               shape = 21)+
   ylim(0,6)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of virgin female flies")+
+       y = "Mean (+/- S.E.) number of flies on a patch",
+       title = "Virgin Female")+
   theme_minimal()
 #------------------ Using patchwork to combine the plots
 exp2bmatedall_plot + exp2bvirginall_plot
