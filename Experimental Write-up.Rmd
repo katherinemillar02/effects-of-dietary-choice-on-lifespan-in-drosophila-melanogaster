@@ -10,3 +10,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 A generalised linear model was used with quasipoisson to count for overdispersion. Day was dropped from the model as there was found to be no significant effect of including day in the model (P = 0.32). 
 It was found that there was a strong significant effect in diet choice when comparing mated *drosophila melanogaster* with virgin. When comparing the P:C 8:1 diet to mated and virgin flies, there was a signficant difference found (P = <0.0001), there was a mean average of 2.74 flies on the 8:1 diet per observation while there was a mean average of only 1.64 flies on a patch at an observation for the virgin females. 
+
+
+
+
+Experiment 3 
+
+When looking at female feeding behaviour, and if this changed with females alone in a feeding assay, to females who were in a feeding assay with males. There was a small interaction effect of day with diet and feeding choice, however this was not significant from not having day as an interaction effect, (F~2,10~ = 0.941, P = 0.3), and was therefore dropped from the full model. 
+
+A generalized linear model with quasipoisson was used (as there was over-dispersion), which showed there was no significant difference in dietary choice between mated females who were alone on a plate and mated females who were on a plate with males. 
