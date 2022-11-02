@@ -75,6 +75,24 @@ What is the small number on the F value??
 
 
 
+Offspring counting for experiment 3 
+Data Analysis 
+
+1. original fly numbers 
+
+a. model of just alone plate 
+b. model of just both plate
+c. model of alone and both plate with an interaction effect 
+
+2. fly proportion numbers 
+
+a. model of just alone plate 
+b. model of just both plate
+c. model of alone and both plate with an interaction effect 
+
+
+
+
 
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
