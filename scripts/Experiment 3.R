@@ -38,20 +38,6 @@ offspring_alone_exp3_plot <- offspring_alone_exp3_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) offspring from alone plates")+
   theme_minimal()
-
-
-
-#---- 📊 Alone Offspring Data analysis  ---- 
-
-# Making a linear model 
-exp3offspring_alone_lm <- lm(offspring_numbers ~ diet, data = long_offspring_alone_exp3)
-# Using the summary function to look at the data 
-summary(exp3offspring_alone_lm)
-
-
-
-
-
 #------- Female count ( with males on a plate) 
 offspring_both_exp3 <- read_excel("data/Exp3OffspringBoth.xlsx")
 #------- Making the data long 
@@ -86,36 +72,40 @@ offspring_both_exp3_plot <- offspring_both_exp3_summary%>%
        y = "Mean (+/- S.E.) offspring from both plates")+
   theme_minimal()
 
-#----- patchworking the data 
-
+#----- Patchworking the data 
 offspring_alone_exp3_plot + offspring_both_exp3_plot
 
-#-------- "Both" Data analysis ----
+#--- 📊 Offspring Data analysis -----
 
+#---- Alone Offspring Data analysis (real numbers) 
+# Making a linear model 
+exp3offspring_alone_lm <- lm(offspring_numbers ~ diet, data = long_offspring_alone_exp3)
+# Using the summary function to look at the data 
+summary(exp3offspring_alone_lm)
+
+#-------- "Both" Data analysis (real numbers) ----
 # Making a linear model
 exp3offspring_both_lm <- lm(offspring_numbers ~ diet, data = long_offspring_both_exp3)
 # Summarising the data to view 
 summary(exp3offspring_both_lm) 
 
-#------- 
+#------- Mutating a variable to combine the data-set (real numbers)
 exp3offspringboth <- long_offspring_alone_exp3 %>% mutate(variable = "alone")
 exp3offspringalone <- long_offspring_both_exp3 %>% mutate(variable = "both")
 
+#--- Combining the data set with rbind (real numbers)
 exp3osnumbers <- rbind(exp3offspringboth, exp3offspringalone)
 
-
-#-------------- data analysis of both and alone interaction effect 
-
+#------- Data analysis of both and alone interaction effect (real numbers)
 exp3offspringall <- lm(offspring_numbers ~ diet * variable, data = exp3osnumbers)
-
+#-- Using the summary function to look at the data 
 summary(exp3offspringall)
 
-#----- offspring proportion
-#------------------ making a proportion of the offspring counting data 
 
-
-
-#- adding varibles 
+#----- Making a proportion variable 
+#-- Offspring proportion
+#----- Making proportion models of the offspring counting data 
+# Adding varibles 
 exp3offspringboth2 <- long_offspring_alone_exp3 %>% mutate(variable = "alone") %>% mutate(offspring_prop = if_else(variable =="both", 
                                                                                                             offspring_numbers/5,
                                                                                                             offspring_numbers/10))
@@ -124,37 +114,27 @@ exp3offspringalone2 <- long_offspring_both_exp3 %>% mutate(variable = "both") %>
                                   offspring_numbers/10))
            
                                                                                                                                                                                                                  
-       
-                                                                                                                                                                                                                          
-                                                                                                                                                                                                                
-       #-----  making a linear model ALONE 
-# Making a linear model 
+# Making a linear model alone
 exp3offspring_alone_lm2 <- lm(offspring_prop ~ diet, data = exp3offspringalone2)
 # Using the summary function to look at the data 
 summary(exp3offspring_alone_lm2)
 
-#-------- "Both" Data analysis ----
-
+#-------- "Both" Data analysis linear model ----
 # Making a linear model
 exp3offspring_both_lm <- lm(offspring_prop ~ diet, data = long_offspring_both_exp3)
 # Summarising the data to view 
 summary(exp3offspring_both_lm) 
-                                
 
-
-
-
+#----- Making summaries of the data sets but with offspring proportions                                
                                                                                                                                                                                                                                                                                       
-#----- summary of in a plate alone                                                                                                    
+#----- Summary of in a plate alone                                                                                                    
 offspring_alone_exp3_summary2  <- exp3offspringalone2 %>%  
   group_by(diet) %>% 
   summarise(mean = mean(offspring_prop),
             sd = sd(offspring_prop),
             n = n(),
             se = sd/sqrt(n))
-                                                                                                          
- #-----    summary of of in a plate with males                                                                                                                                                                                                            
-                 
+ #----- Summary of of in a plate with males                                                                                                                                                                                                            
  offspring_both_exp3_summary2  <- exp3offspringboth2 %>%  
    group_by(diet) %>% 
    summarise(mean = mean(offspring_prop),
@@ -162,16 +142,11 @@ offspring_alone_exp3_summary2  <- exp3offspringalone2 %>%
              n = n(),
              se = sd/sqrt(n))
 
- #-----  binding the two datasets 
-                                                                                                                                                                                                                                                                                                        
+ #-----  Binding the two datasets (with the proportion variable)
 exp3offspring2 <- rbind(exp3offspringboth2, exp3offspringalone2)
-
-
-
-#----- making a linear model with an interaction effect and proportion 
+#----- Making a linear model with an interaction effect and proportion 
 exp3offspring_lm3 <- lm(offspring_prop ~ diet * variable, data = exp3offspring2)
-
-# using summary function to look at the data 
+# Using summary function to look at the data 
 summary(exp3offspring_lm)
 
 
