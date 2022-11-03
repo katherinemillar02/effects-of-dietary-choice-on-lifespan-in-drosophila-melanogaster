@@ -83,7 +83,7 @@ exp3offspring_alone_lm <- lm(offspring_numbers ~ diet, data = long_offspring_alo
 # Using the summary function to look at the data 
 summary(exp3offspring_alone_lm)
 
-#-------- "Both" Data analysis (real numbers) ----
+#-------- "Both" Data analysis (real numbers) 
 # Making a linear model
 exp3offspring_both_lm <- lm(offspring_numbers ~ diet, data = long_offspring_both_exp3)
 # Summarising the data to view 
@@ -119,11 +119,11 @@ exp3offspring_alone_lm2 <- lm(offspring_prop ~ diet, data = exp3offspringalone2)
 # Using the summary function to look at the data 
 summary(exp3offspring_alone_lm2)
 
-#-------- "Both" Data analysis linear model ----
+#-------- "Both" Data analysis linear model
 # Making a linear model
-exp3offspring_both_lm <- lm(offspring_prop ~ diet, data = long_offspring_both_exp3)
+exp3offspring_both_lm2 <- lm(offspring_prop ~ diet, data = exp3offspringalone2)
 # Summarising the data to view 
-summary(exp3offspring_both_lm) 
+summary(exp3offspring_both_lm2) 
 
 #----- Making summaries of the data sets but with offspring proportions                                
                                                                                                                                                                                                                                                                                       
@@ -193,7 +193,7 @@ exp3femalesall_summary <- exp3femalesall %>%
             sd = sd(fly_prop),
             n = n(),
             se = sd/sqrt(n))
-#----------------- Visualising the data 
+#-------- Visualising the data 
 exp3femalesall_plot <- exp3femalesall_summary%>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
@@ -214,9 +214,6 @@ exp3femalesall_plot <- exp3femalesall_summary%>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) female flies/patch on a plate alone")+
   theme_minimal()
-
-
-
 
 
 #---- ⚤ Females on a plate with males  ---- 
@@ -240,8 +237,7 @@ exp3both0all <- rbind(exp3both01, exp3both02)
 
 #------------------------------- Mutating a status variable and a day variable 
 exp3both1 <- long_bothplate_e3d1 %>% mutate(status = "both") %>% mutate(day = "1")%>% mutate(fly_prop = if_else(status =="females", 
-                                                                                                                  fly_numbers/10,
-                                                                                                                  fly_numbers/5))
+                                                                                                                  fly_numbers/10, fly_numbers/5))
 exp3both2 <- long_bothplate_e3d2 %>% mutate(status = "both") %>% mutate(day = "2") %>% mutate(fly_prop = if_else(status =="females", 
                                                                                                                    fly_numbers/10,
                                                                                                                    fly_numbers/5))
