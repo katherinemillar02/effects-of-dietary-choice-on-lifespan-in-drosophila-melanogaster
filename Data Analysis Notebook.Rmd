@@ -81,13 +81,59 @@ Data Analysis
 1. original fly numbers 
 
 a. model of just alone plate 
+
+linear model
+```{r}
+performance::check_model(exp3offspring_alone_lm, check = c("qq"))
+performance::check_model(exp3offspring_alone_lm)
+```
+- linearity : points are too close together 
+- homogenity of variance: points are too close together 
+- normality of residuals look okay
+
+
+
 b. model of just both plate
+```{r}
+performance::check_model(exp3offspring_both_lm)
+performance::check_model(exp3offspring_both_lm, check = c("qq"))
+```
+- linearity: points are mostly too close together 
+- homogenity: points too close 
+- normal distribution: looks good 
+
+
+
 c. model of alone and both plate with an interaction effect 
+```{r}
+performance::check_model(exp3offspringall)
+performance::check_model(exp3offspringall, check = c("qq"))
+```
+- not too bad 
+- linearity points are quite close together 
+- homogenity of variance quite close together 
+- normal distribution is okay but gets worse at beginning and end 
 
 2. fly proportion numbers 
 
 a. model of just alone plate 
+```{r}
+performance::check_model(exp3offspring_alone_lm2, check = c("qq"))
+performance::check_model(exp3offspring_alone_lm2)
+```
+- points are much too close together for both
+- normality is okay, just worse at the end 
+
 b. model of just both plate
+```{r}
+performance::check_model(exp3offspring_both_lm2, check = c("qq"))
+performance::check_model(exp3offspring_both_lm2)
+```
+- too close for both 
+- normality is okay
+
+
+
 c. model of alone and both plate with an interaction effect 
 
 
