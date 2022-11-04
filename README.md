@@ -7,7 +7,8 @@
 
 This was a Genetics Society funded internship hosted by the Professor Tracey Chapman lab at University of East Anglia (UEA) Summer 2022. 
 
-The aim of this project was to investigate the effect of altered protein:carbohydrate ratios in adult diets on lifespan in male and female *Drosophila melanogaster*. 
+ 
+The aim of this project was to investigate the effect of altered protein:carbohydrate (P:C) ratios in adult diets on lifespan in male and female *Drosophila melanogaster*, and to look at how dietary choice is influenced by sex and mating status, and this explains divergent lifespans.
 
 This projected investigated the divergent diet choices of *drosophila melanogaster*, and looked at  how males chose compared to females, how mated females chose compared to virgin females, and also if choice differed if females were placed in plates with males versus if they were in plates alone. 
 
@@ -16,12 +17,12 @@ The four diets contain a variety of P:C ratios based on what has been found that
 
 <img title="drosophilplot" alt="drosopAlt text" src="/images/malesvfemalesplot.png" width=500 height=400>
 
-*Figure: A boxplot showing the divergent choice of different protein: carbohydrate diets on females and males.*
+*Figure 1: A boxplot showing the divergent choice of different protein: carbohydrate diets on females and males.*
 
 
 <img title="droso pic" alt="drosopAlt text" src="/images/drospic.png" width=200 height=200>
 
-*Figure: Mated female feeding behaviour shown in an experimental petri dish. The top of the petri dish shows diet ratios from (left to right) 8:1 and 2:1, and the bottom of the dish shows P:C ratios 1:2 and 1:8. Mated females are shown to mainly feed on the 8:1 diet.*
+*Figure 2: Mated female feeding behaviour shown in an experimental petri dish. The top of the petri dish shows diet ratios from (left to right) 8:1 and 2:1, and the bottom of the dish shows P:C ratios 1:2 and 1:8. Mated females are shown to mainly feed on the 8:1 diet.*
 
 
 ## Descriptions of data files
@@ -116,9 +117,10 @@ An excel document containing the amount of mated female flies on a plate with ma
 
 
 
-## Descriptions of analysis files
+## Descriptions of data analysis files
  
-### Data analysis, including data visualisation and statistical tests for the different experiments. 
+### Data visualisation
+### Statistical analysis 
 
 #### Experiment 1 
 An experiment looking at the feeding behaviour of mated males compared with the feeding behaviour of mated females over the course of 2 days when given the choice of 4x altered P:C ratios. 
