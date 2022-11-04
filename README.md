@@ -8,7 +8,8 @@
 This was a Genetics Society funded internship hosted by the Professor Tracey Chapman lab at University of East Anglia (UEA) Summer 2022. 
 
  
-The aim of this project was to investigate the effect of altered protein:carbohydrate (P:C) ratios in adult diets on lifespan in male and female *Drosophila melanogaster*, and to look at how dietary choice is influenced by sex and mating status, and this explains divergent lifespans.
+The aim of this project was to investigate the effect of altered protein:carbohydrate (P:C) ratios in adult diets on lifespan in male and female *Drosophila melanogaster*.
+
 
 This projected investigated the divergent diet choices of *drosophila melanogaster*, and looked at  how males chose compared to females, how mated females chose compared to virgin females, and also if choice differed if females were placed in plates with males versus if they were in plates alone. 
 
