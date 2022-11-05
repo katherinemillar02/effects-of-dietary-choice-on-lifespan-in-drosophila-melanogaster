@@ -18,7 +18,7 @@ The four diets contain a variety of P:C ratios based on what has been found that
 
 <img title="drosophilplot" alt="drosopAlt text" src="/images/matedvvirgin.png" width=500 height=400>
 
-*Figure 1: A boxplot showing the divergent choice of different protein: carbohydrate diets of mated females and virgin females.*
+*Figure 1: A boxplot showing the divergent choice of different protein: carbohydrate (P:C) diets of mated females (left) and virgin females (right).*
 
 
 <img title="droso pic" alt="drosopAlt text" src="/images/drospic.png" width=200 height=200>
@@ -120,8 +120,6 @@ An excel document containing the amount of mated female flies on a plate with ma
 
 ## Descriptions of data analysis files
  
-### Data visualisation
-### Statistical analysis 
 
 #### Experiment 1 
 An experiment looking at the feeding behaviour of mated males compared with the feeding behaviour of mated females over the course of 2 days when given the choice of 4x altered P:C ratios. 
