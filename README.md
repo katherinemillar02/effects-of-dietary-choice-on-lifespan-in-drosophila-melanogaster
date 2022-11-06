@@ -9,11 +9,13 @@ This was a Genetics Society funded internship hosted by the Professor Tracey Cha
 
 The aim of this project was to investigate the effect of altered protein:carbohydrate (P:C) ratios and dietary choice on lifespan in male and female *Drosophila melanogaster*.
 
-This projected investigated the divergent diet choices of *drosophila melanogaster*, and looked at  - how males chose compared to females (experiment 1)
-- how mated females chose compared to virgin females (experiment 2a and 2b)
-- if choice differed if females were placed in plates with males compared with if they were in plates alone (experiment 3)
+This projected investigated the divergent diet choices of *drosophila melanogaster*, and looked at:
 
-The basis of this experiment monitored the effect of sex and mating status on having divergent dietary choice. A "patch preference assay" (Figure 2) was used in which there were four altered P:C ratio patches of diets which are known to give an optimal lifespan/ the best reproductive success. The P:C diets chosen in these experiments were: 8:1, 2:1, 1:2, 1:8. 
+- how males chose compared to females (Experiment 1)
+- how mated females chose compared to virgin females (ExperimentS 2a and 2b)
+- if choice differed if females were placed in plates with males compared with if they were in plates alone (Experiment 3)
+
+The basis of this experiment monitored the effect of sex and mating status on having divergent dietary choice. A "Patch Preference Assay" (Churchill) was used in which there were four altered P:C ratio patches of diets which are known to give an optimal lifespan/ the best reproductive success, as shown in Figure 2. The P:C diets chosen in these experiments were: 8:1, 2:1, 1:2, 1:8. 
 
 <img title="drosophilplot" alt="drosopAlt text" src="/images/matedvvirgin.png" width=500 height=400>
 
