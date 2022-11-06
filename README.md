@@ -118,12 +118,14 @@ An excel document containing the amount of mated female flies on a plate with ma
 
 
 
-## Descriptions of data analysis files
+## Descriptions of R scripts containing data analysis files
  
 
-#### Experiment 1 
-An experiment looking at the feeding behaviour of mated males compared with the feeding behaviour of mated females over the course of 2 days when given the choice of 4x altered P:C ratios. 
-This experiment also looks into diet choice of where females chose to lay the eggs. 
+#### Experiment1.R
+##### Experiment 1 
+This script contains data analysis and data visualisation of experiment 1. Experiment 1
+shows the feeding behaviour of mated male flies compared with the feeding behaviour of mated female flies. Data was collected over the course of 2 days, and all flies were given the choice of 4x altered P:C ratios in a choice "patch preference assay" (Churchill et al). 
+This experiment also shows data analysis of divergent dietary choice of where female flies chose to lay thier eggs. 
 
 #### Experiment 2a
 An experiment looking at the feeding behaviour of mated females compared with the feeding behaviour of virgin females over the course of 3 days, when given the choice of 4x altered P:C ratios. 
