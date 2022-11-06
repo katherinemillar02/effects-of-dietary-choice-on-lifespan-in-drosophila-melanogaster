@@ -5,16 +5,15 @@
 
 <img title="droso pic" alt="drosopAlt text" src="/images/flypic.jpg" width=200 height=100>
 
-This was a Genetics Society funded internship hosted by the Professor Tracey Chapman lab at University of East Anglia (UEA) Summer 2022. 
+This was a Genetics Society funded internship hosted by the Professor Tracey Chapman lab at University of East Anglia (UEA) in Summer 2022. 
 
- 
-The aim of this project was to investigate the effect of altered protein:carbohydrate (P:C) ratios in adult diets on lifespan in male and female *Drosophila melanogaster*.
+The aim of this project was to investigate the effect of altered protein:carbohydrate (P:C) ratios and dietary choice on lifespan in male and female *Drosophila melanogaster*.
 
+This projected investigated the divergent diet choices of *drosophila melanogaster*, and looked at  - how males chose compared to females (experiment 1)
+- how mated females chose compared to virgin females (experiment 2a and 2b)
+- if choice differed if females were placed in plates with males compared with if they were in plates alone (experiment 3)
 
-This projected investigated the divergent diet choices of *drosophila melanogaster*, and looked at  how males chose compared to females, how mated females chose compared to virgin females, and also if choice differed if females were placed in plates with males versus if they were in plates alone. 
-
-The four diets contain a variety of P:C ratios based on what has been found that is best for lifespan and reproductive success through previous research. The P:C diets chosen in these experiments were:  
-8:1, 2:1, 1:2, 1:8. 
+The basis of this experiment monitored the effect of sex and mating status on having divergent dietary choice. A "patch preference assay" (Figure 2) was used in which there were four altered P:C ratio patches of diets which are known to give an optimal lifespan/ the best reproductive success. The P:C diets chosen in these experiments were: 8:1, 2:1, 1:2, 1:8. 
 
 <img title="drosophilplot" alt="drosopAlt text" src="/images/matedvvirgin.png" width=500 height=400>
 
