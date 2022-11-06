@@ -114,30 +114,22 @@ exp2bvirginall_plot <- exp2bvirginall_summary %>%
 #------------------ Using patchwork to combine the plots
 exp2bmatedall_plot + exp2bvirginall_plot
 
-
-
-
-
-
-
-
 #------------------- 👶 Offspring counts ----
 
 
-
+# Reading the data in 
 offspring_ex2b <- (read_excel(path = "data/OffspringCountExp2b.xlsx", na = "NA"))
-
+# Making the data long 
 long_offspring_ex2b <- offspring_ex2b %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "offspring_numbers")
-
+# Summarising the data 
 offspring_ex2b_summary <- long_offspring_ex2b %>%
   group_by(diet) %>% 
   summarise(mean = mean(offspring_numbers),
             sd = sd(offspring_numbers),
             n = n(),
             se = sd/sqrt(n))
-
-
+# Visualising the data 
 offspring_ex2b_plot <- offspring_ex2b_summary %>% 
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
@@ -158,9 +150,6 @@ offspring_ex2b_plot <- offspring_ex2b_summary %>%
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Mean (+/- S.E.) number of virgin female flies")+
   theme_minimal()
-
-
-
 
 #------------------ Overall data analysis for experiment 2b--------------------#
 # fly_numbers: number of flies on a flies on a food patch 
