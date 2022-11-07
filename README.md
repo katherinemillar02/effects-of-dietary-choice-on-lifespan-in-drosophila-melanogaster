@@ -3,7 +3,7 @@
 
 ## Project Aims
 
-<img title="droso pic" alt="drosopAlt text" src="/images/flypic.jpg" width=200 height=100>
+<img title="droso pic" alt="drosopAlt text" src="/images/flypic.jpg, logo.png" width=200 height=100>
 
 This was a Genetics Society funded internship hosted by the Professor Tracey Chapman lab at University of East Anglia (UEA) in Summer 2022. 
 
