@@ -107,3 +107,75 @@ exp3femalesall_plot + exp3both_plot
 ```
 
 #### The calculated proportional value of the mean average number of flies feeding on diets across 2 days, just mated females alone on a plate (shown in red) and mated females along with males on a plate (shown in purple)
+
+
+
+
+
+
+## OVERALL OFFSPRING OVIPOSITION BEHAVIOUR 
+
+#### Experiment 1 
+##### Mated female 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+egg_counting1_plot
+
+```
+
+#### Experiment 2a
+##### Mated female 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+mated_females_e2_eggcount_plot
+
+```
+
+##### Virgin female 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+virgin_female_e2_eggcount_plot
+
+```
+
+#### Experiment 2b
+##### Mated female 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+offspringcount_e2b_plot
+
+```
+
+#### Experiment 3
+##### Mated female (just females - raw count)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+offspring_alone_exp3_plot 
+
+```
+
+##### Mated female (both)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+offspring_both_exp3_plot
+
+```
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+offspring_alone_exp3_plot2 + offspring_both_exp3_plot2 
+
+```
+
+
+
+
+

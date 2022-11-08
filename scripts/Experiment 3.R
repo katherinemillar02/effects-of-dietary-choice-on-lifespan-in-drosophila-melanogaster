@@ -72,6 +72,58 @@ offspring_both_exp3_plot <- offspring_both_exp3_summary%>%
        y = "Mean (+/- S.E.) offspring from both plates")+
   theme_minimal()
 
+
+exp3offspringalone2 <- long_offspring_both_exp3 %>%  
+  mutate(offspring_prop = if_else(variable =="both", offspring_numbers/5,
+                                  offspring_numbers/10))
+
+
+offspring_both_exp3_plot2 <-  offspring_both_exp3_summary2%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "red",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "red",
+                width = 0.2)+
+  geom_jitter(data = exp3offspringboth2,
+              aes(x = diet,
+                  y = offspring_prop),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,10)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) offspring from both plates")+
+  theme_minimal()
+
+
+
+
+offspring_alone_exp3_plot2 <-  offspring_alone_exp3_summary2%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "red",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "red",
+                width = 0.2)+
+  geom_jitter(data = exp3offspringalone2,
+              aes(x = diet,
+                  y = offspring_prop),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,10)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Mean (+/- S.E.) offspring from both plates")+
+  theme_minimal()
+
+
 #----- Patchworking the data 
 offspring_alone_exp3_plot + offspring_both_exp3_plot
 
@@ -112,6 +164,10 @@ exp3offspringboth2 <- long_offspring_alone_exp3 %>% mutate(variable = "alone") %
 exp3offspringalone2 <- long_offspring_both_exp3 %>% mutate(variable = "both") %>% 
   mutate(offspring_prop = if_else(variable =="both",  offspring_numbers/5,
                                   offspring_numbers/10))
+
+exp3offspringalone2 <- long_offspring_both_exp3 %>% mutate(status = "both") %>% mutate(offspring_prop = if_else(status =="both", 
+                                                                                                                 offspring_numbers/10,
+                                                                                                                 offspring_numbers/5))
            
                                                                                                                                                                                                                  
 # Making a linear model alone
