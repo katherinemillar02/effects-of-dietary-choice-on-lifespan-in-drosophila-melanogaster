@@ -30,7 +30,7 @@ offspringcount_e2b_plot <- offspringcount_e2b_summary %>%
               shape = 21)+
   ylim(0,200)+
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) number of flies on a patch", 
+       y = "Mean (+/- S.E.) offspring from mated flies on a patch", 
        title = "Mated Female")+
   theme_minimal()
 

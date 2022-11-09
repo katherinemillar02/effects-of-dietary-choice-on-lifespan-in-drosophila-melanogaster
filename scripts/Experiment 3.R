@@ -36,8 +36,9 @@ offspring_alone_exp3_plot <- offspring_alone_exp3_summary%>%
               shape = 21)+
   ylim(0,150)+ 
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) offspring from alone plates")+
+       y = "Raw Mean (+/- S.E.) offspring from alone plates")+
   theme_minimal()
+
 #------- Female count ( with males on a plate) 
 offspring_both_exp3 <- read_excel("data/Exp3OffspringBoth.xlsx")
 #------- Making the data long 
@@ -69,7 +70,7 @@ offspring_both_exp3_plot <- offspring_both_exp3_summary%>%
               shape = 21)+
   ylim(0,200)+ 
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) offspring from both plates")+
+       y = "Raw Mean (+/- S.E.) offspring from plate w/males")+
   theme_minimal()
 
 
@@ -96,7 +97,7 @@ offspring_both_exp3_plot2 <-  offspring_both_exp3_summary2%>%
               shape = 21)+
   ylim(0,10)+ 
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) offspring from both plates")+
+       y = "Prop Mean (+/- S.E.) offspring from plate w males")+
   theme_minimal()
 
 
@@ -120,7 +121,7 @@ offspring_alone_exp3_plot2 <-  offspring_alone_exp3_summary2%>%
               shape = 21)+
   ylim(0,10)+ 
   labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Mean (+/- S.E.) offspring from both plates")+
+       y = "Prop Mean (+/- S.E.) offspring from plates alone")+
   theme_minimal()
 
 
