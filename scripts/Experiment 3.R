@@ -74,9 +74,9 @@ offspring_both_exp3_plot <- offspring_both_exp3_summary%>%
   theme_minimal()
 
 
-exp3offspringalone2 <- long_offspring_both_exp3 %>%  
-  mutate(offspring_prop = if_else(variable =="both", offspring_numbers/5,
-                                  offspring_numbers/10))
+#exp3offspringalone2 <- long_offspring_both_exp3 %>%  
+  #mutate(offspring_prop = if_else(variable =="both", offspring_numbers/5,
+                       #           offspring_numbers/10))
 
 
 offspring_both_exp3_plot2 <-  offspring_both_exp3_summary2%>% 
