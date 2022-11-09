@@ -74,10 +74,13 @@ offspring_both_exp3_plot <- offspring_both_exp3_summary%>%
   theme_minimal()
 
 
-#exp3offspringalone2 <- long_offspring_both_exp3 %>%  
-  #mutate(offspring_prop = if_else(variable =="both", offspring_numbers/5,
-                       #           offspring_numbers/10))
 
+#-- Mutating variables for offspring count (alone, proportional)
+
+exp3offspringalone2 <- long_offspring_alone_exp3 %>% mutate(status = "alone") %>% mutate(offspring_prop = if_else(status =="alone", 
+                                                                                                               offspring_numbers/10,
+                                                                                                                 offspring_numbers/5))
+#-- Visualising the data alone, proportional)
 
 offspring_both_exp3_plot2 <-  offspring_both_exp3_summary2%>% 
   ggplot(aes(x = diet, y = mean))+
@@ -102,6 +105,13 @@ offspring_both_exp3_plot2 <-  offspring_both_exp3_summary2%>%
 
 
 
+#-- Mutating both variable for proportional 
+
+
+exp3offspringboth2 <- long_offspring_both_exp3 %>% mutate(status = "both") %>% mutate(offspring_prop = if_else(status =="alone", 
+                                                                                                                  offspring_numbers/10,
+                                                                                                                  offspring_numbers/5))
+#-- Visualising the data 
 
 offspring_alone_exp3_plot2 <-  offspring_alone_exp3_summary2%>% 
   ggplot(aes(x = diet, y = mean))+
