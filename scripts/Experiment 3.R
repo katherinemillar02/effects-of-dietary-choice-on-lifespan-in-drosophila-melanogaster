@@ -1,10 +1,10 @@
 #----------------------------------- 🪰 Experiment 3 🪰 ----------------------------
 
-
+#exp3offspringalone2: mutated "alone" variable, and proportional count. 
 
 #----- 👶Offspring counts --------------------------------------
 
-#----- Raw offspring numbers
+#--------------------------------------------- Raw offspring numbers
 #------- Just females on a plate 
 offspring_alone_exp3 <- read_excel("data/Exp3OffspringAlone.xlsx")
 #------- Making the data long 
@@ -74,44 +74,23 @@ offspring_both_exp3_plot <- offspring_both_exp3_summary%>%
   theme_minimal()
 
 
-
-#-- Mutating variables for offspring count (alone, proportional)
+#---------------------------------------------- Proportional offspring counts 
+#--------- Mutating variables for offspring count (alone, proportional)
 
 exp3offspringalone2 <- long_offspring_alone_exp3 %>% mutate(status = "alone") %>% mutate(offspring_prop = if_else(status =="alone", 
                                                                                                                offspring_numbers/10,
                                                                                                                  offspring_numbers/5))
-#-- Visualising the data alone, proportional)
-
-offspring_both_exp3_plot2 <-  offspring_both_exp3_summary2%>% 
-  ggplot(aes(x = diet, y = mean))+
-  geom_bar(stat = "identity",
-           fill = "skyblue",
-           colour = "red",
-           alpha = 0.6)+
-  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "red",
-                width = 0.2)+
-  geom_jitter(data = exp3offspringboth2,
-              aes(x = diet,
-                  y = offspring_prop),
-              fill = "skyblue",
-              colour = "black",
-              width = 0.2,
-              shape = 21)+
-  ylim(0,10)+ 
-  labs(x = "Diet \n(Protein; Carbohydrate)",
-       y = "Prop Mean (+/- S.E.) offspring from plate w males")+
-  theme_minimal()
 
 
+#----- Summary of in a plate alone                                                                                                    
+offspring_alone_exp3_summary2  <- exp3offspringalone2 %>%  
+  group_by(diet) %>% 
+  summarise(mean = mean(offspring_prop),
+            sd = sd(offspring_prop),
+            n = n(),
+            se = sd/sqrt(n))
 
-#-- Mutating both variable for proportional 
-
-
-exp3offspringboth2 <- long_offspring_both_exp3 %>% mutate(status = "both") %>% mutate(offspring_prop = if_else(status =="alone", 
-                                                                                                                  offspring_numbers/10,
-                                                                                                                  offspring_numbers/5))
-#-- Visualising the data 
+#------------ Visualising the data for alone/ proportional 
 
 offspring_alone_exp3_plot2 <-  offspring_alone_exp3_summary2%>% 
   ggplot(aes(x = diet, y = mean))+
@@ -129,24 +108,64 @@ offspring_alone_exp3_plot2 <-  offspring_alone_exp3_summary2%>%
               colour = "black",
               width = 0.2,
               shape = 21)+
-  ylim(0,10)+ 
+  ylim(0,20)+ 
   labs(x = "Diet \n(Protein; Carbohydrate)",
        y = "Prop Mean (+/- S.E.) offspring from plates alone")+
   theme_minimal()
 
+#------------------ Mutating both variable for proportional 
+
+
+exp3offspringboth2 <- long_offspring_both_exp3 %>% mutate(status = "both") %>% mutate(offspring_prop = if_else(status =="alone", 
+                                                                                                                  offspring_numbers/10,
+                                                                                                                  offspring_numbers/5))
+
+
+#----- Summary of of in a plate with males                                                                                                                                                                                                            
+offspring_both_exp3_summary2  <- exp3offspringboth2 %>%  
+  group_by(diet) %>% 
+  summarise(mean = mean(offspring_prop),
+            sd = sd(offspring_prop),
+            n = n(),
+            se = sd/sqrt(n))
+
+#------- Visualising the data for both, proportional)
+
+offspring_both_exp3_plot2 <-  offspring_both_exp3_summary2%>% 
+  ggplot(aes(x = diet, y = mean))+
+  geom_bar(stat = "identity",
+           fill = "skyblue",
+           colour = "red",
+           alpha = 0.6)+
+  geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
+                colour = "red",
+                width = 0.2)+
+  geom_jitter(data = exp3offspringboth2,
+              aes(x = diet,
+                  y = offspring_prop),
+              fill = "skyblue",
+              colour = "black",
+              width = 0.2,
+              shape = 21)+
+  ylim(0,20)+ 
+  labs(x = "Diet \n(Protein; Carbohydrate)",
+       y = "Prop Mean (+/- S.E.) offspring from plate w males")+
+  theme_minimal()
+
+
 
 #----- Patchworking the data 
-offspring_alone_exp3_plot + offspring_both_exp3_plot
+offspring_alone_exp3_plot2 + offspring_both_exp3_plot2
 
 #--- 📊 Offspring Data analysis -----
 
-#---- Alone Offspring Data analysis (real numbers) 
+#------------------ Alone Offspring Data analysis (real numbers) 
 # Making a linear model 
 exp3offspring_alone_lm <- lm(offspring_numbers ~ diet, data = long_offspring_alone_exp3)
 # Using the summary function to look at the data 
 summary(exp3offspring_alone_lm)
 
-#-------- "Both" Data analysis (real numbers) 
+#------------------------- "Both" Data analysis (real numbers) 
 # Making a linear model
 exp3offspring_both_lm <- lm(offspring_numbers ~ diet, data = long_offspring_both_exp3)
 # Summarising the data to view 
@@ -168,19 +187,7 @@ summary(exp3offspringall)
 #----- Making a proportion variable 
 #-- Offspring proportion
 #----- Making proportion models of the offspring counting data 
-# Adding varibles 
-exp3offspringboth2 <- long_offspring_alone_exp3 %>% mutate(variable = "alone") %>% mutate(offspring_prop = if_else(variable =="both", 
-                                                                                                            offspring_numbers/5,
-                                                                                                            offspring_numbers/10))
-exp3offspringalone2 <- long_offspring_both_exp3 %>% mutate(variable = "both") %>% 
-  mutate(offspring_prop = if_else(variable =="both",  offspring_numbers/5,
-                                  offspring_numbers/10))
-
-exp3offspringalone2 <- long_offspring_both_exp3 %>% mutate(status = "both") %>% mutate(offspring_prop = if_else(status =="both", 
-                                                                                                                 offspring_numbers/10,
-                                                                                                                 offspring_numbers/5))
-           
-                                                                                                                                                                                                                 
+                                                                              
 # Making a linear model alone
 exp3offspring_alone_lm2 <- lm(offspring_prop ~ diet, data = exp3offspringalone2)
 # Using the summary function to look at the data 
@@ -193,31 +200,14 @@ exp3offspring_both_lm2 <- lm(offspring_prop ~ diet, data = exp3offspringalone2)
 summary(exp3offspring_both_lm2) 
 
 #----- Making summaries of the data sets but with offspring proportions                                
-                                                                                                                                                                                                                                                                                      
-#----- Summary of in a plate alone                                                                                                    
-offspring_alone_exp3_summary2  <- exp3offspringalone2 %>%  
-  group_by(diet) %>% 
-  summarise(mean = mean(offspring_prop),
-            sd = sd(offspring_prop),
-            n = n(),
-            se = sd/sqrt(n))
- #----- Summary of of in a plate with males                                                                                                                                                                                                            
- offspring_both_exp3_summary2  <- exp3offspringboth2 %>%  
-   group_by(diet) %>% 
-   summarise(mean = mean(offspring_prop),
-             sd = sd(offspring_prop),
-             n = n(),
-             se = sd/sqrt(n))
+
 
  #-----  Binding the two datasets (with the proportion variable)
 exp3offspring2 <- rbind(exp3offspringboth2, exp3offspringalone2)
 #----- Making a linear model with an interaction effect and proportion 
-exp3offspring_lm3 <- lm(offspring_prop ~ diet * variable, data = exp3offspring2)
+exp3offspring_lm3 <- lm(offspring_prop ~ diet * status, data = exp3offspring2)
 # Using summary function to look at the data 
 summary(exp3offspring_lm)
-
-
-
 
 
 #-----------------  Feeding behaviour analysis 
