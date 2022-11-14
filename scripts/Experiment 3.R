@@ -207,7 +207,7 @@ exp3offspring2 <- rbind(exp3offspringboth2, exp3offspringalone2)
 #----- Making a linear model with an interaction effect and proportion 
 exp3offspring_lm3 <- lm(offspring_prop ~ diet * status, data = exp3offspring2)
 # Using summary function to look at the data 
-summary(exp3offspring_lm)
+summary(exp3offspring_lm3)
 
 
 #-----------------  Feeding behaviour analysis 
