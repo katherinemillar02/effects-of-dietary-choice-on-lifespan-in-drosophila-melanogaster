@@ -1,6 +1,6 @@
 #------------------------------ 🪰 Experiment 2b 🪰 ----------------------------
 #----- 👶 Offspring counting ----
-#----- Data not ready yet 
+
 offspringcount_e2b <- (read_excel(path = "data/OffspringCountExp2b.xlsx", na = "NA"))
 
 long_offspringcount_e2b <- offspringcount_e2b %>% pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "offspring_numbers")
