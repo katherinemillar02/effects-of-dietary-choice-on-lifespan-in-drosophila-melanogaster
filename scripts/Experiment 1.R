@@ -70,6 +70,8 @@ broom::tidy(eggcountingls1,
             conf.int=T)
 
 
+
+
 #- ------ FEEDING BEHAHAVIOUR 
 #---------------- ♀️ Female feeding behaviour -----------------------------------
 #----- Day 1 

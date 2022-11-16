@@ -10,6 +10,26 @@ output: html_notebook
 
 ### Experiment 1 
 
+```{r}
+performance::check_model(eggcountingls1)
+performance::check_model(eggcountingls1, check = c("qq"))
+```
+Normality: looks awful
+linearity/ homogenity: pretty awful too 
+
+So! 
+
+GLM? 
+
+eggcountinglsglm <- glm(egg_numbers ~ diet, data = long_egg_counting1, family = quasipoisson)
+summary(eggcountinglsglm)
+
+```{r}
+performance::check_model(eggcountinglsglm)
+performance::check_model(eggcountinglsglm, check = c("qq"))
+```
+normality : lines are not really on the line 
+linerity/homogenity: points arent as close together but the line is not flat 
 
 
 ### Experiment 2 
@@ -191,6 +211,9 @@ performance::check_model(exp3offspring_lm3)
 Normality: doesn't look great, few loose points 
 linearity/ homogenity: points are too close together 
 
+QUESTION!!
+We discussed that for offspring count, we found that it doesn't matter about doing proportions.
+Does this apply here too? 
 
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
