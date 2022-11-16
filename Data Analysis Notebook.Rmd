@@ -68,12 +68,10 @@ I could go into using more complex models but it is best to stop here as there i
 Final choice: generalised linear model with quasipoisson (and with day dropped from the model).
 Now have chosen generalised linear model. 
 
+QUESTION!! 
 Experiment 3 
 Write up 
-QUESTION!! 
 What is the small number on the F value?? 
-
-
 
 Offspring counting for experiment 3 
 Data Analysis 
@@ -135,9 +133,63 @@ performance::check_model(exp3offspring_both_lm2)
 
 
 c. model of alone and both plate with an interaction effect 
+```{r}
+performance::check_model(exp3allglm2, check = c("qq"))
+performance::check_model(exp3allglm2)
+```
+- Normality of residuals: not great at all 
+- Homogenity of variance: looks decent 
 
 
+OFFSPRING DATA ANALYSIS -- 
 
+Real numbers, offspring alone 
+```{r}
+performance::check_model(exp3offspring_alone_lm, check = c("qq"))
+performance::check_model(exp3offspring_alone_lm)
+```
+Normality: looks pretty good 
+linearity/ homogenity: points are pretty close together 
+
+Real numbers, offspring (females on a plate with males)
+```{r}
+performance::check_model(exp3offspring_both_lm, check = c("qq"))
+performance::check_model(exp3offspring_both_lm)
+```
+Normality: pretty good, a few alone points 
+linearity/ homogenity: points a bit too close together 
+
+Real numbers, both and alone with interaction effect offspring
+```{r}
+performance::check_model(exp3offspringall, check = c("qq"))
+performance::check_model(exp3offspringall)
+```
+Normality: could be better, but looks okay
+linearity/ homogenity: points pretty close together 
+
+proportional numbers, alone 
+```{r}
+performance::check_model(exp3offspring_alone_lm2 , check = c("qq"))
+performance::check_model(exp3offspring_alone_lm2 )
+```
+Normality: looks okay, few spare points
+linearity/ homogenity: points are quite close together 
+
+proportional numbers, both
+```{r}
+performance::check_model(exp3offspring_both_lm2 , check = c("qq"))
+performance::check_model(exp3offspring_both_lm2 )
+```
+Normality: looks okay, few spare points
+linearity/ homogenity: points are quite close together 
+
+proportional numbers, both and alone including an interaction effect 
+```{r}
+performance::check_model(exp3offspring_lm3,check = c("qq"))
+performance::check_model(exp3offspring_lm3)
+```
+Normality: doesn't look great, few loose points 
+linearity/ homogenity: points are too close together 
 
 
 
