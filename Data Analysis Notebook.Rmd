@@ -20,7 +20,7 @@ linearity/ homogenity: pretty awful too
 So! 
 
 GLM? 
-
+QUESTION!!!!
 I am beginning to see through going through different analysis that you cannot have one without the other with regards to good normality and linearity/ homogenity
 So what is preffered: good normality or good linearity/ homogenity? go with glm..? 
 
@@ -48,6 +48,7 @@ how to compare values?
 glm results are in log so..? 
 
 log(54.50)the same
+log(15.30) = 2.72 = 0.2474 - very much not the same, why? 
 
 exp(3.99)
 more or less the same?? 
@@ -56,6 +57,8 @@ cannot do this for "-"
 also how do i transform log values back? 
 I remember from the workbook (and looking at the new one again), that it was 
 exp? 
+The first values calculated are the same, so choose models based on performance? 
+
 
 Feeding behaviour analysis: 
 
@@ -76,6 +79,10 @@ normality : looks awful
 linerity/homogenity:  looks quite ok 
 
 
+lm looks better... 
+```{r}
+summary(exp1alllm)
+```
 
 
 ### Experiment 2 
