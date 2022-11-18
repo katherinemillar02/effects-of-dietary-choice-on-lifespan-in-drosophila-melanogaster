@@ -58,10 +58,10 @@ female_notfeedinge1_plot + male_notfeedinge1_plot
 
 ### Egg counting 
 
+
+###### This has been done with proportional values due to virgins dying, at different time-points. Found virgin values were 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-
 mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
-
 ```
 
 #### The mean average of eggs across four diet ratios with mated females (shown in red) and virgin females (shown in purple)
@@ -70,9 +70,7 @@ mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
 ### Feeding behaviour 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-
 exp2matedall_plot + exp2avirginall_plot
-
 ```
 
 #### The mean average number of flies feeding on diets across 3 days, mated females (shown in red) and virgin females (shown in pink)
@@ -86,9 +84,7 @@ exp2matedall_plot + exp2avirginall_plot
 ### Feeding behaviour 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-
 exp2bmatedall_plot + exp2bvirginall_plot
-
 ```
 
 #### The mean average number of flies feeding on diets across 2 days, mated females (shown in red) and virgin females (shown in pink)
@@ -101,9 +97,7 @@ exp2bmatedall_plot + exp2bvirginall_plot
 ### Feeding behaviour 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-
 exp3femalesall_plot + exp3both_plot
-
 ```
 
 #### The calculated proportional value of the mean average number of flies feeding on diets across 2 days, just mated females alone on a plate (shown in red) and mated females along with males on a plate (shown in purple)
