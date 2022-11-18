@@ -1,5 +1,5 @@
 
-# Effects of Diet on Lifespan in *Drosophila melanogaster*
+# Effects of dietary choice on Lifespan in *Drosophila melanogaster*
 
 ## Project Aims
 
@@ -22,6 +22,35 @@ The basis of this experiment monitored the effect of sex and mating status on ha
 <img title="drosophilplot" alt="drosopAlt text" src="/images/matedvvirgin.png" width=500 height=400>
 
 *Figure 2: A boxplot showing the divergent choice of different protein: carbohydrate (P:C) diets of mated females (left) and virgin females (right).*
+
+## 📝 Descriptions of R scripts containing data analysis 
+ 
+
+#### "Experiment1.R"
+##### Experiment 1 Feeding behaviour 
+This script contains data analysis and data visualisation of experiment 1. Experiment 1
+shows the feeding behaviour of mated male flies compared with the feeding behaviour of mated female flies. Data was collected over the course of 2 days, and all flies were given the choice of 4x altered P:C ratios in a choice "patch preference assay" (Churchill et al).
+##### Experiment 1 Oviposition behaviour
+This experiment also shows data analysis of divergent dietary choice of where female flies chose to lay their eggs. 
+
+#### "Experiment 2a.R"
+##### Experiment 2a Feeding behaviour 
+This script contains data analysis and data visualisation of experiment 2a. Experiment 2a 
+shows feeding behaviour of mated females compared with the feeding behaviour of virgin females over the course of 3 days, when given the choice of 4x altered P:C ratios. 
+##### Experiment 2a Oviposition behaviour
+This experiment also looks into diet choice of where the different types of females chose to lay the eggs. 
+
+#### "Experiment 2b.R" 
+##### Experiment 2b Feeding behaviour
+This script contains data analysis and data visualisation for experiment 2b. Experiment 2b is a repeat of the experiment looking at the feeding behaviour of mated females compared with the feeding behaviour of virgin females. Experiment 2b data was collected over the course of 2 days, when flies were given the choice of 4x altered P:C ratios. 
+##### Experiment 2b Oviposition behaviour
+This experiment looks at on what patch mated females chose to lay their eggs, based off offspring count data. 
+
+#### "Experiment 3.R"
+##### Experiment 3 Feeding behaviour 
+This script contains data analysis and data visualisation for experiment 3. Experiment 3 looks at the feeding behaviour of n=10 females on a replicate of plates, compared with n=5 females mixed with n=5 males on a replicate of plate. Feeding behaviour is monitored from 4x different P:C ratios. Data was collected over the course of 2 days. 
+##### Experiment 3 Oviposition behaviour
+This experiment also includes analysis of the offspring produced from egg laying on the 4x different P:C ratios. 
 
 
 ## 📈 Descriptions of data files
@@ -115,33 +144,4 @@ MatedFemalesE3D2(M+F).xlsx:
 An excel document containing the amount of mated female flies on a plate with males that were on any of the 4 different protein:carbohydrate ratios from day 1 observations from experiment 3.
 
 
-
-## 📝 Descriptions of R scripts containing data analysis 
- 
-
-#### "Experiment1.R"
-##### Experiment 1 Feeding behaviour 
-This script contains data analysis and data visualisation of experiment 1. Experiment 1
-shows the feeding behaviour of mated male flies compared with the feeding behaviour of mated female flies. Data was collected over the course of 2 days, and all flies were given the choice of 4x altered P:C ratios in a choice "patch preference assay" (Churchill et al).
-##### Experiment 1 Oviposition behaviour
-This experiment also shows data analysis of divergent dietary choice of where female flies chose to lay their eggs. 
-
-#### "Experiment 2a.R"
-##### Experiment 2a Feeding behaviour 
-This script contains data analysis and data visualisation of experiment 2a. Experiment 2a 
-shows feeding behaviour of mated females compared with the feeding behaviour of virgin females over the course of 3 days, when given the choice of 4x altered P:C ratios. 
-##### Experiment 2a Oviposition behaviour
-This experiment also looks into diet choice of where the different types of females chose to lay the eggs. 
-
-#### "Experiment 2b.R" 
-##### Experiment 2b Feeding behaviour
-This script contains data analysis and data visualisation for experiment 2b. Experiment 2b is a repeat of the experiment looking at the feeding behaviour of mated females compared with the feeding behaviour of virgin females. Experiment 2b data was collected over the course of 2 days, when flies were given the choice of 4x altered P:C ratios. 
-##### Experiment 2b Oviposition behaviour
-This experiment looks at on what patch mated females chose to lay their eggs, based off offspring count data. 
-
-#### "Experiment 3.R"
-##### Experiment 3 Feeding behaviour 
-This script contains data analysis and data visualisation for experiment 3. Experiment 3 looks at the feeding behaviour of n=10 females on a replicate of plates, compared with n=5 females mixed with n=5 males on a replicate of plate. Feeding behaviour is monitored from 4x different P:C ratios. Data was collected over the course of 2 days. 
-##### Experiment 3 Oviposition behaviour
-This experiment also includes analysis of the offspring produced from egg laying on the 4x different P:C ratios. 
 
