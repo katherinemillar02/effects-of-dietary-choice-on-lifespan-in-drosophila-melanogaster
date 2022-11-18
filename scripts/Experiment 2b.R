@@ -175,7 +175,7 @@ offspring_ex2b_plot <- offspring_ex2b_summary %>%
        y = "Mean (+/- S.E.) number of virgin female flies")+
   theme_minimal()
 
-#------------------ Overall data analysis for experiment 2b--------------------#
+#------------------ 📊Feeding Behaviour data analysis for experiment 2b-----
 # fly_numbers: number of flies on a flies on a food patch 
 # type: whether or not the female fly is mated or a virgin 
 # diet: one of the four P:C ratios 
@@ -191,6 +191,10 @@ performance::check_model(exp2blm0)
 
 # linear model WITH  interaction effect
 exp2blm <- lm(fly_numbers ~ diet * type + day, data = exp2ball)
+summary(exp2blm)
+
+exp2blm2 <- lm(fly_numbers ~ diet * type, data = exp2ball)
+              
 # Checking the model 
 performance::check_model(exp2blm)
 

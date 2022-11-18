@@ -5,10 +5,10 @@ output: html_notebook
 
 
 
- notes - think of this as a lab notebook for your analysis, write notes, thoughts and process here, run code in chunks
+notes - think of this as a lab notebook for your analysis, write notes, thoughts and process here, run code in chunks
 
 
-### Experiment 1 
+### Experiment 1 -------------------------------------
 
 ```{r}
 performance::check_model(eggcountingls1)
@@ -85,13 +85,41 @@ summary(exp1alllm)
 ```
 
 
-### Experiment 2 
+### Experiment 2a ---------------------
+
+### Experiment 2b ---------------------
+
+trying with glm with day dropped as not significant and with quasi-poisson for overdisperson
+```{r}
+performance::check_model(exp2bglm2)
+performance::check_model(exp2bglm2, check = c("qq"))
+```
+normality: doesnt look great, points are okay in the middle 
+homogenity: looks pretty good 
+
+trying with lm... with day dropped as not significant 
+```{r}
+performance::check_model(exp2blm2)
+performance::check_model(exp2blm2, check = c("qq"))
+```
+normality: points only okay in the middle 
+homogenity/ linearity: points very close together but line is flat 
 
 
+from this... glm is better option!!
 
+seeing if summary matches for the sake of it
+```{r}
+summary(exp2bglm2)
+summary(exp2blm2)
+```
 
-### Experiment 3 
+exp(0.3800)
+- numbers seem very different even when put back to normal... bit weird? 
 
+### Experiment 3 --------------------------
+
+# Feeding behaviour data analysis -----------------
 
 Testing the summary function to look at a poisson glm test 
 ```{r}
@@ -219,10 +247,7 @@ For feeding behaviour analysis for experiment 3:
 - found with the glm that quasi-poisson would need to be used and to drop day as is not significant
 
 
-
-
-Experiment 3 - 
-OFFSPRING DATA ANALYSIS -- 
+# Offspring data analysis -------------------- 
 
 Real numbers, offspring alone 
 ```{r}
@@ -277,10 +302,4 @@ QUESTION!!
 We discussed that for behavioural/feeding count, we found that it doesn't matter about doing proportions. data much less complex 
 Does this apply here too? 
 
-
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
-
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
-
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
 
