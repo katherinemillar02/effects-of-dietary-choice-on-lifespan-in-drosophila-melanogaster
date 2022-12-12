@@ -18,4 +18,6 @@ Experiment 3
 
 When looking at female feeding behaviour, and if this changed with females alone in a feeding assay, to females who were in a feeding assay with males. There was a small interaction effect of day with diet and feeding choice, however this was not significant from not having day as an interaction effect, (F~2,10~ = 0.941, P = 0.3), and was therefore dropped from the full model. 
 
+do not know why i put those small values
+
 A generalized linear model with quasipoisson was used (as there was over-dispersion), which showed there was no significant difference in dietary choice between mated females who were alone on a plate and mated females who were on a plate with males. 
