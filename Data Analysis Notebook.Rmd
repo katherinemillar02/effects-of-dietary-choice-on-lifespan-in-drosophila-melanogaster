@@ -17,10 +17,9 @@ performance::check_model(eggcountingls1, check = c("qq"))
 Normality: looks awful
 linearity/ homogenity: pretty awful too 
 
-So! 
-
+So!
 GLM? 
-QUESTION!!!!
+******QUESTION!!!!*****
 I am beginning to see through going through different analysis that you cannot have one without the other with regards to good normality and linearity/ homogenity
 So what is preffered: good normality or good linearity/ homogenity? go with glm..? 
 
@@ -43,16 +42,13 @@ summary(eggcountingls1)
 summary(eggcountinglsglm)
 ```
 
-QUESTION!!!
+******QUESTION!!!!*****
 how to compare values? 
 glm results are in log so..? 
-
 log(54.50)the same
 log(15.30) = 2.72 = 0.2474 - very much not the same, why? 
-
 exp(3.99)
 more or less the same?? 
-
 cannot do this for "-" 
 also how do i transform log values back? 
 I remember from the workbook (and looking at the new one again), that it was 
@@ -82,7 +78,20 @@ linerity/homogenity:  looks quite ok
 lm looks better... 
 ```{r}
 summary(exp1alllm)
+broom::tidy(exp1alllm)
 ```
+
+what it shows 
+not much sig diff between 1:2 female and 1:8 male 
+
+big sig diff between 1:2 female and 2:1 male - big diff in low protein and low carb 
+< p = 0.001 
+
+probaly use emmeans package to compare properly? 
+
+
+
+
 
 
 ### Experiment 2a ---------------------
@@ -127,7 +136,7 @@ summary(exp3allglm1)
 ```
 
 
-QUESTION!!: 
+******QUESTION!!!!*****
 
 If I have a model which is poisson
 Do I 
@@ -167,9 +176,9 @@ I could go into using more complex models but it is best to stop here as there i
 Final choice: generalised linear model with quasipoisson (and with day dropped from the model).
 Now have chosen generalised linear model. 
 
-QUESTION!! 
+******QUESTION!!!!*****
 Experiment 3 
-Write up 
+Write up -- 
 What is the small number on the F value?? 
 
 Offspring counting for experiment 3 
@@ -298,7 +307,7 @@ Normality: doesn't look great, few loose points
 linearity/ homogenity: points are too close together 
 
 
-QUESTION!!
+******QUESTION!!!!*****
 We discussed that for behavioural/feeding count, we found that it doesn't matter about doing proportions. data much less complex 
 Does this apply here too? 
 
