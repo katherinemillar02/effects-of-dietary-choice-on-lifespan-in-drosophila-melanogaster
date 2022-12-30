@@ -17,7 +17,7 @@ The basis of this experiment monitored the effect of sex and mating status on ha
 
 <img title="droso pic" alt="drosopAlt text" src="/images/drospic.png" width=200 height=200>
 
-*Figure 1: Mated female feeding behaviour shown in an experimental petri dish. The top of the petri dish shows diet ratios from (left to right) 8:1 and 2:1, and the bottom of the dish shows P:C ratios 1:2 and 1:8. Mated females are shown to mainly feed on the 8:1 diet.*
+*__Figure 1__: Mated female feeding behaviour shown in an experimental petri dish. The top of the petri dish shows diet ratios from (left to right) 8:1 and 2:1, and the bottom of the dish shows P:C ratios 1:2 and 1:8. Mated females are shown to mainly feed on the 8:1 diet.*
 
 <img title="drosophilplot" alt="drosopAlt text" src="/images/matedvvirgin.png" width=500 height=400>
 
@@ -26,7 +26,7 @@ The basis of this experiment monitored the effect of sex and mating status on ha
 ## 📝 Descriptions of R scripts containing data analysis 
  
 
-#### "Experiment1.R"
+#### "Experiment 1.R"
 ##### Experiment 1 Feeding behaviour 
 This script contains data analysis and data visualisation of experiment 1. Experiment 1
 shows the feeding behaviour of mated male flies compared with the feeding behaviour of mated female flies. Data was collected over the course of 2 days, and all flies were given the choice of 4x altered P:C ratios in a choice "patch preference assay" (Churchill et al).
