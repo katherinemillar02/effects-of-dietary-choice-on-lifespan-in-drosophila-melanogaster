@@ -21,7 +21,7 @@ The basis of this experiment monitored the effect of sex and mating status on ha
 
 <img title="drosophilplot" alt="drosopAlt text" src="/images/matedvvirgin.png" width=500 height=400>
 
-*Figure 2: A boxplot showing the divergent choice of different protein: carbohydrate (P:C) diets of mated females (left) and virgin females (right).*
+*__Figure 2__: A boxplot showing the divergent choice of different protein: carbohydrate (P:C) diets of mated females (left) and virgin females (right).*
 
 ## 📝 Descriptions of R scripts containing data analysis 
  
