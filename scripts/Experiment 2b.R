@@ -214,10 +214,13 @@ performance::check_model(exp2boffspringglm)
 
 summary(exp2boffspringlm)
 
-drop1(exp2boffspringglm, test = "F")
+#overdispersion - so use quasi 
 
 
 
+exp2boffspringglm <- glm(offspring_numbers ~ diet, 
+                         data = long_offspring_ex2b, 
+                         family = quasipoisson(link = "log"))
 
 
 
