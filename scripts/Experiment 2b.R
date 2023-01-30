@@ -196,13 +196,25 @@ anova(exp2bglm2)
 
 
 
-# Offspring data analysis 
+#------------------ Offspring data analysis
 
 exp2boffspringlm <- lm(offspring_numbers ~ diet, data = long_offspring_ex2b)
+
+performance::check_model(exp2boffspringlm)
 
 summary(exp2boffspringlm)
 
 
+exp2boffspringglm <- glm(offspring_numbers ~ diet, 
+                         data = long_offspring_ex2b, 
+                         family = poisson(link = "log"))
+
+performance::check_model(exp2boffspringlm)
+performance::check_model(exp2boffspringglm)
+
+summary(exp2boffspringlm)
+
+drop1(exp2boffspringglm, test = "F")
 
 
 
