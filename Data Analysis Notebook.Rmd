@@ -136,6 +136,10 @@ summary(exp2boffspringlm)
 broom::tidy(exp2boffspringlm)
 emmeans::emmeans(exp2boffspringlm, specs = pairwise ~ diet)
 offspring_ex2b_plot
+
+performance::check_model(exp2boffspringlm, check = c("qq"))
+performance::check_model(exp2boffspringlm)
+
 ```
 
 ******QUESTION!!!!*****
@@ -144,6 +148,17 @@ says 1:8 + 1:2 are significant but in a pairwise they are not at all?
 
 
 1:8 significantly higher than 1:2 but not a lot to it 
+
+```{r}
+summary(exp2boffspringglm)
+broom::tidy(exp2boffspringlm)
+
+performance::check_model(exp2boffspringglm, check = c("qq"))
+
+```
+
+
+
 
 
 
