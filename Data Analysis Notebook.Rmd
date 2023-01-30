@@ -140,6 +140,7 @@ offspring_ex2b_plot
 performance::check_model(exp2boffspringlm, check = c("qq"))
 performance::check_model(exp2boffspringlm)
 
+
 ```
 
 ******QUESTION!!!!*****
@@ -153,13 +154,18 @@ says 1:8 + 1:2 are significant but in a pairwise they are not at all?
 summary(exp2boffspringglm)
 broom::tidy(exp2boffspringlm)
 
+588/486.31
+
 performance::check_model(exp2boffspringglm, check = c("qq"))
+performance::check_model(exp2boffspringglm)
 
 ```
 
+p=0.019
 
+overdispersion so use quasi !! 
 
-
+there's not a lot of difference so use glm? 
 
 
 ### Experiment 3 --------------------------
