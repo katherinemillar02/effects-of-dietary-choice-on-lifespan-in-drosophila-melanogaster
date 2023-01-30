@@ -196,9 +196,11 @@ anova(exp2bglm2)
 
 
 
+# Offspring data analysis 
 
+exp2boffspringlm <- lm(offspring_numbers ~ diet, data = long_offspring_ex2b)
 
-
+summary(exp2boffspringlm)
 
 
 

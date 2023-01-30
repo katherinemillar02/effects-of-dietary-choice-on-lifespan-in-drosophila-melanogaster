@@ -128,6 +128,25 @@ summary(exp2blm2)
 exp(0.3800)
 - numbers seem very different even when put back to normal... bit weird? 
 
+
+offspring counts 
+
+```{r}
+summary(exp2boffspringlm)
+broom::tidy(exp2boffspringlm)
+emmeans::emmeans(exp2boffspringlm, specs = pairwise ~ diet)
+offspring_ex2b_plot
+```
+
+******QUESTION!!!!*****
+
+says 1:8 + 1:2 are significant but in a pairwise they are not at all? 
+
+
+1:8 significantly higher than 1:2 but not a lot to it 
+
+
+
 ### Experiment 3 --------------------------
 
 # Feeding behaviour data analysis -----------------
