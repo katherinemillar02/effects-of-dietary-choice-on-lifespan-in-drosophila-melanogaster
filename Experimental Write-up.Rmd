@@ -8,8 +8,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+#Data Analysis 
+
+### Mated vs virgin females
+
+## Feeding behaviour 
 A generalised linear model was used with quasipoisson to count for overdispersion. Day was dropped from the model as there was found to be no significant effect of including day in the model (P = 0.32). 
-It was found that there was a strong significant effect in diet choice when comparing mated *drosophila melanogaster* with virgin. When comparing the P:C 8:1 diet to mated and virgin flies, there was a signficant difference found (P = <0.0001), there was a mean average of 2.74 flies on the 8:1 diet per observation while there was a mean average of only 1.64 flies on a patch at an observation for the virgin females. 
+It was found that there was a strong significant effect in diet choice when comparing mated *drosophila melanogaster* with virgin. When comparing the P:C 8:1 diet to mated and virgin flies, there was a signficant difference found (P = <0.0001), there was a mean average of 2.74 flies on the 8:1 diet per observation while there was a mean average of only 1.64 flies on a patch at an observation for the virgin females. This shows that mated females will prefer a diet which is high in protein, indicating that mated females are sensible enough to chose a diet which is good for pregnancy, contributing to the growth of their offspring. 
+
+## Oviposition behaviour 
+
 
 
 
