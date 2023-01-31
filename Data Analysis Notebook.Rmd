@@ -98,6 +98,37 @@ probaly use emmeans package to compare properly?
 
 ### Experiment 2a ---------------------
 
+DATA ANALYSIS 
+What there is to be analysed 
+
+- egg count 
+
+visualising the data for egg count
+```{r}
+mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
+```
+
+linear model
+```{r}
+exp2a_egg_lm <- lm(egg_numbers ~ diet * type, data = exp2a_all_egg)
+
+performance::check_model(exp2a_egg_lm)
+performance::check_model(exp2a_egg_lm, check = c("qq"))
+
+summary(exp2a_egg_lm)
+```
+
+generalised linear model 
+```{r}
+exp2a_egg_glm <- glm(egg_numbers ~ diet * type, data = exp2a_all_egg, family = poisson)
+
+performance::check_model(exp2a_egg_glm)
+performance::check_model(exp2a_egg_lm, check = c("qq"))
+```
+
+
+linear model probably looks better 
+
 ### Experiment 2b ---------------------
 
 trying with glm with day dropped as not significant and with quasi-poisson for overdisperson
@@ -217,6 +248,16 @@ I could go into using more complex models but it is best to stop here as there i
 
 Final choice: generalised linear model with quasipoisson (and with day dropped from the model).
 Now have chosen generalised linear model. 
+
+
+
+
+
+
+
+
+
+
 
 ******QUESTION!!!!*****
 Experiment 3 
