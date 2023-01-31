@@ -358,6 +358,7 @@ For feeding behaviour analysis for experiment 3:
 - stuck with real values 
 - used lm and glms
 - found with the glm that quasi-poisson would need to be used and to drop day as is not significant
+-
 
 
 # Offspring data analysis -------------------- 
@@ -406,6 +407,8 @@ proportional numbers, both and alone including an interaction effect
 ```{r}
 performance::check_model(exp3offspring_lm3,check = c("qq"))
 performance::check_model(exp3offspring_lm3)
+
+summary(exp3offspring_lm3)
 ```
 Normality: doesn't look great, few loose points 
 linearity/ homogenity: points are too close together 
@@ -415,4 +418,7 @@ linearity/ homogenity: points are too close together
 We discussed that for behavioural/feeding count, we found that it doesn't matter about doing proportions. data much less complex 
 Does this apply here too? 
 
+what offsprping model is best
+lets say proportions do not matter 
+glm or lm? 
 
