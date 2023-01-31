@@ -52,7 +52,7 @@ exp2bmatedall_plot <- exp2bmatedall_summary %>%
   theme_minimal()
 
 
-#----------------------- 👰 Virgin Females Feeding Behaviour ----
+#----------------------- 👰Virgin Females Feeding Behaviour ----
 #--------- Day 1 
 #---------- Reading the data in 
 virgin_females_e2bd1 <- (read_excel(path = "data/VirginFemalesE2bD1.xlsx", na = "NA"))

@@ -19,9 +19,9 @@ mated_femalesd3 <- (read_excel(path = "data/MatedFemalesE2aD3.xlsx", na = "NA"))
 long_mated_femalesd3 <- mated_femalesd3 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 #------- Mutating variables 
-exp2amated1 <- long_mated_femalesd1 %>% mutate(variable = "mated") %>% mutate(day = "1")
-exp2amated2 <- long_mated_femalesd2 %>% mutate(variable = "mated") %>% mutate(day = "2")
-exp2amated3 <- long_mated_femalesd3 %>% mutate(variable = "mated") %>% mutate(day = "3")
+exp2amated1 <- long_mated_femalesd1 %>% mutate(type = "mated") %>% mutate(day = "1")
+exp2amated2 <- long_mated_femalesd2 %>% mutate(type = "mated") %>% mutate(day = "2")
+exp2amated3 <- long_mated_femalesd3 %>% mutate(type = "mated") %>% mutate(day = "3")
 #-------- Binding mated days 1 - 3 
 exp2matedall <- rbind(exp2amated1, exp2amated2, exp2amated3)
 # ------ Summarising the data 
@@ -72,9 +72,9 @@ virgin_femalesd3 <- (read_excel(path = "data/VirginFemalesE2aD3.xlsx", na = "NA"
 long_virgin_femalesd3 <- virgin_femalesd3 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
 # -------  Mutating variables 
-exp2avirgin1 <- long_virgin_femalesd1 %>% mutate(variable = "virgin") %>% mutate(day = "1")
-exp2avirgin2 <- long_virgin_femalesd2 %>% mutate(variable = "virgin") %>% mutate(day = "2")
-exp2avirgin3 <- long_virgin_femalesd3 %>% mutate(variable = "virgin") %>% mutate(day = "3")
+exp2avirgin1 <- long_virgin_femalesd1 %>% mutate(type = "virgin") %>% mutate(day = "1")
+exp2avirgin2 <- long_virgin_femalesd2 %>% mutate(type = "virgin") %>% mutate(day = "2")
+exp2avirgin3 <- long_virgin_femalesd3 %>% mutate(type = "virgin") %>% mutate(day = "3")
 #------ Binding virgin days 1 - 3 
 exp2avirginall <- rbind(exp2avirgin1, exp2avirgin2, exp2avirgin3)
 #------ Summarising the data 
@@ -184,18 +184,21 @@ virgin_female_e2_eggcount_plot <- virgin_females_e2_eggcount_summary %>%
 #---------- Using patchwork to combine the mated and virgin egg counting plots 
 mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
 
-#------------------------- Data analysis for virgin egg count 
+#------------------------- Data analysis for egg count ----
 
-exp2avirginegg <- long_virgin_females_e2_eggcount %>% mutate(status = "virgin") 
-exp2amatedegg <- long_mated_females_e2_eggcount %>% mutate(status = "mated") 
+
+#-----------
+exp2avirginegg <- long_virgin_females_e2_eggcount %>% mutate(type = "virgin") 
+exp2amatedegg <- long_mated_females_e2_eggcount %>% mutate(type = "mated") 
 
 exp2a_all_egg <- rbind(exp2avirginegg, exp2amatedegg)
 
-exp2a_egg_lm <- lm(egg_numbers ~ diet * status, data = exp2a_all_egg)
+exp2a_egg_lm <- lm(egg_numbers ~ diet * type, data = exp2a_all_egg)
 
 performance::check_model(exp2a_egg_lm)
 
 summary(exp2a_egg_lm)
+
 
 virgin_females_e2_eggcount <- (read_excel(path = "data/VirginEggCountE2a.xlsx", na = "NA"))
 long_virgin_females_e2_eggcount <- virgin_females_e2_eggcount %>% 
@@ -211,14 +214,14 @@ long_virgin_females_e2_eggcount_summary <- long_virgin_females_e2_eggcount %>%
 # Binding mated and virgin days 1 - 3 
 exp2a_all <- rbind(exp2matedall, exp2avirginall)
 # making a linear model 
-exp2a_all_lm <- lm(fly_numbers ~ diet + variable + day, data = exp2a_all)
+exp2a_all_lm <- lm(fly_numbers ~ diet + type + day, data = exp2a_all)
 # Checking the data 
 performance::check_model(exp2a_all_lm)
 
 
 
 # linear model with interaction effect
-exp2a_all_lm_2 <- lm(fly_numbers ~ diet * variable + day, data = exp2a_all)
+exp2a_all_lm_2 <- lm(fly_numbers ~ diet * type + day, data = exp2a_all)
 # Checking the model 
 performance::check_model(exp2a_all_lm_2)
 # Using the summary function
@@ -232,7 +235,7 @@ broom::tidy(exp2a_all_lm,
 
 
 # trying glm 
-exp2aglm <- glm(fly_numbers ~ diet * variable + day,
+exp2aglm <- glm(fly_numbers ~ diet * type + day,
                   data = exp2a_all, family = poisson(link = "log"))
 
 summary(exp2aglm)
