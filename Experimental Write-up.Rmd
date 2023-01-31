@@ -58,3 +58,12 @@ mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
 When looking at female feeding behaviour, and if this changed with females alone in a feeding assay, to females who were in a feeding assay with males. There was a small interaction effect of day with diet and feeding choice, however this was not significant from not having day as an interaction effect, (F~1,0.91~ = 0.941, P = 0.27), and was therefore dropped from the full model. 
 
 A generalized linear model with quasipoisson was used (as there was over-dispersion), which showed there was no significant difference in dietary choice between mated females who were alone on a plate and mated females who were on a plate with males. 
+
+### Offspring counts
+
+
+
+
+
+
+
