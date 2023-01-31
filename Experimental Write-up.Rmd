@@ -32,7 +32,7 @@ It was found that there was a strong significant effect in diet choice when comp
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 exp2bmatedall_plot + exp2bvirginall_plot
 ```
-*Figure 1*: **A boxplot comparing feeding behaviour of mated and virgin females.** Figure shows a plot with the mean average +/- S.E. of where the mated females preferred to feed (left), compared with a mean average +/- S.E. of where the virgin females preferred to feed (right). 
+**Figure 1: A boxplot comparing feeding behaviour of mated and virgin females.** Figure shows a plot with the mean average +/- S.E. of where the mated females preferred to feed (left), compared with a mean average +/- S.E. of where the virgin females preferred to feed (right). 
 
 ### Oviposition behaviour 
 To test for the significance in oviposition behavaviour in the mated females, a generalised linear model was used with quasipoisson to count for overdispersion. It was found that although there was not a lot of differences, there were significantly more offspring emerging from diets 1:8 than diets 1:2 (P = 0.019). Overall there was a mean average of 114 +/- S.E. 22.5 offspring emerging from 1:8 diets and a mean average of 68.9 +/- 10.6 S.E. offspring emerging from the 1:2 diets (Figure 2). 
@@ -42,12 +42,16 @@ Data for virgin female egg laying was not collected for this experiment.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 offspring_ex2b_plot
 ```
+**Figure 2: A boxplot of the offspring counted from mated females.** Boxplot shows mean offspring +/- S.E. that emerged from four varying protein: carbohydrate diet patches. 
 
 Data was also collected in a preliminary experiment, where the egg counts of where both virgin females and mated females laid their eggs was collected. It was found that there was no significant differences found in where virgin females laid their eggs and where mated females laid their eggs in this experiment. This experiment also showed however, that there was significantly more eggs laid on the 1:8 diets compared to the 1:2 diets (P = < 0.001), with a mean average of 121 +/-13.7 S.E. eggs laid on 1:8, and a mean average of 40.6 +/- S.E. 14.1 laid on the 1:2 diets. There was also a slight significant difference in eggs laid on the 1:2 diet, and eggs laid on the 8:1 diet (P=0.025), with a mean average of only 4.21 +/- S.E. 1.52 eggs laid on the 8:1 diets. 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
 ```
+**Figure 3: A boxplot showing the eggs counted from mated females and virgin females.** Boxplot shows the mean average +/- S.E. that emerged from the varying protein: carbohydrate food patches. 
+
+
 
 Experiment 3 
 
