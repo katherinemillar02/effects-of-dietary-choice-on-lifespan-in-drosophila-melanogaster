@@ -264,6 +264,27 @@ Experiment 3
 Write up -- 
 What is the small number on the F value?? 
 
+e.g. from the write up drosophila in the workbook 
+
+F2,118 = 0.512
+
+f 
+2 = df?
+118 = lower confidence interval?
+0.512 = the f value 
+
+1
+0.91
+0.94
+
+```{r}
+summary(exp3allglm)
+broom::tidy(exp3allglm)
+emmeans::emmeans(exp3allglm, specs = pairwise ~ diet + status + day)
+drop1(exp3allglm, test = "F")
+```
+
+
 Offspring counting for experiment 3 
 Data Analysis 
 
