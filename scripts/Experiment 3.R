@@ -372,8 +372,10 @@ performance::check_model(exp3allglm2)
 summary(exp3allglm2)
 broom::tidy(exp3allglm2)
 
+emmeans::emmeans(exp3allglm2, specs = pairwise ~ diet + status)
 
-
+tab_model(exp3allglm)
+tab_model(exp3allglm2)
 
 #-------------------------------------------------------------------------------------@
 
