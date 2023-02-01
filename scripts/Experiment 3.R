@@ -172,8 +172,8 @@ exp3offspring_both_lm <- lm(offspring_numbers ~ diet, data = long_offspring_both
 summary(exp3offspring_both_lm) 
 
 #------- Mutating a variable to combine the data-set (real numbers)
-exp3offspringboth <- long_offspring_alone_exp3 %>% mutate(variable = "alone")
-exp3offspringalone <- long_offspring_both_exp3 %>% mutate(variable = "both")
+exp3offspringboth <- long_offspring_alone_exp3 %>% mutate(condition = "alone")
+exp3offspringalone <- long_offspring_both_exp3 %>% mutate(condition = "both")
 
 #--- Combining the data set with rbind (real numbers)
 exp3osnumbers <- rbind(exp3offspringboth, exp3offspringalone)
@@ -182,6 +182,16 @@ exp3osnumbers <- rbind(exp3offspringboth, exp3offspringalone)
 exp3offspringall <- lm(offspring_numbers ~ diet * variable, data = exp3osnumbers)
 #-- Using the summary function to look at the data 
 summary(exp3offspringall)
+
+
+exp3offspringallglm <- glm(offspring_numbers ~ diet * condition, data = exp3osnumbers, family = poisson())
+summary(exp3offspringallglm)
+1290/1083.5
+# use quasipoisson to count for overdispersion
+
+exp3offspringallglm2 <- glm(offspring_numbers ~ diet * condition, data = exp3osnumbers, family = quasipoisson())
+
+
 
 
 #----- Making a proportion variable 
