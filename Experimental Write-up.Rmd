@@ -55,14 +55,22 @@ mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
 
 ## Mated Female behaviour alone vs Mated Female behaviour with Males (Experiment 3)
 
-When looking at female feeding behaviour, and if this changed with females alone in a feeding assay, to females who were in a feeding assay with males. There was a small interaction effect of day with diet and feeding choice, however this was not significant from not having day as an interaction effect, (F~1,0.91~ = 0.941, P = 0.27), and was therefore dropped from the full model. 
+When looking at female feeding behaviour, and if this changed with females alone in a feeding assay, to females who were in a feeding assay with males.  There was a small interaction effect of day with diet and feeding choice, however this was not significant from not having day as an interaction effect, (F~1,0.91~ = 0.941, P = 0.27), and was therefore dropped from the full model. 
 
 A generalized linear model with quasipoisson was used (as there was over-dispersion), which showed there was no significant difference in dietary choice between mated females who were alone on a plate and mated females who were on a plate with males. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+exp3femalesall_plot + exp3both_plot
+```
+
 
 ### Offspring counts
 
 A general linear model was used to test the significance of whether oviposition preference changed depending on if the mated females were in a plate alone or in a plate with males. There was no significant difference found between the diets chosen depending on the conditions (P = 0.44). 
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+offspring_both_exp3_plot + offspring_alone_exp3_plot
+```
 
 
 
