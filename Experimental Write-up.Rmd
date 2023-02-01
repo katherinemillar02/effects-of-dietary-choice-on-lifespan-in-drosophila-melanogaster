@@ -61,7 +61,7 @@ A generalized linear model with quasipoisson was used (as there was over-dispers
 
 ### Offspring counts
 
-
+A general linear model was used to test the significance of whether oviposition preference changed depending on if the mated females were in a plate alone or in a plate with males. There was no significant difference found between the diets chosen depending on the conditions (P = 0.44). 
 
 
 
