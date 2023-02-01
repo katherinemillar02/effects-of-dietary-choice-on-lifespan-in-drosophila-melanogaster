@@ -358,7 +358,7 @@ For feeding behaviour analysis for experiment 3:
 - stuck with real values 
 - used lm and glms
 - found with the glm that quasi-poisson would need to be used and to drop day as is not significant
--
+
 
 
 # Offspring data analysis -------------------- 
@@ -421,4 +421,36 @@ Does this apply here too?
 what offsprping model is best
 lets say proportions do not matter 
 glm or lm? 
+
+...data visualisations...
+
+```{r}
+offspring_both_exp3_plot + offspring_alone_exp3_plot
+```
+
+
+```{r}
+offspring_both_exp3_plot2 + offspring_alone_exp3_plot2
+```
+
+probs go with normal values!!
+
+
+data analysis !!
+```{r}
+performance::check_model(exp3offspringall)
+performance::check_model(exp3offspringall, check = c("qq"))
+
+performance::check_model(exp3offspringallglm2)
+performance::check_model(exp3offspringallglm2, check = c("qq"))
+```
+
+```{r}
+summary(exp3offspringall)
+```
+
+all round linear model looks better!!
+
+
+
 
