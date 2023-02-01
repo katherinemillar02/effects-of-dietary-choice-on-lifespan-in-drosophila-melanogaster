@@ -222,6 +222,7 @@ just use summary to see if a variable is significant?
 Checking performance for both of the models 
 ```{r}
 performance::check_model(exp3alllm2)
+performance::check_model(exp3alllm2, check=c("qq"))
 ```
 
 ```{r}
@@ -234,6 +235,7 @@ performance::check_model(exp3allglm2)
 
 ```{r}
 performance::check_model(exp3allglm2, check=c("qq"))
+performance::check_model(exp3allglm2)
 ```
 
 Th performance check for the linear model shows the homogenity of variance points to be very close together 
@@ -285,6 +287,14 @@ drop1(exp3allglm, test = "F")
 ```
 
 
+```{r}
+performance::check
+```
+
+
+
+
+
 Offspring counting for experiment 3 
 Data Analysis 
 
@@ -301,6 +311,10 @@ performance::check_model(exp3offspring_alone_lm)
 - homogenity of variance: points are too close together 
 - normality of residuals look okay
 
+```{r}
+performance::check_model(exp3allglm2, check = c("qq"))
+performance::check_model(exp3allglm2)
+```
 
 
 b. model of just both plate
