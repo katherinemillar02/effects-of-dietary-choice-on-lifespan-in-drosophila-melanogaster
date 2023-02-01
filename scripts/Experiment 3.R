@@ -179,7 +179,7 @@ exp3offspringalone <- long_offspring_both_exp3 %>% mutate(condition = "both")
 exp3osnumbers <- rbind(exp3offspringboth, exp3offspringalone)
 
 #------- Data analysis of both and alone interaction effect (real numbers)
-exp3offspringall <- lm(offspring_numbers ~ diet * variable, data = exp3osnumbers)
+exp3offspringall <- lm(offspring_numbers ~ diet * condition, data = exp3osnumbers)
 #-- Using the summary function to look at the data 
 summary(exp3offspringall)
 
