@@ -32,7 +32,7 @@ performance::check_model(eggcountinglsglm)
 performance::check_model(eggcountinglsglm, check = c("qq"))
 ```
 normality : lines are not really on the line 
-linerity/homogenity: points arent as close together but the line is not flat? 
+linerity/homogenity: points aren't as close together but the line is not flat? 
 
 
 Seeing if there are big differences in the summary() function results 
@@ -69,6 +69,27 @@ normality: points are too close together
 linerity/homogenity:  gets bad at the end 
 
 Using GLM - day IS just significant, but with quasi: 
+day stats 
+```{r}
+drop1(exp1allglm2, test = "F")
+
+emmeans::emmeans(exp1allglm2, specs = pairwise ~ sex + diet)
+
+exp1allglm2 %>% broom::tidy(conf.int = T) %>% 
+ select(-`std.error`) %>% 
+mutate_if(is.numeric, round, 2) %>% 
+kbl(col.names = c("Predictors",
+                    "Estimates",
+                    "Z-value",
+                    "P",
+                    "Lower 95% CI",
+                    "Upper 95% CI"),
+      caption = "Linear model coefficients", 
+    booktabs = T) %>% 
+   kable_styling(full_width = FALSE, font_size=16)
+```
+
+
 ```{r}
 performance::check_model(exp1allglm2)
 performance::check_model(exp1allglm2, check = c("qq"))
@@ -86,7 +107,7 @@ broom::tidy(exp1alllm)
 what it shows 
 not much sig diff between 1:2 female and 1:8 male 
 
-big sig diff between 1:2 female and 2:1 male - big diff in low protein and low carb 
+big sig diff between 1:2 female and 2:1 male - big diff in low protein and low carb? 
 < p = 0.001 
 
 probaly use emmeans package to compare properly? 
