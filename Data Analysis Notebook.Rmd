@@ -109,6 +109,7 @@ lm looks better...
 ```{r}
 summary(exp1alllm)
 broom::tidy(exp1alllm)
+anova(exp1alllm)
 ```
 
 what it shows 
