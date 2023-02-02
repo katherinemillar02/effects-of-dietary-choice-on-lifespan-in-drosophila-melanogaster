@@ -27,6 +27,7 @@ So what is preffered: good normality or good linearity/ homogenity? go with glm.
 ```{r}
 performance::check_model(eggcountinglsglm)
 performance::check_model(eggcountinglsglm, check = c("qq"))
+summary(eggcountinglsglm)
 ```
 
 
