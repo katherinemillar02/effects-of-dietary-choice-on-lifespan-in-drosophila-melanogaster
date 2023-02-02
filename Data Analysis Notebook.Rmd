@@ -24,8 +24,14 @@ I am beginning to see through going through different analysis that you cannot h
 So what is preffered: good normality or good linearity/ homogenity? go with glm..? 
 
 
-eggcountinglsglm <- glm(egg_numbers ~ diet, data = long_egg_counting1, family = quasipoisson)
-summary(eggcountinglsglm)
+```{r}
+performance::check_model(eggcountinglsglm)
+performance::check_model(eggcountinglsglm, check = c("qq"))
+```
+
+
+
+
 
 ```{r}
 performance::check_model(eggcountinglsglm)
