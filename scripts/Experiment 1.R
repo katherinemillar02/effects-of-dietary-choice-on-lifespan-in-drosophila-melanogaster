@@ -300,7 +300,7 @@ tab_model(exp1allglm)
 
 
 
-
+anova(exp1alllm)
 
 
 
