@@ -290,7 +290,7 @@ performance::check_model(exp1allglm2)
 # using summary function to look at values 
 summary(exp1allglm2)
 # testing for significance of day
-drop1(exp1alllm, test = "F")
+drop1(exp1allglm2, test = "F")
 #  day is only just significant  but keep anyway?? 
 
 # making a table 
