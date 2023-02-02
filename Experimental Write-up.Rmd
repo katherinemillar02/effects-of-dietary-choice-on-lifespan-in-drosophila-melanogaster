@@ -22,6 +22,14 @@ source(here("scripts", "Experiment 3.R"))
 
 # Data Analysis 
 
+
+## Males vs Females (Experiment 1) - Feeding and Oviposition behaviour
+
+### Feeding behaviour 
+
+A linear model was used with quasipoisson to count for overdispersion. The significance of day was tested in the model and this was kept as it was significant (F~1,0.91~ = 0.941, P = 0.27)
+
+
 ## Mated vs Virgin females (Experiment 2) - Feeding and Oviposition behaviour
 
 ### Feeding behaviour 
