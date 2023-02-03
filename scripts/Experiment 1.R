@@ -302,8 +302,16 @@ tab_model(exp1allglm)
 
 anova(exp1alllm)
 
+performance::check_model(exp1alllm)
+performance::check_model(exp1allglm)
 
 
+
+
+# model checking 
+
+
+car::vif(exp1alllm)
 
 
 # do not use for interaction model?? - doesnt run 
