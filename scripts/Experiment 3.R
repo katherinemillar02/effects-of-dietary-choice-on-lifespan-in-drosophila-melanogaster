@@ -386,8 +386,11 @@ broom::tidy(exp3allglm2)
 # using emmeans to summarise particular parts of data 
 emmeans::emmeans(exp3allglm2, specs = pairwise ~ diet + status)
 
+
 drop1(exp3allglm2, test = "F")
 # no statistically significant difference between the interaction effect so don't include it? 
+
+#  but there is a statistically significant difference between the interaction effect?? 
 
 #  drop interaction effect from model
 exp3allglm3 <- glm(fly_numbers ~ diet + status , data = exp3all01, family = quasipoisson())
