@@ -375,9 +375,10 @@ exp3allglm1 <- glm(fly_numbers ~ diet * status, data = exp3all01, family = poiss
 summary(exp3allglm1)
 # 1147/ 912 = 1.25
 # make model quasi possion as is over-dispersed = >1 
-exp3allglm2 <- glm(fly_numbers ~ diet * status, data = exp3all01, family = quasipoisson())
+exp3allglm2 <- glm(fly_numbers ~ diet * status , data = exp3all01, family = quasipoisson())
 # checking the model 
 performance::check_model(exp3allglm2)
+performance::check_model(exp3allglm2, check = c("qq"))
 # summarising the data 
 summary(exp3allglm2)
 broom::tidy(exp3allglm2)
@@ -388,13 +389,22 @@ emmeans::emmeans(exp3allglm2, specs = pairwise ~ diet + status)
 drop1(exp3allglm2, test = "F")
 # no statistically significant difference between the interaction effect so don't include it? 
 
+#  drop interaction effect from model
+exp3allglm3 <- glm(fly_numbers ~ diet + status , data = exp3all01, family = quasipoisson())
 
+performance::check_model(exp3allglm3)
+performance::check_model(exp3allglm3, check = c("qq"))
+
+# for some reason the one with an interaction effect looks slightly better but interaction effect is not needed so 
 
 tab_model(exp3allglm)
 tab_model(exp3allglm2)
 
 anova(exp3allglm2)
 summary(exp3allglm2)
+
+
+
 #-------------------------------------------------------------------------------------@
 
 
