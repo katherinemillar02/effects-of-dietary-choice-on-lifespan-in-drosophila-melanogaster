@@ -112,6 +112,9 @@ do a post-hoc analysis??
 2~903 
 
 ```{r}
+anova(exp2bglm2)
+anova(exp2als2a)
+
 
 ```
 
