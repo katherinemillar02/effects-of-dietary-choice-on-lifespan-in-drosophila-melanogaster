@@ -104,7 +104,9 @@ anova(exp1alllm)
 
 ```
 
-do a post-hoc
+do a post-hoc analysis?? 
+
+
 
 
 2~903 
