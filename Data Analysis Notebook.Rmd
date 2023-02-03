@@ -32,8 +32,6 @@ summary(eggcountinglsglm)
 
 
 
-
-
 ```{r}
 performance::check_model(eggcountinglsglm)
 performance::check_model(eggcountinglsglm, check = c("qq"))
