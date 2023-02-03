@@ -305,13 +305,22 @@ anova(exp1alllm)
 performance::check_model(exp1alllm)
 performance::check_model(exp1allglm)
 
-
-
+performance::check_model(exp1allglm, check = c("qq"))
+performance::check_model(exp1alllm, check = c("qq"))
 
 # model checking 
 
 
 car::vif(exp1alllm)
+
+MASS::boxcox(exp1alllm)
+
+# use drop1 function to remove top-level terms
+drop1(exp1alllm, test = "F")
+
+summary(exp1alllm)
+
+emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + diet + diet * sex ) 
 
 
 # do not use for interaction model?? - doesnt run 
