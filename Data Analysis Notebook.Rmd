@@ -21,7 +21,7 @@ So!
 GLM? 
 ******QUESTION!!!!*****
 I am beginning to see through going through different analysis that you cannot have one without the other with regards to good normality and linearity/ homogenity
-So what is preffered: good normality or good linearity/ homogenity? go with glm..? 
+So what is prefer: good normality or good linearity/ homogenity? go with glm..? 
 
 
 ```{r}
@@ -94,7 +94,22 @@ kbl(col.names = c("Predictors",
       caption = "Linear model coefficients", 
     booktabs = T) %>% 
    kable_styling(full_width = FALSE, font_size=16)
+
+
+broom::tidy(exp1alllm, conf.int=T, conf.level=0.95)
+
+
+summary(exp1alllm)
+anova(exp1alllm)
+
 ```
+
+2~903 
+
+```{r}
+
+```
+
 
 
 ```{r}
