@@ -382,12 +382,19 @@ performance::check_model(exp3allglm2)
 summary(exp3allglm2)
 broom::tidy(exp3allglm2)
 
+# using emmeans to summarise particular parts of data 
 emmeans::emmeans(exp3allglm2, specs = pairwise ~ diet + status)
+
+drop1(exp3allglm2, test = "F")
+# no statistically significant difference between the interaction effect so don't include it? 
+
 
 
 tab_model(exp3allglm)
 tab_model(exp3allglm2)
 
+anova(exp3allglm2)
+summary(exp3allglm2)
 #-------------------------------------------------------------------------------------@
 
 
