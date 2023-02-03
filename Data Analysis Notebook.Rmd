@@ -104,6 +104,9 @@ anova(exp1alllm)
 
 ```
 
+do a post-hoc
+
+
 2~903 
 
 ```{r}
