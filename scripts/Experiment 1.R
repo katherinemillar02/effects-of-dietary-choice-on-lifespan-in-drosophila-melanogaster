@@ -293,22 +293,22 @@ summary(exp1allglm2)
 drop1(exp1allglm2, test = "F")
 #  day is only just significant  but keep anyway?? 
 
+# final model choice = linear model with interaction effect and day 
+performance::check_model(exp1alllm)
+performance::check_model(exp1allglm)
+performance::check_model(exp1allglm, check = c("qq"))
+performance::check_model(exp1alllm, check = c("qq"))
+
 # making a table 
 tab_model(exp1allglm)
 # what is incidence rate ratios vs. estimates? 
 # happens in the table when glm over lm is used 
 
 
-
+# doing an ANOVA for having more than two groups 
 anova(exp1alllm)
 
-performance::check_model(exp1alllm)
-performance::check_model(exp1allglm)
 
-performance::check_model(exp1allglm, check = c("qq"))
-performance::check_model(exp1alllm, check = c("qq"))
-
-# model checking 
 
 
 car::vif(exp1alllm)
