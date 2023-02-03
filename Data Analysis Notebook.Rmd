@@ -79,6 +79,8 @@ day stats
 drop1(exp1allglm2, test = "F")
 
 emmeans::emmeans(exp1allglm2, specs = pairwise ~ sex + diet)
+emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + diet + diet * sex ) 
+emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + diet) 
 
 exp1allglm2 %>% broom::tidy(conf.int = T) %>% 
  select(-`std.error`) %>% 
