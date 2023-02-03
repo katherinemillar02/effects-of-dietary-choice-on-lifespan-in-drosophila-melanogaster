@@ -187,11 +187,18 @@ summary(exp2bglm2)
 broom::tidy(exp2bglm2)
 # Creating a whole comparison summary 
 emmeans::emmeans(exp2bglm2, specs = pairwise ~ diet + type)
+# use drop1 function to remove top-level terms
+drop1(exp2bglm2, test = "F")
+# lots of significance between diet and type 
+#  using emmeans function with an interaction effect 
+emmeans::emmeans(exp2bglm2, specs = pairwise ~ diet + type + diet * type)
 # creating a table 
 tab_model(exp2bglm2)
 
 # doing an anova test 
 anova(exp2bglm2)
+
+
 
 
 
