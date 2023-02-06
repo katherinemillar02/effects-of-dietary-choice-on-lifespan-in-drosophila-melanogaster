@@ -296,6 +296,10 @@ performance::check_model(exp1allglm)
 performance::check_model(exp1allglm, check = c("qq"))
 performance::check_model(exp1alllm, check = c("qq"))
 
+# use drop1 function to remove top-level terms
+drop1(exp1alllm, test = "F")
+# both the interaction effect and day are relevant 
+
 # making a table 
 tab_model(exp1allglm)
 # what is incidence rate ratios vs. estimates? 
@@ -308,18 +312,16 @@ anova(exp1alllm)
 # comparing with summary function
 summary(exp1alllm)
 
-
+# variance inflation factor - 
 car::vif(exp1alllm)
+# what am i looking at? relevance? 
 
+# will not run 
 MASS::boxcox(exp1alllm)
 
-# use drop1 function to remove top-level terms
-drop1(exp1alllm, test = "F")
-
-summary(exp1alllm)
-
+# using emmeans to test all the factors
 emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + diet + diet * sex ) 
-
+# is there a better way to write this code? 
 
 # do not use for interaction model?? - doesnt run 
 #meansf <- emmeans::emmeans(exp1femaleall, specs = ~ diet)
