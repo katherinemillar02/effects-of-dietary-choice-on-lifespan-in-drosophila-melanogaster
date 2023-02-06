@@ -157,6 +157,11 @@ male day1 8;1 - male day2 8;1     -0.16353 0.0835 903  -1.958  0.8474
 selecting what is interesting with regards to day?? 
 2~903 
 
+
+
+
+female 2;1 - male 2;1     2.1519 0.165 903  13.048  <.0001
+
 ```{r}
 anova(exp2bglm2)
 anova(exp2als2a)
