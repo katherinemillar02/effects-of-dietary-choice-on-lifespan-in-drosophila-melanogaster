@@ -252,9 +252,6 @@ female_notfeedinge1_plot + male_notfeedinge1_plot
 
 
 
-
-
-
 #----------------- 📊 Data Analysis of feeding behaviours  ---- 
 # fly_numbers: number of flies on a flies on a food patch
 # sex: whether the fly is male or female 
@@ -308,7 +305,8 @@ tab_model(exp1allglm)
 # doing an ANOVA for having more than two groups 
 anova(exp1alllm)
 
-
+# comparing with summary function
+summary(exp1alllm)
 
 
 car::vif(exp1alllm)
