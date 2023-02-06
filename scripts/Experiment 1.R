@@ -80,12 +80,26 @@ female_feedingd1 <- read_excel("data/MatedFemalesE1D1.xlsx")
 #---- Making the data long
 long_female_feedingd1 <- female_feedingd1 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+# summary of just day 1 
+exp1female1_summary <- long_female_feedingd1 %>%  
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
 #----- Day 2 
 #-------- Reading the data in
 female_feedingd2 <- read_excel("data/MatedFemalesE1D2.xlsx")
 #---- Making the data long
 long_female_feedingd2 <- female_feedingd2 %>% 
   pivot_longer(cols = ("8;1":"1;8"), names_to = "diet", values_to = "fly_numbers")
+# summary of just day 2 
+exp1female2_summary <- long_female_feedingd2 %>%  
+  group_by(diet) %>% 
+  summarise(mean = mean(fly_numbers),
+            sd = sd(fly_numbers),
+            n = n(),
+            se = sd/sqrt(n))
 #------- Mutating a variable for sex (female) and day 
 exp1females1 <- long_female_feedingd1 %>% mutate(sex = "female") %>% mutate(day = "1")
 exp1females2 <- long_female_feedingd2 %>% mutate(sex = "female") %>% mutate(day = "2")
@@ -316,9 +330,9 @@ summary(exp1alllm)
 car::vif(exp1alllm)
 # what am i looking at? relevance? 
 
-
+# forgot to include day!!!
 # using emmeans to test all the factors
-emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + diet + diet * sex ) 
+emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + day + diet + diet * sex  ) 
 # emmeans - tukey test contrasts - will include posthoc pairwise comparisons between all levels 
 # is there a better way to write this code? 
 # doesn't show one of the f-statistics that is needed? 
