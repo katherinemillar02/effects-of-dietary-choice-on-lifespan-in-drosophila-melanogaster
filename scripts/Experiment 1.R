@@ -342,6 +342,9 @@ emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + day + diet + diet * sex  )
 
 emmeans::emmeans(exp1alllm, specs = pairwise ~ sex  + diet + diet * sex  ) 
 
+exp1alllm2 <- lm(fly_numbers ~ diet * sex, data = exp1all)
+
+anova(exp1alllm2)
 
 # do not use for interaction model?? - doesnt run 
 #meansf <- emmeans::emmeans(exp1femaleall, specs = ~ diet)
