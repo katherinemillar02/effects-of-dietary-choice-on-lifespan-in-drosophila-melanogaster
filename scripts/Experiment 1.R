@@ -321,18 +321,30 @@ MASS::boxcox(exp1alllm)
 
 # using emmeans to test all the factors
 emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + diet + diet * sex ) 
+# emmeans - tukey test contrasts - will include posthoc pairwise comparisons between all levels 
 # is there a better way to write this code? 
+# doesn't show one of the f-statistics that is needed? 
+# is doing emmeans with pairwise just a tukey test then? 
 
 # do not use for interaction model?? - doesnt run 
 #meansf <- emmeans::emmeans(exp1femaleall, specs = ~ diet)
 #meansm <- emmeans::emmeans(exp1maleall, specs = ~ diet)
 
+# creating a table including f-statistic stuff 
+tableexp1feeding <- exp1alllm %>% broom::tidy(conf.int = T) %>% 
+  select(-`std.error`) %>% 
+  mutate_if(is.numeric, round, 2) %>% 
+  kbl(col.names = c("Predictors",
+                    "Estimates",
+                    "Z-value",
+                    "P",
+                    "Lower 95% CI",
+                    "Upper 95% CI"),
+      caption = "Linear model coefficients", 
+      booktabs = T) %>% 
+  kable_styling(full_width = FALSE, font_size=16)
 
-
-
-
-
-
+#  analyse what table is showing 
 
 
 
