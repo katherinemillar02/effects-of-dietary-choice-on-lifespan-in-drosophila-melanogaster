@@ -316,8 +316,6 @@ summary(exp1alllm)
 car::vif(exp1alllm)
 # what am i looking at? relevance? 
 
-# will not run 
-MASS::boxcox(exp1alllm)
 
 # using emmeans to test all the factors
 emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + diet + diet * sex ) 
