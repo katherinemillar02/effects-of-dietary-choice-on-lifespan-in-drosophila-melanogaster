@@ -106,6 +106,37 @@ anova(exp1alllm)
 
 do a post-hoc analysis?? 
 
+question 
+assuming the values plugged into f-statistic analysis are the same 
+do i just use the same values 
+if ygm 
+
+significance between all diets AND interction effect
+data from emmeans = 
+- female 1;2 - female 2;1  .... 
+-  female 1;2 - female 8;1 .... 
+
+-  male 1;2 - female 1;8   
+- male 1;2 - female 2;1 
+-  male 1;2 - female 8;1   
+-  female 1;8 - female 2;1 .....
+
+-  female 1;8 - male 2;1  
+
+- female 1;8 - female 8;1 ..... 
+
+- male 1;8 - female 2;1 
+
+-  female 2;1 - male 2;1.... 
+
+-  female 2;1 - female 8;1 
+- female 2;1 - male 8;1 ...    
+- male 2;1 - female 8;1
+- female 8;1 - male 8;1...
+
+what is interesting to look at
+where sex is different and diets are the same 
+where sex is the same but diets are different - different protein and carbohydrate levels 
 
 
 
