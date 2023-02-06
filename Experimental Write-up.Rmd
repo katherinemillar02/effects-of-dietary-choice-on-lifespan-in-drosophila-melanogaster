@@ -29,7 +29,7 @@ source(here("scripts", "Experiment 3.R"))
 
 A linear model was used with quasipoisson to count for overdispersion, significance of day was tested in the model and this was kept as it was significant (F~8,903~ = 0.941, P = 0.05). ANOVA analysis showed that there was significance between the sexes and the interaction effect (F~8,903~ = 35.36, P = <0.001), so this was kept in the model. 
 
-To look at significance between diets, a tukey test was done. 
+The significance of diets between sexes and within sexes was looked at using a tukey test? Looking at the significance of diets within sexes, there was a significant difference found between a 1:2 diet and an 8:1 diet on the female assay (Tukey test: t~903~ = -5.088, P < 0.001). On day 1, the there was a mean average of 1.43 +/- S.E. 0.154 flies per patch but on day 2 there was an average of 2.36 +/- S.E. 0.230 flies per patch on the 8:1 diet. 
 
 
 ## Mated vs Virgin females (Experiment 2) - Feeding and Oviposition behaviour
