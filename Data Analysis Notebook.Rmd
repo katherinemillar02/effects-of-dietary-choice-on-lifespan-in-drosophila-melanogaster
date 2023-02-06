@@ -82,7 +82,7 @@ emmeans::emmeans(exp1allglm2, specs = pairwise ~ sex + diet)
 emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + diet + diet * sex ) 
 emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + diet) 
 
-exp1allglm2 %>% broom::tidy(conf.int = T) %>% 
+tableexp1feeding <- exp1alllm %>% broom::tidy(conf.int = T) %>% 
  select(-`std.error`) %>% 
 mutate_if(is.numeric, round, 2) %>% 
 kbl(col.names = c("Predictors",
