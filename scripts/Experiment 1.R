@@ -340,6 +340,9 @@ emmeans::emmeans(exp1alllm, specs = pairwise ~ sex + day + diet + diet * sex  )
 # doesn't show one of the f-statistics that is needed? 
 # is doing emmeans with pairwise just a tukey test then? 
 
+emmeans::emmeans(exp1alllm, specs = pairwise ~ sex  + diet + diet * sex  ) 
+
+
 # do not use for interaction model?? - doesnt run 
 #meansf <- emmeans::emmeans(exp1femaleall, specs = ~ diet)
 #meansm <- emmeans::emmeans(exp1maleall, specs = ~ diet)
