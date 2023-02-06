@@ -27,7 +27,9 @@ source(here("scripts", "Experiment 3.R"))
 
 ### Feeding behaviour 
 
-A linear model was used with quasipoisson to count for overdispersion. The significance of day was tested in the model and this was kept as it was significant (F~1,0.91~ = 0.941, P = 0.27)
+A linear model was used with quasipoisson to count for overdispersion, significance of day was tested in the model and this was kept as it was significant (F~8,903~ = 0.941, P = 0.05). ANOVA analysis showed that there was significance between the sexes and the interaction effect (F~8,903~ = 35.36, P = <0.001), so this was kept in the model. 
+
+To look at significance between diets, a tukey test was done. 
 
 
 ## Mated vs Virgin females (Experiment 2) - Feeding and Oviposition behaviour
