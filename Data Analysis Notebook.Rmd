@@ -138,7 +138,13 @@ what is interesting to look at
 where sex is different and diets are the same 
 where sex is the same but diets are different - different protein and carbohydrate levels 
 
-
+forgot to include day in the emmeans 
+- female day1 1;2 - female day1 2;1 
+-  female day1 1;2 - female day2 2;1 
+- female day1 1;2 - female day2 8;1
+-  male day1 1;2 - female day1 2;1
+-  male day1 1;2 - female day2 2;1  
+- 
 
 2~903 
 
