@@ -285,7 +285,7 @@ performance::check_model(exp2boffspringlm)
 
 
 
-emmeans::emmeans(exp2bglm2, specs = pairwise ~ diet + type)
+emmeans::emmeans(exp2bglm2, specs = pairwise ~ diet + type + diet * type)
 
 summary(exp2bglm2)
 ```
