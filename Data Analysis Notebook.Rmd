@@ -293,7 +293,7 @@ summary(exp2bglm2)
 looking at what looks significant using emmeans function
 values are log values!!
 
-posthoc analysis as has pairwisxe 
+posthoc analysis as has pairwise 
 
 mated v mated significant
  1;2 mated - 2;1 mated    -0.5702 0.1218 Inf  -4.682  0.0001
