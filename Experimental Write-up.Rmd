@@ -39,7 +39,7 @@ The significance of sex differences was analysed using a generalised linear mode
 
 A generalised linear model was used with quasipoisson to count for overdispersion. Day was dropped from the model as there was found to be no significant effect of including day in the model (P = 0.32). 
 
-Post hoc analysis showed there were statistically significant differences for the diets chosen between mated and virgin female drosophila melanogaster ()
+Post hoc analysis showed there were statistically significant differences for the diets chosen between mated and virgin female drosophila melanogaster. Between the types of fly, there was a significant difference in choosing a diet high in protein (8:1). (Tukey test: z~~ = -9.065, P < 0.0001). With a mean average of 2.74 +/- S.E. 0.138 mated females per patch and a mean average of 1.64 +/- S.E. 0.146 virgin females  
 
 It was found that there was a strong significant effect in diet choice when comparing mated *drosophila melanogaster* with virgin. When comparing the P:C 8:1 diet to mated and virgin flies, there was a signficant difference found (P = <0.0001), there was a mean average of 2.74 flies on the 8:1 diet per observation while there was a mean average of only 1.64 flies on a patch at an observation for the virgin females (Figure 1). This shows that mated females will prefer a diet which is high in protein, indicating that mated females are sensible enough to chose a diet which is good for pregnancy, contributing to the growth of their offspring. 
 
