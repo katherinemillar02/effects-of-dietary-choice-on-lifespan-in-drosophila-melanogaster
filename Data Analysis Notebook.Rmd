@@ -291,7 +291,24 @@ summary(exp2bglm2)
 ```
 
 looking at what looks significant using emmeans function
-checking with summary
+values are log values!!
+
+mated v mated significant
+ 1;2 mated - 2;1 mated    -0.5702 0.1218 Inf  -4.682  0.0001
+ 1;2 mated - 8;1 mated    -1.0282 0.1134 Inf  -9.065  <.0001 - more intersting 
+ 
+virgin v virgin significant 
+1;2 virgin - 1;8 virgin  -0.5596 0.1036 Inf  -5.402  <.0001
+1;8 virgin - 8;1 virgin   0.4440 0.0999 Inf   4.443  0.0002 - interesting 
+
+mated v virgin significant 
+  1;2 mated - 1;2 virgin   -0.3967 0.1277 Inf  -3.107  0.0399
+  1;8 mated - 1;8 virgin   -0.6286 0.1036 Inf  -6.068  <.0001
+  8;1 mated - 8;1 virgin    0.5159 0.0973 Inf   5.301  <.0001 - interesting 
+  
+
+checking with summary!!
+
 
 
 ******QUESTION!!!!*****
