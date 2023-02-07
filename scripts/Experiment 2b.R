@@ -3,7 +3,7 @@
 
 
 #---- Feeding Behaviour 
-#----------------------- ♀️ Mated Females----
+#----------------------- ♀️ Mated Females -----
 #--------- Day 1 
 #---------- Reading the data in 
 mated_females_e2bd1 <- (read_excel(path = "data/MatedFemalesE2bD1.xlsx", na = "NA"))
