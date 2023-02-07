@@ -282,7 +282,17 @@ performance::check_model(exp2boffspringlm, check = c("qq"))
 performance::check_model(exp2boffspringlm)
 
 
+
+
+
+emmeans::emmeans(exp2bglm2, specs = pairwise ~ diet + type)
+
+summary(exp2bglm2)
 ```
+
+looking at what looks significant using emmeans function
+checking with summary
+
 
 ******QUESTION!!!!*****
 
