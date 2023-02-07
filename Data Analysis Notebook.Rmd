@@ -263,6 +263,13 @@ exp(0.3800)
 - numbers seem very different even when put back to normal... bit weird? 
 
 
+
+```{r}
+anova(exp2bglm2)
+```
+
+
+
 offspring counts 
 
 ```{r}
