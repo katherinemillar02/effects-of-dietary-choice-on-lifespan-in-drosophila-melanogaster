@@ -46,7 +46,7 @@ Post hoc analysis showed there were statistically significant differences for th
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 exp2bmatedall_plot + exp2bvirginall_plot
 ```
-**Figure 1: A boxplot comparing feeding behaviour of mated and virgin females.** Figure shows a plot with the mean average +/- S.E. of where the mated females preferred to feed (left), compared with a mean average +/- S.E. of where the virgin females preferred to feed (right). 
+**__Figure 1: A boxplot comparing feeding behaviour of mated and virgin females.__** Figure shows a plot with the mean average +/- S.E. of where the mated females preferred to feed (left), compared with a mean average +/- S.E. of where the virgin females preferred to feed (right). 
 
 
 The significance of diet on mated and virgin *drosophila melanogaster* seperatley to look for the signifiance in choosing a particular diet. It was found that there was a statistically significant difference in choosing a diet high in protein and low in carbohydrate (8:1) over a diet which was low in protein and high in carbohydrate (1:2). Post hoc analysis (Tukey test: z~1151~ = -9.065, P < 0.0001). There was a mean average of 2.74 +/- S.E. 0.138 flies per patch on an 8:1 diet, and only a mean average +/- S.E. 0.085 flies per patch on a 1:2 diet. Emphasising again the significance on a diet which is high in protein for a mated female. 
