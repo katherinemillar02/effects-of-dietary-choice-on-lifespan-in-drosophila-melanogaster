@@ -175,6 +175,10 @@ performance::check_model(exp2bglm)
 summary(exp2bglm)
 broom::tidy(exp2bglm)
 
+drop1(exp2bglm, test = "F")
+summary(exp2bglm)
+
+
 # can drop day as is not significant
 exp2bglm2 <- glm(fly_numbers ~ diet * type,
                 data = exp2ball, family = quasipoisson(link = "log"))
