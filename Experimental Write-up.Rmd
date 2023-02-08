@@ -20,17 +20,18 @@ source(here("scripts", "Experiment 3.R"))
 ```
 
 
+Data analyses was done in R v. 4.1.1. Various factors such as the effect of sex and mating status were tested using various statiscal models. 
 
-# Data Analysis 
 
-
-## Males vs Females (Experiment 1) - Feeding and Oviposition behaviour
+## Males vs Females (Experiment 1) 
 
 ### Feeding behaviour 
 
-A linear model was used with quasipoisson to count for overdispersion, significance of day was tested in the model and this was kept as it was significant (F~8,903~ = 0.941, P = 0.05). ANOVA analysis showed that there was significance between the sexes and the interaction effect (F~8,903~ = 35.36, P = <0.001), so this was kept in the model. 
+A linear model was used and the significance of day was tested using an ANOVA model. It was found that day was significant (F~8,903~ = 0.941, P = 0.05). ANOVA analysis also showed that there was significance between the sexes and the interaction effect (F~8,903~ = 35.36, P = <0.001), so this was kept in the model. 
 
-The significance of diets between sexes and within sexes was looked at using a tukey test? Looking at the significance of diets within sexes, there was a significant difference found between a 1:2 diet and an 8:1 diet on the female assay on both day 1 and day 2 (Tukey test: t~903~ = -5.088, P < 0.001). On day 1, the there was a mean average of 1.43 +/- S.E. 0.154 flies per patch but on day 2 there was an average of 2.36 +/- S.E. 0.230 flies per patch on the 8:1 diet. 
+The significance of diets between sexes and within sexes was analysed.
+
+There was a statistically significant difference found between a 1:2 diet and an 8:1 diet on the female assay on both day 1 and day 2 (Tukey test: t~903~ = -5.088, P < 0.001). On day 1, the there was a mean average of 1.43 +/- S.E. 0.154 flies per patch but on day 2 there was an average of 2.36 +/- S.E. 0.230 flies per patch on the 8:1 diet. 
 
 The significance of sex differences was analysed using a generalised linear model with quasipoisson to count for overdispersion. It was found that there was a significant difference in male and female flies choosing a diet higher in protein (a 2:1 diet). A tukey test was used to analyse this (t~903~8~ = 13.048, P < 0.001). Day was not considered in this model. 
 
@@ -53,7 +54,9 @@ The significance of diet on mated and virgin *drosophila melanogaster* seperatle
 
 
 ### Oviposition behaviour 
-To test for the significance in oviposition behavaviour in the mated females, a generalised linear model was used with quasipoisson to count for overdispersion. It was found that although there was not a lot of differences, there were significantly more offspring emerging from diets 1:8 than diets 1:2 (P = 0.019). Overall there was a mean average of 114 +/- S.E. 22.5 offspring emerging from 1:8 diets and a mean average of 68.9 +/- 10.6 S.E. offspring emerging from the 1:2 diets (Figure 2). 
+
+#### Looking at mated females  
+To test for the significance in oviposition behaviour in the mated females, a generalised linear model was used with quasipoisson to count for overdispersion. It was found that although there was not a lot of differences, there were significantly more offspring emerging from diets 1:8 than diets 1:2 (P = 0.019). Overall there was a mean average of 114 +/- S.E. 22.5 offspring emerging from 1:8 diets and a mean average of 68.9 +/- 10.6 S.E. offspring emerging from the 1:2 diets (Figure 2). 
 As these diets are both diets which are 'low in protein' it shows that although there is not a lot of preference for any particular diets when mated females are laying their eggs.
 Data for virgin female egg laying was not collected for this experiment. 
 
