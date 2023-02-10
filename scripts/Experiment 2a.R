@@ -194,7 +194,7 @@ exp2a_all_egg <- rbind(exp2avirginegg, exp2amatedegg)
 exp2a_egg_lm <- lm(egg_numbers ~ diet * type, data = exp2a_all_egg)
 exp2a_egg_glm <- glm(egg_numbers ~ diet * type, data = exp2a_all_egg, family = quasipoisson() )
 
-emmeans::emmeans(exp2a_egg_lm, specs = pairwise ~ diet + type + diet * type)
+emmeans::emmeans(exp2a_egg_lm, specs = pairwise ~ diet + type)
 
 summary(exp2a_egg_lm)
 
@@ -205,6 +205,10 @@ performance::check_model(exp2a_egg_lm, check = c ("qq"))
 performance::check_model(exp2a_egg_glm, check = c("qq"))
 
 summary(exp2a_egg_glm)
+
+drop1(exp2a_egg_glm, test = "F")
+ 
+
 
 
 virgin_females_e2_eggcount <- (read_excel(path = "data/VirginEggCountE2a.xlsx", na = "NA"))
