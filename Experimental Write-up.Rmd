@@ -58,7 +58,19 @@ For virgin females, they were a lot less 'choosy' about the diets they chose to 
 
 ### Oviposition behaviour 
 
-The significance of oviposition preference was tested on both mated and female *drosophila melanogaster* 
+The significance of oviposition preference was tested on both mated and virgin female *drosophila melanogaster* 
+
+The first experiment investigated was looking into mated and virgin egg count. A generalised linear model was quasipoisson was used to count for overdispersion, it was found that there was not a significant difference in the interaction effect between where mated females laid their eggs and where virgin females laid their eggs (ANOVA: F~3,64~ = 0.069, P = 0.9 ), so this factor was not tested in the model. 
+
+Looking at the significance of diet choice in mated and virgin female flies individually showed there was a significant difference in the diet in which a mated female chose to lay their eggs, investing into protein and carbohydrate differences, there was a mean average of 121 +/- S.E. 14.1 eggs laid on the 1:8 diet and only a mean average of 4.21 +/- S.E. 1.52 eggs laid on the 8:1 diet, showing a statistically significant difference (Tukey test: t~~ = 7.342, P = < 0.0001). 
+Investigating the significance into where virgin females laid their eggs showed there was also a statistically significant difference in a 1:8 diet and a 8:1 diet (Tukey test: t~~ = 4.127, P = 0.0026). With an average of 74.4 +/- S.E. 17 eggs laid on the 1:8 diet and a mean average of 1.25 +/- 1.25 SE eggs laid on the 8:1 diet. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
+```
+
+
+
 
 #### Looking at mated females  
 To test for the significance in oviposition behaviour in the mated females, a generalised linear model was used with quasipoisson to count for overdispersion. It was found that although there was not a lot of differences, there were significantly more offspring emerging from diets 1:8 than diets 1:2 (P = 0.019). Overall there was a mean average of 114 +/- S.E. 22.5 offspring emerging from 1:8 diets and a mean average of 68.9 +/- 10.6 S.E. offspring emerging from the 1:2 diets (Figure 2). 
