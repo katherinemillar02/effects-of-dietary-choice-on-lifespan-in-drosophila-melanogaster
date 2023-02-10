@@ -1,8 +1,12 @@
 ---
 title: "Experimental write-up"
-output: pdf_document
-font-family: Calibri
+output:
+  pdf_document
+latex_engine: xelatex
+sansfont: Calibri Light
 ---
+
+
 
 
 ```{r setup, include=FALSE}
