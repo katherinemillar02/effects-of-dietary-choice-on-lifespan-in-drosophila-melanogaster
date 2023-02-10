@@ -207,7 +207,7 @@ anova(exp2bglm2)
 
 
 
-#------------------ Offspring data analysis
+#----------------------- Offspring data analysis ---- 
 
 exp2boffspringlm <- lm(offspring_numbers ~ diet, data = long_offspring_ex2b)
 
@@ -218,12 +218,24 @@ summary(exp2boffspringlm)
 
 exp2boffspringglm <- glm(offspring_numbers ~ diet, 
                          data = long_offspring_ex2b, 
-                         family = poisson(link = "log"))
+                         family = quasipoisson(link = "log"))
 
 performance::check_model(exp2boffspringlm)
+
 performance::check_model(exp2boffspringglm)
 
+performance::check_model(exp2boffspringlm, check = c("qq"))
+
+performance::check_model(exp2boffspringglm, check = c("qq"))
+
 summary(exp2boffspringlm)
+
+drop1(exp2boffspringlm, test = "F")
+drop1(exp2boffspringglm, test = "F")
+
+emmeans(exp2boffspringlm, specs = pairwise ~ diet + type + diet * type)
+
+
 
 #overdispersion - so use quasi 
 
