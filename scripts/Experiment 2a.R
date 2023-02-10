@@ -186,16 +186,18 @@ mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
 
 #------------------------- Data analysis for egg count ----
 
-
-#-----------
 exp2avirginegg <- long_virgin_females_e2_eggcount %>% mutate(type = "virgin") 
 exp2amatedegg <- long_mated_females_e2_eggcount %>% mutate(type = "mated") 
 
 exp2a_all_egg <- rbind(exp2avirginegg, exp2amatedegg)
 
 exp2a_egg_lm <- lm(egg_numbers ~ diet * type, data = exp2a_all_egg)
+exp2a_egg_glm <- glm(egg_numbers ~ diet * type, data = exp2a_all_egg, family = poisson() )
+
+
 
 performance::check_model(exp2a_egg_lm)
+performance::check_model(exp2a_egg_glm)
 
 summary(exp2a_egg_lm)
 
