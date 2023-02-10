@@ -264,8 +264,8 @@ summary(exp2bglm2)
 summary(exp2blm2)
 ```
 
-homogenity of variancr?
-what to do about that
+homogenity of variance?
+what to do about that?
 
 exp(0.3800)
 - numbers seem very different even when put back to normal... bit weird? 
