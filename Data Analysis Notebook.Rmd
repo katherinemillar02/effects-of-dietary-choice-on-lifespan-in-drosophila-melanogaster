@@ -251,6 +251,11 @@ normality: points only okay in the middle
 homogenity/ linearity: points very close together but line is flat 
 
 
+```{r}
+performance::check_model(exp2a_egg_lm)
+performance::check_model(exp2a_egg_glm)
+```
+
 from this... glm is better option!!
 
 seeing if summary matches for the sake of it
@@ -258,6 +263,9 @@ seeing if summary matches for the sake of it
 summary(exp2bglm2)
 summary(exp2blm2)
 ```
+
+homogenity of variancr?
+what to do about that
 
 exp(0.3800)
 - numbers seem very different even when put back to normal... bit weird? 
