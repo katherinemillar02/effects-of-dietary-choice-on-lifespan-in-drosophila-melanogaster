@@ -233,7 +233,6 @@ summary(exp2boffspringlm)
 drop1(exp2boffspringlm, test = "F")
 drop1(exp2boffspringglm, test = "F")
 
-emmeans(exp2boffspringlm, specs = pairwise ~ diet + type + diet * type)
 
 
 
