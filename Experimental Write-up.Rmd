@@ -68,7 +68,9 @@ Investigating the significance into where virgin females laid their eggs showed 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
 ```
-**Figure 2: A boxplot showing the eggs counted from mated females and virgin females.** Boxplot shows the mean average +/- S.E. that emerged from the varying protein: carbohydrate food patches
+**Figure 2: A boxplot showing the eggs counted from mated females and virgin females.** Boxplot shows the mean average +/- S.E. eggs from the varying protein: carbohydrate food patches.
+
+
 The same experiment was repeated, where the oviposition preference of mated females was investigated. To test for the significance in oviposition behaviour in the mated females, a linear model was used with.
 
 It was found that although there was not a lot of differences, there were significantly more offspring emerging from diets 1:8 than diets 1:2 (t~~ = 2.379, P = 0.019). Overall there was a mean average of 114 +/- S.E. 22.5 offspring emerging from 1:8 diets and a mean average of 68.9 +/- 10.6 S.E. offspring emerging from the 1:2 diets (Figure 3). 
@@ -98,7 +100,7 @@ A generalized linear model with quasipoisson was used (as there was over-dispers
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 exp3femalesall_plot + exp3both_plot
 ```
-**Figure 5: A boxplot showing the eggs counted from mated females and virgin females.** Boxplot shows the mean average +/- S.E. that emerged from the varying protein: carbohydrate food patches
+**Figure 5: A boxplot showing the feeding behaviour females on a plate alone and females on a plate with males.** Boxplot shows the mean average +/- S.E. flies on the varying protein: carbohydrate food patches
 
 ### Offspring counts
 
@@ -107,7 +109,7 @@ A general linear model was used to test the significance of whether oviposition 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 offspring_both_exp3_plot + offspring_alone_exp3_plot
 ```
-**Figure 6: A boxplot showing the eggs counted from mated females and virgin females.** Boxplot shows the mean average +/- S.E. that emerged from the varying protein: carbohydrate food patches
+**Figure 6: A boxplot showing the offspring count from females in a plate alone and females in a plate with males.** Boxplot shows the mean average +/- S.E. of offspring that emerged from the varying protein: carbohydrate food patches
 
 
 
