@@ -1,9 +1,9 @@
 
 ---
-fontfamily: accanthis
+mainfont: Arial
 output:
   pdf_document: 
-    latex_engine: pdflatex
+    latex_engine: xelatex
 ---
 
 ```{r setup, include=FALSE}
