@@ -1,11 +1,10 @@
----
-title: "Experimental write-up"
-output:
-  pdf_document
-latex_engine: xelatex
-sansfont: Calibri Light
----
 
+---
+fontfamily: accanthis
+output:
+  pdf_document: 
+    latex_engine: pdflatex
+---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
