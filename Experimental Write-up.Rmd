@@ -1,5 +1,6 @@
 
 ---
+title: The effects of dietary choice on lifespan in *drosophila melanogaster*
 mainfont: Arial
 output:
   pdf_document: 
