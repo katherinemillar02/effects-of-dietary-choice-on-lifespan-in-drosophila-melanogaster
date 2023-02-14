@@ -40,9 +40,10 @@ The significance of sex differences was analysed using a generalised linear mode
 
 ## Mated vs Virgin females (Experiment 2) - Feeding and Oviposition behaviour
 
-```{r echo=FALSE, message=FALSE, warning=FALSE,  out.width="20%", fig.cap="A nice image."}
+```{r echo=FALSE, message=FALSE, warning=FALSE,  out.width="30%"}
 knitr::include_graphics("images/experimentpic.png")
 ```
+
 
 ### Feeding behaviour 
 
