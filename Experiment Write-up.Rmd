@@ -26,7 +26,7 @@ source(here("scripts", "Experiment 3.R"))
 Data analyses was done in R v. 4.1.1. Various factors such as the effect of sex and mating status were tested using various statiscal models. 
 
 
-## Males vs Females (Experiment 1) 
+## Males vs Females 
 
 ### Feeding behaviour 
 
@@ -38,7 +38,7 @@ There was a statistically significant difference found between a 1:2 diet and an
 
 The significance of sex differences was analysed using a generalised linear model with quasipoisson to count for overdispersion. It was found that there was a significant difference in male and female flies choosing a diet higher in protein (a 2:1 diet). A tukey test was used to analyse this (t~903~8~ = 13.048, P < 0.001). Day was not considered in this model. 
 
-## Mated vs Virgin females (Experiment 2) - Feeding and Oviposition behaviour
+## Mated vs Virgin females 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE,  out.width="30%"}
 knitr::include_graphics("images/experimentpic.png")
@@ -97,7 +97,7 @@ mated_females_e2_eggcount_plot + virgin_female_e2_eggcount_plot
 
 
 
-## Mated Female behaviour alone vs Mated Female behaviour with Males (Experiment 3)
+## Mated Female behaviour alone vs Mated Female behaviour with Males 
 
 When looking at female feeding behaviour, and if this changed with females alone in a feeding assay, to females who were in a feeding assay with males.  There was a small interaction effect of day with diet and feeding choice, however this was not significant from not having day as an interaction effect, (F~1,0.91~ = 0.941, P = 0.27), and was therefore dropped from the full model. 
 
