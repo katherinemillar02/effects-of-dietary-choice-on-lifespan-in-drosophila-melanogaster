@@ -366,9 +366,6 @@ tableexp1feeding <- exp1alllm %>% broom::tidy(conf.int = T) %>%
 
 #  analyse what table is showing 
 
-
-
-
 #--------------------- IGNORE THE HASHTAGGED OUT CODE
 #expls1 <- lm(long_female_feedingd1$fly_numbers ~ long_male_feedingd1$fly_numbers)
 # Error in variable lengths 
