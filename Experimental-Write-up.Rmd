@@ -42,6 +42,8 @@ The significance of sex differences was analysed using a generalised linear mode
 
 ### Feeding behaviour 
 
+knitr::include_graphics("images/matedvvirgin.png")
+
 
 A generalised linear model was used with quasipoisson to count for overdispersion. Day was dropped from the model as there was found to be no significant effect of including day in the model  (ANOVA: F~1,1159~ = 0.8, P = 0.35). There was found to be a very strong statistically significant effect however on the interaction of diet and type (whether the fly was mated or virgin) (ANOVA: F~3,1159~ = 0.8, P = < 0.0001).
 
