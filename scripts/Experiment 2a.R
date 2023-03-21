@@ -127,10 +127,10 @@ mated_females_e2_eggcount_plot <- mated_femalese2_eggcount_summary %>%
   ggplot(aes(x = diet, y = mean))+
   geom_bar(stat = "identity",
            fill = "skyblue",
-           colour = "red",
+           colour = "green",
            alpha = 0.6)+
   geom_errorbar(aes(ymin = mean-se, ymax = mean+se), 
-                colour = "red",
+                colour = "green",
                 width = 0.2)+
   geom_jitter(data = long_mated_females_e2_eggcount,
               aes(x = diet,
@@ -144,7 +144,7 @@ mated_females_e2_eggcount_plot <- mated_femalese2_eggcount_summary %>%
        y = "Mean (+/- S.E.) number eggs layed by mated flies")+
   theme_minimal()
 
-
+exp2bmatedall_plot 
 
 #-------------- 👰🥚Virgin Egg ----
 # Reading the data in

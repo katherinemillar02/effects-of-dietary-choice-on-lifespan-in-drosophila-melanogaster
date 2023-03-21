@@ -52,6 +52,8 @@ exp2bmatedall_plot <- exp2bmatedall_summary %>%
   theme_minimal()
 
 
+
+
 #----------------------- 👰Virgin Females Feeding Behaviour ----
 #--------- Day 1 
 #---------- Reading the data in 
